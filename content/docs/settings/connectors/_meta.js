@@ -1,5 +1,6 @@
-import { newLabel } from '@components/new_label';
+import { newLabel } from "@components/new_label";
 
 export default {
-    microsoft: 'Microsoft',
-}
+  microsoft: "Microsoft",
+  notion: <div key="notion">Notion {newLabel}</div>,
+};
