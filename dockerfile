@@ -1,34 +1,31 @@
-# Step 1: Build the Next.js app
-FROM node:18-alpine AS builder
+# ---- Build stage ----
+FROM node:20.12-alpine AS builder
 
+# Optionnel mais utile dans CI
+ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 
-# Copy package files first to leverage Docker caching
+# Copie package* d'abord pour profiter du cache
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm ci
 
-# Copy all other files
+# Copie du code
 COPY . .
 
-# Build the Next.js app
+# Toujours utile pour diagnostiquer
+RUN node -v && npm -v
+
+# Build Next.js
 RUN npm run build
 
-# Step 2: Prepare production image
-FROM node:18-alpine
-
+# ---- Runtime stage (serveur Next) ----
+FROM node:20.12-alpine AS runner
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 
-# Copy only necessary files from builder stage
-COPY --from=builder /app/package.json /app/package-lock.json ./
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
+# Si tu utilises next start (mode serveur)
+COPY --from=builder /app ./
 
-
-# Expose the Next.js port
 EXPOSE 3000
-
-# Start Next.js
-CMD ["npm", "run", "start"]
+CMD ["npm","run","start"]
