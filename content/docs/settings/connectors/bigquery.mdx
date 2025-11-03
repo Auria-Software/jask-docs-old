@@ -1,8 +1,7 @@
-import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
 
 # Connecteur BigQuery
-
 
 ![BigQuery](@public/bigquery/bigquery.png)
 
@@ -21,7 +20,6 @@ Rendez vous sur la page web [Compte de service](https://console.cloud.google.com
 
 Cliquez sur le bouton `+ Créer un compte de service` au centre de l'écran.
 
-
 ![Notion Integration](@public/bigquery/new.png)
 
 Entrez le nom du compte de service `Jask` puis cliquez sur le bouton `Créer et continuer` pour passer à l'étape suivante.
@@ -31,17 +29,19 @@ Entrez le nom du compte de service `Jask` puis cliquez sur le bouton `Créer et 
 ### Etape 2 : Donner les permissions à Jask pour accéder à BigQuery
 
 Donnez les deux droits suivants à Jask :
+
 - `BigQuery Data Viewer` : permet à Jask de lire les données dans BigQuery
 - `BigQuery Job User` : permet à Jask de lancer des requêtes SQL dans BigQuery
 
 <Callout type="info">
-  Ces permissions permettent à Jask d'executer seulement des requêtes SQL de lecture (Les requêtes SQL modifiant des données ne sont pas autorisées). Vous pouvez changer les permissions à tout moment.
+  Ces permissions permettent à Jask d'executer seulement des requêtes SQL de
+  lecture (Les requêtes SQL modifiant des données ne sont pas autorisées). Vous
+  pouvez changer les permissions à tout moment.
 </Callout>
 
 ![Notion Integration](@public/bigquery/permissions.png)
 
 Cliquez sur `Continuer` pour passer à la dernière étape de création du compte de service.
-
 
 ### Etape 3 : Créer la clé du compte de service
 
@@ -49,14 +49,17 @@ Rendez vous sur la page de configuration du compte de service puis dans l'onglet
 
 ![bigquery key](@public/bigquery/keys.png)
 
-<Callout type="warning">
-  Vous devez télécharger la clé en format JSON.
-</Callout>
+<Callout type="warning">Vous devez télécharger la clé en format JSON.</Callout>
 
 ![bigquery key](@public/bigquery/download.png)
 
 ### Etape 4 : Déposer la clé dans Jask
 
+Rendez vous sur Jask puis dans le menu de gauche, cliquez sur `Sources de données` puis sur `+ Ajouter une source de données`.
+Nommez votre source, sélectionnez `BigQuery`, paramétrez la visibilité et fournissez une description puis cliquez sur `Suivant`.
+
+Déposez le fichier JSON de la clé du compte de service dans Jask et cliquez sur `Tester la connexion` avant de terminer les étapes.
+
+![bigquery key](@public/bigquery/jask.png)
+
 </Steps>
-
-
