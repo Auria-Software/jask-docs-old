@@ -11,8 +11,10 @@ import { Steps } from "nextra/components";
 # Intégrations d'applications Microsoft
 
 <Callout type="warning">
-  Cette étape technique sur Azure est **obligatoire** pour pouvoir connecter un SharePoint, un
-  OneDrive ou n'importe quelle application Microsoft à Jask. Si elle a déjà été effectuée vous pouvez vous rendre directement sur la documentation de l'application microsoft que vous essayez de connecter.
+  Cette étape technique sur Azure est **obligatoire** pour pouvoir connecter un
+  SharePoint, un OneDrive ou n'importe quelle application Microsoft à Jask. Si
+  elle a déjà été effectuée vous pouvez vous rendre directement sur la
+  documentation de l'application microsoft que vous essayez de connecter.
 </Callout>
 
 Ce guide vous donne un aperçu rapide de la mise en place d'une app registry JaskSSO dans Microsoft Entra pour établir une connexion entre Jask et la suite d'applications Microsoft de votre entreprise. Jask effectuera **toutes les opérations** dans la suite Microsoft **depuis l'app registry JaskSSO.**
@@ -51,8 +53,8 @@ Récupérer la `Valeur` du secret pour la suite.
 
 ### Configurer les clés dans `Gestion des secrets` sur Jask
 
-Rendez vous sur Jask. Cliquez sur `Sécurité` dans le menu de gauche puis sur `Gestion des secrets`. Rentrer le nom `JaskSSO`, Séléctionnez `Connexion O365` puis ajoutez les identifiants récupérés à l'étape 1 et 2.
-Choisissez `Partagé` pour la visibilité de telle sorte à ce que Jask puisse utiliser cette clé pour faire des requêtes en delegated par la suite sur les sources Microsoft. Cliquez sur `Valider`.
+Rendez vous sur Jask. Cliquez sur `Réglages` dans le menu de gauche puis sur `Connexions et secrets`. Rentrer le nom `JaskSSO`, Séléctionnez `Connexion Sharepoint (Obsolète)` puis ajoutez les identifiants récupérés à l'étape 1 et 2.
+Choisissez la visibilité de telle sorte à ce que seulement les personnes ayant accès à ces clés puisse les utiliser pour connecter des sources Sharepoint à Jask. Cliquez sur `Valider`.
 
 ![Jask Secret Management](@public/microsoft/Jask-Secret-Management.png)
 

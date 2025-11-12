@@ -54,8 +54,8 @@ Vous devez valider le consentement de l'administrateur pour cette autorisation d
   Jask utilisera `JaskAdmin`uniquement pour **donner les droits d'accès** à
   `JaskSSO` depuis la console `Sources de données` dans Jask. **Jask ne passera
   jamais par `JaskAdmin`** pour accéder aux sites SharePoint. Cette étape est
-  **obligatoire** pour pouvoir **donner l'autorisation à Jask** d'accéder à des sites
-  SharePoint de votre organisation via `JaskSSO`.
+  **obligatoire** pour pouvoir **donner l'autorisation à Jask** d'accéder à des
+  sites SharePoint de votre organisation via `JaskSSO`.
 </Callout>
 
 **1. Créer l'app registry `JaskAdmin`**
@@ -106,9 +106,9 @@ Vous devez valider le consentement de l'administrateur pour cette autorisation d
 
 **4. Configurer les clés dans `Gestion des secrets` sur Jask**
 
-Rendez vous sur Jask. Cliquez sur `Sécurité` dans le menu de gauche puis sur `Gestion des secrets`. Rentrez le nom `JaskAdmin`, sélectionnez `Connexion O365` puis ajoutez les identifiants récupérés à l'étape 1 et 2.
+Rendez vous sur Jask. Cliquez sur `Réglages` dans le menu de gauche puis sur `Connexions et secrets`. Rentrez le nom `JaskAdmin`, sélectionnez `Connexion Sharepoint (Obsolète)` puis ajoutez les identifiants récupérés à l'étape 1 et 2.
 
-Choisissez la visibilité en fonction de qui peut utiliser cette clé pour donner les droits à `JaskSSO`. Nous vous conseillons de la partager qu'aux administrateurs connectant les sites SharePoint. Cliquez sur `Valider`.
+Choisissez la visibilité en fonction de qui peut utiliser cette clé admin pour donner les droits à `JaskSSO`. Nous vous conseillons de la partager qu'aux administrateurs connectant les sites SharePoint. Cliquez sur `Valider`.
 
 ![Jask Secret Management](@public/microsoft/Jask-Secret-Management.png)
 
