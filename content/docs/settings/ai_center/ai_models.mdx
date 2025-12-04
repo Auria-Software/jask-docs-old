@@ -1,0 +1,67 @@
+import { Callout } from "nextra/components";
+
+# Les Modèles d'IA
+
+Depuis la page `Gestion des Modèles`, vous pouvez gérer les modèles d'IA disponibles dans votre plateforme Jask et qui peut avoir accès à ces modèles d'IA dans votre organisation.
+
+![ai_models](@public/settings/model.png)
+
+## Ajouter un modèle d'IA Générative
+
+### Prérequis
+
+Pour ajouter un modèle d'IA dans Jask, vous devez avoir les prérequis suivants de votre modèle d'IA générative :
+
+- le point de terminaison
+- la clé d'authentification
+
+Si vous souhaitez savoir comment récupérer le point de terminaison et la clé d'authentification d'un modèle d'IA générative, vous pouvez suivre le guide suivant : [Récupérer le point de terminaison et l'api key d'un modèle](/docs/settings/ai_center/ai_models#récupérer-le-point-de-terminaison-et-lapi-key-dun-modèle-dia).
+
+---
+
+### Ajout du modèle dans Jask
+
+Commencez par cliquer sur le bouton `+` pour ajouter un modèle d'IA. Vous pouvez ajouter des modèles d'IA d'Azure, des modèles d'IA publiques ou vos propres modèles d'IA fine tuned.
+Renseignez toutes les informations nécessaires pour ajouter un modèle d'IA puis testez la connexion pour vérifier que le modèle d'IA est accessible.
+
+![ai_models](@public/settings/model-add.png)
+
+Une fois le modèle d'IA ajouté, cliquez sur le modèle dans la liste pour voir les details de celui-ci. C'est sur cette page que vous pouvez modifier les informations du modèle d'IA, donner des droits d'accès à des utilisateurs ou supprimer le modèle d'IA.
+
+<Callout type="info">
+  Quand vous partagez un modèle d'IA avec un utilisateur, celui-ci aura accès à
+  ce choix de modèle d'IA dans toutes les applications et assistants qu'il
+  créera si il a les droits de créer.
+</Callout>
+
+![ai_models](@public/settings/model-update.png)
+
+## Récupérer le point de terminaison et l'api key d'un modèle d'IA
+
+Vous pouvez ajouter n'importe quel modèle d'IA dans Jask, il peut s'agir d'un modèle d'IA d'Azure, d'un modèle d'IA publique ou d'un modèle d'IA fine tuned.
+
+<Callout>
+  Nous préconisons l'utilisation d'Azure Foundry pour ajouter un modèle d'IA
+  dans Jask car le modèle est déployé dans votre environnement Azure, vous
+  garantissant une confidentialité et une sécurité maximales.
+</Callout>
+
+### Modèle d'IA Azure Foundry
+
+Rendez-vous sur la page [déploiement sur Azure Foundry](https://ai.azure.com/foundryProject/overview) pour deployer un modèle d'IA générative. Cliquez sur le bouton `+ Déployer un modèle` puis sélectionnez `Déployer un modèle de base`.
+
+![azure_foundry](@public/settings/ai_models/foundry.png)
+
+Cherchez le modèle d'IA que vous souhaitez déployer puis cliquez sur le bouton `Confirmer` pour déployer le modèle d'IA.
+
+![model](@public/settings/ai_models/model.png)
+
+Vous pouvez ensuite augmenter les quotas (tokens par minutes du modèle d'IA) si nécessaire dans la section détails du déploiement. Enfin cliquez sur le bouton `Déployer` pour confirmer le déploiement.
+
+![quotas](@public/settings/ai_models/quotas.png)
+
+Cliquez ensuite sur le modèle que vous venez de déployer apparaissant à l'écran pour voir les détails du modèle. Vous trouverez le `point de terminaison` appelé **URI Cible** et l'`api key` appelé **Clé** du modèle d'IA.
+
+![uri](@public/settings/ai_models/uri.png)
+
+Vous avez maintenant tous les prérequis pour ajouter le modèle d'IA dans Jask. [Cliquez ici](/docs/settings/ai_center/ai_models#ajout-du-modèle-dans-jask) pour suivre le guide.
