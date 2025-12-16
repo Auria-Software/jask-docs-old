@@ -66,130 +66,177 @@ Outil d’amélioration des prompts (via l’icone “Ampoule”) : Cette action
 Explication de RAG vs utilisation de la brique Analyse de fichiers + lecture de chaque page ?</Table.Td>
     </Table.Tr>
         <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
+      <Table.Td>Prompt Store</Table.Td>
+      <Table.Td>Prompt existant</Table.Td>
+      <Table.Td>Sélection d’un prompt existant dans le Prompt Store afin d’accéder à un prompt déjà créé. 
+
+Cette brique se comporte comme la précédente, mais n’a pas besoin d’être définie.
+
+Ce prompt est figé : je ne peux pas modifier les instructions.
+
+Cela permet de faire appel à un prompt qui revient régulièrement, et ne pas avoir à le réécrire </Table.Td>
+      <Table.Td>Texte et/ou fichier(s)</Table.Td>
+      <Table.Td>Texte</Table.Td>
+      <Table.Td>Voir au dessus</Table.Td>
+      <Table.Td>Voir au dessus</Table.Td>
     </Table.Tr>
      <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
+      <Table.Td>Traitement de fichiers</Table.Td>
+      <Table.Td>Extraction de tableau</Table.Td>
+      <Table.Td>Extraction d’informations d’un fichier et restitution dans un format de tableau défini</Table.Td>
+      <Table.Td>Texte et/ou fichier(s)</Table.Td>
+      <Table.Td>Tableau(x) : un ou plusieurs</Table.Td>
+      <Table.Td>- Colonnes à extraire : Définition des colonnes que vous souhaitez obtenir en sortie (titre et description de la colonne) pour donner du contexte au modèle sur les informations à extraire du contexte
+- Inclure le nom du fichier : Rajoute une colonne avec le nom du fichier d’ou provient la ligne ajoutée. Permet de repérer plus rapidement d’ou provient l’information
+- Consolider les tableaux :  Chaque fichiers en entrée fournira un tableau. Si cette option est activée, les tableaux de chaque fichier seront consolidés en un seul. Ainsi, les informations de plusieurs fichiers sont restituées en un seul tableau. 
+- Instructions personnalisées : Permet de fournir des instructions de traitement personnalisées pour guider le modèle sur la manière d’extraire l’information
+- Sélection du modèle LLM utilisé</Table.Td>
+      <Table.Td>- J’ai besoin d’un tableau consolidé de tous les acronymes contenus dans un document en entrée
+- Je veux extraire toutes les valeurs financières contenues dans un corpus documentaires
+-Je veux extraire des données de la base de contrats de mon entreprise sous forme d’un tableau contenant le montant du contrat, la date de signature, la date de fin et le nom du client</Table.Td>
+    </Table.Tr>
+        <Table.Tr>
+      <Table.Td>Traitement de fichiers</Table.Td>
+      <Table.Td>Analyse de fichier(s)</Table.Td>
+      <Table.Td>Cette brique permet de faire une analyse ou un traitement spécifique sur les éléments de contexte. Par défaut, JAsk propose des résumés Courts et Détaillés du contexte d’entrée.
+Vous pouvez aussi spécifier des instructions personnalisées (traduction, restructuration…). 
+Elle permet de forcer l’IA à parcourir chaque page des documents en entrée, pour éviter de dépasser le contexte d’entrée du LLM.</Table.Td>
+      <Table.Td>Fichier(s)</Table.Td>
+      <Table.Td>Texte</Table.Td>
+      <Table.Td>- Type de traitement : Résumé court, résumé long ou Instructions personnalisées 
+- Si Instructions personnalisées : Prompt ou liées au contexte (le texte passé en entrée fera alors office d’instructions pour le traitement à effectuer)
+- Lire toutes les pages : Force le modèle à lire l’intégralité des pages, cela permet de s’assurer que tout le contenu sera parcouru lors du traitement du/des éléments de contexte
+- Produire un seul livrable si plusieurs fichiers : Consolide les résultats en une seule sortie, sinon une sortie est fournie par fichiers de contexte
+- Sélection du modèle LLM utilisé</Table.Td>
+      <Table.Td>- Je veux faire un résume court de mon contenu en entrée de brique
+- Je veux traduire page par page un des documents dans une langue donnée
+- Je veux faire une analyse détaillé de chaque document en entrée, en analysant l’intégralité du contenu (page par page) et en fournir un résumé unique (consolidé) selon des instructions 
+Si on n’utilise pas la consolidation, on recupére une liste d’éléments en sortie, comment est ce que c’est traité par la brique suivante ??</Table.Td>
+    </Table.Tr>
+     <Table.Tr>
+      <Table.Td>Mes agents</Table.Td>
+      <Table.Td>Mes agents</Table.Td>
+      <Table.Td>Cette brique permet de faire appelle à tous les agents auxquels vous avez accès sur JAsk. </Table.Td>
+      <Table.Td>Texte et/ou fichier(s)</Table.Td>
+      <Table.Td>Texte</Table.Td>
+      <Table.Td>Vous devez spécifier un prompt supplémentaire pour guider l’agent appelé dans ce contexte précis d’utilisation.
+ Cela ne modifie pas les instructions générales de l’agent, mais sont une couche supplémentaire pour l’aider à agir dans ce contexte précis.
+Attention, si votre agent a pour instructions de rentrer dans une discussion et d’intéragir avec l’utilisateur sous format conversationnel, il ne sera pas adapté à un usage dans une application</Table.Td>
+      <Table.Td>- Une batterie d’agents spécialisés (Juridique, Financier, Technique) analyse en parallèle les documents d’une entreprise
+Est ce qu’il faut préciser quelles briques peuvent ingérer en entrée des “listes” ?</Table.Td>
+    </Table.Tr>
+        <Table.Tr>
+      <Table.Td>Mes sources de données</Table.Td>
+      <Table.Td>Import d’un fichier</Table.Td>
+      <Table.Td>Cette brique permet de déposer un document statique qui sera utilisé à chaque execution de l’application</Table.Td>
+      <Table.Td>-</Table.Td>
+      <Table.Td>Fichier (celui importé)</Table.Td>
+      <Table.Td>-</Table.Td>
+      <Table.Td>- Mes règles métiers sont décrites dans un fichier, que je veux insérer dans un agent qui va définir un nouveau process en fonction de la demande de l’utilisateur en prenant en compte mes règles métiers
+- Mon contrat type est contenu dans un fichier. Je veux comparer un contrat proposé par un client à mon contrat type</Table.Td>
+    </Table.Tr>
+     <Table.Tr>
+      <Table.Td>Mes sources de données</Table.Td>
+      <Table.Td>Moteur de recherche</Table.Td>
+      <Table.Td>Cette brique permet de récupérer une liste de documents </Table.Td>
+      <Table.Td>Rien ou Texte</Table.Td>
+      <Table.Td>Liste de fichiers</Table.Td>
+      <Table.Td>- Sélection de la source de données depuis laquelle les documents proviendront
+- Type de recherche : Texte (par rapport à un texte recherché) ou une liste par rapport à une logique
+→ Texte (texte saisi dans la brique OU texte en entrée de la brique)
+- Nombre de documents à retourner 
+- Si Texte : Pertinence minimale à respecter
+- Si Liste : ordre de tri des documents (par date de création dans la source de données)
+Warning : Si un élément est branché en entrée de cette brique, en mode “Texte”, le champ “Texte” de recherche est masqué dynamiquement
+Quand on rentre des fichiers dans cette brique, ca fonctionne mais je ne comprends pas ce qu’il se passe en vrai</Table.Td>
+      <Table.Td>- Je veux la liste des 10 derniers documents créés dans un répertoire Sharepoint, et extraire des informations consolidées de ces fichiers sous un format tableau.
+- Je veux une liste de tous les documents de mon répertoire Sharepoint selon la recherche “CV”, pour trouver le profil le plus intéressant par rapport à un besoin décrit par l’utilisateur</Table.Td>
+    </Table.Tr>
+        <Table.Tr>
+      <Table.Td>Production de documents</Table.Td>
+      <Table.Td>Générer un document</Table.Td>
+      <Table.Td>Génération d’un document en sortie de la brique et sauvegarde de ce document dans un dossier cible. 
+Le document est un concaténation des éléments reçus en entrée de cette brique</Table.Td>
+      <Table.Td>Texte et/ou fichier(s)</Table.Td>
+      <Table.Td>Lien de téléchargement du fichier</Table.Td>
+      <Table.Td>- Type de document : Sélection du format du document en sortie parmi : Word, Powerpoint, Markdown, HTML, Excel
+- Nom du document (Prefix) : Nom qui sera donné au fichier généré, avec l’heure de génération en suffixe
+- Source de données cible : Sélection de la source de données dans laquelle sera sauvegardée le document
+- Dossier de sauvegarde : Chemin de sauvegarde dans la source de données sélectionnée</Table.Td>
+      <Table.Td>- Je veux générer un document word contenant la recherche et l’étude de marché faite par un agent
+- Je veux enregistrer un export Excel de l’extraction d’informations consolidées de ma base de contrats</Table.Td>
+    </Table.Tr>
+     <Table.Tr>
+      <Table.Td>Web</Table.Td>
+      <Table.Td>Requête HTTP (BETA)</Table.Td>
+      <Table.Td>Permet d’effectuer une requête HTTP par API à un service externe</Table.Td>
+      <Table.Td>Aucune entrée, mais à brancher au workflow pour que la step soit executée (?)</Table.Td>
+      <Table.Td>Texte</Table.Td>
+      <Table.Td>- API route à utiliser
+- Methode
+- HTTP Headers</Table.Td>
       <Table.Td></Table.Td>
     </Table.Tr>
         <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
+      <Table.Td>Web</Table.Td>
+      <Table.Td>Importer une page web (BETA)</Table.Td>
+      <Table.Td>Permet d’indexer une page web afin d’utiliser son contenu (texte) dans le workflow</Table.Td>
+      <Table.Td>Aucune entrée, mais à brancher au workflow pour que la step soit executée (?)</Table.Td>
+      <Table.Td>Texte</Table.Td>
+      <Table.Td>-URL : Définition de l’URL à indexer
+- Sélection du modèle LLM utilisé (?)</Table.Td>
+      <Table.Td>- Je souhaite fournir des informations provenant d’une page web, qui seront traitées par une des étapes de mon workflow</Table.Td>
     </Table.Tr>
      <Table.Tr>
+      <Table.Td>Web</Table.Td>
+      <Table.Td>Télécharger un fichier</Table.Td>
+      <Table.Td>Permet de télécharger un fichier hébergé sur le web</Table.Td>
+      <Table.Td>Aucune entrée, mais à brancher au workflow pour que la step soit executée (?)</Table.Td>
       <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
+      <Table.Td>- URL : Adresse d’hébergement du fichier
+- Sélection du modèle LLM utilisé (?)</Table.Td>
+      <Table.Td>?</Table.Td>
     </Table.Tr>
         <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
+      <Table.Td>Mail</Table.Td>
+      <Table.Td>Envoyer un mail</Table.Td>
+      <Table.Td>Envoyer un email depuis votre adresse email au cours du workflow</Table.Td>
+      <Table.Td>Rien ou Texte</Table.Td>
+      <Table.Td>Email contenant le texte en entrée ou le texte défini dans la brique</Table.Td>
+      <Table.Td>- Sujet du mail : Objet qui sera utilisé lors de l’envoi de l’email
+- Contenu : 
+—Vide (prend en compte le contenu en entrée
+— Contenu prédéfini de l’email
+- Adresses : Liste des destinataires de l’email envoyé
+- Sélection du modèle LLM utilisé (?)</Table.Td>
+      <Table.Td>- Je veux envoyer par email, le rapport fourni par un agent
+- Mon agent, branché à ma base de données Big Query, va me fournir par email toutes les semaines l’analyse de que je lui demande de faire sur mes données et les restituer par emails à une liste de destinataires</Table.Td>
     </Table.Tr>
      <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
+      <Table.Td>Mail</Table.Td>
+      <Table.Td>Créer un brouillon</Table.Td>
+      <Table.Td>Créer un brouillon d’email dans la boîte mail associée à votre compte JAsk</Table.Td>
+      <Table.Td>Rien ou Texte</Table.Td>
+      <Table.Td>Brouillon contenant le texte en entrée ou le texte défini dans la brique</Table.Td>
+      <Table.Td>- Sujet du mail : Objet qui sera utilisé lors de l’envoi de l’email
+- Contenu : 
+—Vide (Le corps du texte sera l’entrée exacte de la brique)
+— Contenu prédéfini de l’email
+- Adresses : Liste des destinataires insérées dans le brouillon de mail
+- Sélection du modèle LLM utilisé (?)</Table.Td>
+      <Table.Td>- Un brouillon est généré dans ma boite mail</Table.Td>
     </Table.Tr>
         <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-    </Table.Tr>
-     <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-    </Table.Tr>
-        <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-    </Table.Tr>
-     <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-    </Table.Tr>
-        <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-    </Table.Tr>
-     <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-    </Table.Tr>
-        <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-    </Table.Tr>
-     <Table.Tr>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
-      <Table.Td></Table.Td>
+      <Table.Td>Mail</Table.Td>
+      <Table.Td>Lire mes mails</Table.Td>
+      <Table.Td>Lire les derniers mails reçus dans votre boîte mail</Table.Td>
+      <Table.Td>Aucune entrée nécessaire</Table.Td>
+      <Table.Td>Texte des X mails sélectionnés</Table.Td>
+      <Table.Td>- Sélection de la manière de récupérer les emails : 
+— N derniers mails en choississant le nombre
+— Tous les emails du jour
+— Tous les mails d’une période (entre une date de début et une date de fin)</Table.Td>
+      <Table.Td>- Faire une résumé et une todo liste à partir de tous mes mails reçus dans la journée</Table.Td>
     </Table.Tr>
   </tbody>
 </Table>
