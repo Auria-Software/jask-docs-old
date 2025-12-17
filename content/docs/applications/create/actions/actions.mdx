@@ -201,16 +201,22 @@ Le document est un concaténation des éléments reçus en entrée de cette briq
       <Table.Td>Mail</Table.Td>
       <Table.Td>Envoyer un mail</Table.Td>
       <Table.Td>Envoyer un email depuis votre adresse email au cours du workflow</Table.Td>
-      <Table.Td>Rien ou Texte</Table.Td>
-      <Table.Td>Email contenant le texte en entrée ou le texte défini dans la brique</Table.Td>
-      <Table.Td>- Sujet du mail : Objet qui sera utilisé lors de l’envoi de l’email
-- Contenu : 
-—Vide (prend en compte le contenu en entrée
-— Contenu prédéfini de l’email
-- Adresses : Liste des destinataires de l’email envoyé
-- Sélection du modèle LLM utilisé (?)</Table.Td>
+      <Table.Td>La brique Envoyer un mail peut prendre jusqu'a 3 entrées de natures différentes : Destinataires, Contenu du mail, Pièces jointes. Ces entrées sont optionnelles car elles peuvent aussi être définie de manière statique dans la brique elle-même. 
+- Destinataires : Liste des emails auxquels addressés l'email en sortie de brique. Si cette entrée n'est pas connectée, des destinataires doivent être définis dans le champ "Destinataire" de la brique.
+- Contenu du mail : Contenu qui sera utilisé dans le corps de l'email. Si cette entrée n'est pas connectée, le corps de l'email sera statique et défini dans le champ Contenu de la brique
+- Pièces jointes : Les pièces jointes qui seront attachées à l'email envoyé. Cette entrée peut uniquement être connectée à une brique de Génération de document.</Table.Td>
+      <Table.Td>Envoi de l'email tel que défini (Type (un email pour tous les destinataires ou un email par destinataires), objet du mail, corps du mail, destinataires, pièces jointes) </Table.Td>
+<Table.Td>- Sujet du mail : Obligatoire - Objet de l'email qui sera envoyé
+- Contenu : Ce champ permet de définir le contenu (statique) qui sera envoyé de le corps de l'email. Ce champ n'est affiché que si le pin "Contenu du mail" est laissé vide en entrée. Si l'entrée "Contenu du mail" est connectée au reste du workflow, le corps du mail sera dynamique en fonction de cette entrée.
+- Adresses : Ce champ permet de définir la liste des destinataires de l’email envoyé. Ce champ n'est affiché que si le pin "Destinataires" est laissé vide en entrée. Si l'entrée Destinataires est connectée au reste du workflow, les destinataires de(s) email(s) seront définis dynamiquement en fonction de cette entrée.
+Options avancées : 
+- Extraire les destinataires avec de l'IA : Cette option permet d'utiliser l'IA pour déduire la liste des destinataires à partir du contenu en entrée. Le modèles sélectionné dans cette brique sera utilisé pour cette extraction.
+- Envoyer un mail séparé à chaque destinataire : Cette option permet de forcer l'envoi d'email séparé pour chacun des destinataires définis. Si elle n'est pas activée, tous les destinataires seront en copie de l'email.
+- Envoyer depuis une boîte mail partagée : Cette option permet de définir si l'email doit être envoyé depuis votre adresse email (celle de l'utilisateur qui utilise l'application), ou d'une boîte mail partagée. Dans ce dernier cas, il faut s'assurer que l'utilisateur qui utilise l'application ait bien les droits sur cette boîte partagée.
+- Sélection du modèle LLM utilisé : Utile uniquement si l'option "Extraire les destinataires avec l'IA" est utilisée </Table.Td>
       <Table.Td>- Je veux envoyer par email, le rapport fourni par un agent
-- Mon agent, branché à ma base de données Big Query, va me fournir par email toutes les semaines l’analyse de que je lui demande de faire sur mes données et les restituer par emails à une liste de destinataires</Table.Td>
+- Mon agent, branché à ma base de données Big Query, va me fournir par email toutes les semaines l’analyse de que je lui demande de faire sur mes données et les restituer par emails à une liste de destinataires
+- Création d'une application, qui prend en entrée le transcript d'une réunion Teams. Le workflow va extraire du transcript les participants (futurs destinataires de l'email grâce à l'option "Extraire les destinataires avec l'IA"), traiter le transcript pour en faire un compte-rendu structuré, et ajouté en pièce jointe le transcript brut de la réunion.</Table.Td>
     </Table.Tr>
      <Table.Tr>
       <Table.Td>Mail</Table.Td>
@@ -218,12 +224,7 @@ Le document est un concaténation des éléments reçus en entrée de cette briq
       <Table.Td>Créer un brouillon d’email dans la boîte mail associée à votre compte JAsk</Table.Td>
       <Table.Td>Rien ou Texte</Table.Td>
       <Table.Td>Brouillon contenant le texte en entrée ou le texte défini dans la brique</Table.Td>
-      <Table.Td>- Sujet du mail : Objet qui sera utilisé lors de l’envoi de l’email
-- Contenu : 
-—Vide (Le corps du texte sera l’entrée exacte de la brique)
-— Contenu prédéfini de l’email
-- Adresses : Liste des destinataires insérées dans le brouillon de mail
-- Sélection du modèle LLM utilisé (?)</Table.Td>
+      <Table.Td>Voir au dessus, les mêmes règles s'appliquent au brouillon qui sera préparé
       <Table.Td>- Un brouillon est généré dans ma boite mail</Table.Td>
     </Table.Tr>
         <Table.Tr>
