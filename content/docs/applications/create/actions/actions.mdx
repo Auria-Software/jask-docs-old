@@ -11,8 +11,8 @@ Pour connecter les briques correctement, il faut s'assurer que la sortie d'une b
 
 ## Tableau des briques
 
-
 <details>
+<summary>Contexte</summary>
       Section : - 
       Nom de la brique : Contexte
       Description : La brique de contexte est une brique obligatoire pour définir le point de départ d’une application, son déclencheur et les contraintes d’entrée qui seront imposées à l’utilisateur
@@ -37,6 +37,7 @@ Exemples d'utilisation :
 - Mon application est lancée par un utilisateur et il doit fournir 2 PDF maximum pour pouvoir la lancer</Table.Td>
 </details>
 <details>
+<summary>Nouveau Prompt</summary>
       Section : Prompt Store 
       Nom de la brique : Nouveau Prompt
       Description : La brique Nouveau Prompt permet de définir un prompt qui appliquera ces instructions à un contexte d’entrée pour ressortir un résultat de sortie
@@ -249,8 +250,9 @@ Options avancées :
 La création d'application est un process itératif. Il est important de construire et tester ses applications au fur et à mesure de leur construction pour affiner et s'assurer de la bonne exécution des différents étapes et des liens. En testant l'application depuis le studio, vous pouvez contrôler le résultat de chaque étape quand vous construisez l'application.</Callout>
 
 ## Exemples d'applications
-### Application simple
 
+<details>
+<summary>Application simple</summary>
 Objectif : Faire un résumé court d’un corpus de fichiers, contenant des éléments graphiques (images, tableaux, graphiques)
 
 L’application prend en entrée une liste de fichiers, qui seront lu avec Vision IA. Cela permet de parcourir l’ensemble du contenu des fichiers, avec de la Vision (à la place de l’OCR) avec le model 4.1 (ici aucune instruction spécifique de vision n’est ajoutée).
@@ -259,8 +261,9 @@ Ces fichiers vont ensuite être traité par une brique “Analyse de fichiers”
 L’option “Lire toutes les pages” permet d’assurer que le modèle va parcourir l’intégralité des pages des documents en entrée. En effet, si les fichiers sont trop longs, le contexte du LLM pourrait être dépassé et certaines pages ne pas être parcourues
 
 ![simple_app](@public/applications/simple_app.png)
-
-### Application moyenne
+</details>
+<details>
+<summary>Application moyenne</summary>
 Objectif : Trouver des profils qui correspondent à une compétence demandée dans une base SharePoint de CV et scorer les CV trouvés par rapport au besoin
 
 Le contexte permet à l’utilisateur qui démarre l’application de saisir les compétences recherchées dans son projet.
@@ -270,9 +273,9 @@ Ces compétences sont passées à un moteur de recherche, dont l’objectif est 
 Cette liste de document va ensuite être traitée par un prompt qui analyse les CV trouvés et a pour objectif de les scorer par rapport à une série de règles métiers indiquées dans le prompt
 
 ![medium_app](@public/applications/medium_app.png)
-
-### Application avancée
-
+</details>
+<details>
+<summary>Application avancée</summary>
 Objectif : Analyse d’une entreprise suivant 3 axes Business, Finance, Juridique à partir d’un ensemble documentaire sur l’entreprise
 
 Les documents sur l’entreprise à analyser en entrée sont analysés par 3 agents indépendamment, qui chacun ont des instructions pour analyser le contenu en entrée et faire une restitution spécifique selon des règles métiers.
@@ -280,3 +283,4 @@ Le prompt qui suit permet de structurer les rapports individuels de chacun des a
 La derniere étape permet de générer un document word contenant la synthèse en sortie du prompt.
 
 ![advanced_app](@public/applications/advanced_app.png)
+</details>
