@@ -241,3 +241,39 @@ Options avancées :
     </Table.Tr>
   </tbody>
 </Table>
+
+<Callout type="info">
+La création d'application est un process itératif. Il est important de construire et tester ses applications au fur et à mesure de leur construction pour affiner et s'assurer de la bonne exécution des différents étapes et des liens. En testant l'application depuis le studio, vous pouvez contrôler le résultat de chaque étape quand vous construisez l'application.</Callout>
+
+## Exemples d'applications
+### Application simple
+
+Objectif : Faire un résumé court d’un corpus de fichiers, contenant des éléments graphiques (images, tableaux, graphiques)
+
+L’application prend en entrée une liste de fichiers, qui seront lu avec Vision IA. Cela permet de parcourir l’ensemble du contenu des fichiers, avec de la Vision (à la place de l’OCR) avec le model 4.1 (ici aucune instruction spécifique de vision n’est ajoutée).
+
+Ces fichiers vont ensuite être traité par une brique “Analyse de fichiers” qui a pour objectif de réaliser un résumé court du contexte d’entrée avec le modèle gpt4.1.
+L’option “Lire toutes les pages” permet d’assurer que le modèle va parcourir l’intégralité des pages des documents en entrée. En effet, si les fichiers sont trop longs, le contexte du LLM pourrait être dépassé et certaines pages ne pas être parcourues
+
+![simple_app](@public/applications/simple_app.png)
+
+### Application moyenne
+Objectif : Trouver des profils qui correspondent à une compétence demandée dans une base SharePoint de CV et scorer les CV trouvés par rapport au besoin
+
+Le contexte permet à l’utilisateur qui démarre l’application de saisir les compétences recherchées dans son projet.
+
+Ces compétences sont passées à un moteur de recherche, dont l’objectif est de restituer une liste de CV, depuis un fichier “CV” contenu dans un SharePoint, par rapport à la compétence saisie en entrée.
+
+Cette liste de document va ensuite être traitée par un prompt qui analyse les CV trouvés et a pour objectif de les scorer par rapport à une série de règles métiers indiquées dans le prompt
+
+![medium_app](@public/applications/medium_app.png)
+
+### Application avancée
+
+Objectif : Analyse d’une entreprise suivant 3 axes Business, Finance, Juridique à partir d’un ensemble documentaire sur l’entreprise
+
+Les documents sur l’entreprise à analyser en entrée sont analysés par 3 agents indépendamment, qui chacun ont des instructions pour analyser le contenu en entrée et faire une restitution spécifique selon des règles métiers.
+Le prompt qui suit permet de structurer les rapports individuels de chacun des agents et restructurer les informations selon des règles spécifiés dans le prompt avec un modèle o1-mini dans cet exemple.
+La derniere étape permet de générer un document word contenant la synthèse en sortie du prompt.
+
+![advanced_app](@public/applications/advanced_app.png)
