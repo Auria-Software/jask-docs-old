@@ -11,6 +11,50 @@ Pour connecter les briques correctement, il faut s'assurer que la sortie d'une b
 
 ## Tableau des briques
 
+
+<details>
+      Section : - 
+      Nom de la brique : Contexte
+      Description : La brique de contexte est une brique obligatoire pour définir le point de départ d’une application, son déclencheur et les contraintes d’entrée qui seront imposées à l’utilisateur
+      Entrée(s) de la brique : -
+      Sortie(s) de la brique : Dépend de la configuration sur le type d’entrée (prompt, fichiers, prompt et/ou fichiers, rien)
+      Paramètres avancés : - Type d’entrée : contraindre l’utilisateur sur le type d’informations à fournir pour lancer l’application (Tout type (fichiers et/ou prompt), Texte, Fichiers, Aucune entrée (déclenchement manuel ou périodique))
+
+- Options supplémentaires : 
+—Limiter le nombre de fichier : pour contraindre l’utilisateur sur le nombre max de fichier à insérer en entrée
+
+— Limiter le type de fichiers : contraindre le format de fichier
+
+— inclure les métadata des fichiers: enrichi le contenu des documents avec leurs titres, descriptions…
+
+— utiliser la vision IA (et modèle) : permet d’utiliser des modules de lectures de documents pour analyser les fichiers contenant des images, graphiques, tableaux ou encore des documents scannés. Vous pouvez définir quel modèle de vision sera utilisé pour effectuer cette action et lui donner des instructions (prompt)
+
+⚠️ Cette option entraine des temps de traitement et des consommations plus importantes pour les applications
+— Instructions personnalisées : Personaliser le texte qui sera affiché à l’utilisateur dans la zone de prompt/fichier à insérer</Table.Td>
+
+Exemples d'utilisation : 
+- Mon application doit se déclencher automatiquement à une fréquence définie 
+- Mon application est lancée par un utilisateur et il doit fournir 2 PDF maximum pour pouvoir la lancer</Table.Td>
+</details>
+<details>
+      Section : Prompt Store 
+      Nom de la brique : Nouveau Prompt
+      Description : La brique Nouveau Prompt permet de définir un prompt qui appliquera ces instructions à un contexte d’entrée pour ressortir un résultat de sortie
+      Entrée(s) de la brique : Texte et/ou fichier(s)
+      Sortie(s) de la brique : Texte
+      Paramètres avancés :
+- Définition de l’instruction à appliquer
+- Sélection du modèle LLM utilisé
+- Définition de la température
+Outil d’amélioration des prompts (via l’icone “Ampoule”) : Cette action permet d’améliorer votre prompt en 1 clic
+      Exemples d'utilisation : 
+- Un prompt doit être appliqué au contenu que je passe en entrée de cette brique, avec un modèle et une température spécifique. Ce prompt n’a pas besoin d’être un agent, car il ne contient pas de connaissance spécifique
+
+- Mon contenu en entrée doit être analysé par un expert juridique qui doit mettre en valeur les forces et faiblesses d’un contrat
+
+Explication de RAG vs utilisation de la brique Analyse de fichiers + lecture de chaque page ?
+</details>
+
 <Table>
   <thead>
     <Table.Tr>
@@ -24,47 +68,6 @@ Pour connecter les briques correctement, il faut s'assurer que la sortie d'une b
     </Table.Tr>
   </thead>
   <tbody>
-    <Table.Tr>
-      <Table.Td>-</Table.Td>
-      <Table.Td>Contexte</Table.Td>
-      <Table.Td>La brique de contexte est une brique obligatoire pour définir le point de départ d’une application, son déclencheur et les contraintes d’entrée qui seront imposées à l’utilisateur</Table.Td>
-      <Table.Td>-</Table.Td>
-      <Table.Td>Dépend de la configuration sur le type d’entrée (prompt, fichiers, prompt et/ou fichiers, rien)</Table.Td>
-      <Table.Td>- Type d’entrée : contraindre l’utilisateur sur le type d’informations à fournir pour lancer l’application (Tout type (fichiers et/ou prompt), Texte, Fichiers, Aucune entrée (déclenchement manuel ou périodique))
-
-- Options supplémentaires : 
-—Limiter le nombre de fichier : pour contraindre l’utilisateur sur le nombre max de fichier à insérer en entrée
-
-— Limiter le type de fichiers : contraindre le format de fichier
-
-— inclure les métadata des fichiers: enrichi le contenu des documents avec leurs titres, descriptions…
-
-— utiliser la vision IA (et modèle) : permet d’utiliser des modules de lectures de documents pour analyser les fichiers contenant des images, graphiques, tableaux ou encore des documents scannés. Vous pouvez définir quel modèle de vision sera utilisé pour effectuer cette action et lui donner des instructions (prompt)
-
-
-⚠️ Cette option entraine des temps de traitement et des consommations plus importantes pour les applications
-— Instructions personnalisées : Personaliser le texte qui sera affiché à l’utilisateur dans la zone de prompt/fichier à insérer</Table.Td>
-      <Table.Td>- Mon application doit se déclencher automatiquement à une fréquence définie 
-- Mon application est lancée par un utilisateur et il doit fournir 2 PDF maximum pour pouvoir la lancer</Table.Td>
-    </Table.Tr>
-     <Table.Tr>
-      <Table.Td>Prompt Store</Table.Td>
-      <Table.Td>Nouveau Prompt</Table.Td>
-      <Table.Td>La brique Nouveau Prompt permet de définir un prompt qui appliquera ces instructions à un contexte d’entrée pour ressortir un résultat de sortie</Table.Td>
-      <Table.Td>Texte et/ou fichier(s)</Table.Td>
-      <Table.Td>Texte</Table.Td>
-      <Table.Td>- Définition de l’instruction à appliquer
-- Sélection du modèle LLM utilisé
-- Définition de la température
-
-Outil d’amélioration des prompts (via l’icone “Ampoule”) : Cette action permet d’améliorer votre prompt en 1 clic</Table.Td>
-      <Table.Td>- Un prompt doit être appliqué au contenu que je passe en entrée de cette brique, avec un modèle et une température spécifique. Ce prompt n’a pas besoin d’être un agent, car il ne contient pas de connaissance spécifique
-
-- Mon contenu en entrée doit être analysé par un expert juridique qui doit mettre en valeur les forces et faiblesses d’un contrat
-
-
-Explication de RAG vs utilisation de la brique Analyse de fichiers + lecture de chaque page ?</Table.Td>
-    </Table.Tr>
         <Table.Tr>
       <Table.Td>Prompt Store</Table.Td>
       <Table.Td>Prompt existant</Table.Td>
