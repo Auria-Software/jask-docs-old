@@ -29,10 +29,86 @@ import { Table } from 'nextra/components'
   </thead>
   <tbody>
     <Table.Tr>
-      <Table.Td>[Structure de contrôle](/docs/applications/create/actions/control_structure)</Table.Td>
-      <Table.Td>Boucle</Table.Td>
-      <Table.Td>La brique de contexte est une brique obligatoire pour définir le point de départ d’une application, son déclencheur et les contraintes d’entrée qui seront imposées à l’utilisateur</Table.Td>
-</Table.Tr>
+      <Table.Td>[Contexte](/docs/applications/create/actions/context)</Table.Td>
+      <Table.Td>Contexte</Table.Td>
+      <Table.Td>La brique de contexte est une brique obligatoire pour définir le point de départ d’une application, son déclencheur et les contraintes d’entrée qui seront imposées à l’utilisateur pour démarrer l'application</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Prompts Store](/docs/applications/create/actions/prompts_store)</Table.Td>
+      <Table.Td>Nouveau Prompt</Table.Td>
+      <Table.Td>La brique Nouveau Prompt permet de définir un prompt qui appliquera ces instructions à un contexte d’entrée pour produire un résultat de sortie</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Prompts Store](/docs/applications/create/actions/prompts_store)</Table.Td>
+      <Table.Td>Nouveau Prompt</Table.Td>
+      <Table.Td>Sélection d’un prompt existant dans le Prompt Store afin d’accéder à un prompt déjà créé.</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Traitement de fichiers](/docs/applications/create/actions/file_process)</Table.Td>
+      <Table.Td>Extraction de tableau</Table.Td>
+      <Table.Td>Extraction d’informations d’un fichier et restitution dans un format de tableau défini</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Traitement de fichiers](/docs/applications/create/actions/file_process)</Table.Td>
+      <Table.Td>Analyse de fichier(s)</Table.Td>
+      <Table.Td>Cette brique permet de faire une analyse ou un traitement spécifique sur les éléments de contexte. Par défaut, JAsk propose des résumés Courts et Détaillés du contexte d’entrée.</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Agents](/docs/applications/create/actions/assistants)</Table.Td>
+      <Table.Td>Mes agents</Table.Td>
+      <Table.Td>Cette brique permet de faire appelle à tous les agents auxquels vous avez accès sur JAsk. </Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Sources de données](/docs/applications/create/actions/data_sources)</Table.Td>
+      <Table.Td>Import d’un fichier</Table.Td>
+      <Table.Td>Cette brique permet de déposer un document statique qui sera utilisé à chaque execution de l’application</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Sources de données](/docs/applications/create/actions/data_sources)</Table.Td>
+      <Table.Td>Moteur de recherche</Table.Td>
+      <Table.Td>Cette brique permet de récupérer une liste de documents depuis vos sources de données</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Production de documents](/docs/applications/create/actions/document_production)</Table.Td>
+      <Table.Td>Générer un document</Table.Td>
+      <Table.Td>Génération d’un document en sortie de la brique et sauvegarde de ce document dans un dossier cible.
+Le document est un concaténation des éléments reçus en entrée de cette brique</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Production de documents](/docs/applications/create/actions/document_production)</Table.Td>
+      <Table.Td>Traduire un document</Table.Td>
+      <Table.Td>Traduction de document doc à doc</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Web](/docs/applications/create/actions/web)</Table.Td>
+      <Table.Td>Requête HTTP (BETA)</Table.Td>
+      <Table.Td>Permet d’effectuer une requête HTTP par API à un service externe</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Web](/docs/applications/create/actions/web)</Table.Td>
+      <Table.Td>Importer une page web (BETA)</Table.Td>
+      <Table.Td>Permet d’indexer une page web afin d’utiliser son contenu (texte) dans le workflow</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Web](/docs/applications/create/actions/web)</Table.Td>
+      <Table.Td>Télécharger un fichier</Table.Td>
+      <Table.Td>Permet de télécharger un fichier hébergé sur le web</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Mail](/docs/applications/create/actions/mail)</Table.Td>
+      <Table.Td>Envoyer un mail</Table.Td>
+      <Table.Td>Envoyer un email depuis votre adresse email au cours du workflow</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Mail](/docs/applications/create/actions/mail)</Table.Td>
+      <Table.Td>Créer un brouillon</Table.Td>
+      <Table.Td>Créer un brouillon d’email dans la boîte mail associée à votre compte JAsk</Table.Td>
+     </Table.Tr>
+    <Table.Tr>
+      <Table.Td>[Mail](/docs/applications/create/actions/mail)</Table.Td>
+      <Table.Td>Lire mes mails</Table.Td>
+      <Table.Td>Lire les derniers mails reçus dans votre boîte mail</Table.Td>
+     </Table.Tr>
 </tbody>
 </Table>
 
@@ -139,4 +215,40 @@ Enfin, définissez la visibilité de l'application : Toute l'organisation, Moi u
 ![application_save](@public/applications/deploy.png)
 
 </Steps>
+
+### Exemples d'applications
+
+<details>
+<summary>Application simple</summary>
+Objectif : Faire un résumé court d’un corpus de fichiers, contenant des éléments graphiques (images, tableaux, graphiques)
+
+L’application prend en entrée une liste de fichiers, qui seront lu avec Vision IA. Cela permet de parcourir l’ensemble du contenu des fichiers, avec de la Vision (à la place de l’OCR) avec le model 4.1 (ici aucune instruction spécifique de vision n’est ajoutée).
+
+Ces fichiers vont ensuite être traité par une brique “Analyse de fichiers” qui a pour objectif de réaliser un résumé court du contexte d’entrée avec le modèle gpt4.1.
+L’option “Lire toutes les pages” permet d’assurer que le modèle va parcourir l’intégralité des pages des documents en entrée. En effet, si les fichiers sont trop longs, le contexte du LLM pourrait être dépassé et certaines pages ne pas être parcourues
+
+![simple_app](@public/applications/simple_app.png)
+</details>
+<details>
+<summary>Application moyenne</summary>
+Objectif : Trouver des profils qui correspondent à une compétence demandée dans une base SharePoint de CV et scorer les CV trouvés par rapport au besoin
+
+Le contexte permet à l’utilisateur qui démarre l’application de saisir les compétences recherchées dans son projet.
+
+Ces compétences sont passées à un moteur de recherche, dont l’objectif est de restituer une liste de CV, depuis un fichier “CV” contenu dans un SharePoint, par rapport à la compétence saisie en entrée.
+
+Cette liste de document va ensuite être traitée par un prompt qui analyse les CV trouvés et a pour objectif de les scorer par rapport à une série de règles métiers indiquées dans le prompt
+
+![medium_app](@public/applications/medium_app.png)
+</details>
+<details>
+<summary>Application avancée</summary>
+Objectif : Analyse d’une entreprise suivant 3 axes Business, Finance, Juridique à partir d’un ensemble documentaire sur l’entreprise
+
+Les documents sur l’entreprise à analyser en entrée sont analysés par 3 agents indépendamment, qui chacun ont des instructions pour analyser le contenu en entrée et faire une restitution spécifique selon des règles métiers.
+Le prompt qui suit permet de structurer les rapports individuels de chacun des agents et restructurer les informations selon des règles spécifiés dans le prompt avec un modèle o1-mini dans cet exemple.
+La derniere étape permet de générer un document word contenant la synthèse en sortie du prompt.
+
+![advanced_app](@public/applications/advanced_app.png)
+</details>
 
