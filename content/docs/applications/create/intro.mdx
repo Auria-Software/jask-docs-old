@@ -1,6 +1,7 @@
 import { Steps } from 'nextra/components'
 import { Cards } from 'nextra/components'
 import { Bot, Import, LibraryBig, Database, Search, FileSearch2, LucideImport, Save, Loop, SplitSquareVertical, Repeat2, FilePlus, Languages, BookDashed, ChevronsLeftRightEllipsis, Globe, Download, Mail, MessageCirclePlus } from 'lucide-react'
+import { Table } from 'nextra/components'
 
 # Création d'une application
 
@@ -15,6 +16,25 @@ import { Bot, Import, LibraryBig, Database, Search, FileSearch2, LucideImport, S
 </div>
 
 ---
+
+## Tableau des briques
+
+<Table>
+  <thead>
+    <Table.Tr>
+      <Table.Th>Section</Table.Th>
+      <Table.Th>Titre</Table.Th>
+      <Table.Th>Définition</Table.Th>
+    </Table.Tr>
+  </thead>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>[Structure de contrôle](/docs/applications/create/actions/control_structure)</Table.Td>
+      <Table.Td>Boucle</Table.Td>
+      <Table.Td>La brique de contexte est une brique obligatoire pour définir le point de départ d’une application, son déclencheur et les contraintes d’entrée qui seront imposées à l’utilisateur</Table.Td>
+</Table.Tr>
+</tbody>
+</Table>
 
 
 ## Créer et partager une application
@@ -119,3 +139,4 @@ Enfin, définissez la visibilité de l'application : Toute l'organisation, Moi u
 ![application_save](@public/applications/deploy.png)
 
 </Steps>
+
