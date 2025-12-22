@@ -172,21 +172,21 @@ Depuis la page `Applications` du catalogue de Jask, vous pouvez créer une appli
 
 ### Contexte
 
-Le [**`Contexte`**](/docs/applications/create/actions/context) représente les données d'entrée de votre application. L'entrée peut être un texte écrit par l'utilisateur ou des documents téléchargés par l'utilisateur lançant l'application.
+Le [**`Contexte`**](/docs/applications/create/actions/context) représente les données d'entrée de votre application. Cette brique déterminera les contraintes imposées à l'utilisateur au lancement de l'application ainsi que son mode de déclenchement (manuel, automatisé...). Pour une déclenchement manuel, l'entrée peut être vide, un texte écrit par l'utilisateur et/ou des documents téléchargés par l'utilisateur lançant l'application.
 
 ![application_context](@public/applications/contexte.png)
 
-Ici sur cet exemple, le contexte accepte seulement du texte utilisateur et le texte à afficher au lancement de l'application est "Renseigner le nom du client / compte"
+Ici, sur cet exemple, le contexte accepte seulement du texte utilisateur et le texte à afficher au lancement de l'application est "Renseigner le nom du client / compte"
 ### Enchaîner les actions
 
-Une fois le contexte configuré, vous pouvez enchainer les actions en cliquant sur le bouton `+` en haut à gauche de l'écran.
-Il existe une multitude d'actions à disposition pour construire votre workflow métier.
+Une fois le contexte configuré, vous pouvez enchainer les actions en cliquant sur le bouton `+` en haut à droite de l'écran.
+Il existe une multitude d'actions à disposition pour construire votre workflow métier (voir le tableau en haut de cet article).
 Chaque action peut prendre en compte des entrées (inputs) et/ou des sorties (outputs) représentées par des connexions (pins) situées des deux côtés de l'action. Ils vous simplifieront la connexion de l'action ajoutée au reste du workflow.
 
-Les connexions situées à gauche de l'action sont des entrées de données qui vont permettre à l'action de s'exécuter.
-Les connexions situées à droite de l'action sont des sorties de données qui vont permettre de récupérer les résultats de l'action.
+Les pins situés à gauche de la brique sont des entrées de données qui vont permettre à l'action de s'exécuter.
+Les pins situés à droite de la brique sont des sorties de données qui vont permettre de récupérer les résultats de l'action.
 Vous pouvez aussi enchaîner les actions en les connectant entre elles.
-Pour cela, vous pouvez cliquer sur la connexion située à droite de l'action et le relier à un petit point situé à gauche d'une autre action.
+Pour cela, vous pouvez cliquer sur le pin situé à droite de l'action et le relier au pin situé à gauche d'une autre action.
 Les entrées de données de l'action connectée seront automatiquement remplies avec les sorties de données de l'action précédente.
 
 ![application_chain](@public/applications/actions.png)
