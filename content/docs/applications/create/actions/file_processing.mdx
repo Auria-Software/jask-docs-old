@@ -91,11 +91,11 @@ Une fois l'action dans le workflow, vous pouvez entrer les colonnes à extraire,
     <Table.Tr>
       <Table.Td>Définition</Table.Td>
       <Table.Td>
-        Cette brique permet de faire une analyse ou un traitement spécifique sur les éléments de contexte. Par défaut, Jask propose des résumés Courts et Détaillés du contexte d’entrée.
+        Cette brique permet de faire une analyse ou un traitement spécifique sur les éléments de contexte. Par défaut, JAsk propose "Résumé court" et "Résumé détaillé" du contexte d’entrée.
         
         Vous pouvez aussi spécifier des instructions personnalisées (traduction, restructuration…). 
         
-        Elle permet de forcer l’IA à parcourir chaque page des documents en entrée, pour éviter de dépasser le contexte d’entrée du LLM.
+        Ce brique permet de forcer l’IA à parcourir chaque page des documents en entrée (voir paramètres avancés), pour éviter de dépasser le contexte d’entrée du LLM.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -110,18 +110,18 @@ Une fois l'action dans le workflow, vous pouvez entrer les colonnes à extraire,
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
         - Type de traitement : Résumé court, résumé long ou Instructions personnalisées<br/>
-        - Si Instructions personnalisées : Prompt ou liées au contexte (le texte passé en entrée fera alors office d’instructions pour le traitement à effectuer)<br/>
+        - Si Instructions personnalisées : L'utilisateur peut saisir un prompt d'instruction ou lier les instructions au contexte. Dans ce cas, le texte passé en entrée de la brique sera utilisé en tant instructions pour le traitement à effectuer.<br/>
         - Lire toutes les pages : Force le modèle à lire l’intégralité des pages, cela permet de s’assurer que tout le contenu sera parcouru lors du traitement du/des éléments de contexte<br/>
-        - Produire un seul livrable si plusieurs fichiers : Consolide les résultats en une seule sortie, sinon une sortie est fournie par fichiers de contexte<br/>
-        - Sélection du modèle LLM utilisé
+        - Produire un seul livrable si plusieurs fichiers : Consolide les résultats en une seule sortie, sinon une sortie est fournie par fichier passé en contexte<br/>
+        - Sélection du modèle LLM utilisé pour le traitement
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Exemples d’utilisation</Table.Td>
       <Table.Td>
         - Je veux faire un résume court de mon contenu en entrée de brique<br/>
-        - Je veux traduire page par page un des documents dans une langue donnée<br/>
-        - Je veux faire une analyse détaillé de chaque document en entrée, en analysant l’intégralité du contenu (page par page) et en fournir un résumé unique (consolidé) selon des instructions<br/>
+        - Je veux traduire page par page un des documents dans une langue donnée (instructions personnalisées)<br/>
+        - Je veux faire une analyse détaillée de chaque document en entrée, en analysant l’intégralité du contenu (page par page) et en fournir un résumé unique (consolidé) selon des instructions<br/>
       </Table.Td>
     </Table.Tr>
   </tbody>
