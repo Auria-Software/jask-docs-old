@@ -25,7 +25,7 @@ export default {
   prompts_store: "Prompts Store",
   assistants: "Assistants",
   applications: "Applications",
-  experiences: <div key="experiences">Expériences {newLabel}</div>,
+  experiences: <div key="experiences">Expériences</div>,
   _4: {
     type: "separator",
     title: "Administration",

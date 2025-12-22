@@ -1,0 +1,139 @@
+import { Table } from 'nextra/components'
+
+# Traitement de fichiers
+
+Deux actions sont disponibles pour traiter les fichiers :
+* Extraction de tableau
+* Analyse de fichier(s)
+
+![application_file_processing](@public/applications/file_processing.png)
+
+## Extraction de tableau
+
+### Paramètres
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Traitement de fichiers</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Extraction de Tableau</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Description</Table.Td>
+      <Table.Td>
+Extraction d’informations d’un fichier et restitution dans un format de tableau défini
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>
+        Texte et/ou fichier(s)
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>
+Tableau(x) : un ou plusieurs
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        - Colonnes à extraire : Définition des colonnes que vous souhaitez obtenir en sortie (titre et description de la colonne) pour donner du contexte au modèle sur les informations à extraire du contexte
+
+        - Inclure le nom du fichier : Rajoute une colonne avec le nom du fichier d’ou provient la ligne ajoutée. Permet de repérer plus rapidement d’ou provient l’information
+
+        - Consolider les tableaux :  Chaque fichiers en entrée fournira un tableau. Si cette option est activée, les tableaux de chaque fichier seront consolidés en un seul. Ainsi, les informations de plusieurs fichiers sont restituées en un seul tableau. 
+
+        - Instructions personnalisées : Permet de fournir des instructions de traitement personnalisées pour guider le modèle sur la manière d’extraire l’information
+
+        - Sélection du modèle LLM utilisé
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>
+        - J’ai besoin d’un tableau consolidé de tous les acronymes contenus dans un document en entrée
+        - Je veux extraire toutes les valeurs financières contenues dans un corpus documentaires
+        - Je veux extraire des données de la base de contrats de mon entreprise sous forme d’un tableau contenant le montant du contrat, la date de signature, la date de fin et le nom du client
+      </Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
+
+Cette action vous permet d'extraire des informations structurées depuis des documents et de les restituer sous forme de tableaux configurables.
+
+![application_file_processing](@public/applications/tab_extraction.png)
+
+Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Traitement de fichiers` et enfin sur `Extraction de tableau`.
+Une fois l'action dans le workflow, vous pouvez entrer les colonnes à extraire, sélectionner le modèle LLM utilisé et configurer les paramètres avancés.
+
+## Analyse de fichier(s)
+
+### Paramètres
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Traitement de fichiers</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Analyse de fichier(s)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>
+        Cette brique permet de faire une analyse ou un traitement spécifique sur les éléments de contexte. Par défaut, JAsk propose des résumés Courts et Détaillés du contexte d’entrée.
+        
+        Vous pouvez aussi spécifier des instructions personnalisées (traduction, restructuration…). 
+        
+        Elle permet de forcer l’IA à parcourir chaque page des documents en entrée, pour éviter de dépasser le contexte d’entrée du LLM.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>Fichier(s)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>Texte</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        - Type de traitement : Résumé court, résumé long ou Instructions personnalisées<br/>
+        - Si Instructions personnalisées : Prompt ou liées au contexte (le texte passé en entrée fera alors office d’instructions pour le traitement à effectuer)<br/>
+        - Lire toutes les pages : Force le modèle à lire l’intégralité des pages, cela permet de s’assurer que tout le contenu sera parcouru lors du traitement du/des éléments de contexte<br/>
+        - Produire un seul livrable si plusieurs fichiers : Consolide les résultats en une seule sortie, sinon une sortie est fournie par fichiers de contexte<br/>
+        - Sélection du modèle LLM utilisé
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>
+        - Je veux faire un résume court de mon contenu en entrée de brique<br/>
+        - Je veux traduire page par page un des documents dans une langue donnée<br/>
+        - Je veux faire une analyse détaillé de chaque document en entrée, en analysant l’intégralité du contenu (page par page) et en fournir un résumé unique (consolidé) selon des instructions<br/>
+      </Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
+
+Cette action vous permet d'analyser ou traiter les documents en entrée (résumé, traduction, restructuration…), en forçant la lecture complète des fichiers si nécessaire.
+
+![application_file_processing](@public/applications/file_analysis.png)
+
+Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Traitement de fichiers` et enfin sur `Analyse de fichier(s)`.
+Une fois l'action dans le workflow, vous pouvez sélectionner le type de traitement, configurer les paramètres avancés et entrer les instructions personnalisées.
