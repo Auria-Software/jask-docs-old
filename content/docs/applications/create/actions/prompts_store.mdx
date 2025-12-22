@@ -3,7 +3,7 @@ import { Table } from 'nextra/components'
 
 # Exécuter un prompt du Prompts Store
 
-Le prompt est une action qui fait appel à un modèle d'IA pour exécuter un prompt. Vous pouvez utiliser un prompt du Prompts Store ou créer un prompt personnalisé directement dans une application pour réaliser une tâche spécifique.
+Le prompt est une action qui fait appel à un modèle d'IA pour exécuter une instruction. Vous pouvez créer un prompt personnalisé ou utiliser un prompt du Prompts Store dans une application pour réaliser une tâche spécifique.
 
 <Callout type="info">
 Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA. Ce qui sort à droite de l'action sera uniquement la réponse de l'IA.
@@ -32,9 +32,7 @@ Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA
       <Table.Td>
         La brique Nouveau Prompt permet de définir un prompt personnalisé qui applique des instructions à un contexte d’entrée afin de produire un résultat en sortie.
         
-        Elle accepte en entrée du texte et/ou des fichiers. Si des tableaux sont fournis en entrée, ils sont automatiquement convertis au format Markdown avant d’être transmis au modèle.
-        
-        Cette brique est utilisée lorsque l’on souhaite exécuter une instruction précise sur un contenu donné, sans logique agent ni connaissance métier persistante.
+        Cette brique est utilisée lorsque l’on souhaite exécuter une instruction précise sur le contenu d'entrée, sans logique agent, ni connaissance métier persistante.
       </Table.Td>
     </Table.Tr>
 
@@ -43,14 +41,14 @@ Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA
       <Table.Td>
         Texte et/ou fichier(s).
 
-        Si un ou plusieurs tableaux sont passés en entrée, ils sont automatiquement transformés en Markdown avant l’exécution du prompt.
+        Si des tableaux sont passés en entrée, ils sont automatiquement convertit en markdown avant l’exécution du prompt, ils seront donc traités comme du texte.
       </Table.Td>
     </Table.Tr>
 
     <Table.Tr>
       <Table.Td>Sortie</Table.Td>
       <Table.Td>
-        Texte généré par le modèle LLM en appliquant le prompt défini sur l’ensemble du contenu d’entrée.
+        Texte, généré par le modèle LLM qui applique le prompt défini sur l’ensemble du contenu d’entrée.
       </Table.Td>
     </Table.Tr>
 
@@ -59,7 +57,7 @@ Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA
       <Table.Td>
         - Définition de l’instruction à appliquer
         - Sélection du modèle LLM utilisé
-        - Définition de la température
+        - Définition de la température du modèle
         
         Un outil d’amélioration automatique du prompt est disponible via l’icône “Ampoule”, permettant d’optimiser le prompt en un clic.
       </Table.Td>
@@ -68,7 +66,7 @@ Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA
     <Table.Tr>
       <Table.Td>Exemples d’utilisation</Table.Td>
       <Table.Td>
-        - Appliquer un prompt spécifique sur un contenu donné avec un modèle et une température définis, sans logique agent.
+        - Appliquer un prompt spécifique sur un contenu donné avec un modèle et une température définis, sans logique agentique.
           
         - Analyser un contrat juridique afin d’identifier et mettre en évidence ses forces et faiblesses.
           
@@ -99,7 +97,7 @@ Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA
 Vous pouvez créer un nouveau prompt pour réaliser une tâche spécifique directement dans l'application en cliquant sur le bouton `+` puis sur `Prompts Store` et enfin sur `Nouveau Prompt`
 
 Une fois l'action disponible dans le workflow, vous pouvez le configurer en cliquant sur la petite flèche à droite de l'action. Entrez vos instructions dans la zone de texte, sélectionnez le modèle d'IA que vous souhaitez ainsi que sa température.
-Enfin, vous pouvez reliez un étape précédente à ce prompt pour passer la sortie de cette étape à l'IA.
+Enfin, vous pouvez relier une étape précédente à cette brique pour fournir des éléments d'entrée au prompt.
 
 ![application_prompt_store](@public/applications/new_prompt.png)
 
@@ -136,14 +134,14 @@ Enfin, vous pouvez reliez un étape précédente à ce prompt pour passer la sor
       <Table.Td>
         Texte et/ou fichier(s).
 
-        Si un ou plusieurs tableaux sont passés en entrée, ils sont automatiquement transformés en Markdown avant l’exécution du prompt.
+        Si des tableaux sont passés en entrée, ils sont automatiquement convertit en markdown avant l’exécution du prompt, ils seront donc traités comme du texte.
       </Table.Td>
     </Table.Tr>
 
     <Table.Tr>
       <Table.Td>Sortie</Table.Td>
       <Table.Td>
-        Texte généré par le modèle LLM à partir du prompt sélectionné et appliqué sur l’ensemble du contenu d’entrée.
+        Texte, généré par le modèle LLM qui applique le prompt défini sur l’ensemble du contenu d’entrée.
       </Table.Td>
     </Table.Tr>
 
@@ -152,7 +150,7 @@ Enfin, vous pouvez reliez un étape précédente à ce prompt pour passer la sor
       <Table.Td>
           - Sélection d’un prompt existant depuis le Prompt Store
           - Possibilité de modifier le modèle LLM utilisé
-          - Possibilité d’ajuster la température
+          - Possibilité d’ajuster la température du modèle
 
         Les modifications apportées peuvent être temporaires pour l’exécution ou enregistrées pour mettre à jour le prompt dans le Prompt Store.
       </Table.Td>
@@ -166,8 +164,6 @@ Enfin, vous pouvez reliez un étape précédente à ce prompt pour passer la sor
         - Appliquer un prompt standardisé d’extraction d’informations sur différents jeux de documents.
          
         - Centraliser les bonnes pratiques de prompting au sein d’une organisation.
-    
-        <strong>À noter :</strong> la brique Prompt Existant permet d’assurer la cohérence des réponses en s’appuyant sur des prompts partagés, contrairement à la brique Nouveau Prompt qui favorise l’expérimentation rapide.
       </Table.Td>
     </Table.Tr>
   </tbody>
@@ -179,7 +175,7 @@ Enfin, vous pouvez reliez un étape précédente à ce prompt pour passer la sor
 
 Vous pouvez réutiliser un prompt du Prompts Store en cliquant sur le bouton `+` puis sur `Prompts Store` et enfin sur le prompt que vous souhaitez utiliser.
 
-Une fois l'action disponible dans le workflow, vous pouvez lire le prompt entièrement en cliquant sur la petite flèche à droite de l'action. Sélectionnez le modèle d'IA que vous souhaitez ainsi que sa température puis reliez l'action précédente avec ce prompt pour passer du contexte à l'IA.
+Une fois l'action disponible dans le workflow, vous pouvez lire le prompt entièrement en cliquant sur la flèche à droite de l'action. Sélectionnez le modèle d'IA que vous souhaitez ainsi que sa température puis reliez l'action précédente à cette brique pour passer du contexte à l'IA.
 
 <Callout>
 Tous les mots-clés entre [ ] dans le prompt apparaitront comme des variables dans l'action pour que vous puissiez les remplacer par des valeurs provenant des actions précédentes.
