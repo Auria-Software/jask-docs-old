@@ -2,7 +2,6 @@ import { newLabel, betaLabel } from "@components/new_label";
 
 export default {
     context: "Contexte",
-    control_structure: "Structures de Contrôle",
     prompts_store: "Prompts Store",
     file_processing: <div key="file_processing">Traitement de fichiers {newLabel}</div>,
     assistants: "Assistants",
@@ -11,4 +10,5 @@ export default {
     web: <div key="web">Web {betaLabel}</div>,
     mail: "Mail",
     task: "Tâche prédéfinies",
+    control_structure: "Structures de Contrôle (avancé)",
 }
