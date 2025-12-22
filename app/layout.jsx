@@ -3,18 +3,22 @@ import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 
+
+
 const banner = <Banner storageKey="2.0-release">
-        <a href="/docs/intro">
-          🎉 Read more →
+        <a href="/docs/applications/create/actions/file_processing">
+          🎉 Nouvelles actions de traitement de fichiers dans les applications →
         </a>
       </Banner>
 const navbar = (
     <Navbar
-        logo={<b><img src="/Logo JAsk.png" alt="Logo JAsk" width={100} height={100}/></b>}
+        logo={<b><img src="/Logo Jask.png" alt="Logo Jask" width={100} height={100}/></b>}
     // ... Your additional navbar options
     />
 )
 const footer = <Footer>MIT {new Date().getFullYear()} © Jask.</Footer>
+
+
 
 export default async function RootLayout({ children }) {
     return (
@@ -27,14 +31,13 @@ export default async function RootLayout({ children }) {
             suppressHydrationWarning
         >
             <Head>
-                
             </Head>
             <body>
                 <Layout
                     sidebar={{
                         defaultMenuCollapseLevel: 1,
                     }}
-                    banner={null}
+                    banner={banner}
                     navbar={navbar}
                     pageMap={await getPageMap()}
                     footer={null}
