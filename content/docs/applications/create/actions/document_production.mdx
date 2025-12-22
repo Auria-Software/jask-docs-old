@@ -1,11 +1,7 @@
 import { Callout } from 'nextra/components'
-
+import { Table } from 'nextra/components'
 
 # Générer des documents
-
-![application_document_production](@public/applications/generate.png)
-
-## Les fonctionnalités
 
 Trois actions sont disponibles pour générer des documents :
 
@@ -13,21 +9,60 @@ Trois actions sont disponibles pour générer des documents :
 * Générer un document de zéro à partir d'un texte
 * Générer un document à partir d'un template à partir d'un texte
 
-### Traduire un document
-
-Cette action vous permet de traduire un document tout en gardant le format du document original. Il accepte en entrée un document (Soit depuis le [contexte](/docs/applications/create/intro#etape-1--contexte-premier-élément-par-defaut), soit depuis le [moteur de recherche](/docs/applications/create/actions/data_sources) etc...).
-
-<Callout type="warning">
-La traduction est effectuée uniquement pour les documents Word et PowerPoint.
-</Callout>
-
-![application_document_production](@public/applications/translate.png)
-
-Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Production de documents` et enfin sur `Traduire un document`.
-Une fois l'action dans le workflow, vous pouvez sélectionner la langue de traduction (Anglais, espagnol, etc...), donner un nom à votre document traduit et choisir un dossier de sauvegarde ainsi que la source de données dans laquelle vous souhaitez stocker votre document traduit.
+![application_document_production](@public/applications/generate.png)
 
 
-### Générer un document de zero
+## Générer un document de zero
+
+### Paramètres
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Production de documents</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Générer un document</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>
+        Génération d’un document en sortie de la brique et sauvegarde de ce document dans un dossier cible. 
+        
+        Le document est un concaténation des éléments reçus en entrée de cette brique
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>Texte</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>Lien de téléchargement du fichier</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        - Type de document : Sélection du format du document en sortie parmi : Word, Powerpoint, Markdown, HTML, Excel<br/>
+        - Nom du document (Prefix) : Nom qui sera donné au fichier généré, avec l’heure de génération en suffixe<br/>
+        - Source de données cible : Sélection de la source de données dans laquelle sera sauvegardée le document<br/>
+        - Dossier de sauvegarde : Chemin de sauvegarde dans la source de données sélectionnée
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>
+        - Je veux générer un document word contenant la recherche et l’étude de marché faite par un agent<br/>
+        - Je veux enregistrer un export Excel de l’extraction d’informations consolidées de ma base de contrats
+      </Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
 
 Cette action vous permet de générer un document à partir d'un texte et de le stocker dans votre source de données choisie.
 
@@ -45,7 +80,66 @@ Vous avez le choix du format du document généré :
 
 Vous pouvez également choisir le nom du nouveau document, le chemin de sauvegarde ainsi que la source de donnée dans laquelle vous souhaitez stocker votre document.
 
-### Générer un document à partir d'un template
+
+## Traduire un document
+
+### Paramètres
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Production de documents</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Traduire un document</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>Traduction de document doc à doc</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>Fichiers (docx et pptx uniquement)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>Fichier(s) (docx et pptx uniquement en fonction de l’entrée)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        - Langue cible : Sélection de la langue choisie parmi la liste de langue proposée<br/>
+        - Nom du document (Prefix) : Nom qui sera donné au fichier généré, avec l’heure de génération en suffixe<br/>
+        - Source de données cible : Sélection de la source de données dans laquelle sera sauvegardée le document<br/>
+        - Dossier de sauvegarde : Chemin de sauvegarde dans la source de données sélectionnée
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>- Ne peut se mettre que après le contexte</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
+
+Cette action vous permet de traduire un document tout en gardant le format du document original. Il accepte en entrée un document (Soit depuis le [contexte](/docs/applications/create/intro#etape-1--contexte-premier-élément-par-defaut), soit depuis le [moteur de recherche](/docs/applications/create/actions/data_sources) etc...).
+
+<Callout type="warning">
+La traduction est effectuée uniquement pour les documents Word et PowerPoint.
+</Callout>
+
+![application_document_production](@public/applications/translate.png)
+
+Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Production de documents` et enfin sur `Traduire un document`.
+Une fois l'action dans le workflow, vous pouvez sélectionner la langue de traduction (Anglais, espagnol, etc...), donner un nom à votre document traduit et choisir un dossier de sauvegarde ainsi que la source de données dans laquelle vous souhaitez stocker votre document traduit.
+
+
+
+## Générer un document à partir d'un template
 
 Générer un document à partir d'un template consiste à utiliser un template d'entreprise préalabement chargé sur Jask et l'IA va remplacer les zones de textes par les données d'entrée de l'action.
 

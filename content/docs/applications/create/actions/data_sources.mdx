@@ -1,4 +1,5 @@
 import { Callout } from 'nextra/components'
+import { Table } from 'nextra/components'
 
 # Utiliser les sources de données
 
@@ -6,11 +7,52 @@ Vous pouvez utiliser les sources de données dans une application pour récupér
 
 ![application_data_sources](@public/applications/my_sources.png)
 
-## Les fonctionnalités
-
 Trois types d'actions sont possibles dans les sources de données.
 
-### Importer un fichier
+## Importer un fichier
+
+### Paramètres
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Mes sources de données</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Import d’un fichier</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>
+        Cette brique permet de déposer un document statique qui sera utilisé à chaque execution de l’application
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>-</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>Fichier (celui importé)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>-</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>
+        - Mes règles métiers sont décrites dans un fichier, que je veux insérer dans un agent qui va définir un nouveau process en fonction de la demande de l’utilisateur en prenant en compte mes règles métiers<br/>
+        - Mon contrat type est contenu dans un fichier. Je veux comparer un contrat proposé par un client à mon contrat type
+      </Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
 
 Vous pouvez importer un fichier statique dans l'application pour utiliser le contenu dans un [prompt](/docs/applications/create/actions/prompts_store) ou un [assistant](/docs/applications/create/actions/assistants) par exemple.
 
@@ -20,7 +62,69 @@ Cliquez sur le bouton `+` puis `Mes sources de données` et enfin `Importer un f
 
 Maintenant utilisez le contenu du fichier en le reliant à l'entrée d'un [prompt](/docs/applications/create/actions/prompts_store) ou d'un [assistant](/docs/applications/create/actions/assistants) par exemple.
 
-### Moteur de recherche
+
+## Moteur de recherche
+
+### Paramètres
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Mes sources de données</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Moteur de recherche</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>
+        Cette brique permet de récupérer une liste de documents depuis vos sources de données
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>
+        Rien ou Texte, fichiers
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>Liste de fichiers</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        - Sélection de la source de données depuis laquelle les documents proviendront<br/>
+        - Type de recherche : Texte (par rapport à un texte recherché) ou une liste par rapport à une logique<br/>
+        - Si Texte : 
+            - Texte : texte saisi dans la brique OU texte en entrée de la brique
+            - Nombre de documents à retourner
+            - Pertinence minimale à respecter. Similarité entre l’entrée et les docs (top 10)
+
+            <Callout type="warning">
+            Si un élément est branché en entrée de cette brique, en mode “Texte”, le champ “Texte” de recherche est masqué dynamiquement
+            </Callout>
+        <br />
+
+        - Si Liste : 
+            - Ordre de tri des documents (par date de modification dans la source de données). Avec liste, l’entrée n’est pas prise en compte.
+
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>
+        - Je veux la liste des 10 derniers documents créés dans un répertoire Sharepoint, et extraire des informations consolidées de ces fichiers sous un format tableau.<br/>
+        - Je veux une liste de tous les documents de mon répertoire Sharepoint selon la recherche “CV”, pour trouver le profil le plus intéressant par rapport à un besoin décrit par l’utilisateur
+      </Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
 
 Vous pouvez utiliser le moteur de recherche pour trouver un ou des documents dans vos sources de données puis les utiliser dans un [prompt](/docs/applications/create/actions/prompts_store) ou un [assistant](/docs/applications/create/actions/assistants) par exemple.
 
@@ -38,7 +142,7 @@ Si vous passez des éléments en entrée de l'action, le texte sera utilisé com
 
 La pertinence des résultats est calculée par le nombre de fois que le mot-clé de recherche apparaît dans le document.
 
-### Source de données
+## Source de données
 
 Vous pouvez utiliser une source de données pour récupérer des informations dans une base de données. A la différence du moteur de recherche, la recherche dans une source de données renvoie différentes parties de documents contenant les éléments de réponses demandées.
 

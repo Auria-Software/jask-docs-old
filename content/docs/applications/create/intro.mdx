@@ -1,6 +1,7 @@
 import { Steps } from 'nextra/components'
 import { Cards } from 'nextra/components'
 import { Bot, Import, LibraryBig, Database, Search, FileSearch2, LucideImport, Save, Loop, SplitSquareVertical, Repeat2, FilePlus, Languages, BookDashed, ChevronsLeftRightEllipsis, Globe, Download, Mail, MessageCirclePlus } from 'lucide-react'
+import { Table } from 'nextra/components'
 
 # Création d'une application
 
@@ -16,8 +17,152 @@ import { Bot, Import, LibraryBig, Database, Search, FileSearch2, LucideImport, S
 
 ---
 
+## Tableau des actions
 
-## Créer et partager une application
+<Table>
+  <thead>
+    <Table.Tr>
+      <Table.Th>Section</Table.Th>
+      <Table.Th>Titre</Table.Th>
+      <Table.Th>Définition</Table.Th>
+    </Table.Tr>
+  </thead>
+  <tbody>
+
+    <Table.Tr>
+      <Table.Td>-</Table.Td>
+      <Table.Td> [Context](/docs/applications/create/actions/context)</Table.Td>
+      <Table.Td>
+        La brique de contexte est obligatoire pour définir le point de départ d’une application, son mode de déclenchement et les contraintes d’entrée imposées à l’utilisateur.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Prompt Store</Table.Td>
+      <Table.Td>[Nouveau Prompt](/docs/applications/create/actions/prompts_store#nouveau-prompt)</Table.Td>
+      <Table.Td>
+        Permet de définir un prompt appliquant des instructions à un contexte d’entrée afin de produire un résultat de sortie, en configurant le modèle LLM et ses paramètres.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Prompt Store</Table.Td>
+      <Table.Td>[Prompt Existant](/docs/applications/create/actions/prompts_store#prompt-existant)</Table.Td>
+      <Table.Td>
+        Permet de réutiliser un prompt existant et figé depuis le Prompt Store, sans modifier ses instructions, pour standardiser des usages récurrents.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Traitement de fichiers</Table.Td>
+      <Table.Td>[Extraction de Tableau](/docs/applications/create/actions/file_processing#extraction-de-tableau)</Table.Td>
+      <Table.Td>
+        Extrait des informations structurées depuis des documents et restitue les résultats sous forme de tableaux configurables.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Traitement de fichiers</Table.Td>
+      <Table.Td>[Analyse de fichier(s)](/docs/applications/create/actions/file_processing#analyse-de-fichiers)</Table.Td>
+      <Table.Td>
+        Analyse ou traite les documents en entrée (résumé, traduction, restructuration…), en forçant la lecture complète des fichiers si nécessaire.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Mes agents</Table.Td>
+      <Table.Td>[Mes agents](/docs/applications/create/actions/assistants)</Table.Td>
+      <Table.Td>
+        Permet d’appeler des agents spécialisés (juridique, financier, technique, etc.) pour analyser un contexte selon leur expertise.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Mes sources de données</Table.Td>
+      <Table.Td>[Import d’un fichier](/docs/applications/create/actions/data_sources#importer-un-fichier)</Table.Td>
+      <Table.Td>
+        Permet d’importer un document statique utilisé comme source de données à chaque exécution de l’application.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Mes sources de données</Table.Td>
+      <Table.Td>[Moteur de recherche](/docs/applications/create/actions/data_sources#moteur-de-recherche)</Table.Td>
+      <Table.Td>
+        Récupère dynamiquement des documents depuis des sources de données selon une recherche textuelle ou une logique de liste.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Production de documents</Table.Td>
+      <Table.Td>[Générer un document](/docs/applications/create/actions/document_production#gerer-un-document-de-zero)</Table.Td>
+      <Table.Td>
+        Génère un document (Word, Excel, PowerPoint, etc.) à partir des éléments en entrée et le sauvegarde dans une source cible.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Production de documents</Table.Td>
+      <Table.Td>[Traduire un document](/docs/applications/create/actions/document_production#traduire-un-document)</Table.Td>
+      <Table.Td>
+        Traduit automatiquement un document existant (Word ou PowerPoint) et enregistre la version traduite.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Web</Table.Td>
+      <Table.Td>[Requête HTTP (BETA)](/docs/applications/create/actions/web#requête-http)</Table.Td>
+      <Table.Td>
+        Exécute une requête HTTP vers un service externe afin d’intégrer des données ou déclencher des actions via une API.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Web</Table.Td>
+      <Table.Td>[Importer une page web (BETA)](/docs/applications/create/actions/web#importer-une-page-web)</Table.Td>
+      <Table.Td>
+        Indexe le contenu textuel d’une page web pour l’exploiter dans un workflow.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Web</Table.Td>
+      <Table.Td>[Télécharger un fichier web](/docs/applications/create/actions/web#telecharger-un-fichier-web)</Table.Td>
+      <Table.Td>
+        Télécharge un fichier hébergé sur le web afin de l’utiliser comme élément de contexte dans le workflow.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Mail</Table.Td>
+      <Table.Td>[Envoyer un mail](/docs/applications/create/actions/mail#envoyer-un-mail)</Table.Td>
+      <Table.Td>
+        Envoie un email au cours du workflow en utilisant le contenu généré ou défini dans la brique.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Mail</Table.Td>
+      <Table.Td>[Créer un brouillon](/docs/applications/create/actions/mail#creer-un-brouillon)</Table.Td>
+      <Table.Td>
+        Crée un brouillon d’email dans la boîte mail associée au compte Jask.
+      </Table.Td>
+    </Table.Tr>
+
+    <Table.Tr>
+      <Table.Td>Mail</Table.Td>
+      <Table.Td>[Lire mes mails](/docs/applications/create/actions/mail#lire-mes-mails)</Table.Td>
+      <Table.Td>
+        Récupère et analyse les emails reçus selon différents critères (nombre, période, journée).
+      </Table.Td>
+    </Table.Tr>
+
+  </tbody>
+</Table>
+
+
+
+## Guide pour créer et partager une application
 
 Depuis la page `Applications` du catalogue de Jask, vous pouvez créer une application en appuyant sur le bouton `Actions` puis `Créer une application` en haut à droite.
 
@@ -25,21 +170,9 @@ Depuis la page `Applications` du catalogue de Jask, vous pouvez créer une appli
 
 <Steps>
 
-### Contexte (premier élément par defaut)
+### Contexte
 
-Le **`Contexte`** représente les données d'entrée de votre application. L'entrée peut être un texte écrit par l'utilisateur ou des documents téléchargés par l'utilisateur lançant l'application.
-
-Le contexte peut être utilisé tel quel dans le workflow ou peut être configuré en cliquant sur `Réglages avancés` pour modifier les variables du contexte.
-
-Il est possible de configurer :
-* **Type d'entrée** : permet de restreindre ce que l'utilisateur peut entrer dans le workflow au moment du lancement.
-* **Options supplémentaires** :
-  * Limiter le nombre de fichiers que l'utilisateur peut télécharger.
-  * Limiter le type de fichier en sélectionnant un format dans la liste déroulante.
-  * Inclure les métadonnées des fichiers téléchargés c'est à dire que dans le contenu de la première brique contexte, le nom du fichier sera inclus.
-  * Utiliser la vision IA pour extraire les informations de photos téléchargées ou de fichiers complexes comme des pdf. Sans vision IA, seul l'OCR sera utilisé.
-  * Texte à afficher au lancement de l'application pour guider l'utilisateur dans l'utilisation de l'application.
-
+Le [**`Contexte`**](/docs/applications/create/actions/context) représente les données d'entrée de votre application. L'entrée peut être un texte écrit par l'utilisateur ou des documents téléchargés par l'utilisateur lançant l'application.
 
 ![application_context](@public/applications/contexte.png)
 
@@ -58,56 +191,6 @@ Les entrées de données de l'action connectée seront automatiquement remplies 
 
 ![application_chain](@public/applications/actions.png)
 
-Il existe plusieurs types d'actions et voici la documentation pour chacune d'entre elles :
-
-* **Actions de base**
-
-<Cards>
-  <Cards.Card
-    title="Prompts Store"
-    href="/docs/applications/create/actions/prompts_store"
-    icon={<LibraryBig/>}
-  />
-  <Cards.Card
-    title="Appeler un Assistant"
-    href="/docs/applications/create/actions/assistants"
-    icon={<Bot />}
-  />
-  <Cards.Card
-    title="Sources de données"
-    href="/docs/applications/create/actions/data_sources"
-    icon={<Database/>}
-  />
-  <Cards.Card
-    title="Envoyer un mail"
-    href="/docs/applications/create/actions/mail"
-    icon={<Mail/>}
-  />
-</Cards>
-
-* **Actions avancées**
-<Cards>
-  <Cards.Card
-    title="Structure de contôle (Découper, Boucler)"
-    href="/docs/applications/create/actions/control_structure"
-    icon={<SplitSquareVertical/>}
-  />
-  <Cards.Card
-    title="Production de documents (Templates)"
-    href="/docs/applications/create/actions/document_production"
-    icon={<FilePlus/>}
-  />
-  <Cards.Card
-    title="Web (Requête HTTP, Scrapping)"
-    href="/docs/applications/create/actions/web"
-    icon={<Globe/>}
-  />
-  <Cards.Card
-    title="Tâches prédéfinies (Words)"
-    href="/docs/applications/create/actions/task"
-    icon={<MessageCirclePlus/>}
-  />
-</Cards>
 
 ### Enregistrer l'application
 
@@ -119,3 +202,39 @@ Enfin, définissez la visibilité de l'application : Toute l'organisation, Moi u
 ![application_save](@public/applications/deploy.png)
 
 </Steps>
+
+## Exemples d'applications
+
+<details>
+<summary>Application simple</summary>
+Objectif : Faire un résumé court d’un corpus de fichiers, contenant des éléments graphiques (images, tableaux, graphiques)
+
+L’application prend en entrée une liste de fichiers, qui seront lu avec Vision IA. Cela permet de parcourir l’ensemble du contenu des fichiers, avec de la Vision (à la place de l’OCR) avec le model 4.1 (ici aucune instruction spécifique de vision n’est ajoutée).
+
+Ces fichiers vont ensuite être traité par une brique “Analyse de fichiers” qui a pour objectif de réaliser un résumé court du contexte d’entrée avec le modèle gpt4.1.
+L’option “Lire toutes les pages” permet d’assurer que le modèle va parcourir l’intégralité des pages des documents en entrée. En effet, si les fichiers sont trop longs, le contexte du LLM pourrait être dépassé et certaines pages ne pas être parcourues
+
+![simple_app](@public/applications/simple_app.png)
+</details>
+<details>
+<summary>Application moyenne</summary>
+Objectif : Trouver des profils qui correspondent à une compétence demandée dans une base SharePoint de CV et scorer les CV trouvés par rapport au besoin
+
+Le contexte permet à l’utilisateur qui démarre l’application de saisir les compétences recherchées dans son projet.
+
+Ces compétences sont passées à un moteur de recherche, dont l’objectif est de restituer une liste de CV, depuis un fichier “CV” contenu dans un SharePoint, par rapport à la compétence saisie en entrée.
+
+Cette liste de document va ensuite être traitée par un prompt qui analyse les CV trouvés et a pour objectif de les scorer par rapport à une série de règles métiers indiquées dans le prompt
+
+![medium_app](@public/applications/medium_app.png)
+</details>
+<details>
+<summary>Application avancée</summary>
+Objectif : Analyse d’une entreprise suivant 3 axes Business, Finance, Juridique à partir d’un ensemble documentaire sur l’entreprise
+
+Les documents sur l’entreprise à analyser en entrée sont analysés par 3 agents indépendamment, qui chacun ont des instructions pour analyser le contenu en entrée et faire une restitution spécifique selon des règles métiers.
+Le prompt qui suit permet de structurer les rapports individuels de chacun des agents et restructurer les informations selon des règles spécifiés dans le prompt avec un modèle o1-mini dans cet exemple.
+La derniere étape permet de générer un document word contenant la synthèse en sortie du prompt.
+
+![advanced_app](@public/applications/advanced_app.png)
+</details>

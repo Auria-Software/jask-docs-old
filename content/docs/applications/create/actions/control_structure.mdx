@@ -1,4 +1,5 @@
 import { Callout } from 'nextra/components'
+import { Table } from 'nextra/components'
 
 # Les structures de contrôle
 
@@ -8,12 +9,8 @@ Les structures de contrôle sont des actions qui permettent de contrôler le flu
 Les modèles d'IA ont une limite de taille de texte en entrée pour une requête et si le document est trop long, il peut ne pas être traité correctement.
 </Callout>
 
-Deux actions sont disponibles pour permettre de traiter ces cas de grosse quantité de documents :
 
-## Les fonctionnalités
-
-
-### La découpe
+## La découpe
 
 La découpe est une action qui permet de découper un ou des documents déposés en entrée dans le contexte en plusieurs parties.
 
@@ -28,7 +25,7 @@ Vous avez le choix de découper le(s) document(s) en Pages, Caractères ou Token
 
 À gauche de l'action vous pouvez y faire entrer le contexte par exemple et à droite la sortie sera une liste d'éléments dont la taille dépend de la découpe.
 
-### La boucle
+## La boucle
 
 La boucle est une action permettant d'exécuter un prompt sur une liste d'éléments. Elle est principalement utilisée pour traiter des documents de grande taille et se place après une découpe pour traiter chaque élément résultant de la découpe.
 Le but étant d'exécuter un prompt sur chaque partie du document.
