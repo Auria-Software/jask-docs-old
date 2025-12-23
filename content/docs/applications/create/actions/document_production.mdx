@@ -11,6 +11,61 @@ Trois actions sont disponibles pour générer des documents :
 
 ![application_document_production](@public/applications/generate.png)
 
+## Traduire un document
+
+### Paramètres
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Production de documents</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Traduire un document</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>Traduction de document doc à doc</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>Fichiers (docx et pptx uniquement)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>Fichier(s) (docx et pptx uniquement en fonction de l’entrée)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        - Langue cible : Sélection de la langue choisie parmi la liste de langue proposée<br/>
+        - Nom du document (Prefix) : Nom qui sera donné au fichier généré, avec l’heure de génération en suffixe<br/>
+        - Source de données cible : Sélection de la source de données dans laquelle sera sauvegardée le document<br/>
+        - Dossier de sauvegarde : Chemin de sauvegarde dans la source de données sélectionnée
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>- Ne peut se mettre que après le contexte</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
+
+Cette action vous permet de traduire un document tout en gardant le format du document original. Il accepte en entrée un document (Soit depuis le [contexte](/docs/applications/create/intro#etape-1--contexte-premier-élément-par-defaut), soit depuis le [moteur de recherche](/docs/applications/create/actions/data_sources) etc...).
+
+<Callout type="warning">
+La traduction est effectuée uniquement pour les documents Word et PowerPoint.
+</Callout>
+
+![application_document_production](@public/applications/translate.png)
+
+Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Production de documents` et enfin sur `Traduire un document`.
+Une fois l'action dans le workflow, vous pouvez sélectionner la langue de traduction (Anglais, espagnol, etc...), donner un nom à votre document traduit et choisir un dossier de sauvegarde ainsi que la source de données dans laquelle vous souhaitez stocker votre document traduit.
 
 ## Générer un document de zero
 
@@ -79,65 +134,6 @@ Vous avez le choix du format du document généré :
 * HTML
 
 Vous pouvez également choisir le nom du nouveau document, le chemin de sauvegarde ainsi que la source de donnée dans laquelle vous souhaitez stocker votre document.
-
-
-## Traduire un document
-
-### Paramètres
-<Table>
-  <tbody>
-    <Table.Tr>
-      <Table.Td>Section</Table.Td>
-      <Table.Td>Production de documents</Table.Td>
-    </Table.Tr>
-    <Table.Tr>
-      <Table.Td>Titre</Table.Td>
-      <Table.Td>Traduire un document</Table.Td>
-    </Table.Tr>
-    <Table.Tr>
-      <Table.Td>Définition</Table.Td>
-      <Table.Td>Traduction de document doc à doc</Table.Td>
-    </Table.Tr>
-    <Table.Tr>
-      <Table.Td>Entrée</Table.Td>
-      <Table.Td>Fichiers (docx et pptx uniquement)</Table.Td>
-    </Table.Tr>
-    <Table.Tr>
-      <Table.Td>Sortie</Table.Td>
-      <Table.Td>Fichier(s) (docx et pptx uniquement en fonction de l’entrée)</Table.Td>
-    </Table.Tr>
-    <Table.Tr>
-      <Table.Td>Paramètres avancés</Table.Td>
-      <Table.Td>
-        - Langue cible : Sélection de la langue choisie parmi la liste de langue proposée<br/>
-        - Nom du document (Prefix) : Nom qui sera donné au fichier généré, avec l’heure de génération en suffixe<br/>
-        - Source de données cible : Sélection de la source de données dans laquelle sera sauvegardée le document<br/>
-        - Dossier de sauvegarde : Chemin de sauvegarde dans la source de données sélectionnée
-      </Table.Td>
-    </Table.Tr>
-    <Table.Tr>
-      <Table.Td>Exemples d’utilisation</Table.Td>
-      <Table.Td>- Ne peut se mettre que après le contexte</Table.Td>
-    </Table.Tr>
-  </tbody>
-</Table>
-
----
-
-### Guide d'utilisation
-
-Cette action vous permet de traduire un document tout en gardant le format du document original. Il accepte en entrée un document (Soit depuis le [contexte](/docs/applications/create/intro#etape-1--contexte-premier-élément-par-defaut), soit depuis le [moteur de recherche](/docs/applications/create/actions/data_sources) etc...).
-
-<Callout type="warning">
-La traduction est effectuée uniquement pour les documents Word et PowerPoint.
-</Callout>
-
-![application_document_production](@public/applications/translate.png)
-
-Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Production de documents` et enfin sur `Traduire un document`.
-Une fois l'action dans le workflow, vous pouvez sélectionner la langue de traduction (Anglais, espagnol, etc...), donner un nom à votre document traduit et choisir un dossier de sauvegarde ainsi que la source de données dans laquelle vous souhaitez stocker votre document traduit.
-
-
 
 ## Générer un document à partir d'un template
 
