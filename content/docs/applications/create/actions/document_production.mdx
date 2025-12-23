@@ -1,7 +1,7 @@
 import { Callout } from 'nextra/components'
 import { Table } from 'nextra/components'
 
-# Générer des documents
+# Production de documents
 
 Trois actions sont disponibles pour générer des documents :
 
@@ -41,13 +41,16 @@ Trois actions sont disponibles pour générer des documents :
       <Table.Td>
         - Langue cible : Sélection de la langue choisie parmi la liste de langue proposée<br/>
         - Nom du document (Prefix) : Nom qui sera donné au fichier généré, avec l’heure de génération en suffixe<br/>
-        - Source de données cible : Sélection de la source de données dans laquelle sera sauvegardée le document<br/>
+        - Source de données cible : Sélection de la source de données dans laquelle sera sauvegardé le document<br/>
         - Dossier de sauvegarde : Chemin de sauvegarde dans la source de données sélectionnée
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Exemples d’utilisation</Table.Td>
-      <Table.Td>- Ne peut se mettre que après le contexte</Table.Td>
+      <Table.Td>- Ne peut se mettre que après le contexte
+      - Traduction d'un fichier Powerpoint de présentation de l'entreprise dans une langue cible
+      - Traduction d'une fiche produit Word dans une langue sélectionnée
+      </Table.Td>
     </Table.Tr>
   </tbody>
 </Table>
@@ -56,7 +59,7 @@ Trois actions sont disponibles pour générer des documents :
 
 ### Guide d'utilisation
 
-Cette action vous permet de traduire un document tout en gardant le format du document original. Il accepte en entrée un document (Soit depuis le [contexte](/docs/applications/create/intro#etape-1--contexte-premier-élément-par-defaut), soit depuis le [moteur de recherche](/docs/applications/create/actions/data_sources) etc...).
+Cette action vous permet de traduire un document tout en gardant le format du document original. Il accepte en entrée un document (soit depuis le [contexte](/docs/applications/create/intro#etape-1--contexte-premier-élément-par-defaut), soit depuis le [moteur de recherche](/docs/applications/create/actions/data_sources) etc...).
 
 <Callout type="warning">
 La traduction est effectuée uniquement pour les documents Word et PowerPoint.
@@ -85,7 +88,7 @@ Une fois l'action dans le workflow, vous pouvez sélectionner la langue de tradu
       <Table.Td>
         Génération d’un document en sortie de la brique et sauvegarde de ce document dans un dossier cible. 
         
-        Le document est un concaténation des éléments reçus en entrée de cette brique
+        Le document est une concaténation des éléments reçus en entrée de cette brique
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -101,7 +104,7 @@ Une fois l'action dans le workflow, vous pouvez sélectionner la langue de tradu
       <Table.Td>
         - Type de document : Sélection du format du document en sortie parmi : Word, Powerpoint, Markdown, HTML, Excel<br/>
         - Nom du document (Prefix) : Nom qui sera donné au fichier généré, avec l’heure de génération en suffixe<br/>
-        - Source de données cible : Sélection de la source de données dans laquelle sera sauvegardée le document<br/>
+        - Source de données cible : Sélection de la source de données dans laquelle sera sauvegardé le document<br/>
         - Dossier de sauvegarde : Chemin de sauvegarde dans la source de données sélectionnée
       </Table.Td>
     </Table.Tr>
