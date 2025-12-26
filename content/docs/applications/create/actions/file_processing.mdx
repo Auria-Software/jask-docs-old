@@ -8,6 +8,11 @@ Deux actions sont disponibles pour traiter les fichiers :
 
 ![application_file_processing](@public/applications/file_processing.png)
 
+
+<Callout type="info">
+ Si vous souhaitez extraire des données d'un document de grande taille dans un format structuré, nous vous conseillons de faire usage de ces deux briques de manière coordonnées.
+</Callout>
+
 ## Extraction de tableau
 
 ### Paramètres
@@ -137,3 +142,17 @@ Cette action vous permet d'analyser ou traiter les documents en entrée (résum�
 
 Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Traitement de fichiers` et enfin sur `Analyse de fichier(s)`.
 Une fois l'action dans le workflow, vous pouvez sélectionner le type de traitement, configurer les paramètres avancés et entrer les instructions personnalisées.
+
+## Exemple d'utilisation
+<details>
+<summary>Utilisation les briques de traitement de fichiers pour extraire des informations</summary>
+Objectif : Je souhaite extraire les noms et emails de tous les participants à une conférence. J'ai en ma possession 15 documents correspondants aux 15 sessions de l'événement. Mon objectif est d'obtenir un tableau contenant tous les participants.
+
+Dans un premier temps, je vais utiliser une brique analyse de fichiers, cette brique va pouvoir parcourir page par page l'intégralité de mes documents, et en extraire uniquement les informations personnalisées. Cette étape est primordiale pour éviter de dépasser le contexte d'entrée du modèle.
+Dans un second temps, je vais utiliser une brique Extraction de tableau, qui va utiliser tous les éléments extraits dans l'étape précédente, sous forme de tableau consolidé.
+Ainsi, même avec de fichiers de grande taille, en travaillant sur les prompts d'extraction, et sur le paramétrage de mon tableau de sortie, je peux extraire de grandes quantités d'information de manière consolidée.
+![extraction_app](@public/applications/analyse.png)
+
+![extraction_app](@public/applications/table.png)
+</details>
+
