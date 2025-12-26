@@ -12,7 +12,7 @@ const banner = <Banner storageKey="2.0-release">
       </Banner>
 const navbar = (
     <Navbar
-        logo={<b><img src="/Logo Jask.png" alt="Logo Jask" width={100} height={100}/></b>}
+        logo={<b><img src="/logo_jask.png" alt="Logo Jask" width={100} height={100}/></b>}
     // ... Your additional navbar options
     />
 )
