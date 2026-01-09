@@ -1,9 +1,10 @@
+import { Callout } from "nextra/components";
+
 # Observabilité
 
 Depuis les réglages, allez sur la page `Observabilité`, vous pouvez suivre la consommation des agents et applications de votre organisation.
 
 ![observability](@public/settings/observability.png)
-
 
 ### Filtrer sur une période
 
@@ -11,10 +12,36 @@ Choisissez la période sur laquelle vous voulez voir les données en haut à dro
 
 ![observability](@public/settings/observability-date.png)
 
-Dans cette vue vous avez un résumé de la consommation globale dans la partie haute de la page. 
+Dans cette vue vous avez un résumé de la consommation globale dans la partie haute de la page.
 
 ![observability](@public/settings/kpi-global.png)
 
 En bas à gauche de la page, vous avez le détail de consommation en sélectionnant le type d'élément que vous voulez voir par utilisateur, par agent, par application, etc.
 
 ![observability](@public/settings/kpi-users.png)
+
+### Télécharger les logs
+
+Vous pouvez télécharger les logs / consommation de votre organisation en cliquant sur le bouton `Télécharger` en haut à droite de la page à coté du filtre sur la période.
+En effectuant cette action, vous allez télécharger un fichier CSV contenant les logs de votre organisation sur la période sélectionnée.
+
+<Callout type="warning">
+  Afin d’optimiser les performances, il est conseillé d’exporter les logs par
+  petites périodes (inférieures à 1 mois de préférence). Dans Power BI par
+  exemple, les fichiers peuvent ensuite être chargés depuis un dossier unique et
+  combinés automatiquement (fonction “Combiner les fichiers”), ce qui permet une
+  analyse évolutive mois par mois sans recharger l’historique complet.
+</Callout>
+
+![download logs](@public/settings/observability/download.png)
+
+Chaque ligne du fichier correspond à un log associé à une requête effectuée par un utilisateur dans Jask.
+Une seule requête adressée à un agent **peut générer plusieurs lignes**, chacune représentant un type de ressource utilisé lors du traitement de la requête :
+
+- User : 1 ligne identifiant l’utilisateur à l’origine de la requête
+- Assistant : 0 ou 1 ligne indiquant l’assistant sollicité
+- Models : 0 ou N lignes indiquant le modèle d’IA utilisé
+- Datasources : 0 à N lignes par source de données utilisée par l’assistant
+- Resources : 0 à N lignes par fichier ou ressource consommée
+
+![download logs](@public/settings/observability/logs.png)
