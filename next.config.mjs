@@ -11,15 +11,13 @@ export default withNextra({
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-        "@components": path.resolve("./components"),
-        "@public": path.resolve("./public")
+      "@components": path.resolve("./components"),
+      "@public": path.resolve("./public"),
     };
     return config;
   },
 
   async redirects() {
-    return [
-      { source: "/", destination: "/docs", permanent: true }
-    ];
-    },
+    return [{ source: "/", destination: "/docs", permanent: false }];
+  },
 });

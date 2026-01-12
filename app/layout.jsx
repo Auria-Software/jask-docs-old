@@ -33,6 +33,9 @@ export default async function RootLayout({ children }) {
       // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
       suppressHydrationWarning>
       <Head>
+        {/* Prevent search engine indexing */}
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
         {/* Google Analytics */}
         <Script
           async
