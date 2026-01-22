@@ -36,6 +36,7 @@ export default async function RootLayout({ children }) {
         {/* Prevent search engine indexing */}
         <meta name="robots" content="noindex, nofollow" />
         <meta name="googlebot" content="noindex, nofollow" />
+        <meta name="google-site-verification" content="QZuJf6xlz4IGab0TRwRHSag-c_KaNTYxJ710BRr3-mg" />
         {/* Google Analytics */}
         <Script
           async

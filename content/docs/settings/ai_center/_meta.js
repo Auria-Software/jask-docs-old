@@ -1,3 +1,3 @@
 export default {
-  ai_models: "Modèles d'IA",
+  ai_models: "Gestion des Modèles",
 };
