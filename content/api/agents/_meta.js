@@ -1,5 +1,5 @@
-import { getLabel } from "@components/CRUD_label";
+import { postLabel } from "@components/CRUD_label";
 
 export default {
-  get: <div key="get">Retrieve all agents {getLabel}</div>,
+  post: <div key="post">Call {postLabel}</div>,
 };

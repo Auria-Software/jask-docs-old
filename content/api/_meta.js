@@ -10,6 +10,7 @@ export default {
     type: "separator",
     title: "Objets",
   },
+  formats: "Formats de Réponse",
   _3: {
     type: "separator",
     title: "Routes",
