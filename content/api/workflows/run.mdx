@@ -1,0 +1,250 @@
+---
+title: "Exécuter une Application"
+description: "Lancer un workflow d'automatisation Jask"
+---
+
+# Exécuter une Application
+
+Cet endpoint permet d'exécuter une application (workflow) Jask qui peut effectuer des tâches complexes comme la génération de documents, l'analyse de données, etc.
+
+## Endpoint
+
+```http
+POST /studio/apps/run
+```
+
+## Headers requis
+
+| Header | Valeur | Description |
+|--------|--------|-------------|
+| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'application |
+| `Content-Type` | `application/json` | Format du payload |
+
+## Corps de la requête
+
+```typescript
+{
+  context: string,           // Contexte/données d'entrée
+  files?: File[]            // Fichiers optionnels à traiter
+}
+```
+
+### Paramètres
+
+| Paramètre | Type | Requis | Description |
+|-----------|------|--------|-------------|
+| `context` | string | ✅ | Texte ou données en entrée du workflow |
+| `files` | File[] | ❌ | Liste de fichiers à traiter (optionnel) |
+
+## Réponse
+
+La réponse est un stream d'événements SSE décrivant la progression du workflow.
+
+### Événements principaux
+
+| Type | Description |
+|------|-------------|
+| `taskStart` | Début d'une tâche |
+| `taskEnd` | Fin d'une tâche |
+| `taskError` | Erreur dans une tâche |
+
+## Exemples
+
+### Exemple: Python complet avec gestion des événements pour la Génération de Documentation
+
+```python
+import httpx
+import json
+from typing import Optional
+
+async def run_application(
+    context: str,
+    api_key: str,
+    files: list = None,
+    timeout: float = 300.0
+) -> dict:
+    """
+    Exécute une application Jask
+    
+    Args:
+        context: Données d'entrée du workflow
+        api_key: Clé API de l'application
+        files: Liste de fichiers (optionnel)
+        timeout: Timeout en secondes (défaut: 5 min)
+    
+    Returns:
+        dict: Résultats de l'exécution
+    """
+    payload = {
+        "context": context,
+        "files": files or []
+    }
+    
+    result = {
+        "status": "pending",
+        "document_path": None,
+        "tasks": [],
+        "error": None
+    }
+    
+    try:
+        async with httpx.AsyncClient(timeout=timeout) as client:
+            async with client.stream(
+                "POST",
+                "https://{organization_jask_backend_name}.azurewebsites.net/studio/apps/run",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json"
+                },
+                json=payload
+            ) as response:
+                response.raise_for_status()
+                
+                async for line in response.aiter_lines():
+                    if not line.startswith('data:'):
+                        continue
+                    
+                    try:
+                        json_str = line.removeprefix('data:').strip()
+                        event = json.loads(json_str)
+                        event_type = event.get("type")
+                        value = event.get("value")
+                        
+                        # Gestion des événements
+                        if event_type == "taskStart":
+                            task_info = value
+                            print(f"[TASK START] {task_info.get('taskName')}")
+                            result["tasks"].append({
+                                "id": task_info.get("taskId"),
+                                "name": task_info.get("taskName"),
+                                "status": "running"
+                            })
+                        
+                        elif event_type == "taskProgress":
+                            progress = value.get("progress", 0)
+                            message = value.get("message", "")
+                            print(f"[PROGRESS] {progress}% - {message}")
+                        
+                        elif event_type == "documentGenerationEnd":
+                            document_path = value
+                            print(f"[DOCUMENT] Généré: {document_path}")
+                            result["document_path"] = document_path
+                        
+                        elif event_type == "taskEnd":
+                            task_info = value
+                            print(f"[TASK END] Durée: {task_info.get('duration')}s")
+                            result["status"] = "success"
+                        
+                        elif event_type == "taskError":
+                            error_msg = value.get("message")
+                            print(f"[ERROR] {error_msg}")
+                            result["error"] = error_msg
+                            result["status"] = "error"
+                            raise Exception(f"Erreur dans le workflow: {error_msg}")
+                        
+                        elif event_type == "error":
+                            error_msg = value.get("message") if isinstance(value, dict) else str(value)
+                            print(f"[ERROR] {error_msg}")
+                            result["error"] = error_msg
+                            result["status"] = "error"
+                            raise Exception(f"Erreur: {error_msg}")
+                            
+                    except json.JSONDecodeError:
+                        continue
+        
+        return result
+        
+    except httpx.HTTPStatusError as e:
+        result["status"] = "error"
+        result["error"] = f"HTTP {e.response.status_code}: {e.response.text}"
+        raise
+    
+    except httpx.TimeoutException:
+        result["status"] = "error"
+        result["error"] = "Timeout lors de l'exécution de l'application"
+        raise
+    
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+        raise
+
+# Utilisation
+try:
+    result = await run_application(
+        context="Générer documentation pour ticket #456",
+        api_key="jask_app_key_xyz789"
+    )
+    
+    if result["status"] == "success":
+        print(f"✓ Succès! Document: {result['document_path']}")
+    else:
+        print(f"✗ Échec: {result['error']}")
+        
+except Exception as e:
+    print(f"Erreur: {e}")
+```
+
+## Événements détaillés
+
+### Structure d'un événement `taskStart`
+
+```json
+{
+  "type": "taskStart",
+  "value": {
+    "taskId": "task-001",
+    "taskName": "Document Generation",
+    "startTime": "2025-01-12T10:30:00Z"
+  }
+}
+```
+
+
+### Structure d'un événement `taskEnd`
+
+```json
+{
+  "type": "taskEnd",
+  "value": {
+    "taskId": "task-001",
+    "status": "success",
+  }
+}
+```
+
+### Structure d'un événement `taskError`
+
+```json
+{
+  "type": "taskError",
+  "value": {
+    "taskId": "task-001",
+    "message": "Échec de la génération du document",
+    "details": "File not found: input.json",
+    "recoverable": false
+  }
+}
+```
+
+## Gestion des erreurs
+
+### Erreur HTTP
+
+```python
+try:
+    result = await run_application(context, api_key)
+except httpx.HTTPStatusError as e:
+    if e.response.status_code == 401:
+        print("Clé API invalide")
+    elif e.response.status_code == 400:
+        print("Payload invalide")
+    elif e.response.status_code == 500:
+        print("Erreur serveur")
+```
+
+
+## Voir aussi
+
+- [Response Formats](/api/formats) - Comprendre les événements SSE
+- [Ask an agent](/api/agents/post) - Appeler un agent

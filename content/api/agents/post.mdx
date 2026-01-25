@@ -1,0 +1,359 @@
+---
+title: "Appeler un Agent"
+description: "Interagir avec un agent IA en mode streaming"
+---
+import { Tabs } from "nextra/components";
+import { postLabel } from "@components/CRUD_label";
+import { Callout } from "nextra/components";
+
+# Appeler un Agent
+
+Cet endpoint permet d'interagir avec un agent IA spécifique en mode streaming (Server-Sent Events).
+
+## Endpoint
+
+```http
+POST /ask/sse
+```
+
+## Headers requis
+
+| Header | Valeur | Description |
+|--------|--------|-------------|
+| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'agent à utiliser |
+| `Content-Type` | `application/json` | Format du payload |
+
+## Corps de la requête
+
+<Callout type="info">
+Avant d’appeler un agent via /ask/sse, vous devez d’abord initialiser une conversation. Voir [Conversations](/api/conversations/post) pour plus de détails.
+</Callout>
+
+```typescript
+{
+  conversationId: string,    // ID unique de la conversation
+  text: string,              // Message de l'utilisateur
+}
+```
+
+### Paramètres
+
+| Paramètre | Type | Requis | Description |
+|-----------|------|--------|-------------|
+| `conversationId` | string | ✅ | Identifiant unique de la conversation (UUID) |
+| `text` | string | ✅ | Le message actuel de l'utilisateur |
+
+## Réponse
+
+La réponse est un stream d'événements SSE (Server-Sent Events). Voir [Formats de Réponse](/api/formats) pour plus de détails.
+
+### Événements principaux
+
+```
+data: {"type": "streaming", "value": "Bonjour"}
+data: {"type": "streaming", "value": ", comment"}
+data: {"type": "streaming", "value": " puis-je vous aider ?"}
+data: {"type": "end", "value": ""}
+```
+
+## Exemples
+
+<Tabs items={['cURL', 'Python', 'JavaScript']} defaultIndex="0">
+  <Tabs.Tab value="cURL">
+    ```bash filename="call_assistant_streaming.sh"
+    curl -X POST "https://{organization_jask_backend_name}.azurewebsites.net/ask/sse" \
+    -H "Authorization: Bearer YOUR_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"conversationId": "conversation_id", "text": "Quel est la taille de la tour eiffel ?"}'
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab value="Python">
+    ```python filename="call_assistant_streaming.py"
+import httpx
+import json
+from uuid import uuid4
+
+async def call_assistant_streaming(
+    text: str,
+    api_key: str,
+    conversation_id: str = None,
+    history: list = None
+):
+    """
+    Appelle un agent en mode streaming
+    
+    Args:
+        text: Message de l'utilisateur
+        api_key: Clé API de l'agent
+        conversation_id: ID de conversation (généré si non fourni)
+        history: Historique optionnel des messages
+    
+    Returns:
+        str: Réponse complète de l'agent
+    """
+    if conversation_id is None:
+        conversation_id = str(uuid4())
+    
+    payload = {
+        "conversationId": conversation_id,
+        "text": text
+    }
+    
+    if history:
+        payload["history"] = history
+    
+    full_response = ""
+    
+    async with httpx.AsyncClient() as client:
+        # 1. Initialiser la conversation
+        await client.post(
+            f"https://{organization_jask_backend_name}.azurewebsites.net/conversations/{conversation_id}",
+            headers={"Authorization": f"Bearer {api_key}"},
+            json={}
+        )
+        
+        # 2. Appeler l'agent en streaming
+        async with client.stream(
+            "POST",
+            "https://{organization_jask_backend_name}.azurewebsites.net/ask/sse",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            },
+            json=payload
+        ) as response:
+            async for line in response.aiter_lines():
+                if not line.startswith("data:"):
+                    continue
+                
+                try:
+                    json_str = line.removeprefix("data:").strip()
+                    data = json.loads(json_str)
+                    event_type = data.get("type")
+                    
+                    if event_type == "streaming":
+                        chunk = data.get("value", "")
+                        full_response += chunk
+                        print(chunk, end="", flush=True)
+                    
+                    elif event_type == "error":
+                        raise Exception(f"Erreur: {data.get('value')}")
+                    
+                    elif event_type == "end":
+                        print()  # Nouvelle ligne
+                        break
+                
+                except json.JSONDecodeError:
+                    continue
+    
+    return full_response
+
+# Utilisation
+response = await call_assistant_streaming(
+    text="Quelle est la météo aujourd'hui ?",
+    api_key="jask_api_key_abc123"
+)
+print(f"Réponse complète: {response}")
+```
+  </Tabs.Tab>
+  <Tabs.Tab value="JavaScript">
+    ```javascript filename="call_assistant_streaming.js"
+async function callAssistantStreaming(text, apiKey, conversationId = null, history = null) {
+  if (!conversationId) {
+    conversationId = crypto.randomUUID();
+  }
+
+  const payload = {
+    conversationId,
+    text
+  };
+
+  if (history) {
+    payload.history = history;
+  }
+
+  // 1. Initialiser la conversation
+  await fetch(
+    `https://{organization_jask_backend_name}.azurewebsites.net/conversations/${conversationId}`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    }
+  );
+
+  // 2. Appeler l'agent en streaming
+  const response = await fetch(
+    'https://{organization_jask_backend_name}.azurewebsites.net/ask/sse',
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    }
+  );
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let fullResponse = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    const chunk = decoder.decode(value);
+    const lines = chunk.split('\n');
+
+    for (const line of lines) {
+      if (!line.startsWith('data:')) continue;
+
+      try {
+        const json = line.replace('data:', '').trim();
+        const data = JSON.parse(json);
+
+        if (data.type === 'streaming') {
+          fullResponse += data.value;
+          console.log(data.value); // Afficher en temps réel
+        } else if (data.type === 'end') {
+          return fullResponse;
+        } else if (data.type === 'error') {
+          throw new Error(data.value.message);
+        }
+      } catch (e) {
+        // Ignorer les erreurs de parsing
+      }
+    }
+  }
+
+  return fullResponse;
+}
+
+// Utilisation
+const response = await callAssistantStreaming(
+  "Bonjour, comment puis-je créer un ticket ?",
+  "jask_api_key_abc123"
+);
+console.log("Réponse:", response);
+```
+  </Tabs.Tab>
+</Tabs>
+
+
+## Cas d'usage avancés
+
+### Cas 1: Multiple agents en séquence
+
+Utilisez plusieurs agents pour créer un workflow complexe :
+
+```python filename="multi_assistant_workflow.py"
+async def multi_assistant_workflow(user_message: str):
+    """
+    1. Classifier détecte l'intention
+    2. Agent principal répond
+    3. Classifier vérifie si résolu
+    """
+    
+    # Étape 1: Détection d'intention
+    intention = await call_assistant_streaming(
+        text=user_message,
+        api_key=settings.jask_intention_api_key
+    )
+    print(f"Intention détectée: {intention}")
+    
+    # Étape 2: Réponse principale
+    main_response = await call_assistant_streaming(
+        text=user_message,
+        api_key=settings.jask_main_api_key
+    )
+    
+    # Étape 3: Vérifier si résolu
+    is_resolved = await call_assistant_streaming(
+        text=main_response,
+        api_key=settings.jask_fixclassifier_api_key
+    )
+    
+    return {
+        "intention": intention,
+        "response": main_response,
+        "resolved": is_resolved.strip().lower() == "yes"
+    }
+```
+
+### Cas 2: Agent avec RAG (Recherche de documents)
+
+Certains agents retournent des résultats de recherche :
+
+```python filename="call_rag_assistant.py"
+async def call_rag_assistant(text: str, api_key: str):
+    payload = {
+        "conversationId": str(uuid4()),
+        "text": text
+    }
+    
+    full_response = ""
+    documents = []
+    
+    async with httpx.AsyncClient() as client:
+        async with client.stream(
+            "POST",
+            "https://{organization_jask_backend_name}.azurewebsites.net/ask/sse",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            },
+            json=payload
+        ) as response:
+            async for line in response.aiter_lines():
+                if not line.startswith("data:"):
+                    continue
+                
+                try:
+                    data = json.loads(line.removeprefix("data:").strip())
+                    event_type = data.get("type")
+                    
+                    if event_type == "streaming":
+                        full_response += data.get("value", "")
+                    
+                    elif event_type == "informative":
+                        info = data.get("value", {})
+                        if info.get("type") == "searchResult":
+                            resources = info.get("value", {}).get("resources", [])
+                            # Garder les 5 documents les plus pertinents
+                            documents = sorted(
+                                resources,
+                                key=lambda x: x.get("relevance", 0),
+                                reverse=True
+                            )[:5]
+                    
+                    elif event_type == "end":
+                        break
+                
+                except json.JSONDecodeError:
+                    continue
+    
+    return {
+        "response": full_response,
+        "sources": documents
+    }
+
+# Utilisation
+result = await call_rag_assistant(
+    "Comment configurer l'authentification OAuth ?",
+    api_key="jask_rag_api_key"
+)
+
+print(f"Réponse: {result['response']}")
+print(f"Sources ({len(result['sources'])}):")
+for doc in result['sources']:
+    print(f"  - {doc['name']} (relevance: {doc['relevance']})")
+```
+
+## Voir aussi
+
+- [Conversation](/api/conversations/post) - Gérer les conversations
+- [Response Formats](/api/formats) - Comprendre les événements SSE
