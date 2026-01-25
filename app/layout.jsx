@@ -6,8 +6,8 @@ import Script from "next/script";
 
 const banner = (
   <Banner storageKey="2.0-release">
-    <a href="/docs/applications/create/actions/file_processing">
-      🎉 Nouvelles actions de traitement de fichiers dans les applications →
+    <a href="/changelog/2026.02">
+      🎉 Nouvelle version de Jask v2026.02 →
     </a>
   </Banner>
 );

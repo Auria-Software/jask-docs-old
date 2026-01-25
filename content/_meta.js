@@ -8,4 +8,8 @@ export default {
     title: "API Reference",
     type: "page",
   },
+  changelog: {
+    title: "Changelog",
+    type: "page",
+  },
 };
