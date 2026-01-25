@@ -23,7 +23,7 @@ export default {
         title: 'Catalogue',
     },
     prompts_store: "Prompts Store",
-    assistants: "Assistants",
+    agents: "Agents",
     applications: "Applications",
     experiences: <div key="experiences">Expériences {newLabel}</div>,
     _4: {

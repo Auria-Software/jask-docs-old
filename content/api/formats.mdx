@@ -2,6 +2,7 @@
 title: "Formats de Réponse"
 description: "Comprendre les différents formats de réponse de l'API Jask"
 ---
+import { Tabs } from "nextra/components";
 
 # Formats de Réponse
 
@@ -19,11 +20,11 @@ data: {"type": "EVENT_TYPE", "value": ...}
 
 Chaque ligne commence par `data:` suivi d'un objet JSON.
 
-## Types d'événements - Assistants
+## Types d'événements - Agents
 
 ### 1. `streaming`
 
-Contient un fragment de la réponse de l'assistant.
+Contient un fragment de la réponse de l'agent.
 
 ```json
 data: {"type": "streaming", "value": "Bonjour, "}
@@ -33,7 +34,7 @@ data: {"type": "streaming", "value": "puis-je vous aider ?"}
 
 **Utilisation** : Assembler les fragments pour obtenir la réponse complète.
 
-```python
+```python filename="example.py"
 full_response = ""
 if event_type == "streaming":
     full_response += data.get("value", "")
@@ -62,7 +63,7 @@ data: {
 }
 ```
 
-**Cas d'usage** : Afficher les sources utilisées par l'assistant.
+**Cas d'usage** : Afficher les sources utilisées par l'agent.
 
 ### 3. `end`
 
@@ -155,9 +156,9 @@ data: {
 
 ## Exemple complet: Parser les événements SSE
 
-### Python avec httpx
-
-```python
+<Tabs items={['Python', 'JavaScript']} defaultIndex="0">
+  <Tabs.Tab value="Python">
+    ```python filename="stream_assistant.py"
 import httpx
 import json
 
@@ -168,7 +169,7 @@ async def stream_assistant(payload: dict, api_key: str):
     async with httpx.AsyncClient() as client:
         async with client.stream(
             "POST",
-            "https://api-dev-auria-jask-sw-01.azurewebsites.net/ask/sse",
+            "https://{organization_jask_backend_name}.azurewebsites.net/ask/sse",
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json"
@@ -213,13 +214,12 @@ async def stream_assistant(payload: dict, api_key: str):
         "documents": documents
     }
 ```
-
-### JavaScript avec fetch
-
-```javascript
+  </Tabs.Tab>
+  <Tabs.Tab value="JavaScript">
+```javascript filename="stream_assistant.js"
 async function streamAssistant(payload, apiKey) {
   const response = await fetch(
-    'https://api-dev-auria-jask-sw-01.azurewebsites.net/ask/sse',
+    'https://{organization_jask_backend_name}.azurewebsites.net/ask/sse',
     {
       method: 'POST',
       headers: {
@@ -274,10 +274,13 @@ async function streamAssistant(payload, apiKey) {
   return fullResponse;
 }
 ```
+  </Tabs.Tab>
+</Tabs>
+
 
 
 ## Voir aussi
 
-- [Call Assistant](/api/agents/post) - Utiliser les assistants en streaming
+- [Call Agent](/api/agents/post) - Utiliser les agents en streaming
 - [Run Application](/api/workflows/run) - Exécuter des workflows
 - [Conversation](/api/conversations/create) - Gérer les conversations

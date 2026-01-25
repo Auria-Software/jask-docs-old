@@ -1,11 +1,14 @@
 ---
-title: "Appeler un Assistant"
-description: "Interagir avec un assistant IA en mode streaming"
+title: "Appeler un Agent"
+description: "Interagir avec un agent IA en mode streaming"
 ---
+import { Tabs } from "nextra/components";
+import { postLabel } from "@components/CRUD_label";
+import { Callout } from "nextra/components";
 
-# Appeler un Assistant
+# Appeler un Agent
 
-Cet endpoint permet d'interagir avec un assistant IA spécifique en mode streaming (Server-Sent Events).
+Cet endpoint permet d'interagir avec un agent IA spécifique en mode streaming (Server-Sent Events).
 
 ## Endpoint
 
@@ -17,10 +20,14 @@ POST /ask/sse
 
 | Header | Valeur | Description |
 |--------|--------|-------------|
-| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'assistant à utiliser |
+| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'agent à utiliser |
 | `Content-Type` | `application/json` | Format du payload |
 
 ## Corps de la requête
+
+<Callout type="info">
+Avant d’appeler un agent via /ask/sse, vous devez d’abord initialiser une conversation. Voir [Conversations](/api/conversations/post) pour plus de détails.
+</Callout>
 
 ```typescript
 {
@@ -38,7 +45,7 @@ POST /ask/sse
 
 ## Réponse
 
-La réponse est un stream d'événements SSE (Server-Sent Events). Voir [Formats de Réponse](/api/objets/response) pour plus de détails.
+La réponse est un stream d'événements SSE (Server-Sent Events). Voir [Formats de Réponse](/api/formats) pour plus de détails.
 
 ### Événements principaux
 
@@ -51,10 +58,17 @@ data: {"type": "end", "value": ""}
 
 ## Exemples
 
-
-### Exemple 1: Python avec httpx
-
-```python
+<Tabs items={['cURL', 'Python', 'JavaScript']} defaultIndex="0">
+  <Tabs.Tab value="cURL">
+    ```bash filename="call_assistant_streaming.sh"
+    curl -X POST "https://{organization_jask_backend_name}.azurewebsites.net/ask/sse" \
+    -H "Authorization: Bearer YOUR_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"conversationId": "conversation_id", "text": "Quel est la taille de la tour eiffel ?"}'
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab value="Python">
+    ```python filename="call_assistant_streaming.py"
 import httpx
 import json
 from uuid import uuid4
@@ -66,16 +80,16 @@ async def call_assistant_streaming(
     history: list = None
 ):
     """
-    Appelle un assistant en mode streaming
+    Appelle un agent en mode streaming
     
     Args:
         text: Message de l'utilisateur
-        api_key: Clé API de l'assistant
+        api_key: Clé API de l'agent
         conversation_id: ID de conversation (généré si non fourni)
         history: Historique optionnel des messages
     
     Returns:
-        str: Réponse complète de l'assistant
+        str: Réponse complète de l'agent
     """
     if conversation_id is None:
         conversation_id = str(uuid4())
@@ -93,15 +107,15 @@ async def call_assistant_streaming(
     async with httpx.AsyncClient() as client:
         # 1. Initialiser la conversation
         await client.post(
-            f"https://api-dev-auria-jask-sw-01.azurewebsites.net/conversations/{conversation_id}",
+            f"https://{organization_jask_backend_name}.azurewebsites.net/conversations/{conversation_id}",
             headers={"Authorization": f"Bearer {api_key}"},
             json={}
         )
         
-        # 2. Appeler l'assistant en streaming
+        # 2. Appeler l'agent en streaming
         async with client.stream(
             "POST",
-            "https://api-dev-auria-jask-sw-01.azurewebsites.net/ask/sse",
+            "https://{organization_jask_backend_name}.azurewebsites.net/ask/sse",
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json"
@@ -141,10 +155,9 @@ response = await call_assistant_streaming(
 )
 print(f"Réponse complète: {response}")
 ```
-
-### Exemple 2: JavaScript avec fetch
-
-```javascript
+  </Tabs.Tab>
+  <Tabs.Tab value="JavaScript">
+    ```javascript filename="call_assistant_streaming.js"
 async function callAssistantStreaming(text, apiKey, conversationId = null, history = null) {
   if (!conversationId) {
     conversationId = crypto.randomUUID();
@@ -161,7 +174,7 @@ async function callAssistantStreaming(text, apiKey, conversationId = null, histo
 
   // 1. Initialiser la conversation
   await fetch(
-    `https://api-dev-auria-jask-sw-01.azurewebsites.net/conversations/${conversationId}`,
+    `https://{organization_jask_backend_name}.azurewebsites.net/conversations/${conversationId}`,
     {
       method: 'POST',
       headers: {
@@ -172,9 +185,9 @@ async function callAssistantStreaming(text, apiKey, conversationId = null, histo
     }
   );
 
-  // 2. Appeler l'assistant en streaming
+  // 2. Appeler l'agent en streaming
   const response = await fetch(
-    'https://api-dev-auria-jask-sw-01.azurewebsites.net/ask/sse',
+    'https://{organization_jask_backend_name}.azurewebsites.net/ask/sse',
     {
       method: 'POST',
       headers: {
@@ -227,18 +240,21 @@ const response = await callAssistantStreaming(
 );
 console.log("Réponse:", response);
 ```
+  </Tabs.Tab>
+</Tabs>
+
 
 ## Cas d'usage avancés
 
-### Cas 1: Multiple assistants en séquence
+### Cas 1: Multiple agents en séquence
 
-Utilisez plusieurs assistants pour créer un workflow complexe :
+Utilisez plusieurs agents pour créer un workflow complexe :
 
-```python
+```python filename="multi_assistant_workflow.py"
 async def multi_assistant_workflow(user_message: str):
     """
     1. Classifier détecte l'intention
-    2. Assistant principal répond
+    2. Agent principal répond
     3. Classifier vérifie si résolu
     """
     
@@ -268,11 +284,11 @@ async def multi_assistant_workflow(user_message: str):
     }
 ```
 
-### Cas 2: Assistant avec RAG (Recherche de documents)
+### Cas 2: Agent avec RAG (Recherche de documents)
 
-Certains assistants retournent des résultats de recherche :
+Certains agents retournent des résultats de recherche :
 
-```python
+```python filename="call_rag_assistant.py"
 async def call_rag_assistant(text: str, api_key: str):
     payload = {
         "conversationId": str(uuid4()),
@@ -285,7 +301,7 @@ async def call_rag_assistant(text: str, api_key: str):
     async with httpx.AsyncClient() as client:
         async with client.stream(
             "POST",
-            "https://api-dev-auria-jask-sw-01.azurewebsites.net/ask/sse",
+            "https://{organization_jask_backend_name}.azurewebsites.net/ask/sse",
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json"
@@ -337,11 +353,7 @@ for doc in result['sources']:
     print(f"  - {doc['name']} (relevance: {doc['relevance']})")
 ```
 
-
-
-
 ## Voir aussi
 
-- [Conversation](/api/objets/conversation) - Gérer les conversations
+- [Conversation](/api/conversations/post) - Gérer les conversations
 - [Response Formats](/api/formats) - Comprendre les événements SSE
-- [Examples](/api/routes/assistants/examples) - Plus d'exemples pratiques

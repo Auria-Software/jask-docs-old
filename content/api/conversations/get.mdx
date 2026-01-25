@@ -2,6 +2,7 @@
 title: "Récupérer une Conversation"
 description: "Vérifier si une conversation existe ou récupérer ses détails"
 ---
+import { Tabs } from "nextra/components";
 
 # Récupérer une Conversation
 
@@ -17,7 +18,7 @@ GET /conversations/{conversationId}
 
 | Header | Valeur | Description |
 |--------|--------|-------------|
-| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'assistant |
+| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'agent |
 
 ## Paramètres d'URL
 
@@ -27,36 +28,37 @@ GET /conversations/{conversationId}
 
 ## Réponse
 
-### Succès (200 OK) - Conversation existe
+<Tabs items={['200 OK', '404 Not Found', '401 Unauthorized']} defaultIndex="0">
+  <Tabs.Tab value="200 OK">
+    ```json filename="200"
+    {
+      "conversationId": "conv-550e8400-e29b-41d4-a716-446655440000",
+      "status": "active",
+      "createdAt": "2025-01-12T10:30:00Z",
+      "lastActivityAt": "2025-01-12T14:45:23Z"
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab value="404 Not Found">
+    ```json filename="404"
+    {
+      "status": 404,
+      "error": "Not Found",
+      "message": "Conversation not found or expired"
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab value="401 Unauthorized">
+    ```json filename="401"
+    {
+      "status": 401,
+      "error": "Unauthorized",
+      "message": "Invalid or missing API key"
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
 
-```json
-{
-  "conversationId": "conv-550e8400-e29b-41d4-a716-446655440000",
-  "status": "active",
-  "createdAt": "2025-01-12T10:30:00Z",
-  "lastActivityAt": "2025-01-12T14:45:23Z"
-}
-```
-
-### Erreur (404 Not Found) - Conversation n'existe pas
-
-```json
-{
-  "status": 404,
-  "error": "Not Found",
-  "message": "Conversation not found or expired"
-}
-```
-
-### Erreur (401 Unauthorized)
-
-```json
-{
-  "status": 401,
-  "error": "Unauthorized",
-  "message": "Invalid or missing API key"
-}
-```
 
 ## Cas d'usage
 
@@ -76,15 +78,15 @@ graph TD
     G --> H
 ```
 
-### 2. Vérifier avant d'appeler un assistant
+### 2. Vérifier avant d'appeler un agent
 
 Assurez-vous qu'une conversation est toujours valide avant de l'utiliser.
 
 ## Exemples
 
-### Exemple 1: Python - Vérifier l'existence
-
-```python
+<Tabs items={['Python']} defaultIndex="0">
+  <Tabs.Tab value="Python">
+```python filename="conversation_exists.py"
 import httpx
 
 async def conversation_exists(conversation_id: str, api_key: str) -> bool:
@@ -93,7 +95,7 @@ async def conversation_exists(conversation_id: str, api_key: str) -> bool:
     
     Args:
         conversation_id: ID de la conversation à vérifier
-        api_key: Clé API de l'assistant
+        api_key: Clé API de l'agent
     
     Returns:
         bool: True si la conversation existe, False sinon
@@ -101,7 +103,7 @@ async def conversation_exists(conversation_id: str, api_key: str) -> bool:
     async with httpx.AsyncClient() as client:
         try:
             response = await client.get(
-                f"https://api-dev-auria-jask-sw-01.azurewebsites.net/conversations/{conversation_id}",
+                f"https://{organization_jask_backend_name}.azurewebsites.net/conversations/{conversation_id}",
                 headers={"Authorization": f"Bearer {api_key}"}
             )
             
@@ -128,10 +130,11 @@ else:
     print("Créer une nouvelle conversation")
 ```
 
+</Tabs.Tab>
+</Tabs>
 
 
 ## Voir aussi
 
-- [Create Conversation](/api/conversations/create) - Créer une nouvelle conversation
-- [Call Assistant](/api/agents/post) - Utiliser la conversation
-- [Conversation Object](/api/objets/conversation) - Structure de données
+- [Create a conversation](/api/conversations/post) - Créer une nouvelle conversation
+- [Ask an agent](/api/agents/post) - Appeler un agent

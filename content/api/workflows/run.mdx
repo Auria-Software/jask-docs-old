@@ -91,7 +91,7 @@ async def run_application(
         async with httpx.AsyncClient(timeout=timeout) as client:
             async with client.stream(
                 "POST",
-                "https://api-dev-auria-jask-sw-01.azurewebsites.net/studio/apps/run",
+                "https://{organization_jask_backend_name}.azurewebsites.net/studio/apps/run",
                 headers={
                     "Authorization": f"Bearer {api_key}",
                     "Content-Type": "application/json"
@@ -247,5 +247,4 @@ except httpx.HTTPStatusError as e:
 ## Voir aussi
 
 - [Response Formats](/api/formats) - Comprendre les événements SSE
-- [Call Assistant](/api/agents/post) - Appeler des assistants
-- [Examples](/api/routes/applications/examples) - Plus d'exemples
+- [Ask an agent](/api/agents/post) - Appeler un agent

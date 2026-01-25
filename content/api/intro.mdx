@@ -5,23 +5,27 @@ description: "Guide complet pour utiliser l'API Jask"
 
 # Introduction à l'API Jask
 
-Bienvenue dans la documentation de l'API Jask. Cette API vous permet d'intégrer des assistants IA conversationnels et des workflows d'automatisation dans vos applications.
+Bienvenue dans la documentation de l'API Jask. Cette API vous permet d'intégrer des agents IA conversationnels et des workflows d'automatisation dans vos applications.
 
 ## Base URL
 
+La base URL de l'API Jask varie en fonction de l'organisation. Vous pouvez la trouver sur le portail Azure de votre organisation dans la ressource API Jask.
+Sinon vous pouvez la retrouver dans la partie réseau de l'inspecteur de votre navigateur à l'utilisation de la plateforme Jask.
+
 ```
-https://api-dev-auria-jask-sw-01.azurewebsites.net
+https://{organization_jask_backend_name}.azurewebsites.net/api/v1
 ```
 
 ## Authentification
 
-Toutes les requêtes à l'API nécessitent une clé API passée dans le header `Authorization` :
+Toutes les requêtes à l'API Jask nécessitent une clé API passée dans le header `Authorization` :
 
 ```http
 Authorization: Bearer YOUR_API_KEY
 ```
 
 Vous pouvez obtenir votre clé API depuis votre tableau de bord Jask.
+
 
 ## Types de réponses
 
@@ -43,7 +47,7 @@ Pour les opérations non-conversationnelles, l'API retourne du JSON standard.
 
 | Endpoint | Méthode | Description |
 |----------|---------|-------------|
-| `/ask/sse` | POST | Appeler un assistant en mode streaming |
+| `/ask/sse` | POST | Appeler un agent en mode streaming |
 | `/studio/apps/run` | POST | Exécuter une application/workflow |
 | `/conversations/{id}` | POST | Créer/initialiser une conversation |
 
@@ -74,5 +78,4 @@ Les erreurs sont retournées avec un code HTTP approprié et un message JSON :
 ## Prochaines étapes
 
 - Explorez les [Objets](/api/formats) pour comprendre les structures de données
-- Consultez les [Routes](/api/routes) pour les détails de chaque endpoint
-- Testez avec nos [Exemples](/api/examples)
+- Consultez les [Routes](/api/agents/post) pour les détails de chaque endpoint

@@ -15,7 +15,7 @@ export default {
     type: "separator",
     title: "Routes",
   },
+  conversations: "Conversations",
   agents: "Agents",
   workflows: "Applications",
-  files: "Fichiers",
 };

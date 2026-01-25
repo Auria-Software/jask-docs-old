@@ -1,11 +1,12 @@
 ---
 title: "Créer une Conversation"
-description: "Initialiser une nouvelle conversation avec un assistant"
+description: "Initialiser une nouvelle conversation avec un agent"
 ---
+import { Tabs } from "nextra/components";
 
 # Créer une Conversation
 
-Avant d'appeler un assistant via `/ask/sse`, vous devez d'abord initialiser une conversation. Cet endpoint crée ou réinitialise une session de conversation.
+Avant d'appeler un agent via `/ask/sse`, vous devez d'abord initialiser une conversation. Cet endpoint crée ou réinitialise une session de conversation.
 
 ## Endpoint
 
@@ -17,7 +18,7 @@ POST /conversations/{conversationId}
 
 | Header | Valeur | Description |
 |--------|--------|-------------|
-| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'assistant |
+| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'agent |
 | `Content-Type` | `application/json` | Format du payload |
 
 ## Paramètres d'URL
@@ -36,40 +37,40 @@ Le corps est un objet JSON vide. La configuration de la conversation est déterm
 
 ## Réponse
 
-### Succès (200 OK)
-
-```json
-{
-  "conversationId": "conv-550e8400-e29b-41d4-a716-446655440000",
-  "status": "created",
-  "createdAt": "2025-01-12T10:30:00Z"
-}
-```
-
-### Erreur (401 Unauthorized)
-
-```json
-{
-  "status": 401,
-  "error": "Unauthorized",
-  "message": "Invalid or missing API key"
-}
-```
+<Tabs items={['200 OK', '401 Unauthorized']} defaultIndex="0">
+  <Tabs.Tab value="200">
+    ```json filename="200"
+    {
+      "conversationId": "conv-550e8400-e29b-41d4-a716-446655440000",
+      "status": "created",
+      "createdAt": "2025-01-12T10:30:00Z"
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab value="401">
+    ```json filename="401"
+    {
+      "status": 401,
+      "error": "Unauthorized",
+      "message": "Invalid or missing API key"
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ## Exemples
 
-### Exemple 1: cURL
-
-```bash
-curl -X POST "https://api-dev-auria-jask-sw-01.azurewebsites.net/conversations/conv-12345" \
+<Tabs items={['cURL', 'Python', 'JavaScript']} defaultIndex="0">
+  <Tabs.Tab value="cURL">
+    ```bash
+curl -X POST "https://{organization_jask_backend_name}.azurewebsites.net/conversations/conv-12345" \
   -H "Authorization: Bearer jask_api_key_abc123" \
   -H "Content-Type: application/json" \
   -d '{}'
 ```
-
-### Exemple 2: Python avec httpx
-
-```python
+  </Tabs.Tab>
+  <Tabs.Tab value="Python">
+  ```python
 import httpx
 from uuid import uuid4
 
@@ -78,7 +79,7 @@ async def create_conversation(api_key: str, conversation_id: str = None) -> str:
     Crée une nouvelle conversation
     
     Args:
-        api_key: Clé API de l'assistant
+        api_key: Clé API de l'agent
         conversation_id: ID de conversation (généré si non fourni)
     
     Returns:
@@ -89,7 +90,7 @@ async def create_conversation(api_key: str, conversation_id: str = None) -> str:
     
     async with httpx.AsyncClient() as client:
         response = await client.post(
-            f"https://api-dev-auria-jask-sw-01.azurewebsites.net/conversations/{conversation_id}",
+            f"https://{organization_jask_backend_name}.azurewebsites.net/conversations/{conversation_id}",
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json"
@@ -105,16 +106,16 @@ async def create_conversation(api_key: str, conversation_id: str = None) -> str:
 conversation_id = await create_conversation("jask_api_key_abc123")
 ```
 
-### Exemple 3: JavaScript avec fetch
-
-```javascript
+  </Tabs.Tab>
+  <Tabs.Tab value="JavaScript">
+    ```javascript
 async function createConversation(apiKey, conversationId = null) {
   if (!conversationId) {
     conversationId = crypto.randomUUID();
   }
 
   const response = await fetch(
-    `https://api-dev-auria-jask-sw-01.azurewebsites.net/conversations/${conversationId}`,
+    `https://{organization_jask_backend_name}.azurewebsites.net/conversations/${conversationId}`,
     {
       method: 'POST',
       headers: {
@@ -136,6 +137,9 @@ async function createConversation(apiKey, conversationId = null) {
 // Utilisation
 const conversationId = await createConversation('jask_api_key_abc123');
 ```
+  </Tabs.Tab>
+</Tabs>
+
 
 ## Cycle de vie d'une conversation
 
@@ -145,7 +149,7 @@ graph TD
     B --> C{Succès?}
     C -->|Oui| D[Conversation prête]
     C -->|Non| E[Erreur d'authentification]
-    D --> F[Appeler assistant]
+    D --> F[Appeler agent]
     F --> G[POST /ask/sse]
     G --> H[Recevoir réponse]
     H --> I{Continuer?}
@@ -165,7 +169,7 @@ except httpx.HTTPStatusError as e:
     if e.response.status_code == 401:
         print("Clé API invalide ou expirée")
     elif e.response.status_code == 403:
-        print("Accès non autorisé à cet assistant")
+        print("Accès non autorisé à cet agent")
 ```
 
 ### ID de conversation invalide
@@ -184,6 +188,4 @@ valid_id = "conv-user-123-session-456"  # Slug valide
 
 ## Voir aussi
 
-- [Call Assistant](/api/routes/assistants/call) - Utiliser la conversation
-- [Conversation](/api/objets/conversation) - Structure de données
-- [Response Formats](/api/objets/response) - Formats de réponse
+- [Ask an agent](/api/agents/post) - Utiliser la conversation
