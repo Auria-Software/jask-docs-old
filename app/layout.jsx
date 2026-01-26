@@ -6,7 +6,7 @@ import Script from "next/script";
 
 const banner = (
   <Banner storageKey="2.0-release">
-    <a href="/changelog/2026.02">
+    <a href="/changelog/version202602">
       🎉 Nouvelle version de Jask v2026.02 →
     </a>
   </Banner>
