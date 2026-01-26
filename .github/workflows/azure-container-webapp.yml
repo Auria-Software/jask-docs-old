@@ -27,8 +27,8 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME_PROD: docs-dev-auria-jask-sw-01 # set this to the name of your Azure Web App
-  AZURE_WEBAPP_NAME_DEV: docs-staging-auria-jask-sw-01 # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME_DEV: docs-dev-auria-jask-sw-01 # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME_STAGING: docs-staging-auria-jask-sw-01 # set this to the name of your Azure Web App
 
 on:
   push:
@@ -84,11 +84,11 @@ jobs:
       - name: Select target WebApp
         run: |
           if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
-            echo "AZURE_WEBAPP_NAME=${{ env.AZURE_WEBAPP_NAME_PROD }}" >> $GITHUB_ENV
-            echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_PROD }}" >> $GITHUB_ENV
-          else
             echo "AZURE_WEBAPP_NAME=${{ env.AZURE_WEBAPP_NAME_DEV }}" >> $GITHUB_ENV
             echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DEV }}" >> $GITHUB_ENV
+          else
+            echo "AZURE_WEBAPP_NAME=${{ env.AZURE_WEBAPP_NAME_STAGING }}" >> $GITHUB_ENV
+            echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}" >> $GITHUB_ENV
           fi
 
       - name: Deploy to Azure Web App
