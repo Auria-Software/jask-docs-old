@@ -27,12 +27,14 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: docs-dev-auria-jask-sw-01 # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME_DEV: docs-dev-auria-jask-sw-01 # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME_STAGING: docs-staging-auria-jask-sw-01 # set this to the name of your Azure Web App
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
+      - 'release/**'
   workflow_dispatch:
 
 permissions:
@@ -63,7 +65,7 @@ jobs:
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
           push: true
-          tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
+          tags: ghcr.io/${{env.REPO}}:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
@@ -79,10 +81,20 @@ jobs:
       - name: Lowercase the repo name and username
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
+      - name: Select target WebApp
+        run: |
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+            echo "AZURE_WEBAPP_NAME=${{ env.AZURE_WEBAPP_NAME_DEV }}" >> $GITHUB_ENV
+            echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DEV }}" >> $GITHUB_ENV
+          else
+            echo "AZURE_WEBAPP_NAME=${{ env.AZURE_WEBAPP_NAME_STAGING }}" >> $GITHUB_ENV
+            echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}" >> $GITHUB_ENV
+          fi
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: 'ghcr.io/${{ env.REPO }}:${{ github.sha }}'
+          app-name: ${{env.AZURE_WEBAPP_NAME}}
+          publish-profile: ${{env.AZURE_WEBAPP_PUBLISH_PROFILE}}
+          images: "ghcr.io/${{env.REPO}}:${{ github.sha }}"
