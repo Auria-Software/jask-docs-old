@@ -84,17 +84,15 @@ jobs:
       - name: Select target WebApp
         run: |
           if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
-            echo "AZURE_WEBAPP_NAME=${{ env.AZURE_WEBAPP_NAME_DEV }}" >> $GITHUB_ENV
-            echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DEV }}" >> $GITHUB_ENV
+            echo "WEBAPP=DEV" >> $GITHUB_ENV
           else
-            echo "AZURE_WEBAPP_NAME=${{ env.AZURE_WEBAPP_NAME_STAGING }}" >> $GITHUB_ENV
-            echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}" >> $GITHUB_ENV
+            echo "WEBAPP=STAGING" >> $GITHUB_ENV
           fi
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{env.AZURE_WEBAPP_NAME}}
-          publish-profile: ${{env.AZURE_WEBAPP_PUBLISH_PROFILE}}
+          app-name: ${{ env.WEBAPP == 'DEV' && env.AZURE_WEBAPP_NAME_DEV || env.AZURE_WEBAPP_NAME_STAGING }}
+          publish-profile: ${{ env.WEBAPP == 'DEV' && secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DEV || secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
           images: "ghcr.io/${{env.REPO}}:${{ github.sha }}"
