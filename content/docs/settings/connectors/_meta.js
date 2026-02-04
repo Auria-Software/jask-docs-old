@@ -4,4 +4,5 @@ export default {
   bigquery: <div key="bigquery">BigQuery {newLabel}</div>,
   microsoft: "Microsoft",
   notion: <div key="notion">Notion {newLabel}</div>,
+  RSS: <div key="rss">RSS {newLabel}</div>,
 };
