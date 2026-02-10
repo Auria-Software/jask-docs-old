@@ -2,7 +2,7 @@ import { Callout } from 'nextra/components'
 import { Cards } from 'nextra/components'
 import { Bot, Search, Package, MessageSquare, MessagesSquare, FolderSearch2 } from 'lucide-react'
 
-# Commencer par l'Accueil
+# L'Accueil
 
 <div style={{
           position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', width: '100%', borderRadius: '8px', marginTop: '24px' }}>
@@ -22,22 +22,19 @@ Vous y retrouverez `une barre de chat` ainsi que des `accès rapides` à vos res
 
 ## Les fonctionnalités
 
-La barre de chat est l'élément central de l'Accueil. Elle vous permet d'interagir avec **les assistants, de rechercher des documents et d'exécuter des applications**. Chacune de ces trois fonctionnalités est accessible via des `boutons` situés en bas à gauche de la barre de chat.
-L'accueil est conçu pour vous offrir une expérience fluide et intuitive, vous permettant de naviguer facilement entre les différentes fonctionnalités mais chacune d'entre elles possède sa propre page dédiée pour une utilisation plus avancée.
+La barre de chat est l'élément central de l'Accueil. Elle vous permet d'interagir avec **les agents, les applications et vos bases de données**. Vous pouvez combiner les différentes fonctionnalités (agents, applications, bases de données) et importer des fichiers à traiter. L'accueil est un véritable point d'entrée vers l'ensemble des services disponibles sur JAsk
+L'accueil est conçue pour vous offrir une expérience fluide et intuitive, vous permettant de naviguer facilement entre les différentes fonctionnalités. Chacune d'entre elles possède sa propre page dédiée pour une utilisation plus avancée.
 Voici un aperçu des fonctionnalités disponibles :
 
-### 1. Discuter
+### 1. Discuter avec des agents
 
 ![discuter](@public/accueil/Accueil-Discuter.gif)
 
-Vous pouvez discuter avec [les assistants](/docs/chats_room/intro) que vous avez créés ou avec les assistants partagés par votre organisation.
-Choisissez un assistant dans la liste déroulante et commencez à poser vos questions.
+Vous pouvez discuter avec [les agents](/docs/chats_room/intro) que vous avez créés ou avec les agents partagés par votre organisation.
+Choisissez un agent depuis le + et commencez à poser vos questions.
+Si vous sélectionnez plusieurs agents, vous pourrez comparer leurs réponses à une même requête.
 
 #### Discuter sur vos fichiers
-
-<Callout type="warning" emoji="⚠️">
-  Vous ne pouvez `importer des fichiers` que sur l'assistant par défaut appelé **Jask**.
-</Callout>
 
 ![discuter fichier](@public/accueil/Accueil-Discuter-File.gif)
 
@@ -47,22 +44,23 @@ Choisissez un assistant dans la liste déroulante et commencez à poser vos ques
 
 ![discuter prompt](@public/accueil/Accueil-Discuter-PS.gif)
 
-Gagnez du temps en utilisant un prompt déjà sauvegardé dans le `Prompt Store` pour poser une question à l'un de vos assistants. Cliquez simplement sur le bouton `PS` dans la barre de chat et sélectionnez le prompt que vous souhaitez utiliser.
+Gagnez du temps en utilisant un prompt déjà sauvegardé dans le `Prompt Store` pour poser une question à l'un de vos agents. Cliquez simplement sur le bouton + puis Prompt Store dans la barre de chat et sélectionnez le prompt que vous souhaitez utiliser.
 
+### 2. Executer des applications
 
-### 2. Rechercher
+Une application est un workflow automatisé d'action. Il existe plusieurs types d'applications :
+- L'application Deep Research : Elle permet d'utiliser un mode de réflexion avancé pour traiter la demande de l'utilisateur. L'IA va effectuer une série d'étapes, les unes à la suite des autres afin de fournir le résultat le plus pertinent possible.
+- Les applications MS : Elles sont présentes par défaut sur votre environnement et permettent d'intéragir avec des ressources Microsoft (emails, transcripts, sharepoints, MS Graph...)
+- Les applications créées : Créées par vous ou votre organisation, ces applications permettent de réaliser une tâche spécifique de manière automatique selon la configuration qui a été définie.
+Vous pouvez sélectionner une application dans la liste déroulante et l'exécuter directement depuis la page d'accueil.
+
+### 3. Interroger vos bases de données
 
 ![rechercher](@public/accueil/Accueil-Rechercher.gif)
 
 Recherchez des documents dans les bases de connaissance de votre organisation.
 Entrez des `mots-clés` ou une `phrase` pour trouver des informations pertinentes grâce à l'IA.
-Vous pouvez **sélectionner une ou plusieurs sources de données** que vous souhaitez interroger dans la liste déroulante.
-
-
-### 3. Executer
-
-Une application est un workflow crée par vous ou votre organisation permettant de réaliser une tâche spécifique de manière automatique avec des prompts déjà définis.
-Vous pouvez sélectionner une application dans la liste déroulante et l'exécuter directement depuis la page d'accueil.
+Vous pouvez **sélectionner une ou plusieurs sources de données** que vous souhaitez interroger avec votre requête avec le bouton +
 
 ## Enchainer les fonctionnalités
 
@@ -71,6 +69,7 @@ Par exemple, vous pouvez :
 - **Discuter** avec un assistant pour obtenir des informations, puis
 - **Rechercher** des documents pertinents, les sélectionner puis
 - **Exécuter** une application pour automatiser une tâche.
+
 
 <Callout>
 Chacune des 3 fonctionnalités a sa propre vue spécifique pour une utilisation plus avancée dans Jask.
