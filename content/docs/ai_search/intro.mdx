@@ -1,5 +1,5 @@
 import {Callout} from 'nextra/components'
-import { Folder, FolderSearch2 } from 'lucide-react'
+import { Folder, FolderSearch2,CircleUser,House, FileSymlink,BookCopy,History } from 'lucide-react'
 import { Cards } from 'nextra/components'
 
 # Mes Documents
@@ -36,26 +36,26 @@ Découvrez les principales fonctionnalités de la page `Documents`.
   <Cards.Card
     title="Vue d'ensemble"
     href="/docs/ai_search/search_home"
-    icon={<Folder />}
+    icon={<House />}
   />
   <Cards.Card
     title="Mes bibliothèques"
     href="/docs/ai_search/personnal"
-    icon={<FolderSearch2 />}
+    icon={<CircleUser />}
   />
   <Cards.Card
     title="Modèles de documents"
     href="/docs/ai_search/templates"
-    icon={<FolderSearch2 />}
+    icon={<FileSymlink />}
   />
   <Cards.Card
     title="Carnets de travail"
     href="/docs/ai_search/workbooks"
-    icon={<FolderSearch2 />}
+    icon={<BookCopy />}
   />
   <Cards.Card
     title="Historique"
     href="/docs/ai_search/history"
-    icon={<FolderSearch2 />}
+    icon={<History />}
   />
 </Cards>
