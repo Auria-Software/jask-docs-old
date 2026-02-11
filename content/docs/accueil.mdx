@@ -69,7 +69,47 @@ Par exemple, vous pouvez :
 - **Exécuter** une application 
 - **Rebondir sur le résultat de l'application** avec un agent pour approfondir
 
+### 4. Croiser les services
+<Table>
+  <thead>
+    <Table.Tr>
+      <Table.Th>Service(s)</Table.Th>
+      <Table.Th>Comportement</Table.Th>
+    </Table.Tr>
+  </thead>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Agent</Table.Td>
+      <Table.Td>L'agent répond à la requête de l'utilisateur en prenant en compte les fichiers importés (si c'est le cas)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Application</Table.Td>
+      <Table.Td>L'application se lance en prenant en contexte la requête/fichier saisis par l'utilisateur (si c'est le cas). Si l'application ne permet pas de prendre en contexte un fichier, le fichier importé sera ignoré.</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Base de connaissance</Table.Td>
+      <Table.Td>L'IA répond à la requête de l'utilsateur en interrogeant la base de données séléctionnée. Si un fichier est importé, l'IA traitera la base de données sélectionnée et le fichier comme deux sources distinctes pour générer sa réponse.</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Plusieurs agents</Table.Td>
+      <Table.Td>Les agents sélectionnés répondent parallèlement à la requête de l'utilisateur.</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Plusieurs applications</Table.Td>
+      <Table.Td>Les applications sélectionnées sont déclenchées en parallèle.</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Plusieurs bases de données</Table.Td>
+      <Table.Td>Les bases de données sont utilisées par l'IA pour répondre à la requête de l'utilisateur.</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Deux services sélectionnés</Table.Td>
+      <Table.Td>Les deux services sont exécutés parallèlement.</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
 
+Cas particulier de l'application Deep Research : Quand l'application Deep Research est utilisée avec d'autres services (agents, applications, bases de données), les différents services sont mis à disposition de l'application, qui déterminera lesquels elle utilisera dans sa réflexion pour répondre à la requête de l'utilisateur
 
 <Callout>
 Chacune des 3 fonctionnalités a sa propre vue spécifique pour une utilisation plus avancée dans Jask. Vous retrouverez l'ensemble de vos intéractions avec les agents, exécutions d'application et les bases de connaissances dans la Chat Room
