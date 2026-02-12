@@ -12,7 +12,6 @@ export default {
   chats_room: "Chats Room",
   ai_search: "Documents",
   projects: <div key="projet">Projets {betaLabel}</div>,
-  workbooks: <div key="workbooks">Carnets de travail {betaLabel}</div>,
   _2: {
     type: "separator",
     title: "Plugins Externes",
