@@ -119,6 +119,9 @@ Comme pour l'agent par défaut, vous avez la possibilité d'activer des opérati
 
 ![deep_agent](@public/assistants/deep_agent.png)
 
+<Callout type="warning">
+Le comportement du Deep Agent va être progressivement déprécié en faveur de l'application Deep Research que les utilisateurs pourront activer nativement quand leur requête demande une analyse et une réflexion plus approfonfie.
+</Callout>
 
 ### Étape 5 : Sécurité & Gouvernance
 
@@ -134,12 +137,15 @@ Dans cette étape, vous configurez la sécurité et la gouvernance de votre assi
 **Utilisateurs et Groupes**
 
 Vous pouvez définir plus spécifiquement les utilisateurs et groupes qui auront accès à votre assistant.
+<Callout type="warning">
+Les utilisateurs indiqués ici, ne seront pris en compte que si le paramètre "Tout mon organisation" a été défini dans le premier onglet "Générales"
+</Callout>
 
 **Gouvernance**
 
-Vous pouvez décider de limiter la consommation d'un assistant par un utilisateur : 
-* Nombre de requêtes : Limiter le nombre de requêtes qu'un utilisateur peut envoyer à un assistant
-* Volumétrie de données : Limiter la quantité de données qu'un utilisateur peut consommer auprès d'un assistant (Nombre d'octets ou de tokens consommés)
+Vous pouvez décider de limiter la consommation d'un agent par un utilisateur : 
+* Nombre de requêtes : Limiter le nombre de requêtes qu'un utilisateur peut envoyer à un agent
+* Volumétrie de données : Limiter la quantité de données qu'un utilisateur peut consommer auprès d'un agent (Nombre d'octets ou de tokens consommés)
 
 <Callout type="warning">
 Les valeurs d'utilisation par utilisateur ne sont pas réinitialisées automatiquement pour le calcul des limites.
