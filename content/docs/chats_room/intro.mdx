@@ -1,4 +1,4 @@
-import { BookCheck, Bot, Files, History, Keyboard, MessagesSquare } from 'lucide-react'
+import { BookCheck, Bot, Files, History, Keyboard, MessagesSquare,Workflow,Pencil } from 'lucide-react'
 import { Cards } from 'nextra/components'
 import { Callout } from "nextra/components";
 
@@ -41,7 +41,7 @@ Deux vues sont disponibles dans la Chat Room accessible en haut du menu de gauch
   <Cards.Card
     title="Applications"
     href="/docs/chats_room/views/applications"
-    icon={<Bot />}
+    icon={<Workflow />}
   />
   <Cards.Card
     title="Fichiers"
@@ -64,6 +64,11 @@ Découvrez les principales fonctionnalités de la Chat Room.
     title="Les Sources de Réponse"
     href="/docs/chats_room/features/grounding"
     icon={<BookCheck />}
+  />
+  <Cards.Card
+    title="Édition"
+    href="/docs/chats_room/features/edit"
+    icon={<Pencil />}
   />
 </Cards>
 
