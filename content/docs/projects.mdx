@@ -11,30 +11,30 @@ Les projets sont caractérisés par 3 notions principales :
 
 ## Création d'un projet
 
-Pour créer un projet, cliquez sur le bouton "Nouveau projet" dans le sous-menu de gauche. Entrez un nom et une description. 
+Pour créer un projet, cliquez sur le bouton "Nouveau projet" en bas de la barre d'affichage de gauche. Entrez un nom et une description. 
 
 Vous arrivez ensuite à l'intérieur de votre projet vierge dont vous êtes l'unique utilisateur. Depuis cette vue d'ensemble, vous retrouvez les informations principales du projet ainsi que les dernières conversations dans le projet. Vous pouvez aussi commencer une nouvelle conversation depuis la barre de chat en haut de la page.
 
 Les autres onglets vous permettent de : 
-- Gérer et ajouter des ressources au projet
-- Consulter et gérer les contenus épinglés au projet
-- Retrouver l'historique des modifications apportées au projet
-- Voir et gérer la liste des membres du projet et leurs rôles
+- Gérer et ajouter des ressources au projet.
+- Consulter et gérer les contenus épinglés au projet.
+- Retrouver l'historique des modifications apportées au projet.
+- Voir et gérer la liste des membres du projet et leurs rôles.
 
 ## Paramètres du projet
 Un projet est défini par ses paramètres. C'est l'intelligence qui sera dans ce projet. Passons en revue les différents paramètres du projet : 
-- Modèle IA : Le LLM qui sera utilisé dans les conversations du projet
-- Prompt system : Le prompt qui sera appliqué dans les conversations du projet. Vous pouvez définir le ton, la manière de répondre et l'objectif du projet dans ce prompt afin de maximiser la pertinence des réponses
+- Modèle IA : Le LLM qui sera utilisé dans les conversations du projet.
+- Prompt system : Le prompt qui sera appliqué dans les conversations du projet. Vous pouvez définir le ton, la manière de répondre et l'objectif du projet dans ce prompt afin de maximiser la pertinence des réponses.
 - Température : niveau de créativité du LLM (0 : peu de créativité/ 1 : grande créativité)
 - Ajout des fichiers : Chaque fois qu'un fichier est inséré par un membre dans une conversation du projet, ce document est ajouté au périmètre du projet
-- Plusieurs utilisateurs sur la même conversation : Ce paramètre permet de laisser la possibilité à plusieurs utilisateurs de converser dans la même conversation. ATTENTION : Ce paramètre peut-être risqué, le temps de rafraîchissemnt des conversations, du timing des envois de requêtes par les différents utilisateurs peuvent aboutir à des incohérences. A utiliser avec modération!
-- Fréquence de synchronisation du projet : temps entre deux synchronisations automatiques du projet
+- Plusieurs utilisateurs sur la même conversation : Ce paramètre permet de laisser la possibilité à plusieurs utilisateurs de converser dans la même conversation. ATTENTION : Ce paramètre peut-être risqué, le temps de rafraîchissemnt des conversations, du timing des envois de requêtes par les différents utilisateurs peuvent aboutir à des incohérences. A utiliser avec précaution !
+- Fréquence de synchronisation du projet : temps entre deux synchronisations automatiques du projet.
 
 ## Les ressources du projet
 
 Pour définir le périmètre du projet, vous devez sélectionner et/ou importer les ressources du projet. Depuis l'onglet `Ressources` ou depuis le panel d'administration à droite de l'écran, les éditeurs et contributeurs au projet peuvent définir les fichiers et ressources qui composeront le périmètre du projet : 
-- Importer les fichiers qui constitueront les données du projet que l'IA utilisera quand les membres converseront sur le projet
-- Sélectionner les sources auquel le projet peut accéder parmi les sources disponibles sur JAsk
+- Importer les fichiers qui constitueront les données du projet que l'IA utilisera quand les membres converseront sur le projet.
+- Sélectionner les sources auquel le projet peut accéder parmi les sources disponibles sur JAsk.
 
 ![projects](@public/projects/import.png)
 
@@ -42,16 +42,16 @@ Pour définir le périmètre du projet, vous devez sélectionner et/ou importer 
 
 ##Les membres du projet
 Afin que le projet soit un espace collaboratif sur lequel plusieurs utilisateurs vont pouvoir travailler, les éditeurs d'un projet peuvent partager ce projet avec d'autres utilisateurs de JAsk. Chaque utilisateur aura un droit sur le projet qui lui donnera plus ou moins de droits et de contrôle sur ce projet : 
-- Editeurs : Les éditeurs ont les droits les plus hauts dans un projet. Ils peuvent éditer le projet, ses paramètres, ses ressources et ses membres
-- Contributeurs : Les contributeurs peuvent participer au projet mais ils ne peuvent pas partager ce projet à d'autres utilisateurs
-- Lecture seule : Les membres en lecture seule pourront uniquement voir le projet et ses contenus, mais pas intéragir avec le projet.
+- Administrateurs : Les administrateurs ont les droits les plus hauts dans un projet. Ils peuvent éditer le projet, ses paramètres, ses ressources et ses membres. Ils peuvent également partager le projet.
+- Contributeurs : Les contributeurs peuvent participer au projet mais ils ne peuvent pas partager ce projet à d'autres utilisateurs.
+- Lecture seule : Les membres en lecture seule pourront uniquement voir le projet, ses contenus et sources. Ils ne peuvent pas intéragir avec le projet.
 
 ![projects](@public/projects/members_create.png)
 
 ## Autres onglets 
 ###Contenus épinglés
-L'onglet Contenus épinglés permet de sauvegarder certains résultats obtenus dans des conversations dans un espace dédié.
-Quand la réponse d'un agent ou le résultat d'une application doit être sauvegardé, en cliquant sur l'icône de sauvegarde (représentée par une disquette), la réponse est sauvegardée et visible par les membres du projet dans le section Contenus épinglés
+L'onglet Contenus épinglés permet de sauvegarder certains résultats obtenus dans des conversations dans un espace dédié, afin de les sauvegarder un contenu important ou de le rendre plus visible.
+Quand la réponse d'un agent ou le résultat d'une application doit être sauvegardé, en cliquant sur l'icône de sauvegarde (représentée par une disquette), la réponse est sauvegardée et visible par les membres du projet dans le section Contenus épinglés.
 
 ![chat_room](@public/projects/pinned.png)
 
