@@ -1,5 +1,8 @@
+import { newLabel, betaLabel } from "@components/new_label";
 export default {
-    intro: "Introduction",
-    personnal: "Stockage Personnel",
-    search: "Recherche IA"
+    intro: "Vue d'ensemble",
+    personnal: "Mes bibliothèques",
+    search: "Modèles de document {betaLabel}",
+    workbooks: "Carnets de travail {betaLabel}",
+    history : "Historique {newLabel}"
 }

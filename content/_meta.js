@@ -1,3 +1,4 @@
+
 export default {
   docs: {
     title: "Documentation",
@@ -5,6 +6,10 @@ export default {
   },
   api: {
     title: "API Reference",
+    type: "page",
+  },
+  changelog: {
+    title: "Changelog",
     type: "page",
   },
 };

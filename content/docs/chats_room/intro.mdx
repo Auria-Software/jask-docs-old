@@ -1,4 +1,4 @@
-import { BookCheck, Bot, Files, History, Keyboard, MessagesSquare } from 'lucide-react'
+import { BookCheck, Bot, Files, History, Keyboard, MessagesSquare,Workflow,Pencil } from 'lucide-react'
 import { Cards } from 'nextra/components'
 import { Callout } from "nextra/components";
 
@@ -19,7 +19,9 @@ import { Callout } from "nextra/components";
 
 ---
 
-Bienvenue dans la Chat Room de Jask, votre espace dédié pour interagir avec des Assistants IA personnalisés. Que vous souhaitiez poser des questions, obtenir des informations ou collaborer sur des projets, la Chat Room est conçue pour faciliter vos échanges avec l'intelligence artificielle.
+Bienvenue dans la Chats Room de Jask! Cet espace est dédié à l'utilisation et l'historique de vos conversations avec les agents, les exécutions d'applications ainsi que les conversations avec des fichiers/corpus de fichiers. 
+
+Que vous souhaitiez converser avec des agents, retrouver vos exécutions, obtenir des informations ou collaborer sur des projets, la Chat Room est conçue pour faciliter vos échanges avec l'intelligence artificielle.
 
 <Callout>
 La fonctionnalité de chatter avec vos agents est également **disponible depuis l'accueil de Jask** en sélectionnant `Discuter` dans la barre de chat.
@@ -32,12 +34,17 @@ Deux vues sont disponibles dans la Chat Room accessible en haut du menu de gauch
 
 <Cards>
   <Cards.Card
-    title="Chat avec Agents"
+    title="Agents"
     href="/docs/chats_room/views/agents"
     icon={<Bot />}
   />
   <Cards.Card
-    title="Chat avec Fichiers"
+    title="Applications"
+    href="/docs/chats_room/views/applications"
+    icon={<Workflow />}
+  />
+  <Cards.Card
+    title="Fichiers"
     href="/docs/chats_room/views/files_room"
     icon={<Files />}
   />
@@ -57,6 +64,11 @@ Découvrez les principales fonctionnalités de la Chat Room.
     title="Les Sources de Réponse"
     href="/docs/chats_room/features/grounding"
     icon={<BookCheck />}
+  />
+  <Cards.Card
+    title="Édition"
+    href="/docs/chats_room/features/edit"
+    icon={<Pencil />}
   />
 </Cards>
 

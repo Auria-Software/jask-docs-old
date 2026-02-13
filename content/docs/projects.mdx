@@ -1,51 +1,72 @@
 # Les Projets
 
-Les projets sont des espaces de travail collaboratifs pour permettre à des équipes de travailler ensemble sur certains documents dans un espace cloisonné.
+Les projets sont des espaces de travail collaboratifs pour permettre à des équipes de travailler ensemble sur certains documents dans un espace cloisonné. 
+
+Les projets sont caractérisés par 3 notions principales : 
+- Les paramètres du projet : les règles du projet, le modèle utilisé, son prompt, sa température...
+- Le périmètre du projet : l'ensemble du corpus et des ressources sur lesquels le projet se base.
+- Les membres du projet : l'ensemble des membres pouvant voir/participer à ce projet en fonction de leurs droits sur ce projet.
 
 ![projects](@public/projects/screen.png)
 
 ## Création d'un projet
 
-Commencez par créer un projet, entrez un nom, une description et sélectionnez la visibilité du projet. Vous avez deux autres sections dans la création `Chat Room` et `Sécurité & Gouvernance`.
-Dans `Chat Room`, vous pouvez sélectionner le modèle d'IA à utiliser pour le chat avec les documents du projet.
-Dans `Sécurité & Gouvernance`, vous pouvez sélectionner le type de droits d'accès aux sources.
+Pour créer un projet, cliquez sur le bouton "Nouveau projet" en bas de la barre d'affichage de gauche. Entrez un nom et une description. 
 
-**Mode de contrôle d'accès aux ressources**
+Vous arrivez ensuite à l'intérieur de votre projet vierge dont vous êtes l'unique utilisateur. Depuis cette vue d'ensemble, vous retrouvez les informations principales du projet ainsi que les dernières conversations dans le projet. Vous pouvez aussi commencer une nouvelle conversation depuis la barre de chat en haut de la page.
 
-    * **`Délégué à la source`** permet de déléguer le contrôle d'accès aux ressources à la source de données par exemple pour un agent connecté à l'entièreté d'un sharepoint si deux utilisteurs n'ayant pas les mêmes droits dans le sharepoint posent la même questions, les réponses seront différentes. En effet, l'asssitant répondra qu'avec les documents dont l'utilisateurs posant la question a accès.
+Les autres onglets vous permettent de : 
+- Gérer et ajouter des ressources au projet.
+- Consulter et gérer les contenus épinglés au projet.
+- Retrouver l'historique des modifications apportées au projet.
+- Voir et gérer la liste des membres du projet et leurs rôles.
 
-    * **`Partage via Jask`** permet de partager les ressources via Jask, dans ce cas les deux utilisateurs auront la même réponse se basant sur l'entièreté des documents dont l'assistant a accès.
+## Paramètres du projet
+Un projet est défini par ses paramètres. C'est l'intelligence qui sera dans ce projet. Passons en revue les différents paramètres du projet : 
+- Modèle IA : Le LLM qui sera utilisé dans les conversations du projet.
+- Prompt system : Le prompt qui sera appliqué dans les conversations du projet. Vous pouvez définir le ton, la manière de répondre et l'objectif du projet dans ce prompt afin de maximiser la pertinence des réponses.
+- Température : niveau de créativité du LLM (0 : peu de créativité/ 1 : grande créativité)
+- Ajout des fichiers : Chaque fois qu'un fichier est inséré par un membre dans une conversation du projet, ce document est ajouté au périmètre du projet. Cet ajout ne se fait automatiquement que si le paramètre est activité (voir paramètre dans la roue crantrée en haut à droite de l'écran).
+- Plusieurs utilisateurs sur la même conversation : Ce paramètre permet de laisser la possibilité à plusieurs utilisateurs de converser dans la même conversation. ATTENTION : Ce paramètre peut-être risqué, le temps de rafraîchissemnt des conversations, du timing des envois de requêtes par les différents utilisateurs peuvent aboutir à des incohérences. A utiliser avec précaution !
+- Fréquence de synchronisation du projet : temps entre deux synchronisations automatiques du projet.
 
-![projects](@public/projects/create.png)
+## Les ressources du projet
 
-## Importation de documents
-
-Vous pouvez importer des documents dans le projet en cliquant sur le bouton `Importer depuis mes ressources` dans la section `Accueil` ou `Ressources`.
+Pour définir le périmètre du projet, vous devez sélectionner et/ou importer les ressources du projet. Depuis l'onglet `Ressources` ou depuis le panel d'administration à droite de l'écran, les éditeurs et contributeurs au projet peuvent définir les fichiers et ressources qui composeront le périmètre du projet : 
+- Importer les fichiers qui constitueront les données du projet que l'IA utilisera quand les membres converseront sur le projet.
+- Sélectionner les sources auquel le projet peut accéder parmi les sources disponibles sur JAsk.
 
 ![projects](@public/projects/import.png)
 
-Recherchez les documents à importer dans le projet et cliquez sur le bouton `Importer` pour les ajouter au projet.
+![projects](@public/projects/sources.png)
 
-![projects](@public/projects/add_docs.png)
+##Les membres du projet
+Afin que le projet soit un espace collaboratif sur lequel plusieurs utilisateurs vont pouvoir travailler, les éditeurs d'un projet peuvent partager ce projet avec d'autres utilisateurs de JAsk. Chaque utilisateur aura un droit sur le projet qui lui donnera plus ou moins de droits et de contrôle sur ce projet : 
+- Administrateurs : Les administrateurs ont les droits les plus hauts dans un projet. Ils peuvent éditer le projet, ses paramètres, ses ressources et ses membres. Ils peuvent également partager le projet.
+- Contributeurs : Les contributeurs peuvent participer au projet mais ils ne peuvent pas partager ce projet à d'autres utilisateurs.
+- Lecture seule : Les membres en lecture seule pourront uniquement voir le projet, ses contenus et sources. Ils ne peuvent pas intéragir avec le projet.
 
-## Les sections d'un projet
+![projects](@public/projects/members_create.png)
 
-Vous débloquerez alors différentes sections par projet
+## Autres onglets 
+###Contenus épinglés
+L'onglet Contenus épinglés permet de sauvegarder certains résultats obtenus dans des conversations dans un espace dédié, afin de les sauvegarder un contenu important ou de le rendre plus visible.
+Quand la réponse d'un agent ou le résultat d'une application doit être sauvegardé, en cliquant sur l'icône de sauvegarde (représentée par une disquette), la réponse est sauvegardée et visible par les membres du projet dans le section Contenus épinglés.
 
-- `Accueil` : Pour accéder aux informations du projet
-- `Ressources` : Pour gérer les documents importés du projet et importer de nouveaux documents
-- `Chats Room` : Pour discuter avec tous les documents du projet grâce à l'IA
+![chat_room](@public/projects/pinned.png)
 
-![chat_room](@public/projects/chat.png)
+### Activités
+Pour garder un œil sur les activités du projet (Conversations démarrées, applications lancées dans le projet, changement de configuration etc.)
 
-- `Activités` : Pour garder un œil sur les activités du projet (Applications lancées dans le projet, etc.)
+![activities](@public/projects/activity.png)
 
-![activities](@public/projects/activities.png)
+###Membres
+Liste des membres du projet, leur date d'ajout et de leur rôle.
 
-- `Notes` : Pour sauvegarder les résultats de vos applications et discussions avec l'IA
+![notes](@public/projects/members.png)
 
-![notes](@public/projects/notes.png)
-
-- `Membres` : Pour gérer les membres pouvant accéder au projet
-
-
+### Les paramètres
+Les paramètres sont accessibles par le bouton "Roue crantée" en haut à droite de l'écranc. Vous pouvez : 
+- Importer des fichiers pour les ajouter au projet.
+- Gérer l'accès aux sources de données internes.
+- Modifier les paramètres du projet : le prompt donné à l'agent sur l'ensemble du projet, le modèle IA utilisé, la température, la faculté de travailler à plusieurs sur la même conversation et la synchronisation automatique des imports de fichier.
