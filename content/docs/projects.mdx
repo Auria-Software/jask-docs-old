@@ -26,7 +26,7 @@ Un projet est défini par ses paramètres. C'est l'intelligence qui sera dans ce
 - Modèle IA : Le LLM qui sera utilisé dans les conversations du projet.
 - Prompt system : Le prompt qui sera appliqué dans les conversations du projet. Vous pouvez définir le ton, la manière de répondre et l'objectif du projet dans ce prompt afin de maximiser la pertinence des réponses.
 - Température : niveau de créativité du LLM (0 : peu de créativité/ 1 : grande créativité)
-- Ajout des fichiers : Chaque fois qu'un fichier est inséré par un membre dans une conversation du projet, ce document est ajouté au périmètre du projet
+- Ajout des fichiers : Chaque fois qu'un fichier est inséré par un membre dans une conversation du projet, ce document est ajouté au périmètre du projet. Cet ajout ne se fait automatiquement que si le paramètre est activité (voir paramètre dans la roue crantrée en haut à droite de l'écran).
 - Plusieurs utilisateurs sur la même conversation : Ce paramètre permet de laisser la possibilité à plusieurs utilisateurs de converser dans la même conversation. ATTENTION : Ce paramètre peut-être risqué, le temps de rafraîchissemnt des conversations, du timing des envois de requêtes par les différents utilisateurs peuvent aboutir à des incohérences. A utiliser avec précaution !
 - Fréquence de synchronisation du projet : temps entre deux synchronisations automatiques du projet.
 
@@ -65,4 +65,8 @@ Liste des membres du projet, leur date d'ajout et de leur rôle.
 
 ![notes](@public/projects/members.png)
 
-
+### Les paramètres
+Les paramètres sont accessibles par le bouton "Roue crantée" en haut à droite de l'écranc. Vous pouvez : 
+- Importer des fichiers pour les ajouter au projet.
+- Gérer l'accès aux sources de données internes.
+- Modifier les paramètres du projet : le prompt donné à l'agent sur l'ensemble du projet, le modèle IA utilisé, la température, la faculté de travailler à plusieurs sur la même conversation et la synchronisation automatique des imports de fichier.
