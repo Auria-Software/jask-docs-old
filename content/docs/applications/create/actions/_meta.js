@@ -8,7 +8,7 @@ export default {
     data_sources: "Sources de Données",
     document_production: "Production de Documents",
     web: <div key="web">Web {betaLabel}</div>,
-    mail: "Mail",
-    task: "Tâche prédéfinies",
+    m365: "Microsoft 365",
+    task: "Tâches prédéfinies",
     control_structure: "Structures de Contrôle (avancé)",
 }
