@@ -14,7 +14,7 @@ La barre d’affichage à gauche de la zone vous donne la liste des agents utili
 Si un agent est déjà sélectionné, la partie centrale de l'écran présente le détail de cet agent. L'onglet Conversations affiche l'historique de vos conversations et le nombre de conversations que vous avez engagé avec cet agent.
 ![Conversations](@public/chat_rooms/conversations.gif)
 
-Depuis la barre d'affichage, vous pouvez :
+Depuis la barre d'affichage des agents, vous pouvez :
 
 - Créer une `Nouvelle conversation`
 - Accéder à vos conversations passées `Mes conversations`
@@ -25,7 +25,7 @@ Cette dernière option supprimme totalement une conversation : attention à son 
 ## Pourquoi avoir des conversations distinctes ?
 
 - **Organisation** : Les conversations distinctes vous permettent de séparer les sujets ou projets. Par exemple, vous pouvez avoir une conversation pour un projet spécifique et une autre pour des questions générales.
-- **Contexte** : Chaque conversation conserve le contexte des échanges précédents, ce qui permet à l'agent de fournir des réponses plus pertinentes basées sur l'historique de la conversation.
+- **Contexte** : Chaque conversation conserve le contexte de tous les messages de la conversation, ce qui permet à l'agent de fournir des réponses plus pertinentes basées sur l'historique de la conversation.
 - **Gestion** : Vous pouvez facilement retrouver et gérer vos interactions passées en accédant à vos conversations enregistrées.
 
 ## Historique de toutes les conversations
@@ -38,7 +38,7 @@ Vous avez accès à l’historique des conversations avec chaque agent. Pour y a
 ## Agents favoris
 
 Vous avez la possibilité de définir certains agents comme favoris. Cela vous permet de les retrouver plus rapidement.
-Vos agents favoris sont regroupés dans la section "Mes favoris" de la barre d'affichage.
+Vos agents favoris sont regroupés dans la section "Mes favoris" de la barre d'affichage. Pour déplacer un agent dans une section, cliquez sur l'icône "..." puis sur la section cible.
 
 ## Organisation de la page
 
@@ -52,14 +52,14 @@ La vue d'ensemble est le point de départ de vos actions avec l'agent. Depuis ce
 
 - La barre de conversation avec l'agent, dont l'utilisation sera détaillée dans la [section Chat](/docs/chats_room/features/chat_box)
 - Les détails de l'agent : Nom, description, instruction (prompt)(un paramètre de l'agent permet de masquer son prompt aux utilisateurs dans la configuration de l'agent)
-- Des propositions de questions ou demandes à poser à l'agent afin d'exploiter au mieux ses capacités et ressources. [Suggestion de Questions](/docs/chats_room/features/chat_box.mdx)
+- Des propositions de questions ou demandes à poser à l'agent afin d'exploiter au mieux ses capacités et ressources. [Suggestion de Questions](/docs/chats_room/features/chat_box#suggestion-de-questions)
 - Les connaissances sur lesquelles l'agent se base (si paramètre activé dans la configuration de l'agent)
-- Les plus gros contributeurs sur cet agent
+- Les plus gros utilisateurs de cet agent
 - Les différents outils à disposition de cet agent (par exemple, génération d'image, graphes...)
 
 #### Conversations
 
-Depuis cette vue, vous avez accès à l'historique de vos conversations avec cet agent. Le numéro indique le nombre de conversations.
+Depuis cette vue, vous avez accès à l'historique de vos conversations avec cet agent. Le numéro indique le nombre de conversations que vous avez engagé.
 
 #### Contenus partagés
 
@@ -67,7 +67,7 @@ Vous avez la possiblité de partager le résultat de l'agent avec vos collaborat
 
 #### Activités
 
-Cet onglet répertorie toutes les modifications de l'agent (nom, description, instructions...).
+Cet onglet répertorie toutes les modifications de configuration de l'agent (nom, description, instructions...).
 
 </Steps>
 
@@ -79,7 +79,7 @@ En bas de la liste des agents dans la Chat Room, onglet Agents, vous pouvez cré
 
 - Section : Les sections permettront d'organiser vos agents dans la liste. Par défaut, les agents sont organisés par ordre de dernière conversation la plus récente.
 - Agent IA : Création d'un agent IA [Création d'un agent](/docs/assistants/create)
-- Groupe d'agents (BETA) : Création d'un groupe d'agents. Les groupes est défini par son nom, sa description, son mode de fonctionnement, ses membres (agents membres du groupe) et sa visibilité.
+- Groupe d'agents (BETA) : Création d'un groupe d'agents. Un groupe est défini par son nom, sa description, son mode de fonctionnement, ses membres (agents membres du groupe) et sa visibilité.
   Il existe deux modes principaux de groupe d'agents :
   - Tous les agents du groupe répondent en même temps
   - Les agents du groupe planifient et orchestrent la refléxion par rapport aux agents présents dans le groupe
