@@ -10,7 +10,7 @@ L'extension Web API transforme votre agent en véritable pont vers vos systèmes
 
 ## Utilisation
 
-Imaginez pouvoir dire à votre assistant : "Trouve-moi le client avec l'email jean.dupont@example.com" et qu'il consulte automatiquement votre CRM. Ou encore : "Crée un rendez-vous demain à 14h avec Marie" et hop, c'est fait dans votre calendrier.
+Imaginez pouvoir dire à votre agent : "Trouve-moi le client avec l'email jean.dupont@example.com" et qu'il consulte automatiquement votre CRM. Ou encore : "Crée un rendez-vous demain à 14h avec Marie" et hop, c'est fait dans votre calendrier.
 
 C'est exactement ce que fait cette extension. Elle donne à votre IA la capacité d'interagir avec vos outils métier, sans que vos utilisateurs aient besoin de connaître les détails techniques.
 
@@ -351,14 +351,14 @@ Partage : Équipes Ventes et Support
 
 ```
 User : Cherche le client jean.martin@example.com
-Assistant : [Appelle l'API avec identifiant="jean.martin@example.com"]
+Agent : [Appelle l'API avec identifiant="jean.martin@example.com"]
             Voici les informations de Jean Martin :
             - Entreprise : Acme Corp
             - Téléphone : +33 6 12 34 56 78
             - Dernière commande : 15/01/2024
 
 User : Affiche-moi les détails du client 12345
-Assistant : [Appelle l'API avec identifiant="12345"]
+Agent : [Appelle l'API avec identifiant="12345"]
             ...
 ```
 
@@ -402,7 +402,7 @@ User : Réserve une réunion "Point Projet" demain à 14h pour 1h30
        avec marie@entreprise.com dans la salle Bordeaux. 
        On va discuter du planning Q2.
 
-Assistant : [Extrait les informations]
+Agent: [Extrait les informations]
             - titre = "Point Projet"
             - date = "2024-01-22"
             - heure = "14:00"
@@ -505,7 +505,7 @@ Utilisez l'icône poubelle dans la liste des extensions. Attention, c'est défin
 <details>
 <summary>**Que se passe-t-il si l'utilisateur oublie un paramètre dans sa question ?**</summary>
 
-L'IA va lui demander de préciser l'information manquante. Par exemple, si quelqu'un demande "Quel temps fait-il ?" sans dire où, l'assistant demandera "Pour quelle ville ?".
+L'IA va lui demander de préciser l'information manquante. Par exemple, si quelqu'un demande "Quel temps fait-il ?" sans dire où, l'agent demandera "Pour quelle ville ?".
 
 </details>
 
@@ -538,7 +538,7 @@ Quelques codes que vous verrez peut-être dans les erreurs :
 
 ## En résumé
 
-Vous savez maintenant créer des extensions Web API pour votre assistant. Les points essentiels :
+Vous savez maintenant créer des extensions Web API pour votre agent. Les points essentiels :
 
 - Les **placeholders** sont ce qui rend tout ça intelligent
 - Des **descriptions claires** = une meilleure extraction par l'IA
