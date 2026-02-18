@@ -1,3 +1,3 @@
 export default {
-    create: "Créer un assistant",
+    create: "Créer un agent",
 }
