@@ -34,12 +34,12 @@ Depuis la page `Agents IA` du catalogue ou le bouton `Nouveau` de la Chats Room,
 
 ## Configuration
 
-Plusieurs éléments sont configurables pour créer un assistant :
+Plusieurs éléments sont configurables pour créer un agent :
 
 <Steps>
 ### Étape 1 : Générales
 
-Dans cette étape, vous pouvez renseigner le nom de votre assistant, sa description, choisir un avatar et configurer sa visibilité (moi uniquement par défaut, toute mon organisation)
+Dans cette étape, vous pouvez renseigner le nom de votre agent, sa description, choisir un avatar et configurer sa visibilité (moi uniquement par défaut, toute mon organisation)
 
 <Callout>
   Un ciblage plus précis de la visibilité de l'agent pourra être défini dans
@@ -53,7 +53,7 @@ Dans cette étape, vous pouvez renseigner le nom de votre assistant, sa descript
 Dans cette étape, vous pouvez choisir les sources de données que votre agent pourra utiliser quand un utilisateur lui pose une question. Vous pouvez connecter une ou plusieurs sources de données. Vous pouvez choisir entre des sources externes connectées à JAsk (Sharepoint, Web, Salesforce, Notion...) ou bien importer des documents statiques sur l'agent (en utilisant la source **Poste de travail**)
 
 <Callout>
-  Si vous ne connectez aucune source de données, votre assistant sera un simple
+  Si vous ne connectez aucune source de données, votre agent sera un simple
   LLM c'est à dire qu'il répondra uniquement à l'aide des connaissances
   d'entrainement que le modèle sélectionné a reçu.
 </Callout>
@@ -103,19 +103,19 @@ C'est ici que vous allez pouvoir configurer le `Prompt System` de votre agent. L
 
 **Options avancées**
 
-Vous pouvez activer ou desactiver certaines options pour votre assistant :
+Vous pouvez activer ou desactiver certaines options pour votre agent :
 
 - Cites toujours tes sources (documents, liens, ...) : Cette option permet de référencer les sources de la réponse avec réponse fournie par l'agent. Décochée, les sources utilisées ne seront pas citées par l'agent.
 - Suggères des questions liées à la fin : Cette option permet de suggérer des questions liées à la fin de la réponse séléctionnables par l'utilisateur pour continuer la discussion.
-- Détailles tes réponses avec la chaine de pensée : Cette option permet de détailler la réponse de l'assistant avec la chaine de pensée.
+- Détailles tes réponses avec la chaine de pensée : Cette option permet de détailler la réponse de l'agent avec la chaine de pensée.
 - Informes l'utilisateur lorsque la réponse ne se base pas sur les sources connectées : Cette option permet de prévénir l'utilisateur quand l'agent a utilisé l'entraînement de son modèles sans être allé chercher dans le contenu des sources.
 - Utilises la terminologie interne : Cette option permet d'utiliser la terminologie interne de l'entreprise dans les questions de l'utilisateur et les réponses de l'agent. Par exemple : propale -> proposition commerciale.
 
 **Base de connaissances**
 
-Le RAG est un mécanisme qui permet à l'assistant de répondre aux questions en utilisant les documents qui lui sont exposés. Vous pouvez configurer le RAG de votre assistant afin d'obtenir les résultats les plus pertinents.
+Le RAG est un mécanisme qui permet à l'agent de répondre aux questions en utilisant les documents qui lui sont exposés. Vous pouvez configurer le RAG de votre agent afin d'obtenir les résultats les plus pertinents.
 
-- La quantité de documents qui seront récupérés pour répondre à une question: `Dynamique` (mode automatique qui définit la quantité de document à utiliser) ou `Personnalisé` (vous définissez le nombre de documents que l'assistant peut récupérer à chaque requête).
+- La quantité de documents qui seront récupérés pour répondre à une question: `Dynamique` (mode automatique qui définit la quantité de document à utiliser) ou `Personnalisé` (vous définissez le nombre de documents que l'agent peut récupérer à chaque requête).
 
 - Le degré de diversité des sources récupérées : `Dynamique` (mode automatique qui définit le niveau de diversité à considérer) ou `Minimum de diversités des sources (Top recherches)`(seules les sources les plus pertinentes sont considérées par l'agent) ou `Maximum de diversités des sources (MMR)` (L'agent diversifie au maximum les sources utilisées)
 
@@ -124,7 +124,7 @@ Le RAG est un mécanisme qui permet à l'assistant de répondre aux questions en
 Dans cette étape, vous configurez les opérations agentiques de votre agent. Ce sont les outils a disposition de l'agent, que l'agent peut décider d'utiliser ou non, en fonction de la requête de l'utilisateur.
 
 <Callout type="warning">
-  Si vous activez le mode agentique, le **prompt system** de l'assistant n'est
+  Si vous activez le mode agentique, le **prompt system** de l'agent n'est
   plus pris en compte.
 </Callout>
 
@@ -135,7 +135,7 @@ Trois modes agentiques existent :
 Dans ce mode, l'agent peut utiliser l'ensemble des sources de données et extensions qui lui sont mis à disposition pour répondre au mieux à la question de l'utilisateur.
 
 <Callout>
-  Activez des sources de données dans les connaissances de l'assistant pour voir
+  Activez des sources de données dans les connaissances de l'agent pour voir
   les actions agentiques possibles de cette source de données.
 </Callout>
 
@@ -164,17 +164,17 @@ Comme pour l'agent par défaut, vous avez la possibilité d'activer des opérati
 
 ### Étape 5 : Sécurité & Gouvernance
 
-Dans cette étape, vous configurez la sécurité et la gouvernance de votre assistant.
+Dans cette étape, vous configurez la sécurité et la gouvernance de votre agent.
 
 **Mode de contrôle d'accès aux ressources**
 
-    * **`Délégué à la source`** : le contrôle d'accès aux ressources est géré par la source de données. Par exemple, pour un agent connecté à l'entièreté d'un environnement Sharepoint, si deux utilisateurs n'ayant pas les mêmes droits dans le Sharepoint posent la même question, les réponses seront différentes. En effet, l'assistant répondra uniquement en prenant en compte les documents auxquels l'utilisateur posant la question a accès.
+    * **`Délégué à la source`** : le contrôle d'accès aux ressources est géré par la source de données. Par exemple, pour un agent connecté à l'entièreté d'un environnement Sharepoint, si deux utilisateurs n'ayant pas les mêmes droits dans le Sharepoint posent la même question, les réponses seront différentes. En effet, l'agent répondra uniquement en prenant en compte les documents auxquels l'utilisateur posant la question a accès.
 
-    * **`Partage via Jask`** : le contrôle d'accès est géré via Jask. Dans ce cas, les deux utilisateurs auront la même réponse qui se basera sur l'entièreté des documents auxquels l'assistant a accès.
+    * **`Partage via Jask`** : le contrôle d'accès est géré via Jask. Dans ce cas, les deux utilisateurs auront la même réponse qui se basera sur l'entièreté des documents auxquels l'agent a accès.
 
 **Utilisateurs et Groupes**
 
-Vous pouvez définir plus spécifiquement les utilisateurs et groupes qui auront accès à votre assistant.
+Vous pouvez définir plus spécifiquement les utilisateurs et groupes qui auront accès à votre agent.
 
 <Callout type="warning">
   Les utilisateurs indiqués ici, ne seront pris en compte que si le paramètre
