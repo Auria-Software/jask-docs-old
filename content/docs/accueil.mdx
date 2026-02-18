@@ -46,7 +46,7 @@ Vous y retrouverez `une barre de chat` ainsi que des `accès rapides` à vos res
 
 ## Les fonctionnalités
 
-La barre de chat est l'élément central de l'Accueil. Elle vous permet d'interagir avec **les agents, les applications et vos bases de données**. Vous pouvez combiner les différentes fonctionnalités (agents, applications, bases de données) et importer des fichiers à traiter. L'accueil est un véritable point d'entrée vers l'ensemble des services disponibles sur JAsk
+La barre de chat est l'élément central de l'Accueil. Elle vous permet d'interagir avec **les agents, les workflows et vos bases de données**. Vous pouvez combiner les différentes fonctionnalités (agents, workflows, bases de données) et importer des fichiers à traiter. L'accueil est un véritable point d'entrée vers l'ensemble des services disponibles sur JAsk.
 L'accueil est conçue pour vous offrir une expérience fluide et intuitive, vous permettant de naviguer facilement entre les différentes fonctionnalités. Chacune d'entre elles possède sa propre page dédiée pour une utilisation plus avancée.
 Voici un aperçu des fonctionnalités disponibles :
 
@@ -70,14 +70,14 @@ Si vous sélectionnez plusieurs agents, vous pourrez comparer leurs réponses à
 
 Gagnez du temps en utilisant un prompt déjà sauvegardé dans le `Prompt Store` pour poser une question à l'un de vos agents. Cliquez simplement sur le bouton + puis Prompt Store dans la barre de chat et sélectionnez le prompt que vous souhaitez utiliser.
 
-### 2. Exécuter des applications
+### 2. Exécuter des workflows
 
-Une application est un workflow automatisé d'actions. Il existe plusieurs types d'applications :
+Un workflow est une application ou une serie d'actions a été automatisée. Il existe plusieurs types de workflows :
 
-- Deep Research : Elle permet d'utiliser un mode de réflexion avancé pour traiter la demande de l'utilisateur. L'IA va effectuer une série d'étapes, les unes à la suite des autres afin de fournir le résultat le plus pertinent possible. Elle permet de gérer des traitements ou des réflexions avancés, souvent appelé Recherche Approfondie, Deep-thinking, ou Self-thinking. Cette application peut-être utilisée en plus des autres ressources disponibles pour effectuer des tâches plus avancées et complexes. 
-- Les applications MS : Elles sont présentes par défaut sur votre environnement et permettent d'intéragir avec des ressources Microsoft (emails, transcripts, sharepoints, MS Graph...).
-- Les applications créées : Créées par vous ou votre organisation, ces applications permettent de réaliser une série de tâches spécifiques de manière automatisée selon la configuration qui a été définie.
-  Vous pouvez sélectionner une application dans la liste déroulante et l'exécuter directement depuis la page d'accueil.
+- Deep Research : Le Deep Research permet d'utiliser un mode de réflexion avancé pour traiter la demande de l'utilisateur. L'IA va effectuer une série d'étapes, les unes à la suite des autres afin de fournir le résultat le plus pertinent possible. Elle permet de gérer des traitements ou des réflexions avancés, souvent appelé Recherche Approfondie, Deep-thinking, ou Self-thinking. Cette application peut-être utilisée en plus des autres ressources disponibles pour effectuer des tâches plus avancées et complexes. 
+- Les Workflows natifs (Microsoft) : Ils sont présents par défaut sur votre environnement et permettent d'intéragir avec des ressources Microsoft (emails, transcripts, sharepoints, MS Graph...).
+- Les workflows custom : Créées par vous ou votre organisation, ces workflows permettent de réaliser une série de tâches spécifiques de manière automatisée selon la configuration qui a été définie.
+  Vous pouvez sélectionner les workflows dans la liste déroulante et l'exécuter directement depuis la page d'accueil.
 
 ### 3. Interroger vos bases de données
 
@@ -92,7 +92,7 @@ Vous pouvez **sélectionner une ou plusieurs sources de données** que vous souh
 Depuis l'accueil, vous pouvez enchaîner plusieurs services présentés précedemment. Cela vous permet de poursuivre, d'approfondir ou de challenger les résultats fournis par l'IA
 Par exemple, vous pouvez :
 
-- **Exécuter** une application
+- **Exécuter** un workflows
 - **Rebondir sur le résultat de l'application** avec un agent pour approfondir
 
 ### Croiser les services
@@ -113,9 +113,9 @@ Par exemple, vous pouvez :
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
-      <Table.Td>Application</Table.Td>
+      <Table.Td>Workflows</Table.Td>
       <Table.Td>
-        L'application se lance en prenant en contexte la requête/fichier saisis
+        Le workflow se lance en prenant en contexte la requête/fichier saisis
         par l'utilisateur (si c'est le cas). Si l'application ne permet pas de
         prendre en contexte un fichier, le fichier importé sera ignoré.
       </Table.Td>
@@ -137,9 +137,9 @@ Par exemple, vous pouvez :
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
-      <Table.Td>Plusieurs applications</Table.Td>
+      <Table.Td>Plusieurs workflows</Table.Td>
       <Table.Td>
-        Les applications sélectionnées sont déclenchées en parallèle.
+        Les workflows sélectionnés sont déclenchés en parallèle.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -156,12 +156,12 @@ Par exemple, vous pouvez :
   </tbody>
 </Table>
 
-Cas particulier de l'application Deep Research : Quand l'application Deep Research est utilisée avec d'autres services (agents, applications, bases de données), les différents services sont mis à disposition de l'application, qui déterminera lesquels elle utilisera dans sa réflexion pour répondre à la requête de l'utilisateur
+Cas particulier du workflow Deep Research : Quand le workflow Deep Research est utilisé avec d'autres services (agents, workflows, bases de données), les différents services sont mis à disposition du Deep Research, qui déterminera lesquels elle utilisera dans sa réflexion pour répondre à la requête de l'utilisateur
 
 <Callout>
   Chacune des 3 fonctionnalités a sa propre vue spécifique pour une utilisation
   plus avancée dans Jask. Vous retrouverez l'ensemble de vos intéractions avec
-  les agents, exécutions d'application et les bases de connaissances dans la
+  les agents, exécutions de workflows et les bases de connaissances dans la
   Chat Room
 </Callout>
 
@@ -177,10 +177,4 @@ Cas particulier de l'application Deep Research : Quand l'application Deep Resear
   href="/docs/ai_search/intro"
   icon={<FolderSearch2 />}
 />
-
-  <Cards.Card
-    title="Applications"
-    href="/docs/chats_room/views/application"
-    icon={<Workflow />}
-  />
 </Cards>
