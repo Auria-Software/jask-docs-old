@@ -4,7 +4,7 @@ export default {
     context: "Contexte",
     prompts_store: "Prompts Store",
     file_processing: <div key="file_processing">Traitement de fichiers {newLabel}</div>,
-    assistants: "Assistants",
+    assistants: "Agents",
     data_sources: "Sources de Données",
     document_production: "Production de Documents",
     web: <div key="web">Web {betaLabel}</div>,
