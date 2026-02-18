@@ -5,7 +5,7 @@ import { Table } from "nextra/components";
 
 # Informations Générales
 
-Depuis la vue ChatsRoom, il est possible d'engager une conversation avec un agent, un workflow ou des fichiers. Il est possible d'avoir plusieurs conversations en parallèle, et de reprendre une conversation là où elle en est.
+Depuis la vue Chats Room, il est possible d'engager une conversation avec un agent, un workflow ou des dossiers. Il est possible d'avoir plusieurs conversations en parallèle, et de reprendre une conversation là où elle en est.
 
 ## Pourquoi avoir des conversations distinctes ?
 
@@ -17,19 +17,19 @@ Depuis la vue ChatsRoom, il est possible d'engager une conversation avec un agen
 
 Pour accéder à l’historique des conversations : 
 
-- Soit vous sélectionnez l’agent/workflow/Fichier dans la barre d'affichage. L'historique s'affiche dans le menu déroulant.
-- Soit vous avez déjà sélectionné cet agent, et vous cliquez sur l'onglet Conversations. Le numéro indique le nombre de conversations.
+- Soit vous sélectionnez le service (agent/workflow/dossier) dans la liste des services. L'historique s'affiche sous ce service.
+- Soit vous avez déjà sélectionné ce service, et vous cliquez sur l'onglet Conversations. Le numéro indique le nombre d'intéractions avec ce service.
 
 
 # Organisation de la page
 
 ## La barre d'affichage
 
-La barre d’affichage à gauche de la zone vous donne la liste des agents/workflows/fichiers utilisés, avec le nom et la description de ces derniers.
+La liste des services à gauche de la zone vous donne la liste des agents/workflows/dossiers utilisés, avec le nom et la description de ces derniers.
 Depuis la barre d'affichage, vous pouvez :
 
 - Créer une nouvelle conversation "nouveau chat"
-- Accéder à vos conversations passées en cliquant dessus
+- Accéder au détail de la conversation en cliquant dessus
 - Renommer vos conversations
 - Effacer des conversations.
 
@@ -41,15 +41,14 @@ Les fonctionnalités de la barre de chat sont détaillées dans la partie [secti
 
 ## Les onglets
 
-Si un agent est déjà sélectionné, la partie centrale de l'écran présente le détail de cet agent. 
-
+Si un service est déjà sélectionné, la partie centrale de l'écran présente le détail de ce service. 
 
 ### 1. Vue d'ensemble
 
 La vue d'ensemble regroupe des informations, en dessous de la barre de chat, qui dépendent de l'élement sélectionné :
 
 <Steps>
-Pour un agent : 
+###Pour un agent : 
 
 - Les détails généraux de l'agent : Nom, description, instruction (prompt)
 - Les connaissances : les sources auxquelles il a accès (Sharepoint, Jira...)
@@ -59,17 +58,17 @@ Pour un agent :
   NB : il est possible de modifier la visibilité de ces informations dans les paramètres de l'agent.
 
 
-Pour un workflow :  
+###Pour un workflow :  
 
 - Les détails sur le workflow : nom, description, créateur
 - La liste des derniers traitements sur ce workflow
 - Les utilisateurs ayant le plus utilisé ce workflow
 
 
-Pour des fichiers : 
+###Pour des dossiers : 
 
-- Les détails sur les fichiers sélectionnés. Il est possible d'éditer certains détails, comme le modèle d'IA utilisé. 
-- L'historique de la conversation
+- Les détails sur le dossier : nom, description, créateur
+- Les détails sur les fichiers de ce dossier. Il est possible d'éditer certains détails, comme le modèle d'IA utilisé. 
 
 </Steps>
 
@@ -92,7 +91,7 @@ Pour un workflow :
 - A propos du créateur : Cette section vous permet de trouver des informations sur le créateur du workflow et de consulter les autres workflows du même auteur.
 
 
-Pour un fichier : 
+Pour un Dossier : 
 
 - Fichiers importés : Les fichiers sur lesquels se base vos recherches et actions. Vous avez la possibilité d'importer de nouveaux fichiers ou d'en supprimer.
 
@@ -106,7 +105,7 @@ Vous pouvez importer des éléments dans la barre de chat (bouton Ajouter en bas
 - Des Agents 
 - Des Workflows
 - Des sources de données
-- Des bibliothèques
+- Des bibliothèques 
 
 
 
@@ -117,9 +116,6 @@ Vous pouvez créer des éléments, en fonction de vos droits sur JAsk (bouton fl
 - Groupe d'agents (BETA) : un groupe est défini par son nom, sa description, son mode de fonctionnement, ses membres (agents membres du groupe) et sa visibilité. Il existe deux modes principaux de groupe d'agents : soit les agents répondent en même temps soit les agents du groupe planifient et orchestrent la réfexion par rapport aux agents présents dans le grouppe
 - Prompt personnalisé : [Création d'un prompt dans le prompt store](/docs/prompts_store)
 - Bibliothèque Documentaire : un espace pour créer une bibliothèque de fichiers.
-
-
-
 
 ## Section et favoris
 
