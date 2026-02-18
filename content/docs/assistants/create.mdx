@@ -30,47 +30,49 @@ import { Callout } from "nextra/components";
 
 ---
 
-Depuis la page `Agents IA` du catalogue ou le bouton `Nouveau` de la Chats Room, vous pouvez créer des nouveaux agents.
+Depuis la page `Agents IA` du catalogue ou le bouton `Nouveau` de la Chats Room, vous pouvez sélectionner "Créer un agent IA".
 
 ## Configuration
 
-Plusieurs éléments sont configurables pour créer un agent :
+Plusieurs éléments sont configurables pour créer un agent IA:
 
 <Steps>
 ### Étape 1 : Générales
 
-Dans cette étape, vous pouvez renseigner le nom de votre agent, sa description, choisir un avatar et configurer sa visibilité (moi uniquement par défaut, toute mon organisation)
+Dans cette étape, vous pouvez renseigner le nom de votre agent, sa description, choisir un avatar et configurer sa visibilité (moi uniquement (par défaut), toute mon organisation ou un ciblage personnalisé par Utilisateur(s) ou groupes)
 
-<Callout>
-  Un ciblage plus précis de la visibilité de l'agent pourra être défini dans
-  l'onglet `Sécurité & Gouvernance`
-</Callout>
 
 ![assistant_general](@public/assistants/general.png)
 
 ### Étape 2 : Connaissances
 
-Dans cette étape, vous pouvez choisir les sources de données que votre agent pourra utiliser quand un utilisateur lui pose une question. Vous pouvez connecter une ou plusieurs sources de données. Vous pouvez choisir entre des sources externes connectées à JAsk (Sharepoint, Web, Salesforce, Notion...) ou bien importer des documents statiques sur l'agent (en utilisant la source **Poste de travail**)
+Dans cette étape, vous pouvez choisir les sources de données que votre agent pourra utiliser quand un utilisateur lui pose une question. 
+Vous pouvez connecter une ou plusieurs sources de données. 
+Vous pouvez choisir entre des sources externes connectées à JAsk (Sharepoint, Web, Salesforce, Notion...) ou bien utiliser des documentés importés sur JAsk (en utilisant un des dossiers de la ressource **Mes documents**)
 
 <Callout>
-  Si vous ne connectez aucune source de données, votre agent sera un simple
-  LLM c'est à dire qu'il répondra uniquement à l'aide des connaissances
-  d'entrainement que le modèle sélectionné a reçu.
+  Si vous ne connectez aucune source de données, votre agent sera un simple LLM c'est à dire qu'il répondra uniquement à l'aide des connaissances
+ d'entrainement que le modèle sélectionné a reçu.
 </Callout>
 
-{/* ![assistant_knowledge](@public/assistants/connaissance.gif) */}
+![assistant_knowledge](@public/assistants/step2.gif)
 
 Chaque sources de données est paramétrable en fonction des données que vous voulez fournir à votre agent. Par exemple, si vous connectez un Sharepoint, vous pouvez filtrer les dossiers que vous voulez utiliser.
 
+Le Mode Agentique permet de définir la ressource mis à disposition de l'agent. Si le Mode agentique est activé, les ressources sont à disposition de l'agent, qui décidera d'y faire appel en fonction de la requête de l'utilisateur. Si les ressources sont ajoutées à l'agent sans le Mode Agentique, les ressources seront systématiquement consultées lors de la génération de la réponse de l'agent.
+
+<Callout type="important">
+Si vous avez activé le **Mode agentique** sur une source de l'agent, toutes les sources de l'agent auront ce Mode. Autrement dit, l'agent passe en mode agentique (et ce paramètre n'est pas gérable au niveau de la ressource elle-même
+</Callout>
+
 ### Étape 3 : Intelligence
-
 Dans cette étape, vous configurez l'intelligence de votre agent. Vous pouvez configurer :
-
+![assistant_intelligence](@public/assistants/intelligence.png)
 **Le modèle d'IA**
 
 Sélectionnez le modèle d'IA que votre agent utilisera pour répondre aux questions. Dans la liste déroulante vous voyez les modèles d'IA auxquels vous avez accès.
 
-Ensuite configurez la température du modèle d'IA. La température est un paramètre qui permet de contrôler la créativité de la réponse de l'agent. Plus la température est élevée (proche de 1), plus la réponse est créative et moins elle est conforme à la question posée. Une température élevée signifie que pour une même question, l'agent peut répondre de manière différente à chaque fois.
+Ensuite, configurez la température du modèle d'IA. La température est un paramètre qui permet de contrôler la créativité de la réponse de l'agent. Plus la température est élevée (proche de 1), plus la réponse est créative et moins elle est conforme à la question posée. Une température élevée signifie que pour une même question, l'agent peut répondre de manière différente à chaque fois.
 
 **Rôle et Modération de cet agent (Prompt System)**
 
@@ -103,13 +105,18 @@ C'est ici que vous allez pouvoir configurer le `Prompt System` de votre agent. L
 
 **Options avancées**
 
-Vous pouvez activer ou desactiver certaines options pour votre agent :
+Vous pouvez activer ou désactiver certaines options pour votre agent :
 
 - Cites toujours tes sources (documents, liens, ...) : Cette option permet de référencer les sources de la réponse avec réponse fournie par l'agent. Décochée, les sources utilisées ne seront pas citées par l'agent.
-- Suggères des questions liées à la fin : Cette option permet de suggérer des questions liées à la fin de la réponse séléctionnables par l'utilisateur pour continuer la discussion.
-- Détailles tes réponses avec la chaine de pensée : Cette option permet de détailler la réponse de l'agent avec la chaine de pensée.
+- Inclure le prompt système par défaut : Cette option permet de suggérer des questions liées à la fin de la réponse séléctionnables par l'utilisateur pour continuer la discussion.
 - Informes l'utilisateur lorsque la réponse ne se base pas sur les sources connectées : Cette option permet de prévénir l'utilisateur quand l'agent a utilisé l'entraînement de son modèles sans être allé chercher dans le contenu des sources.
 - Utilises la terminologie interne : Cette option permet d'utiliser la terminologie interne de l'entreprise dans les questions de l'utilisateur et les réponses de l'agent. Par exemple : propale -> proposition commerciale.
+
+<Callout>
+Les deux options suivantes ont été dépréciées pour suivre l'évolution des LLM et de JAsk: 
+- Détailles tes réponses avec la chaine de pensée
+- Suggères des questions liées à la fin
+</Callout>
 
 **Base de connaissances**
 
@@ -119,50 +126,13 @@ Le RAG est un mécanisme qui permet à l'agent de répondre aux questions en uti
 
 - Le degré de diversité des sources récupérées : `Dynamique` (mode automatique qui définit le niveau de diversité à considérer) ou `Minimum de diversités des sources (Top recherches)`(seules les sources les plus pertinentes sont considérées par l'agent) ou `Maximum de diversités des sources (MMR)` (L'agent diversifie au maximum les sources utilisées)
 
-### Étape 4 : Opérations Agentiques
-
-Dans cette étape, vous configurez les opérations agentiques de votre agent. Ce sont les outils a disposition de l'agent, que l'agent peut décider d'utiliser ou non, en fonction de la requête de l'utilisateur.
+### Étape (Dépréciée) : Opérations Agentiques
 
 <Callout type="warning">
-  Si vous activez le mode agentique, le **prompt system** de l'agent n'est
-  plus pris en compte.
+Cette étape a été depréciée. La gestion des modes agentiques est gérée directement dans les bases de données (Onglet Connaissances) ou en utilisant l'application Deep Search
 </Callout>
 
-Trois modes agentiques existent :
-
-- **Mode Defaut**
-
-Dans ce mode, l'agent peut utiliser l'ensemble des sources de données et extensions qui lui sont mis à disposition pour répondre au mieux à la question de l'utilisateur.
-
-<Callout>
-  Activez des sources de données dans les connaissances de l'agent pour voir
-  les actions agentiques possibles de cette source de données.
-</Callout>
-
-![super_agent](@public/assistants/agent_default.png)
-
-- **Mode Super Agent**
-
-Dans ce mode, l'agent devient un chef d'équipe et son rôle est de déléguer les demandes des utilisateurs à des agents plus spécialisés.
-
-![super_agent](@public/assistants/super_agent.png)
-
-- **Mode Deep Agent**
-
-Dans ce mode, l'agent planifie chacune des demandes utilisateur en une série de tâches à effectuer puis exécute le plan de manière itérative.
-Ce mode est plus adapté pour des questions complexes qui nécessitent une recherche et une réflexion approfondies.
-
-Comme pour l'agent par défaut, vous avez la possibilité d'activer des opérations (sources de données et extensions) que l'agent peut effectuer.
-
-![deep_agent](@public/assistants/deep_agent.png)
-
-<Callout type="warning">
-  Le comportement du Deep Agent va être progressivement déprécié en faveur de
-  l'application Deep Research que les utilisateurs pourront activer nativement
-  quand leur requête demande une analyse et une réflexion plus approfonfie.
-</Callout>
-
-### Étape 5 : Sécurité & Gouvernance
+### Étape 4 : Sécurité & Gouvernance
 
 Dans cette étape, vous configurez la sécurité et la gouvernance de votre agent.
 
@@ -172,15 +142,6 @@ Dans cette étape, vous configurez la sécurité et la gouvernance de votre agen
 
     * **`Partage via Jask`** : le contrôle d'accès est géré via Jask. Dans ce cas, les deux utilisateurs auront la même réponse qui se basera sur l'entièreté des documents auxquels l'agent a accès.
 
-**Utilisateurs et Groupes**
-
-Vous pouvez définir plus spécifiquement les utilisateurs et groupes qui auront accès à votre agent.
-
-<Callout type="warning">
-  Les utilisateurs indiqués ici, ne seront pris en compte que si le paramètre
-  "Tout mon organisation" a été défini dans le premier onglet "Générales"
-</Callout>
-
 **Gouvernance**
 
 Vous pouvez décider de limiter la consommation d'un agent par un utilisateur :
@@ -189,13 +150,16 @@ Vous pouvez décider de limiter la consommation d'un agent par un utilisateur :
 - Volumétrie de données : Limiter la quantité de données qu'un utilisateur peut consommer auprès d'un agent (Nombre d'octets ou de tokens consommés)
 
 <Callout type="warning">
-  Les valeurs d'utilisation par utilisateur ne sont pas réinitialisées
-  automatiquement pour le calcul des limites.
+  Les valeurs d'utilisation par utilisateur ne sont pas réinitialisées automatiquement pour le calcul des limites.
 </Callout>
+
+**Tags**
+
+Vous pouvez séléctionner les tags qui seront attachés à cet agent pour les trier dans la partie catalogue.
 
 ![security](@public/assistants/security.png)
 
-### Étape 6 : Expérience utilisateur
+### Étape 5 : Expérience utilisateur
 
 - **Message d'accueil** : Définition du message d'accueil affiché par l'agent au démarrage d'une conversation
 - **Exemples de demandes** : Définition d'exemples de questions de démarrage pour inspirer les utilisateurs de l'agent
@@ -203,5 +167,4 @@ Vous pouvez décider de limiter la consommation d'un agent par un utilisateur :
 - **Afficher les sources connectées** : Permet d'afficher/masquer les sources connectées à l'agent aux consommateurs de cet agent
 - **Recommandation d'applications** : Permet de sélectionner des applications qui seront mis en valeur lors de l'utilisation de l'agent par les utilisateurs.
   ![ux](@public/assistants/ux.png)
-
 </Steps>
