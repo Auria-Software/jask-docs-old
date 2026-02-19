@@ -2,12 +2,13 @@ import { Callout } from "nextra/components";
 import { Table } from "nextra/components";
 
 # Les briques Microsoft O365
-Les actions Microsoft 0365 permettent de créer des intéractions avec votre environnement Microsoft et vos ressources telles que vos emails, vos transcripts de réunions Teams ou votre boîte email (rédaction). Il existe 4 briques : 
+
+Les actions Microsoft 0365 permettent de créer des intéractions avec votre environnement Microsoft et vos ressources telles que vos emails, vos transcripts de réunions Teams ou votre boîte email (rédaction). Il existe 4 briques :
+
 - Envoyer un email
 - Créer un brouillon (Draft)
 - Lire mes mails
 - Transcripts Teams
-
 
 ![application_mail](@public/applications/mail.png)
 
@@ -102,7 +103,7 @@ Pour utiliser cette action, cliquez sur le bouton `+ Ajouter` puis sur `Microsof
 Une fois l'action dans le workflow, vous pouvez entrer l'adresse email du destinataire, le sujet du mail et le contenu du mail - ou bien rendre ces éléments dynamiques grâce aux pins en entrée de la brique.
 
 Exemple d'utilisation pour un email dont le destinataire est statique, et le contenu généré par un prompt.
-![application_mail](@public/applications/m0365_send.png)
+![application_mail](@public/applications/send.png)
 
 Exemple d'utilisation pour un email dont les destinataires, le contenu et une pièce jointe sont dynamiques et générés par IA (le mail est envoyé d'une boîte mail partagée)
 ![application_mail2](@public/applications/send2.png)
@@ -221,11 +222,13 @@ Une fois l'action dans le workflow, vous pouvez entrer l'adresse email du destin
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
         - Sélection de la manière de récupérer les emails :<br />
-        — N derniers mails en choisissant le nombre<br />
-        — Tous les emails du jour<br />
-        — Tous les mails d’une période (entre une date de début et une
-        date de fin) <br />
-- Lire depuis une boîte mail partagée : Lire les mails d'une boîte mail partagée (à préciser) sur laquelle vous avez les droits
+        — N derniers mails en choisissant le nombre
+        <br />
+        — Tous les emails du jour
+        <br />
+        — Tous les mails d’une période (entre une date de début et une date de
+        fin) <br />- Lire depuis une boîte mail partagée : Lire les mails d'une
+        boîte mail partagée (à préciser) sur laquelle vous avez les droits
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -272,14 +275,20 @@ Une fois l'action dans le workflow, vous pouvez entrer l'adresse email du destin
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
         - Sélection de la manière de récupérer les emails :<br />
-        — Récupérer tous les transcripts du jour<br />
-        — Récupérer tous les transcript d'hier<br />
-        — Récupérer tous les transcript de la semaine<br />
-        — Récupérer tous les transcript du mois en cours<br />
+        — Récupérer tous les transcripts du jour
+        <br />
+        — Récupérer tous les transcript d'hier
+        <br />
+        — Récupérer tous les transcript de la semaine
+        <br />
+        — Récupérer tous les transcript du mois en cours
+        <br />
         — Récupérer tous les transcript de la semaine prochaine (meetings
-        prévus)<br />
+        prévus)
+        <br />
         — Récupérer tous les transcript d'une période donnée (entre une date de
-        début et une date de fin)<br />
+        début et une date de fin)
+        <br />
       </Table.Td>
     </Table.Tr>
     <Table.Tr>

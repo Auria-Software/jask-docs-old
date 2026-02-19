@@ -1,28 +1,49 @@
-import { BookCheck, Bot, Files, History, Keyboard, MessagesSquare,Workflow,Pencil,MessagesSquare } from 'lucide-react'
-import { Cards } from 'nextra/components'
+import {
+  BookCheck,
+  Bot,
+  Files,
+  History,
+  Keyboard,
+  MessagesSquare,
+  Workflow,
+  Pencil,
+  MessageSquare,
+} from "lucide-react";
+import { Cards } from "nextra/components";
 import { Callout } from "nextra/components";
-
 
 # La Chat Room
 
-
-<div style={{
-          position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', width: '100%', borderRadius: '8px', marginTop: '24px' }}>
+<div
+  style={{
+    position: "relative",
+    paddingBottom: "56.25%",
+    height: 0,
+    overflow: "hidden",
+    width: "100%",
+    borderRadius: "8px",
+    marginTop: "24px",
+  }}>
   <iframe
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '12px' }}
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "12px",
+    }}
     src="https://www.youtube.com/embed/s-riFfDsapc"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowFullScreen
   />
 </div>
 
-
 ---
 
-Bienvenue dans la Chats Room de JAsk! Cet espace est dédié à l'utilisation et l'historique de vos conversations avec les agents, les exécutions d'applications ainsi que les conversations avec des fichiers/corpus de fichiers. 
+Bienvenue dans la Chats Room de JAsk! Cet espace est dédié à l'utilisation et l'historique de vos conversations avec les agents, les exécutions d'applications ainsi que les conversations avec des fichiers/corpus de fichiers.
 
 Que vous souhaitiez converser avec des agents, retrouver vos exécutions, obtenir des informations ou collaborer sur des projets, la Chat Room est conçue pour faciliter vos échanges avec l'intelligence artificielle.
-
 
 ## La vue Chats Room
 
@@ -32,7 +53,7 @@ La vue Chats Room accessible en haut du menu de gauche :
   <Cards.Card
     title="Chats Room"
     href="/docs/chats_room/views/chatsroom"
-    icon={<MessagesSquare />}
+    icon={<MessageSquare />}
   />
 </Cards>
 
@@ -57,4 +78,3 @@ Découvrez les principales fonctionnalités de la Chat Room.
     icon={<Pencil />}
   />
 </Cards>
-
