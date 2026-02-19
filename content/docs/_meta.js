@@ -22,8 +22,7 @@ export default {
     title: "Catalogue",
   },
   prompts_store: "Prompts Store",
-  assistants: "Agents",
-  applications: "Applications",
+  agentia: "Agents IA",
   experiences: <div key="experiences">Expériences</div>,
   _4: {
     type: "separator",
