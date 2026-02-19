@@ -1,25 +1,17 @@
 import { Callout } from "nextra/components";
+import { Tabs } from 'nextra/components'
 
 # Observabilité
 
-Depuis les réglages, allez sur la page `Observabilité`, vous pouvez suivre la consommation des agents et applications de votre organisation.
+Depuis les réglages, allez sur la page `Observabilité`, vous pouvez suivre la consommation des agents, workflows, modèles et utilisateurs de votre organisation. Cette vue est la pour vous donner une vue d'ensemble de l'utilisation et de la consommation sur JAsk.
 
 ![observability](@public/settings/observability.png)
 
 ### Filtrer sur une période
 
-Choisissez la période sur laquelle vous voulez voir les données en haut à droite de la page.
+Choisissez la période sur laquelle vous voulez voir les données en utilisant le filtre en haut à droite de la page.
 
 ![observability](@public/settings/observability-date.png)
-
-Dans cette vue vous avez un résumé de la consommation globale : le nombre de requêtes, les ressources ainsi les agents, applications et modèles les plus utilisés ainsi que. Vous trouvez également les utilisateurs les plus actifs.
-
-![observability](@public/settings/kpi-global.png)
-
-### Informations générales
-En haut de l'écran d'observabilité, vous pouvez accéder à différents onglets, donnant à chaque fois un classement par utilisations ainsi que des informations liées à cette utilisation (tokens, nombre de requêtes, coûts associés, taux d'utilisation). Les onglets sont : vue d'ensemble, utilisateurs, groupes, agents, applicaitons, sources de données, file rooms, modèle IA, canaux.
-
-
 
 ### Télécharger les logs
 
@@ -46,3 +38,48 @@ Une seule requête adressée à un agent **peut générer plusieurs lignes**, ch
 - Resources : 0 à N lignes par fichier ou ressource consommée
 
 ![download logs](@public/settings/observability/logs.png)
+
+###Vue d'ensemble
+Dans cette vue vous avez un résumé de la consommation globale de JAsk au travers de 6 graphiques : 
+- le nombre de requêtes (nombre de requêtes, utilisateurs actifs, estimation du coûts, évolution temporelle des requêtes
+- les ressources utilisées (nombre d'agents, nombre de workflows, nombre de sources de données connectées, bar chart de la répartition des requêtes par ressources)
+- les top agents (nombre de requêtes aux agents, total de tokens des requêtes, estimations du coût, bar chart de la répartition des requêtes sur le top 10 des agents utilisés)
+- les top workflows (nombre de requêtes aux workflows, total de tokens des requêtes, estimations du coût, bar chart de la répartition des requêtes sur le top 10 des workflows utilisés)
+- les modèles les plus utilisés (nombre de modèles déployés, nombre de modèles utilisés, estimations du coût, bar chart de la répartition des requêtes sur le top 10 des modèles utilisés)
+- les utilisateurs les plus actifs (nombre total d'utilisateurs, nombre total d'utilisateurs actifs, nombre de requêtes moyen par utilisateur, bar chart de la répartition des requêtes pour le top 5 utilisateurs)
+
+![observability](@public/settings/kpi-global.png)
+
+### Onglets dédiés
+En haut de l'écran d'observabilité, vous pouvez accéder à différents onglets, donnant à chaque fois un classement par utilisations ainsi que des informations liées à cette utilisation (tokens, nombre de requêtes, coûts associés, taux d'utilisation). Les onglets sont : vue d'ensemble, utilisateurs, groupes, agents, applicaitons, sources de données, file rooms, modèle IA, canaux.
+
+<Tabs items={['Utilisateurs', 'Groupes', 'Agents', 'Workflows', 'Sources de données', 'File Rooms', 'Modèles IA', 'Canaux']}>
+  <Tabs.Tab>**Utilisateurs**:<br/> Total : Nombre d'utilisateurs, % actifs, total de requêtes, estimation coûts<br/>
+Par utilisateur : taux d'utilisation, nombre de requêtes total, tokens consommés, estimations coût 
+![observability_users](@public/settings/kpi-users.png)
+</Tabs.Tab>
+  <Tabs.Tab>**Groupes**: <br/> Total : Nombre de groupes, % groupes actifs (au moins 1 utilisateur du groupe actif), total de requêtes, estimation coûts<br/>
+Par groupe : taux d'utilisation, nombre de requêtes total, tokens consommés, estimations coût 
+<Callout> La somme des taux d'utilisation des groupe peut dépasser 100% puisque chaque utilisateur est compté dans chacun des groupes dans lequel il est
+</Callout>
+![observability_groups](@public/settings/kpi-groups.png)
+</Tabs.Tab>
+  <Tabs.Tab>**Agents**:<br/> Total : Nombre d'agents, total de requêtes, total de tokens, estimation coûts<br/>
+Par agent : taux d'utilisation, nombre de requêtes total, tokens consommés, estimations coût 
+![observability_agents](@public/settings/kpi-agents.png)</Tabs.Tab>
+ <Tabs.Tab>**Workflows**: <br/> Total : Nombre de workflows, total de requêtes, total token, estimation coûts<br/>
+Par workflow : taux d'utilisation, nombre de requêtes total, tokens consommés, estimations coût 
+![observability_workflows](@public/settings/kpi-workflows.png)</Tabs.Tab>
+ <Tabs.Tab>**Sources de données**: <br/> Total : Nombre de sources de données, total de requêtes, total tokens, estimation coûts<br/>
+Par sources de données : taux d'utilisation, nombre de requêtes total, tokens consommés, estimations coût 
+![observability_datasources](@public/settings/kpi-datasources.png)</Tabs.Tab>
+ <Tabs.Tab>**File Rooms**: <br/> Total : Nombre de file rooms, total de requêtes, total tokens,  estimation coûts<br/>
+Par file room : taux d'utilisation, nombre de requêtes total, tokens consommés, estimations coût 
+![observability_filerooms](@public/settings/kpi-filerooms.png)</Tabs.Tab>
+ <Tabs.Tab>**Modèles IA**:<br/> Total : Nombre de modèles utilisés, total de requêtes, total tokens,  estimation coûts<br/>
+Par modèle : taux d'utilisation, nombre de requêtes total, tokens consommés, estimations coût 
+![observability_models](@public/settings/kpi-models.png) </Tabs.Tab>
+ <Tabs.Tab>**Canaux**: <br/> Total : Nombre de canaux, total de requêtes, total tokens,  estimation coûts<br/>
+Par canal: taux d'utilisation, nombre de requêtes total, tokens consommés, estimations coût 
+![observability_channels](@public/settings/kpi-channels.png) </Tabs.Tab>
+</Tabs>
