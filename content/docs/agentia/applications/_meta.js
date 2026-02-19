@@ -1,4 +1,4 @@
 export default {
     intro: "Introduction",
-    create: "Créer une application",
+    create: "Créer un workflow",
 }
