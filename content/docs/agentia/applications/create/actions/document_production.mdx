@@ -7,7 +7,6 @@ Trois actions sont disponibles pour générer des documents :
 
 * Traduire un document à partir d'un document
 * Générer un document de zéro à partir d'un texte
-* Générer un document à partir d'un template à partir d'un texte
 
 ![application_document_production](@public/applications/generate.png)
 
@@ -135,16 +134,7 @@ Vous avez le choix du format du document généré :
 * PowerPoint
 * Markdown
 * HTML
+* PDF
+* Excel
 
 Vous pouvez également choisir le nom du nouveau document, le chemin de sauvegarde ainsi que la source de donnée dans laquelle vous souhaitez stocker votre document.
-
-## Générer un document à partir d'un template
-
-Générer un document à partir d'un template consiste à utiliser un template d'entreprise préalabement chargé sur Jask dans lequel l'IA va remplacer les zones de textes par les données d'entrée de la brique dans le workflow.
-
-![application_document_production](@public/applications/template.png)
-
-Pour ce faire, il faut d'abord suivre le guide pour charger un template d'entreprise sur Jask : [Charger un template d'entreprise](/docs/templates/create)
-Ensuite, dans l'application, cliquez sur le bouton `+` puis sur `Production de documents` et sélectionnez le template d'entreprise que vous souhaitez utiliser. 
-Il ne vous reste plus qu'à connecter la sortie de la brique contenant le contenu pour générer le template et les connecter à cette action `Template`.
-
