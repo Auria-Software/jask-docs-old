@@ -3,7 +3,7 @@ import { Cards } from 'nextra/components'
 import { Bot, Import, LibraryBig, Database, Search, FileSearch2, LucideImport, Save, Loop, SplitSquareVertical, Repeat2, FilePlus, Languages, BookDashed, ChevronsLeftRightEllipsis, Globe, Download, Mail, MessageCirclePlus } from 'lucide-react'
 import { Table } from 'nextra/components'
 
-# Création d'une application
+# Création d'un workflow
 
 <div style={{
           position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', width: '100%', borderRadius: '8px', marginTop: '24px' }}>
@@ -33,7 +33,7 @@ import { Table } from 'nextra/components'
       <Table.Td>-</Table.Td>
       <Table.Td> [Context](/docs/applications/create/actions/context)</Table.Td>
       <Table.Td>
-        La brique de contexte est obligatoire pour définir le point de départ d’une application, son mode de déclenchement et les contraintes d’entrée imposées à l’utilisateur.
+        La brique de contexte est obligatoire pour définir le point de départ du workflow, son mode de déclenchement et les contraintes d’entrée imposées à l’utilisateur.
       </Table.Td>
     </Table.Tr>
 
@@ -100,7 +100,7 @@ import { Table } from 'nextra/components'
       <Table.Td>Mes sources de données</Table.Td>
       <Table.Td>[Import d’un fichier](/docs/applications/create/actions/data_sources#importer-un-fichier)</Table.Td>
       <Table.Td>
-        Permet d’importer un document statique utilisé comme source de données à chaque exécution de l’application.
+        Permet d’importer un document statique utilisé comme source de données à chaque exécution du workflow.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -114,7 +114,7 @@ import { Table } from 'nextra/components'
       <Table.Td>Mes sources de données</Table.Td>
       <Table.Td>[Analyse d'une source](/docs/applications/create/actions/data_sources#analyse-dune-source)</Table.Td>
       <Table.Td>
-        Analyse une source de données avec une application ou une instruction spécifique
+        Analyse une source de données avec un workflow ou une instruction spécifique
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -128,7 +128,7 @@ import { Table } from 'nextra/components'
       <Table.Td>Mes applications</Table.Td>
       <Table.Td>[Mes applications](/docs/applications/create/actions/applications)</Table.Td>
       <Table.Td>
-        Permet d’appeler des applications dans une application
+        Permet d’appeler des workflows dans une application
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -176,9 +176,9 @@ import { Table } from 'nextra/components'
 
 
 
-## Guide pour créer et partager une application
+## Guide pour créer et partager un workflow
 
-Depuis la page `Applications` du catalogue de JAsk, vous pouvez créer une application en appuyant sur le bouton `Actions` puis `Créer une application` en haut à droite.
+Depuis la page `Agents IA > Workflows` du catalogue de JAsk, vous pouvez créer un process en appuyant sur le bouton `Actions` puis `Créer un workflow` en haut à droite.
 
 ![application_create](@public/applications/app_create.gif)
 
@@ -186,11 +186,11 @@ Depuis la page `Applications` du catalogue de JAsk, vous pouvez créer une appli
 
 ### Contexte
 
-Le [**`Contexte`**](/docs/applications/create/actions/context) représente les données d'entrée de votre application. Cette brique déterminera les contraintes imposées à l'utilisateur au lancement de l'application ainsi que son mode de déclenchement (manuel, automatisé...). Pour une déclenchement manuel, l'entrée peut être vide, un texte écrit par l'utilisateur et/ou des documents téléchargés par l'utilisateur qui exécute l'application.
+Le [**`Contexte`**](/docs/applications/create/actions/context) représente les données d'entrée de votre workflow. Cette brique déterminera les contraintes imposées à l'utilisateur au lancement du workflow ainsi que son mode de déclenchement (manuel, automatisé...). Pour une déclenchement manuel, l'entrée peut être vide, un texte écrit par l'utilisateur et/ou des documents téléchargés par l'utilisateur qui exécute le workflow.
 
 ![application_context](@public/applications/contexte.png)
 
-Ici, sur cet exemple, le contexte accepte seulement du texte utilisateur et le texte à afficher au lancement de l'application est "Renseigner le nom du client / compte"
+Ici, sur cet exemple, le contexte accepte seulement du texte utilisateur et le texte à afficher au lancement du workflow est "Renseigner le nom du client / compte"
 
 ### Enchaîner les actions
 
@@ -207,24 +207,24 @@ Les entrées de données de l'action connectée seront automatiquement remplies 
 ![application_chain](@public/applications/actions.png)
 
 
-### Enregistrer l'application
+### Sauvegarder le workflow
 
 Une fois le workflow testé et validé, vous pouvez l'enregistrer en cliquant sur le bouton `Sauvegarder` en haut à droite.
 
-Vous pouvez lui donner un nom et une description puis choisir un tag pour qu'elle soit triée dans la bonne section du catalogue d'applications. 
-Enfin, définissez la visibilité de l'application : Toute l'organisation, Moi uniquement ou Personnalisé (Utilisateurs et Groupes spécifiques).
+Vous pouvez lui donner un nom et une description puis choisir un tag pour qu'elle soit triée dans la bonne section du catalogue de services. 
+Enfin, définissez la visibilité du workflow : Toute l'organisation, Moi uniquement ou Personnalisé (Utilisateurs et Groupes spécifiques).
 
 ![application_save](@public/applications/deploy.png)
 
 </Steps>
 
-## Exemples d'applications
+## Exemples de workflows
 
 <details>
-<summary>Application simple</summary>
+<summary>Workflow simple</summary>
 Objectif : Faire un résumé court d’un corpus de fichiers, contenant des éléments graphiques (images, tableaux, graphiques)
 
-L’application prend en entrée une liste de fichiers, qui seront lu avec Vision IA. Cela permet de parcourir l’ensemble du contenu des fichiers, avec de la Vision (à la place de l’OCR) avec le model 4.1 (ici aucune instruction spécifique de vision n’est ajoutée).
+Le workflow prend en entrée une liste de fichiers, qui seront lu avec Vision IA. Cela permet de parcourir l’ensemble du contenu des fichiers, avec de la Vision (à la place de l’OCR) avec le model 4.1 (ici aucune instruction spécifique de vision n’est ajoutée).
 
 Ces fichiers vont ensuite être traité par une brique “Analyse de fichiers” qui a pour objectif de réaliser un résumé court du contexte d’entrée avec le modèle gpt4.1.
 L’option “Lire toutes les pages” permet d’assurer que le modèle va parcourir l’intégralité des pages des documents en entrée. En effet, si les fichiers sont trop longs, le contexte du LLM pourrait être dépassé et certaines pages ne pas être parcourues
@@ -232,7 +232,7 @@ L’option “Lire toutes les pages” permet d’assurer que le modèle va parc
 ![simple_app](@public/applications/simple_app.png)
 </details>
 <details>
-<summary>Application moyenne</summary>
+<summary>Workflow moyen</summary>
 Objectif : Trouver des profils qui correspondent à une compétence demandée dans une base SharePoint de CV et scorer les CV trouvés par rapport au besoin
 
 Le contexte permet à l’utilisateur qui démarre l’application de saisir les compétences recherchées dans son projet.
@@ -244,7 +244,7 @@ Cette liste de document va ensuite être traitée par un prompt qui analyse les 
 ![medium_app](@public/applications/medium_app.png)
 </details>
 <details>
-<summary>Application avancée</summary>
+<summary>Workflow avancé</summary>
 Objectif : Analyse d’une entreprise suivant 3 axes Business, Finance, Juridique à partir d’un ensemble documentaire sur l’entreprise
 
 Les documents sur l’entreprise à analyser en entrée sont analysés par 3 agents indépendamment, qui chacun ont des instructions pour analyser le contenu en entrée et faire une restitution spécifique selon des règles métiers.
