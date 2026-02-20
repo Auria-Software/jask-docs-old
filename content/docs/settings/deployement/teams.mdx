@@ -51,7 +51,7 @@ Configurer la ressource bot dans Azure.
 
 ![Microsoft Teams App](@public/settings/deploy/add_bot_2.png)
 
-Une fois la ressource bot créee, rendez vous sur la page de configuration dans le menu gauche de la ressource bot.
+Une fois la ressource bot créée, rendez vous sur la page de configuration dans le menu gauche de la ressource bot.
 
 1. Ajouter l'url suivante dans le champs `Messaging endpoint` :
 
@@ -80,7 +80,7 @@ User.Read
 
 ![Microsoft Teams App](@public/settings/deploy/configuration.png)
 
-Rendez vous ensuite sur la page `Channels` dans le menu gauche de la ressource bot et ajouter Teams.
+Rendez vous ensuite sur la page `Channels` dans le menu gauche de la ressource bot et ajoutez Teams.
 
 ![Microsoft Teams App](@public/settings/deploy/add_teams.png)
 
@@ -88,7 +88,7 @@ Rendez vous ensuite sur la page `Channels` dans le menu gauche de la ressource b
 
 Allez dans Microsoft Entra et rendez vous sur l'app registration portant le nom de votre ressource bot dans Azure.
 
-Récupérer les informations suivantes :
+Récupérez les informations suivantes :
 
 - **Application (client) id**
 - **Application (secret) id**
@@ -103,7 +103,7 @@ Rendez vous dans le menu `Authentification` et ajouter les informations suivante
 
 ![Microsoft Teams App](@public/settings/deploy/authentication.png)
 
-Ajouter les clients ids suivants dans `expose an api` en activant la permission crée lors de l'installation :
+Ajouter les clients ids suivants dans `expose an api` en activant la permission créée lors de l'installation :
 
 - 1fec8e78-bce4-4aaf-ab1b-5451cc387264
 - 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
@@ -116,11 +116,11 @@ Ces clés permettent au bot Teams de communiquer avec Jask.
 
 ### Etape 5: Créer un secret de connexion pour JaskSSO
 
-Si ce n'est pas déjà fait, créer un secret de type `Connexion O365` pour l'app registration JaskSSO.
+Si ce n'est pas déjà fait, créez un secret de type `Connexion O365` pour l'app registration JaskSSO.
 
 <Callout type="warning">
   Le type de connexion 'Sharepoint' est obsolète et ne fonctionne pas avec les
-  déploiement dans Microsoft Teams.
+  déploiements dans Microsoft Teams.
 </Callout>
 
 ![Jask Secret Management](@public/settings/deploy/secret.png)
