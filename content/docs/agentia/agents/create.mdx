@@ -72,6 +72,7 @@ Le Mode Agentique permet de définir la ressource mis à disposition de l'agent.
 
 Dans cette étape, vous configurez l'intelligence de votre agent. Vous pouvez configurer :
 ![assistant_intelligence](@public/assistants/intelligence.png)
+
 **Le modèle d'IA**
 
 Sélectionnez le modèle d'IA que votre agent utilisera pour répondre aux questions. Dans la liste déroulante vous voyez les modèles d'IA auxquels vous avez accès.
@@ -111,14 +112,14 @@ C'est ici que vous allez pouvoir configurer le `Prompt System` de votre agent. L
 
 Vous pouvez activer ou désactiver certaines options pour votre agent :
 
-- Cites toujours tes sources (documents, liens, ...) : Cette option permet de référencer les sources de la réponse avec réponse fournie par l'agent. Décochée, les sources utilisées ne seront pas citées par l'agent.
+- Cite toujours tes sources (documents, liens, ...) : Cette option permet de référencer les sources de la réponse avec réponse fournie par l'agent. Décochée, les sources utilisées ne seront pas citées par l'agent.
 - Inclure le prompt système par défaut : Cette option permet de suggérer des questions liées à la fin de la réponse séléctionnables par l'utilisateur pour continuer la discussion.
-- Informes l'utilisateur lorsque la réponse ne se base pas sur les sources connectées : Cette option permet de prévénir l'utilisateur quand l'agent a utilisé l'entraînement de son modèles sans être allé chercher dans le contenu des sources.
-- Utilises la terminologie interne : Cette option permet d'utiliser la terminologie interne de l'entreprise dans les questions de l'utilisateur et les réponses de l'agent. Par exemple : propale -> proposition commerciale.
+- Informe l'utilisateur lorsque la réponse ne se base pas sur les sources connectées : Cette option permet de prévenir l'utilisateur quand l'agent a utilisé l'entraînement de son modèle sans être allé chercher dans le contenu des sources.
+- Utilise la terminologie interne : Cette option permet d'utiliser la terminologie interne de l'entreprise dans les questions de l'utilisateur et les réponses de l'agent. Par exemple : propale -> proposition commerciale.
 
 <Callout>
   Les deux options suivantes ont été dépréciées pour suivre l'évolution des LLM
-  et de JAsk: - Détailles tes réponses avec la chaine de pensée - Suggères des
+  et de JAsk: - Détaille tes réponses avec la chaine de pensée - Suggère des
   questions liées à la fin
 </Callout>
 
@@ -172,7 +173,7 @@ Vous pouvez séléctionner les tags qui seront attachés à cet agent pour les t
 - **Exemples de demandes** : Définition d'exemples de questions de démarrage pour inspirer les utilisateurs de l'agent
 - **Afficher le prompt système** : Permet d'afficher/masquer le prompt système aux consommateurs de l'agent
 - **Afficher les sources connectées** : Permet d'afficher/masquer les sources connectées à l'agent aux consommateurs de cet agent
-- **Recommandation d'applications** : Permet de sélectionner des applications qui seront mis en valeur lors de l'utilisation de l'agent par les utilisateurs.
+- **Recommandation d'applications** : Permet de sélectionner des applications qui seront mises en valeur lors de l'utilisation de l'agent par les utilisateurs.
   ![ux](@public/assistants/ux.png)
 
 </Steps>
