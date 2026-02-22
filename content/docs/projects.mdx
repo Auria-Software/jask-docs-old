@@ -1,8 +1,9 @@
 # Les Projets
 
-Les projets sont des espaces de travail collaboratifs pour permettre à des équipes de travailler ensemble sur certains documents dans un espace cloisonné. 
+Les projets sont des espaces de travail collaboratifs pour permettre à des équipes de travailler ensemble sur certains documents dans un espace cloisonné.
 
-Les projets sont caractérisés par 3 notions principales : 
+Les projets sont caractérisés par 3 notions principales :
+
 - Les paramètres du projet : les règles du projet, le modèle utilisé, son prompt, sa température...
 - Le périmètre du projet : l'ensemble du corpus et des ressources sur lesquels le projet se base.
 - Les membres du projet : l'ensemble des membres pouvant voir/participer à ce projet en fonction de leurs droits sur ce projet.
@@ -11,18 +12,21 @@ Les projets sont caractérisés par 3 notions principales :
 
 ## Création d'un projet
 
-Pour créer un projet, cliquez sur le bouton "Nouveau projet" en bas de la barre d'affichage de gauche. Entrez un nom et une description. 
+Pour créer un projet, cliquez sur le bouton "Nouveau projet" en bas de la barre d'affichage de gauche. Entrez un nom et une description.
 
 Vous arrivez ensuite à l'intérieur de votre projet vierge dont vous êtes l'unique utilisateur. Depuis cette vue d'ensemble, vous retrouvez les informations principales du projet ainsi que les dernières conversations dans le projet. Vous pouvez aussi commencer une nouvelle conversation depuis la barre de chat en haut de la page.
 
-Les autres onglets vous permettent de : 
+Les autres onglets vous permettent de :
+
 - Gérer et ajouter des ressources au projet.
 - Consulter et gérer les contenus épinglés au projet.
 - Retrouver l'historique des modifications apportées au projet.
 - Voir et gérer la liste des membres du projet et leurs rôles.
 
 ## Paramètres du projet
-Un projet est défini par ses paramètres. C'est l'intelligence qui sera dans ce projet. Passons en revue les différents paramètres du projet : 
+
+Un projet est défini par ses paramètres. C'est l'intelligence qui sera dans ce projet. Passons en revue les différents paramètres du projet :
+
 - Modèle IA : Le LLM qui sera utilisé dans les conversations du projet.
 - Prompt system : Le prompt qui sera appliqué dans les conversations du projet. Vous pouvez définir le ton, la manière de répondre et l'objectif du projet dans ce prompt afin de maximiser la pertinence des réponses.
 - Température : niveau de créativité du LLM (0 : peu de créativité/ 1 : grande créativité)
@@ -32,9 +36,10 @@ Un projet est défini par ses paramètres. C'est l'intelligence qui sera dans ce
 
 ## Les ressources du projet
 
-Pour définir le périmètre du projet, vous devez sélectionner et/ou importer les ressources du projet. Depuis l'onglet `Ressources` ou depuis le panel d'administration à droite de l'écran, les éditeurs et contributeurs au projet peuvent définir les fichiers et ressources qui composeront le périmètre du projet : 
+Pour définir le périmètre du projet, vous devez sélectionner et/ou importer les ressources du projet. Depuis l'onglet `Ressources` ou depuis le panel d'administration à droite de l'écran, les éditeurs et contributeurs au projet peuvent définir les fichiers et ressources qui composeront le périmètre du projet :
+
 - Importer les fichiers qui constitueront les données du projet que l'IA utilisera quand les membres converseront sur le projet.
-- Sélectionner les sources auquel le projet peut accéder parmi les sources disponibles sur JAsk.
+- Sélectionner les sources auquel le projet peut accéder parmi les sources disponibles sur Jask.
 
 ![projects](@public/projects/import.png)
 
@@ -42,14 +47,15 @@ Pour définir le périmètre du projet, vous devez sélectionner et/ou importer 
 
 ## Les membres du projet
 
-Afin que le projet soit un espace collaboratif sur lequel plusieurs utilisateurs peuvent travailler, les éditeurs d'un projet peuvent partager ce projet avec d'autres utilisateurs de JAsk. Chaque utilisateur aura un droit sur le projet qui lui donnera plus ou moins de droits et de contrôle sur ce projet : 
+Afin que le projet soit un espace collaboratif sur lequel plusieurs utilisateurs peuvent travailler, les éditeurs d'un projet peuvent partager ce projet avec d'autres utilisateurs de Jask. Chaque utilisateur aura un droit sur le projet qui lui donnera plus ou moins de droits et de contrôle sur ce projet :
+
 - Administrateurs : Les administrateurs ont les droits les plus hauts dans un projet. Ils peuvent éditer le projet, ses paramètres, ses ressources et ses membres. Ils peuvent également partager le projet.
 - Contributeurs : Les contributeurs peuvent participer au projet mais ils ne peuvent pas partager ce projet à d'autres utilisateurs.
 - Lecture seule : Les membres en lecture seule pourront uniquement voir le projet, ses contenus et sources. Ils ne peuvent pas intéragir avec le projet.
 
 ![projects](@public/projects/members_create.png)
 
-## Autres onglets 
+## Autres onglets
 
 ### Contenus épinglés
 
@@ -59,6 +65,7 @@ Quand la réponse d'un agent ou le résultat d'une application doit être sauveg
 ![chat_room](@public/projects/pinned.png)
 
 ### Activités
+
 Pour garder un œil sur les activités du projet (Conversations démarrées, applications lancées dans le projet, changement de configuration etc.)
 
 ![activities](@public/projects/activity.png)
@@ -70,7 +77,9 @@ Liste des membres du projet, leur date d'ajout et de leur rôle.
 ![notes](@public/projects/members.png)
 
 ### Les paramètres
-Les paramètres sont accessibles par le bouton "Roue crantée" en haut à droite de l'écranc. Vous pouvez : 
+
+Les paramètres sont accessibles par le bouton "Roue crantée" en haut à droite de l'écranc. Vous pouvez :
+
 - Importer des fichiers pour les ajouter au projet.
 - Gérer l'accès aux sources de données internes.
 - Modifier les paramètres du projet : le prompt donné à l'agent sur l'ensemble du projet, le modèle IA utilisé, la température, la faculté de travailler à plusieurs sur la même conversation et la synchronisation automatique des imports de fichier.

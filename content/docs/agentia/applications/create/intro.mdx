@@ -1,14 +1,49 @@
-import { Steps } from 'nextra/components'
-import { Cards } from 'nextra/components'
-import { Bot, Import, LibraryBig, Database, Search, FileSearch2, LucideImport, Save, Loop, SplitSquareVertical, Repeat2, FilePlus, Languages, BookDashed, ChevronsLeftRightEllipsis, Globe, Download, Mail, MessageCirclePlus } from 'lucide-react'
-import { Table } from 'nextra/components'
+import { Steps } from "nextra/components";
+import { Cards } from "nextra/components";
+import {
+  Bot,
+  Import,
+  LibraryBig,
+  Database,
+  Search,
+  FileSearch2,
+  LucideImport,
+  Save,
+  Loop,
+  SplitSquareVertical,
+  Repeat2,
+  FilePlus,
+  Languages,
+  BookDashed,
+  ChevronsLeftRightEllipsis,
+  Globe,
+  Download,
+  Mail,
+  MessageCirclePlus,
+} from "lucide-react";
+import { Table } from "nextra/components";
 
 # Création d'un workflow
 
-<div style={{
-          position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', width: '100%', borderRadius: '8px', marginTop: '24px' }}>
+<div
+  style={{
+    position: "relative",
+    paddingBottom: "56.25%",
+    height: 0,
+    overflow: "hidden",
+    width: "100%",
+    borderRadius: "8px",
+    marginTop: "24px",
+  }}>
   <iframe
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '12px' }}
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "12px",
+    }}
     src="https://www.youtube.com/embed/a4Jwl-gCRP4"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowFullScreen
@@ -183,14 +218,13 @@ import { Table } from 'nextra/components'
         L'action de découpe permet de découper un fichier ou un contenu passé en entrée de cette brique, en une liste d'éléments pour ne pas dépasser le contexte d'entrée d'un LLM
       </Table.Td>
     </Table.Tr>
+
   </tbody>
 </Table>
 
-
-
 ## Guide pour créer et partager un workflow
 
-Depuis la page `Agents IA > Workflows` du catalogue de JAsk, vous pouvez créer un process en appuyant sur le bouton `Actions` puis `Créer un workflow` en haut à droite.
+Depuis la page `Agents IA > Workflows` du catalogue de Jask, vous pouvez créer un process en appuyant sur le bouton `Actions` puis `Créer un workflow` en haut à droite.
 
 ![application_create](@public/applications/app_create.gif)
 
@@ -218,12 +252,11 @@ Les entrées de données de l'action connectée seront automatiquement remplies 
 
 ![application_chain](@public/applications/actions.png)
 
-
 ### Sauvegarder le workflow
 
 Une fois le workflow testé et validé, vous pouvez l'enregistrer en cliquant sur le bouton `Sauvegarder` en haut à droite.
 
-Vous pouvez lui donner un nom et une description puis choisir un tag pour qu'elle soit triée dans la bonne section du catalogue de services. 
+Vous pouvez lui donner un nom et une description puis choisir un tag pour qu'elle soit triée dans la bonne section du catalogue de services.
 Enfin, définissez la visibilité du workflow : Toute l'organisation, Moi uniquement ou Personnalisé (Utilisateurs et Groupes spécifiques).
 
 ![application_save](@public/applications/deploy.png)
@@ -242,6 +275,7 @@ Ces fichiers vont ensuite être traités par une brique “Analyse de fichiers�
 L’option “Lire toutes les pages” permet d’assurer que le modèle va parcourir l’intégralité des pages des documents en entrée. En effet, si les fichiers sont trop longs, le contexte du LLM pourrait être dépassé et certaines pages ne pas être parcourues
 
 ![simple_app](@public/applications/simple_app.png)
+
 </details>
 <details>
 <summary>Workflow moyen</summary>
@@ -254,6 +288,7 @@ Ces compétences sont passées à un moteur de recherche, dont l’objectif est 
 Cette liste de document va ensuite être traitée par un prompt qui analyse les CV trouvés et a pour objectif de les scorer par rapport à une série de règles métiers indiquées dans le prompt
 
 ![medium_app](@public/applications/medium_app.png)
+
 </details>
 <details>
 <summary>Workflow avancé</summary>
@@ -264,5 +299,5 @@ Le prompt qui suit permet de structurer les rapports individuels de chacun des a
 La derniere étape permet de générer un document word contenant la synthèse en sortie du prompt.
 
 ![advanced_app](@public/applications/advanced_app.png)
-</details>
 
+</details>

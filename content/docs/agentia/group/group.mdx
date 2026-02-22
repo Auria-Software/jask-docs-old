@@ -2,12 +2,15 @@ import { Steps } from "nextra/components";
 import { Callout } from "nextra/components";
 
 # Les groupes d'agents
+
 ---
+
 ![group_use](@public/group/group_use.png)
 
 ## Définition
 
-Un groupe d'agents est un service JAsk qui permet de regrouper plusieurs agents dans un même objet afin de déléguer une tâche demandée au groupe d'agents. Il existe 3 modes de fonctionnement pour les groupes d'agents : 
+Un groupe d'agents est un service Jask qui permet de regrouper plusieurs agents dans un même objet afin de déléguer une tâche demandée au groupe d'agents. Il existe 3 modes de fonctionnement pour les groupes d'agents :
+
 - `Tous répondent en même temps` : tous les agents du groupe formuleront une réponse à la requête de l'utilisateur
 - `Planifie et orchcestre`: L'IA va déterminer les étapes à suivre, décomposer la réflexion et orchestrer les agents membres du groupe les uns par rapport aux autres en fonction de leurs expertises respectives
 - `Uniquement l'agent le plus adéquat répond` : L'IA détermine l'agent membre le plus pertinent pour répondre à la requête de l'utilisateur. Seul cet agent répondra.
@@ -16,15 +19,17 @@ Un groupe d'agents est un service JAsk qui permet de regrouper plusieurs agents 
 
 ## Création d'un groupe d'agents
 
-Pour créer un groupe d'agent, rendez-vous dans la partie Agents IA du catalogue JAsk puis cliquez sur Actions -> `Créer un groupe d'agents`. Vous pouvez aussi initier la création du groupe d'agents depuis la Chats Room en cliquant sur le bouton `+ Nouveau` en bas de la liste des agents. 
+Pour créer un groupe d'agent, rendez-vous dans la partie Agents IA du catalogue Jask puis cliquez sur Actions -> `Créer un groupe d'agents`. Vous pouvez aussi initier la création du groupe d'agents depuis la Chats Room en cliquant sur le bouton `+ Nouveau` en bas de la liste des agents.
 
 - Donner un nom et une description à votre groupe d'agents pour indiquer aux utilisateurs qui auront accès comment se comporte le groupe d'agents.
-<Callout type="info">
-Dans le cas ou le mode de fonctionnement sélectionné est `Planifie et Orchestre`, la description fera office de prompt system pour la planification des tâches
-</Callout>
+  <Callout type="info">
+    Dans le cas ou le mode de fonctionnement sélectionné est `Planifie et
+    Orchestre`, la description fera office de prompt system pour la
+    planification des tâches
+  </Callout>
 - Sélectionner le mode de fonctionnement du groupe
 - Sélectionner les membres (agents) du groupe d'agents
-- Définir la visibilité du groupe : 
+- Définir la visibilité du groupe :
   - Moi uniquement : vous seul verrez le groupe
   - Tous ceux qui ont accès aux agents du groupe : tous les utilisateurs qui peuvent voir l'ensemble des agents du groupe, verront le groupe
   - Personnalisé : séléction d'utilisateurs parmi tous ceux qui ont accès à tous les agents du groupe
