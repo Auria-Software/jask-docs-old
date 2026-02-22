@@ -1,5 +1,4 @@
 export default {
-    intro: "Introduction",
-    views : "Les Vues",
-    features: "Les Fonctionnalités",
-}
+  intro: "Introduction",
+  features: "Les Fonctionnalités",
+};

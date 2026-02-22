@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { Cards } from "nextra/components";
 import { Callout } from "nextra/components";
+import { newLabel } from "@components/new_label";
+import { Steps } from "nextra/components";
 
 # La Chat Room
 
@@ -45,19 +47,118 @@ Bienvenue dans la Chats Room de JAsk! Cet espace est dédié à l'utilisation et
 
 Que vous souhaitiez converser avec des agents, retrouver vos exécutions, obtenir des informations ou collaborer sur des projets, la Chat Room est conçue pour faciliter vos échanges avec l'intelligence artificielle.
 
-## La vue Chats Room
+## Organisation de la page
 
-La vue Chats Room accessible en haut du menu de gauche :
+Après avoir cliqué sur un agent, l'agent s'ouvre. Plusieurs onglets vous permettent d'accéder aux différentes fonctionnalités de l'agent.
 
-<Cards>
-  <Cards.Card
-    title="Chats Room"
-    href="/docs/chats_room/views/chatsroom"
-    icon={<MessageSquare />}
-  />
-</Cards>
+![create_chatroom](@public/chat_rooms/create_chatroom.png)
 
-## Les Fonctionnalités
+## La barre d'affichage
+
+La liste des services à gauche de la zone vous donne la liste des agents/workflows/dossiers utilisés, avec le nom et la description de ces derniers.
+Depuis la barre d'affichage, vous pouvez :
+
+- Créer une nouvelle conversation "nouveau chat"
+- Accéder au détail de la conversation en cliquant dessus
+- Renommer vos conversations
+- Effacer des conversations.
+
+Cette dernière option supprime totalement une conversation : attention à son utilisation !
+
+## La barre de chat
+
+Les fonctionnalités de la barre de chat sont détaillées dans la partie [section Chat](/docs/chats_room/features/chat_box)
+
+## Les onglets
+
+Si un service est déjà sélectionné, la partie centrale de l'écran présente le détail de ce service.
+
+### 1. Vue d'ensemble
+
+La vue d'ensemble regroupe des informations, en dessous de la barre de chat, qui dépendent de l'élement sélectionné :
+
+<Steps>
+### Pour un agent :
+
+- Les détails généraux de l'agent : Nom, description, instruction (prompt)
+- Les connaissances : les sources auxquelles il a accès (Sharepoint, Jira...)
+- Les capacités de l'agent : les outils à sa disposition (Génération d'image, graphe...)
+- Les propositions de questions ou demande à poser à l'agent : [Suggestion de Questions](/docs/chats_room/features/chat_box#suggestion-de-questions)
+
+  NB : il est possible de modifier la visibilité de ces informations dans les paramètres de l'agent.
+
+### Pour un workflow :
+
+- Les détails sur le workflow : nom, description, créateur
+- La liste des derniers traitements sur ce workflow
+- Les utilisateurs ayant le plus utilisé ce workflow
+
+### Pour des dossiers :
+
+- Les détails sur le dossier : nom, description, créateur
+- Les détails sur les fichiers de ce dossier. Il est possible d'éditer certains détails, comme le modèle d'IA utilisé.
+
+</Steps>
+
+### 2. Les autres onglets
+
+En fonction de l'élément sélectionné, les onglets diffèrent.
+
+<Steps>
+### Pour un agent :
+
+- Conversations : Accès à l'historique de vos conversations avec cet agent. Le numéro indique le nombre de conversations que vous avez engagées.
+- Contenus partagés : Tous les contenus partagés par vous ou par vos collaborateurs à partir de cet agent.
+- Activités : Toutes les modifications de configuration de l'agent (nom, description, instructions...).
+
+### Pour un workflow :
+
+- Détails : Détail sur le fonctionnement du workflow, sa structure et sa logique. Elle donne du contexte sur les étapes et le but du workflow.
+- Historique : L'historique répertorie toutes les activités liées à ce workflow. La partie chiffrée correspond au nombre de requêtes effectuées sur ce workflow.
+- A propos du créateur : Cette section vous permet de trouver des informations sur le créateur du workflow et de consulter les autres workflows du même auteur.
+
+### Pour un Dossier :
+
+- Fichiers importés : Les fichiers sur lesquels se base vos recherches et actions. Vous avez la possibilité d'importer de nouveaux fichiers ou d'en supprimer.
+
+</Steps>
+
+## Création et Importation
+
+Vous pouvez importer des éléments dans la barre de chat (bouton Ajouter en bas à gauche). Ces éléments s'ajouteront à la barre d'affichage.
+
+- Des Agents
+- Des Workflows
+- Des sources de données
+- Des bibliothèques
+
+Vous pouvez créer des éléments, en fonction de vos droits sur JAsk (bouton flèche vers le haut, à côté du bouton Ajouter:
+
+- Section : une section est une liste personnelle qui vous permet d'organiser des éléments. Par défaut, l'organisation se fait par ordre de dernière conversation.
+- Agent IA : Création d'un agent IA. [Création d'un agent](/docs/assistants/create)
+- Groupe d'agents (BETA) : un groupe est défini par son nom, sa description, son mode de fonctionnement, ses membres (agents membres du groupe) et sa visibilité. Il existe deux modes principaux de groupe d'agents : soit les agents répondent en même temps soit les agents du groupe planifient et orchestrent la réfexion par rapport aux agents présents dans le grouppe
+- Prompt personnalisé : [Création d'un prompt dans le prompt store](/docs/prompts_store)
+- Bibliothèque Documentaire : un espace pour créer une bibliothèque de fichiers.
+
+## Section et favoris
+
+Vous avez la possibilité de définir certains agents comme favoris. Cela vous permet de les retrouver plus rapidement.
+Vos agents favoris sont regroupés dans la section "Mes favoris" de la barre d'affichage. Pour déplacer un agent dans une section, cliquez sur l'icône "..." puis sur la section cible.
+
+## Pourquoi avoir des conversations distinctes ?
+
+- **Organisation** : Les conversations distinctes vous permettent de séparer les sujets ou projets. Par exemple, vous pouvez avoir une conversation pour un projet spécifique et une autre pour des questions générales.
+- **Contexte** : Chaque conversation conserve le contexte de tous les messages de la conversation, ce qui permet à l'agent de fournir des réponses plus pertinentes basées sur l'historique de la conversation.
+- **Gestion** : Vous pouvez facilement retrouver et gérer vos interactions passées en accédant à vos conversations enregistrées.
+
+## Historique des conversations :
+
+Pour accéder à l’historique des conversations :
+
+- Soit vous sélectionnez le service (agent/workflow/dossier) dans la liste des services. L'historique s'affiche sous ce service.
+- Soit vous avez déjà sélectionné ce service, et vous cliquez sur l'onglet Conversations. Le numéro indique le nombre d'interactions avec ce service.
+
+## Les Fonctionnalités de Chat
 
 Découvrez les principales fonctionnalités de la Chat Room.
 
