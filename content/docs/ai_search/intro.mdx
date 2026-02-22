@@ -1,13 +1,36 @@
-import {Callout} from 'nextra/components'
-import { Folder, FolderSearch2,CircleUser,House, FileSymlink,BookCopy,History } from 'lucide-react'
-import { Cards } from 'nextra/components'
+import { Callout } from "nextra/components";
+import {
+  Folder,
+  FolderSearch2,
+  CircleUser,
+  House,
+  FileSymlink,
+  BookCopy,
+  History,
+} from "lucide-react";
+import { Cards } from "nextra/components";
 
 # Mes Documents
 
-<div style={{
-          position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', width: '100%', borderRadius: '8px', marginTop: '24px' }}>
+<div
+  style={{
+    position: "relative",
+    paddingBottom: "56.25%",
+    height: 0,
+    overflow: "hidden",
+    width: "100%",
+    borderRadius: "8px",
+    marginTop: "24px",
+  }}>
   <iframe
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '12px' }}
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "12px",
+    }}
     src="https://www.youtube.com/embed/rDp1qzwYwZU"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowFullScreen
@@ -16,7 +39,8 @@ import { Cards } from 'nextra/components'
 
 ---
 
-Bienvenue dans la page `Documents` de JAsk, cet espace est dédié à la gestion de vos documents sur JAsk. Dans cette section vous pourrez : 
+Bienvenue dans la page `Documents` de JAsk, cet espace est dédié à la gestion de vos documents sur JAsk. Dans cette section vous pourrez :
+
 - Recherche dans les bases documentations connectées à JAsk
 - Stocker et organiser des documents dans des dossiers sur JAsk
 - Créer et générer des documents à partir de modèles de documents
@@ -24,8 +48,10 @@ Bienvenue dans la page `Documents` de JAsk, cet espace est dédié à la gestion
 - Retrouver l'historique de vos recherches
 
 <Callout>
-La fonctionnalité de recherche de documents **n'est pas disponible depuis l'accueil de Jask**.
-Documents n'est rien d'autre qu'une vue plus intuitive pour rechercher des documents dans les bases de connaissance de votre organisation.
+  La fonctionnalité de recherche de documents **n'est pas disponible depuis
+  l'accueil de Jask**. Documents n'est rien d'autre qu'une vue plus intuitive
+  pour rechercher des documents dans les bases de connaissance de votre
+  organisation.
 </Callout>
 
 ## Les Fonctionnalités
@@ -35,22 +61,22 @@ Découvrez les principales fonctionnalités de la page `Documents`.
 <Cards>
   <Cards.Card
     title="Vue d'ensemble"
-    href="/docs/ai_search/search_home"
+    href="/docs/ai_search/features/search_home"
     icon={<House />}
   />
   <Cards.Card
     title="Mes bibliothèques"
-    href="/docs/ai_search/personnal"
+    href="/docs/ai_search/features/personnal"
     icon={<CircleUser />}
   />
   <Cards.Card
     title="Carnets de travail"
-    href="/docs/ai_search/workbooks"
+    href="/docs/ai_search/features/workbooks"
     icon={<BookCopy />}
   />
   <Cards.Card
     title="Historique"
-    href="/docs/ai_search/search_home"
+    href="/docs/ai_search/features/search_home"
     icon={<History />}
   />
 </Cards>
