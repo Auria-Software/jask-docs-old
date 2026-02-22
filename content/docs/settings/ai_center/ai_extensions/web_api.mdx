@@ -12,28 +12,28 @@ L'extension Web API transforme votre agent en véritable pont vers vos systèmes
 
 Imaginez pouvoir dire à votre agent : "Trouve-moi le client avec l'email jean.dupont@example.com" et qu'il consulte automatiquement votre CRM. Ou encore : "Crée un rendez-vous demain à 14h avec Marie" et hop, c'est fait dans votre calendrier.
 
-C'est exactement ce que fait cette extension. Elle donne à votre IA la capacité d'interagir avec vos outils métier, sans que vos utilisateurs aient besoin de connaître les détails techniques.
+C'est exactement ce que fait cette extension. Elle donne à votre agent la capacité d'interagir avec vos outils métier, sans que vos utilisateurs aient besoin de connaître les détails techniques.
 
 **Quelques exemples d'usage :**
+
 - Chercher des infos clients dans votre CRM
 - Créer des rendez-vous automatiquement
 - Publier des articles sur votre blog d'entreprise
 - Récupérer des données depuis vos systèmes internes
 - Consulter des API publiques (météo, taux de change, etc.)
 
-
 ## Créer votre première extension
 
 ### Prérequis
 
-- L'adresse de votre API (genre `https://api.votreservice.com`)
+- L'adresse de votre API ( `https://api.votreservice.com`)
 - Un token ou une clé d'authentification (si votre API l'exige)
 - Éventuellement la documentation de l'API, c'est toujours utile
 
 <Callout type="info">
-Vous n'avez pas encore d'API sous la main ? Voyons ensemble comment connecter une API météo publique, pour bien comprendre le principe.
+  Vous n'avez pas encore d'API sous la main ? Voyons ensemble comment connecter
+  une API météo publique, pour bien comprendre le principe.
 </Callout>
-
 
 ### Exemple d'API à utiliser
 
@@ -54,27 +54,33 @@ On va se connecter à **Open-Meteo**, une API météo gratuite qui ne nécessite
 
 #### Remplir les informations
 
-**Nom** : 
+**Nom** :
+
 ```
 Météo Paris
 ```
-**Description** : 
+
+**Description** :
+
 ```
 Obtenir la météo actuelle à Paris. À utiliser quand l'utilisateur demande la météo ou le temps qu'il fait à Paris.
 ```
-**Type** : 
+
+**Type** :
+
 ```
 Web API
 ```
 
 **Endpoint :**
+
 ```
 https://api.open-meteo.com/v1/forecast
 ```
 
 **Méthode :** GET
 
-**En-têtes HTTP :** 
+**En-têtes HTTP :**
 Laissez vide ! Cette API est totalement ouverte, pas besoin d'authentification.
 
 **Paramètres de requête :**
@@ -85,7 +91,7 @@ Cliquez sur **+ Ajouter un paramètre** pour chaque ligne :
 Clé : latitude
 Valeur : 48.8566
 
-Clé : longitude  
+Clé : longitude
 Valeur : 2.3522
 
 Clé : current
@@ -96,10 +102,9 @@ Valeur : Europe/Paris
 ```
 
 <Callout type="info">
-**Pourquoi ces valeurs ?**
-- `48.8566, 2.3522` = coordonnées de Paris
-- `current` = les données qu'on veut (température, humidité, météo)
-- `timezone` = pour avoir l'heure locale
+  **Pourquoi ces valeurs ?** - `48.8566, 2.3522` = coordonnées de Paris -
+  `current` = les données qu'on veut (température, humidité, météo) - `timezone`
+  = pour avoir l'heure locale
 </Callout>
 
 **Qui peut utiliser cette extension** :
@@ -119,12 +124,12 @@ Votre extension est créée, mais elle n'est pas encore disponible pour les conv
 3. Dans la section **Outils disponibles**, trouvez "Météo Paris"
 4. **Activez le toggle** pour rendre l'outil accessible à cet agent
 
-![Activation de l'outil](@public/settings/ai_extensions/web_api/activate-tool.png) 
+![Activation de l'outil](@public/settings/ai_extensions/web_api/activate-tool.png)
 
 <Callout type="info">
-Un même outil peut être activé pour plusieurs agents différents. Activez-le uniquement pour les agents qui en ont besoin !
+  Un même outil peut être activé pour plusieurs agents différents. Activez-le
+  uniquement pour les agents qui en ont besoin !
 </Callout>
-
 
 #### Tester votre extension
 
@@ -144,7 +149,6 @@ Agent : [Utilise l'outil Météo Paris]
             - Conditions : Partiellement nuageux
 ```
 
-
 #### Version avancée : N'importe quelle ville
 
 Une fois que ça marche, vous pouvez améliorer pour gérer toutes les villes avec les [placeholders](/docs/settings/ai_center/ai_extensions/web_api#les-placeholders-valeurs-dynamiques) :
@@ -155,7 +159,7 @@ Une fois que ça marche, vous pouvez améliorer pour gérer toutes les villes av
 Clé : latitude
 Valeur : {{lat|Latitude de la ville}}
 
-Clé : longitude  
+Clé : longitude
 Valeur : {{lon|Longitude de la ville}}
 
 Clé : current
@@ -166,6 +170,7 @@ Valeur : auto
 ```
 
 **Changez aussi la description :**
+
 ```
 Description : Obtenir la météo actuelle pour n'importe quelle ville du monde.
 À utiliser quand l'utilisateur demande la météo ou le temps qu'il fait.
@@ -189,19 +194,18 @@ L'agent trouvera automatiquement les coordonnées !
 
 </Steps>
 
-
 ### Comment ça fonctionne ?
 
 Quand vous demandez "Quel temps fait-il à Paris ?", voici ce qu'il se passe :
 
-1. **L'IA comprend** que vous parlez de météo à Paris
-2. **Elle sélectionne** votre outil "Météo Paris"
-3. **Elle appelle** l'URL avec tous les paramètres :
+1. **L'agent comprend** que vous parlez de météo à Paris
+2. **Il sélectionne** votre outil "Météo Paris"
+3. **Il appelle** l'URL avec tous les paramètres :
    ```
    https://api.open-meteo.com/v1/forecast?latitude=48.8566&longitude=2.3522&current=temperature_2m,relative_humidity_2m,weathercode&timezone=Europe/Paris
    ```
-4. **Elle reçoit** les données météo en JSON
-5. **Elle vous répond** de façon naturelle
+4. **Il reçoit** les données météo en JSON
+5. **Il vous répond** de façon naturelle
 
 ### Et voilà !
 
@@ -209,10 +213,9 @@ Vous venez de créer votre première extension qui appelle une vraie API. Le pri
 
 ---
 
-
 ## Les placeholders (valeurs dynamiques)
 
-Les placeholders, c'est vraiment le cœur du système. C'est ce qui permet à l'IA de transformer une phrase normale en appel d'API.
+Les placeholders, c'est vraiment le cœur du système. C'est ce qui permet à l'agent de transformer une phrase normale en appel d'API.
 
 ### Comment ça fonctionne ?
 
@@ -226,21 +229,22 @@ L'utilisateur demande : "Trouve-moi le livre avec l'ISBN 978-2-1234-5678-9"
 
 Voici ce qui se passe dans les coulisses :
 
-1. L'IA voit qu'elle doit extraire un `isbn`
-2. Elle analyse la phrase et repère "978-2-1234-5678-9"
-3. Elle construit l'URL : `https://api.bibliotheque.com/livres/978-2-1234-5678-9`
-4. Elle appelle l'API
-5. Elle vous retourne le résultat de façon lisible
-
+1. L'agent voit qu'il doit extraire un `isbn`
+2. Il analyse la phrase et repère "978-2-1234-5678-9"
+3. Il construit l'URL : `https://api.bibliotheque.com/livres/978-2-1234-5678-9`
+4. Il appelle l'API
+5. Il vous retourne le résultat de façon lisible
 
 ### Les règles d'écriture
 
 Un placeholder suit toujours ce format :
+
 ```
-{{nom_de_variable|Description pour l'IA}}
+{{nom_de_variable|Description pour l'Agent}}
 ```
 
 **Pour le nom de variable :**
+
 - Lettres, chiffres et underscore uniquement
 - Doit commencer par une lettre
 - Pas d'espaces ni de caractères spéciaux
@@ -257,12 +261,13 @@ Un placeholder suit toujours ce format :
 
 **Pour la description :**
 
-C'est ici que vous aidez l'IA à comprendre ce qu'elle doit chercher. Soyez précis !
+C'est ici que vous aidez l'agent à comprendre ce qu'il doit chercher. Soyez précis !
 
 Comparez :
+
 ```
 ❌ {{id|ID}}
-Trop vague. L'IA ne sait pas quel ID chercher.
+Trop vague. L'agent ne sait pas quel ID chercher.
 
 ✅ {{id|ID numérique unique du client}}
 Beaucoup mieux. On sait qu'on cherche un nombre et que c'est lié à un client.
@@ -276,18 +281,20 @@ Encore mieux : on précise même le format attendu.
 Vous pouvez mettre des placeholders à 4 endroits différents :
 
 **1. Dans l'URL**
+
 ```
 https://api.exemple.com/utilisateurs/{{user_id}}/commandes/{{order_id}}
 ```
 
-
 **2. Dans les paramètres de requête**
+
 ```
 search={{terme|Ce qu'on cherche}}
 limit={{max|Nombre max de résultats}}
 ```
 
 **3. Dans le corps JSON (POST/PUT)**
+
 ```json
 {
   "nom": "{{nom|Nom de famille}}",
@@ -300,19 +307,21 @@ limit={{max|Nombre max de résultats}}
 
 La qualité de votre description fait toute la différence. Voici comment améliorer vos descriptions :
 
-| Mauvais exemple | Bon exemple | Pourquoi c'est mieux |
-|----------------|-------------|----------------------|
-| `{{id\|ID}}` | `{{id\|ID numérique du client}}` | On précise le type et le contexte |
-| `{{date\|Date}}` | `{{date\|Date au format JJ/MM/AAAA}}` | On indique le format |
-| `{{montant\|Montant}}` | `{{montant\|Montant en euros sans le symbole}}` | On clarifie l'unité et le format |
-| `{{statut\|Statut}}` | `{{statut\|Statut : actif, inactif ou suspendu}}` | On liste les valeurs possibles |
+| Mauvais exemple        | Bon exemple                                       | Pourquoi c'est mieux              |
+| ---------------------- | ------------------------------------------------- | --------------------------------- |
+| `{{id\|ID}}`           | `{{id\|ID numérique du client}}`                  | On précise le type et le contexte |
+| `{{date\|Date}}`       | `{{date\|Date au format JJ/MM/AAAA}}`             | On indique le format              |
+| `{{montant\|Montant}}` | `{{montant\|Montant en euros sans le symbole}}`   | On clarifie l'unité et le format  |
+| `{{statut\|Statut}}`   | `{{statut\|Statut : actif, inactif ou suspendu}}` | On liste les valeurs possibles    |
 
 **La formule magique :**
+
 ```
 [Type de donnée] + [Format si besoin] + [Contexte d'usage]
 ```
 
 Exemples appliqués :
+
 ```
 {{telephone|Numéro de téléphone français au format +33XXXXXXXXX}}
 {{role|Rôle de l'utilisateur : admin, user ou guest uniquement}}
@@ -362,11 +371,9 @@ Agent : [Appelle l'API avec identifiant="12345"]
             ...
 ```
 
-
 ### Exemple 2 : Création de rendez-vous
 
 **Le besoin :** Simplifier la prise de rendez-vous dans le calendrier d'équipe.
-
 
 **Configuration :**
 
@@ -398,8 +405,8 @@ Partage : Toute l'organisation
 **Utilisation en pratique :**
 
 ```
-User : Réserve une réunion "Point Projet" demain à 14h pour 1h30 
-       avec marie@entreprise.com dans la salle Bordeaux. 
+User : Réserve une réunion "Point Projet" demain à 14h pour 1h30
+       avec marie@entreprise.com dans la salle Bordeaux.
        On va discuter du planning Q2.
 
 Agent: [Extrait les informations]
@@ -410,13 +417,12 @@ Agent: [Extrait les informations]
             - email_participant = "marie@entreprise.com"
             - lieu = "Bordeaux"
             - description = "Discussion du planning Q2"
-            
+
             [Appelle l'API]
-            
-            Parfait ! J'ai créé la réunion "Point Projet" pour demain 
+
+            Parfait ! J'ai créé la réunion "Point Projet" pour demain
             à 14h dans la salle Bordeaux. Marie recevra une invitation.
 ```
-
 
 ---
 
@@ -430,7 +436,7 @@ Vous pouvez mettre autant de placeholders que nécessaire :
 https://api.exemple.com/users/{{user_id}}/orders/{{order_id}}/items
 ```
 
-L'IA extraira les deux valeurs de la phrase de l'utilisateur.
+L'agent extraira les deux valeurs de la phrase de l'utilisateur.
 
 ### JSON complexes et imbriqués
 
@@ -462,13 +468,14 @@ Conseil : gardez une indentation claire pour vous y retrouver.
 
 ### Combiner plusieurs extensions
 
-L'IA peut utiliser plusieurs outils à la suite pour répondre à une question complexe.
+L'agent peut utiliser plusieurs outils à la suite pour répondre à une question complexe.
 
 Exemple :
+
 ```
 User : Quel est le statut de la dernière commande de client@example.com ?
 
-L'IA va :
+L'agent va :
 1. Utiliser l'extension "Recherche Client" pour trouver l'ID
 2. Utiliser l'extension "Liste Commandes" avec cet ID
 3. Utiliser l'extension "Statut Commande" sur la dernière commande
@@ -505,7 +512,7 @@ Utilisez l'icône poubelle dans la liste des extensions. Attention, ceci défini
 <details>
 <summary>**Que se passe-t-il si l'utilisateur oublie un paramètre dans sa question ?**</summary>
 
-L'IA va lui demander de préciser l'information manquante. Par exemple, si quelqu'un demande "Quel temps fait-il ?" sans dire où, l'agent demandera "Pour quelle ville ?".
+L'agent va lui demander de préciser l'information manquante. Par exemple, si quelqu'un demande "Quel temps fait-il ?" sans dire où, l'agent demandera "Pour quelle ville ?".
 
 </details>
 
@@ -541,12 +548,13 @@ Quelques codes que vous verrez peut-être dans les erreurs :
 Vous savez maintenant créer des extensions Web API pour votre agent. Les points essentiels :
 
 - Les **placeholders** sont ce qui rend tout ça intelligent
-- Des **descriptions claires** = une meilleure extraction par l'IA
+- Des **descriptions claires** = une meilleure extraction par l'agent
 - **Testez** toujours avant de partager largement
 - Commencez **simple** puis complexifiez au besoin
 
 Besoin d'aide ? Contactez le support ou consultez vos collègues qui ont déjà créé des extensions. Et n'hésitez pas à expérimenter, c'est comme ça qu'on apprend !
 
 <Callout type="info">
-Cette documentation est en constante évolution. Si vous trouvez des points à améliorer ou si vous avez des questions, faites-nous signe !
+  Cette documentation est en constante évolution. Si vous trouvez des points à
+  améliorer ou si vous avez des questions, faites-nous signe !
 </Callout>

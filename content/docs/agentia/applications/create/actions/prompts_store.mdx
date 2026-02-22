@@ -1,20 +1,21 @@
-import { Callout } from 'nextra/components'
-import { Table } from 'nextra/components'
+import { Callout } from "nextra/components";
+import { Table } from "nextra/components";
 
 # Exécuter un prompt du Prompts Store
 
 Le prompt est une action qui fait appel à un modèle d'IA pour exécuter une instruction. Vous pouvez créer un prompt personnalisé ou utiliser un prompt du Prompts Store dans une application pour réaliser une tâche spécifique.
 
 <Callout type="info">
-Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA. Ce qui sort à droite de l'action sera uniquement la réponse de l'IA.
+  Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA.
+  Ce qui sort à droite de l'action sera uniquement la réponse de l'IA.
 </Callout>
 
 ![application_prompt_store](@public/applications/prompt.png)
 
-
 ## Nouveau Prompt
 
 ### Paramètres
+
 <Table>
   <tbody>
     <Table.Tr>
@@ -28,48 +29,58 @@ Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA
     <Table.Tr>
       <Table.Td>Description</Table.Td>
       <Table.Td>
-        La brique Nouveau Prompt permet de définir un prompt personnalisé qui applique des instructions à un contexte d’entrée afin de produire un résultat en sortie.
-        Cette brique est utilisée lorsque l’on souhaite exécuter une instruction précise sur le contenu d'entrée, sans logique agent, ni connaissance métier persistante.
+        La brique Nouveau Prompt permet de définir un prompt personnalisé qui
+        applique des instructions à un contexte d’entrée afin de produire un
+        résultat en sortie. Cette brique est utilisée lorsque l’on souhaite
+        exécuter une instruction précise sur le contenu d'entrée, sans logique
+        agent, ni connaissance métier persistante.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Entrée</Table.Td>
       <Table.Td>
-        Texte et/ou fichier(s).
-        Si des tableaux sont passés en entrée, ils sont automatiquement convertit en markdown avant l’exécution du prompt, ils seront donc traités comme du texte.
+        Texte et/ou fichier(s). Si des tableaux sont passés en entrée, ils sont
+        automatiquement convertit en markdown avant l’exécution du prompt, ils
+        seront donc traités comme du texte.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Sortie</Table.Td>
       <Table.Td>
-        Texte, généré par le modèle LLM qui applique le prompt défini sur l’ensemble du contenu d’entrée.
+        Texte, généré par le modèle LLM qui applique le prompt défini sur
+        l’ensemble du contenu d’entrée.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
-        - Définition de l’instruction à appliquer
-        - Sélection du modèle LLM utilisé
-        - Définition de la température du modèle
-        Un outil d’amélioration automatique du prompt est disponible via l’icône “Ampoule”, permettant d’optimiser le prompt en un clic.
+        - Définition de l’instruction à appliquer - Sélection du modèle LLM
+        utilisé - Définition de la température du modèle Un outil d’amélioration
+        automatique du prompt est disponible via l’icône “Ampoule”, permettant
+        d’optimiser le prompt en un clic.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Exemples d’utilisation</Table.Td>
       <Table.Td>
-        - Appliquer un prompt spécifique sur un contenu donné avec un modèle et une température définis, sans logique agentique.
-        - Analyser un contrat juridique afin d’identifier et mettre en évidence ses forces et faiblesses.
-        - Extraire ou reformuler une information précise à partir d’un texte complet.
+        - Appliquer un prompt spécifique sur un contenu donné avec un modèle et
+        une température définis, sans logique agentique. - Analyser un contrat
+        juridique afin d’identifier et mettre en évidence ses forces et
+        faiblesses. - Extraire ou reformuler une information précise à partir
+        d’un texte complet.
         <Callout type="info">
-        Contrairement à une approche RAG ou à la brique Analyse de fichiers, le prompt est appliqué directement sur le contenu fourni en entrée.
+          Contrairement à une approche RAG ou à la brique Analyse de fichiers,
+          le prompt est appliqué directement sur le contenu fourni en entrée.
         </Callout>
-        <br />
+        <div />
         <ul>
           <li>
-            <strong>Nouveau Prompt</strong> : exécute une instruction sur l’ensemble du texte fourni.
+            <strong>Nouveau Prompt</strong> : exécute une instruction sur
+            l’ensemble du texte fourni.
           </li>
           <li>
-            <strong>Analyse de fichiers</strong> : parcourt l’intégralité des pages d’un document avant de produire une réponse.
+            <strong>Analyse de fichiers</strong> : parcourt l’intégralité des
+            pages d’un document avant de produire une réponse.
           </li>
         </ul>
       </Table.Td>
@@ -81,7 +92,6 @@ Tout ce que vous reliez à gauche de l'action sera passé dans le prompt à l'IA
 
 ### Guide d'utilisation
 
-
 Vous pouvez créer un nouveau prompt pour réaliser une tâche spécifique directement dans l'application en cliquant sur le bouton `+` puis sur `Prompts Store` et enfin sur `Nouveau Prompt`
 
 Une fois l'action disponible dans le workflow, vous pouvez le configurer en cliquant sur la petite flèche à droite de l'action. Entrez vos instructions dans la zone de texte, sélectionnez le modèle d'IA que vous souhaitez ainsi que sa température.
@@ -92,6 +102,7 @@ Enfin, vous pouvez relier une étape précédente à cette brique pour fournir d
 ## Prompt Existant
 
 ### Paramètres
+
 <Table>
   <tbody>
     <Table.Tr>
@@ -105,41 +116,50 @@ Enfin, vous pouvez relier une étape précédente à cette brique pour fournir d
     <Table.Tr>
       <Table.Td>Description</Table.Td>
       <Table.Td>
-        La brique Prompt Existant permet de réutiliser un prompt déjà enregistré dans le Prompt Store et de l’appliquer à un contexte d’entrée afin de générer un résultat en sortie. 
-        Cette brique est particulièrement utile pour standardiser les usages, mutualiser des prompts validés et garantir une cohérence des réponses entre plusieurs applications ou workflows.
+        La brique Prompt Existant permet de réutiliser un prompt déjà enregistré
+        dans le Prompt Store et de l’appliquer à un contexte d’entrée afin de
+        générer un résultat en sortie. Cette brique est particulièrement utile
+        pour standardiser les usages, mutualiser des prompts validés et garantir
+        une cohérence des réponses entre plusieurs applications ou workflows.
         <Callout type="warning">
-        Ce prompt est statique: toute modification dans le Prompt Store n’est pas appliquée automatiquement. Supprimez et recréez l’action pour utiliser la version mise à jour.        
+          Ce prompt est statique: toute modification dans le Prompt Store n’est
+          pas appliquée automatiquement. Supprimez et recréez l’action pour
+          utiliser la version mise à jour.
         </Callout>
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Entrée</Table.Td>
       <Table.Td>
-        Texte et/ou fichier(s).
-        Si des tableaux sont passés en entrée, ils sont automatiquement convertit en markdown avant l’exécution du prompt, ils seront donc traités comme du texte.
+        Texte et/ou fichier(s). Si des tableaux sont passés en entrée, ils sont
+        automatiquement convertit en markdown avant l’exécution du prompt, ils
+        seront donc traités comme du texte.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Sortie</Table.Td>
       <Table.Td>
-        Texte, généré par le modèle LLM qui applique le prompt défini sur l’ensemble du contenu d’entrée.
+        Texte, généré par le modèle LLM qui applique le prompt défini sur
+        l’ensemble du contenu d’entrée.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
-          - Sélection d’un prompt existant depuis le Prompt Store
-          - Possibilité de modifier le modèle LLM utilisé
-          - Possibilité d’ajuster la température du modèle
-        Les modifications apportées peuvent être temporaires pour l’exécution ou enregistrées pour mettre à jour le prompt dans le Prompt Store.
+        - Sélection d’un prompt existant depuis le Prompt Store - Possibilité de
+        modifier le modèle LLM utilisé - Possibilité d’ajuster la température du
+        modèle Les modifications apportées peuvent être temporaires pour
+        l’exécution ou enregistrées pour mettre à jour le prompt dans le Prompt
+        Store.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Exemples d’utilisation</Table.Td>
       <Table.Td>
-        - Réutiliser un prompt juridique validé pour analyser plusieurs contrats de manière homogène.
-        - Appliquer un prompt standardisé d’extraction d’informations sur différents jeux de documents.
-        - Centraliser les bonnes pratiques de prompting au sein d’une organisation.
+        - Réutiliser un prompt juridique validé pour analyser plusieurs contrats
+        de manière homogène. - Appliquer un prompt standardisé d’extraction
+        d’informations sur différents jeux de documents. - Centraliser les
+        bonnes pratiques de prompting au sein d’une organisation.
       </Table.Td>
     </Table.Tr>
   </tbody>
@@ -154,8 +174,9 @@ Vous pouvez réutiliser un prompt du Prompts Store en cliquant sur le bouton `+`
 Une fois l'action disponible dans le workflow, vous pouvez lire le prompt entièrement en cliquant sur la flèche à droite de l'action. Sélectionnez le modèle d'IA que vous souhaitez ainsi que sa température puis reliez l'action précédente à cette brique pour passer du contexte à l'IA.
 
 <Callout>
-Tous les mots-clés entre [ ] dans le prompt apparaitront comme des variables dans l'action pour que vous puissiez les remplacer par des valeurs provenant des actions précédentes.
+  Tous les mots-clés entre [ ] dans le prompt apparaitront comme des variables
+  dans l'action pour que vous puissiez les remplacer par des valeurs provenant
+  des actions précédentes.
 </Callout>
 
 ![application_prompt_store](@public/applications/variables.png)
-

@@ -35,10 +35,16 @@ Les actions Microsoft 0365 permettent de créer des intéractions avec votre env
     <Table.Tr>
       <Table.Td>Entrée</Table.Td>
       <Table.Td>
-        3 entrées possibles : - Destinataires (optionnel) : Liste d'adresses
-        mail ou texte (avec option "Extraire les destinataires avec l'IA"
-        activée) - Contenu du mail (optionnel) : Texte - Pièces jointes
-        (optionnel) : Document généré par JAsk (brique Production de document)
+        3 entrées possibles :
+        <div />
+        - Destinataires (optionnel) : Liste d'adresses mail ou texte (avec
+        option "Extraire les destinataires avec l'IA" activée)
+        <div />
+        - Contenu du mail (optionnel) : Texte
+        <div />
+        - Pièces jointes (optionnel) : Document généré par JAsk (brique
+        production de document)
+        <div />
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -52,37 +58,43 @@ Les actions Microsoft 0365 permettent de créer des intéractions avec votre env
       <Table.Td>
         - Sujet du mail : Objet qui sera utilisé lors de l’envoi de l’email. Ce
         sujet est statique
-        <br />
-        - Contenu :<br />
-        — Vide (prend en compte le contenu branché sur le pin "Contenu du mail")
-        <br />
-        — Contenu prédéfini de l’email
-        <br />
-        - Adresses : - Liste statique des destinataires de l’email envoyé
-        <br />
+        <div />
+        - Contenu :
+        <div />
+        1. Vide (prend en compte le contenu branché sur le pin "Contenu du
+        mail")
+        <div />
+        2. Contenu prédéfini de l’email
+        <div />
         - Liste dynamique des destinataires de l’email (prend en compte les
         éléments branchés au pin "Destinataires", ou l'extraction des emails
         depuis ce contenu si l'option "Extraire les destinataires avec de l'IA"
-        est activée
-        <br />- Extraire les destinataires avec l'IA : Extrait les adresses
-        emails du contenu en entrée du pin "Destinataires" - Envoyer un mail
-        séparé à chaque destinataire : Les emails partent séparément à chaque
-        destinataire. - Envoyer depuis une boite mail partagée : Envoie l'email
-        depuis une boîte mail partagée sur laquelle vous avez les droits. Vous
-        devrez préciser l'adresse email partagée depuis laquelle envoyer
-        l'email.
+        est activée)
+        <div />
+        - Extraire les destinataires avec l'IA : Extrait les adresses emails du
+        contenu en entrée du pin "Destinataires"
+        <div />
+        - Envoyer un mail séparé à chaque destinataire : Les emails partent
+        séparément à chaque destinataire.
+        <div />
+        - Envoyer depuis une boite mail partagée : Envoie l'email depuis une
+        boîte mail partagée sur laquelle vous avez les droits. Vous devrez
+        préciser l'adresse email partagée depuis laquelle envoyer l'email.
+        <div />
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Exemples d’utilisation</Table.Td>
       <Table.Td>
         - Je veux envoyer par email, le rapport fourni par un agent
-        <br />
+        <div />
         - Mon agent, branché à ma base de données Big Query, va me fournir par
         email toutes les semaines l’analyse de ce que je lui demande de faire
         sur mes données et les restituer par emails à une liste de destinataires
-        <br />- Pour formater le mail, rajouter une brique prompt pour embellir
-        en markdown le mail
+        <div />
+        - Pour formater le mail, rajouter une brique prompt pour embellir en
+        markdown le mail
+        <div />
       </Table.Td>
     </Table.Tr>
   </tbody>
@@ -95,8 +107,8 @@ Les actions Microsoft 0365 permettent de créer des intéractions avec votre env
 Cette action vous permet d'envoyer un mail à un ou plusieurs destinataires.
 
 <Callout type="warning">
-  Les emails envoyés par cette action le sont depuis l'adresse email de votre
-  compte de connexion à JAsk.
+  Les emails envoyés par cette action le sont depuis l'adresse email du compte
+  ayant lancé le workflow.
 </Callout>
 
 Pour utiliser cette action, cliquez sur le bouton `+ Ajouter` puis sur `Microsoft 0365` et enfin sur `Envoyer un mail`.
@@ -108,7 +120,7 @@ Exemple d'utilisation pour un email dont le destinataire est statique, et le con
 Exemple d'utilisation pour un email dont les destinataires, le contenu et une pièce jointe sont dynamiques et générés par IA (le mail est envoyé d'une boîte mail partagée)
 ![application_mail2](@public/applications/send2.png)
 
-## Créer un brouillon
+## Créer un brouillon de mail
 
 ### Paramètres
 
@@ -132,10 +144,17 @@ Exemple d'utilisation pour un email dont les destinataires, le contenu et une pi
     <Table.Tr>
       <Table.Td>Entrée</Table.Td>
       <Table.Td>
-        3 entrées possibles : - Destinataires (optionnel) : Liste d'adresses
-        mail ou texte (avec option "Extraire les destinataires avec l'IA"
-        activée) - Contenu du mail (optionnel) : Texte - Pièces jointes
-        (optionnel) : Document généré par JAsk (brique Production de document)
+        3 entrées possibles :
+        <div />
+        - Destinataires (optionnel) : Liste d'adresses mail ou texte (avec
+        option "Extraire les destinataires avec l'IA" activée)
+        <div />
+        - Contenu du mail (optionnel) : Texte
+        <div />
+        - Pièces jointes (optionnel)
+        <div />
+        : Document généré par JAsk (brique Production de document)
+        <div />
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -149,25 +168,33 @@ Exemple d'utilisation pour un email dont les destinataires, le contenu et une pi
       <Table.Td>
         - Sujet du mail : Objet qui sera utilisé lors de l’envoi de l’email. Ce
         sujet est statique
-        <br />
-        - Contenu :<br />
-        — Vide (prend en compte le contenu branché sur le pin "Contenu du mail")
-        <br />
-        — Contenu prédéfini de l’email
-        <br />
-        - Adresses : - Liste statique des destinataires de l’email envoyé
-        <br />
-        - Liste dynamique des destinataires de l’email (prend en compte les
+        <div />
+        - Contenu :
+        <div />
+        1. Vide (prend en compte le contenu branché sur le pin "Contenu du
+        mail")
+        <div />
+        2. Contenu prédéfini de l’email
+        <div />
+        - Adresses :
+        <div />
+        1. Liste statique des destinataires de l’email envoyé
+        <div />
+        2. Liste dynamique des destinataires de l’email (prend en compte les
         éléments branchés au pin "Destinataires", ou l'extraction des emails
         depuis ce contenu si l'option "Extraire les destinataires avec de l'IA"
-        est activée
-        <br />- Extraire les destinataires avec l'IA : Extraits les adresses
-        emails du contenu en entrée du pin "Destinataires" - Envoyer un mail
-        séparé à chaque destinataire : Les emails partent séparément à chaque
-        destinataire. - Envoyer depuis une boite mail partagée : Envoie l'email
-        depuis une boîte mail partagée sur laquelle vous avez les droits. Vous
-        devrez préciser l'adresse email partagée depuis laquelle envoyer
-        l'email.
+        est activée)
+        <div />
+        3. Extraire les destinataires avec l'IA : Extraits les adresses emails
+        du contenu en entrée du pin "Destinataires"
+        <div />
+        - Envoyer un mail séparé à chaque destinataire : Les emails partent
+        séparément à chaque destinataire.
+        <div />
+        - Envoyer depuis une boite mail partagée : Envoie l'email depuis une
+        boîte mail partagée sur laquelle vous avez les droits. Vous devrez
+        préciser l'adresse email partagée depuis laquelle envoyer l'email.
+        <div />
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -221,14 +248,18 @@ Une fois l'action dans le workflow, vous pouvez entrer l'adresse email du destin
     <Table.Tr>
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
-        - Sélection de la manière de récupérer les emails :<br />
-        — N derniers mails en choisissant le nombre
-        <br />
-        — Tous les emails du jour
-        <br />
-        — Tous les mails d’une période (entre une date de début et une date de
-        fin) <br />- Lire depuis une boîte mail partagée : Lire les mails d'une
-        boîte mail partagée (à préciser) sur laquelle vous avez les droits
+        - Sélection de la manière de récupérer les emails :
+        <div />
+        1. N derniers mails en choisissant le nombre
+        <div />
+        2. Tous les emails du jour
+        <div />
+        3. Tous les mails d’une période (entre une date de début et une date de
+        fin)
+        <div />
+        - Lire depuis une boîte mail partagée : Lire les mails d'une boîte mail
+        partagée (à préciser) sur laquelle vous avez les droits
+        <div />
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -274,21 +305,19 @@ Une fois l'action dans le workflow, vous pouvez entrer l'adresse email du destin
     <Table.Tr>
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
-        - Sélection de la manière de récupérer les emails :<br />
-        — Récupérer tous les transcripts du jour
-        <br />
-        — Récupérer tous les transcript d'hier
-        <br />
-        — Récupérer tous les transcript de la semaine
-        <br />
-        — Récupérer tous les transcript du mois en cours
-        <br />
-        — Récupérer tous les transcript de la semaine prochaine (meetings
+        - Sélection de la manière de récupérer les emails :
+        <div />
+        1. Récupérer tous les transcripts du jour
+        <div />
+        2. Récupérer tous les transcript d'hier
+        <div />
+        3. Récupérer tous les transcript de la semaine
+        <div />
+        4. Récupérer tous les transcript du mois en cours
+        <div />
+        5. Récupérer tous les transcript de la semaine prochaine (meetings
         prévus)
-        <br />
-        — Récupérer tous les transcript d'une période donnée (entre une date de
-        début et une date de fin)
-        <br />
+        <div />
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -296,13 +325,26 @@ Une fois l'action dans le workflow, vous pouvez entrer l'adresse email du destin
       <Table.Td>
         - Faire un résumé et une todo liste de tous mes meetings de la semaine
         passée
-        <br />
+        <div />
         - Préparer un compte-rendu d'une réunion avec transcript et générer un
         draft de CR par email aux personnes présentes dans le meeting
-        <br />
+        <div />
       </Table.Td>
     </Table.Tr>
   </tbody>
 </Table>
 
 ![application_transcripts](@public/applications/mo365_transcripts.png)
+
+## Analyse de document Word
+
+Cette action permet à l'IA de lire le contenu mais également tous les commentaires d'un document Word.
+
+<Callout type="warning">
+  Cette action ne peut être utilisée que sur des documents Word.
+</Callout>
+
+Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Tâche prédéfinie` et enfin sur `Analyser un document Word`.
+Une fois l'action dans le workflow, vous pouvez y attacher le contexte où l'utilisateur déposera son document Word pour que l'app puisse y lire le contenu et les commentaires.
+
+Écrivez vos instructions dans la zone de texte pour guider l'IA à analyser le document Word.

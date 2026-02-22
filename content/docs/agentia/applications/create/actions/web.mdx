@@ -1,18 +1,19 @@
-import { Table } from 'nextra/components'
+import { Table } from "nextra/components";
 
 # Les actions Web
 
 Trois actions sont disponibles pour faire des requêtes HTTP :
 
-* Exécuter une requête HTTP
-* Importer une page web
-* Télécharger un fichier web
+- Exécuter une requête HTTP
+- Importer une page web
+- Télécharger un fichier web
 
 ![application_web](@public/applications/web.png)
 
 ## Exécuter une requête HTTP
 
 ### Paramètres
+
 <Table>
   <tbody>
     <Table.Tr>
@@ -25,11 +26,16 @@ Trois actions sont disponibles pour faire des requêtes HTTP :
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Définition</Table.Td>
-      <Table.Td>Permet d’effectuer une requête HTTP par API à un service externe</Table.Td>
+      <Table.Td>
+        Permet d’effectuer une requête HTTP par API à un service externe
+      </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Entrée</Table.Td>
-      <Table.Td>Aucune entrée, mais à brancher au workflow pour que l'action soit executée</Table.Td>
+      <Table.Td>
+        Aucune entrée, mais à brancher au workflow pour que l'action soit
+        executée
+      </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Sortie</Table.Td>
@@ -38,9 +44,10 @@ Trois actions sont disponibles pour faire des requêtes HTTP :
     <Table.Tr>
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
-        - API route à utiliser<br/>
-        - Methode<br/>
-        - HTTP Headers
+        - API route à utiliser
+        <div />
+        - Methode
+        <div />- HTTP Headers
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -64,6 +71,7 @@ Une fois l'action dans le workflow, vous pouvez entrer l'URL de la requête HTTP
 ## Importer une page web
 
 ### Paramètres
+
 <Table>
   <tbody>
     <Table.Tr>
@@ -76,11 +84,17 @@ Une fois l'action dans le workflow, vous pouvez entrer l'URL de la requête HTTP
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Définition</Table.Td>
-      <Table.Td>Permet d’indexer une page web afin d’utiliser son contenu (texte) dans le workflow</Table.Td>
+      <Table.Td>
+        Permet d’indexer une page web afin d’utiliser son contenu (texte) dans
+        le workflow
+      </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Entrée</Table.Td>
-      <Table.Td>Aucune entrée, mais à brancher au workflow pour que la step soit executée</Table.Td>
+      <Table.Td>
+        Aucune entrée, mais à brancher au workflow pour que la step soit
+        executée
+      </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Sortie</Table.Td>
@@ -88,14 +102,13 @@ Une fois l'action dans le workflow, vous pouvez entrer l'URL de la requête HTTP
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Paramètres avancés</Table.Td>
-      <Table.Td>
-        - URL : Définition de l’URL à indexer
-      </Table.Td>
+      <Table.Td>- URL : Définition de l’URL à indexer</Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Exemples d’utilisation</Table.Td>
       <Table.Td>
-        - Je souhaite fournir des informations provenant d’une page web, qui seront traitées par une des étapes de mon workflow
+        - Je souhaite fournir des informations provenant d’une page web, qui
+        seront traitées par une des étapes de mon workflow
       </Table.Td>
     </Table.Tr>
   </tbody>
@@ -117,6 +130,7 @@ L'action s'occupe de scraper le texte de la page web et de fournir en sortie tou
 ## Télécharger un fichier web
 
 ### Paramètres
+
 <Table>
   <tbody>
     <Table.Tr>
@@ -133,7 +147,10 @@ L'action s'occupe de scraper le texte de la page web et de fournir en sortie tou
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Entrée</Table.Td>
-      <Table.Td>Aucune entrée, mais à brancher au workflow pour que la step soit executée</Table.Td>
+      <Table.Td>
+        Aucune entrée, mais à brancher au workflow pour que la step soit
+        executée
+      </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Sortie</Table.Td>

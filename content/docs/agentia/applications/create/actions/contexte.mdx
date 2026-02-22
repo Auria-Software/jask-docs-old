@@ -1,5 +1,5 @@
-import { Table } from 'nextra/components'
-import { Callout } from 'nextra/components'
+import { Table } from "nextra/components";
+import { Callout } from "nextra/components";
 
 # Le Contexte
 
@@ -22,7 +22,9 @@ Le contexte est la première action à ajouter dans une application. Elle permet
     <Table.Tr>
       <Table.Td>Description</Table.Td>
       <Table.Td>
-        La brique de contexte est une brique obligatoire pour définir le point de départ d’une application, son déclencheur et les contraintes d’entrée qui seront imposées à l’utilisateur.
+        La brique de contexte est une brique obligatoire pour définir le point
+        de départ d’une application, son déclencheur et les contraintes d’entrée
+        qui seront imposées à l’utilisateur.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -32,21 +34,26 @@ Le contexte est la première action à ajouter dans une application. Elle permet
     <Table.Tr>
       <Table.Td>Sortie</Table.Td>
       <Table.Td>
-        Déclenchement de l’application avec les paramètres d’entrée disponibles pour les briques suivantes.
+        Déclenchement de l’application avec les paramètres d’entrée disponibles
+        pour les briques suivantes.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Paramètres avancés</Table.Td>
       <Table.Td>
-        Les options supplémentaires vont permettre de configurer le déclencheur et les éléments initiaux nécessaires pour lancer l’application (ex : texte, fichiers, données utilisateur).
+        Les options supplémentaires vont permettre de configurer le déclencheur
+        et les éléments initiaux nécessaires pour lancer l’application (ex :
+        texte, fichiers, données utilisateur).
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
       <Table.Td>Exemples d’utilisation</Table.Td>
       <Table.Td>
-        - Définir le contexte d’une application de traitement de documents.<br/>
-        - Spécifier un formulaire utilisateur comme déclencheur.<br/>
-        - Définir des contraintes sur le type ou le format des fichiers à fournir pour déclencher l'application.
+        - Définir le contexte d’une application de traitement de documents.
+        <div />
+        - Spécifier un formulaire utilisateur comme déclencheur.
+        <div />- Définir des contraintes sur le type ou le format des fichiers à
+        fournir pour déclencher l'application.
       </Table.Td>
     </Table.Tr>
   </tbody>
@@ -55,33 +62,39 @@ Le contexte est la première action à ajouter dans une application. Elle permet
 ---
 
 ### Guide d'utilisation
+
 Le **`Contexte`** représente les contraintes et les données à fournir en entrée de votre application.
 
 Le contexte peut être utilisé tel quel dans le workflow ou peut être configuré en cliquant sur `Réglages avancés` pour modifier les variables du contexte.
 
 Il est possible de configurer :
-* **Type d'entrée** : permet de restreindre ce que l'utilisateur peut entrer dans le workflow au moment du lancement.
-  * Tout type de ressources : Fichier(s) et prompt
-  * Texte : Contraint l'utilisateur à déclencher l'application avec un prompt uniquement
-  * Fichier(s) : Contraint l'utilisateur à déclencher l'application avec un/des fichier(s) uniquement 
-  * Aucune entrée nécessaire : 
-    * Manuel : L'utilisateur doit déclencher manuellement déclencher l'application depuis Jask
-    * Déclencheur périodique : L'application se déclenche de manière automatique à une fréquence donnée (toutes les X minutes, heures, jours, semaines, mois)
-* **Options supplémentaires** :
-  * Limiter le nombre de fichiers que l'utilisateur peut télécharger.
-  * Limiter le type de fichier en sélectionnant un format dans la liste déroulante.
-  * Inclure les métadonnées des fichiers téléchargés : dans le contenu de la première brique contexte, le nom du fichier sera inclus.
-  * Utiliser la vision IA pour extraire les informations de photos téléchargées ou de fichiers complexes comme des pdf. Sans vision IA, seul l'OCR sera utilisé.
-    * Le modèle utilisé pour la vision IA
-    * Les instructions spécifiques utilisées pour la vision IA
-  * Texte à afficher au lancement de l'application pour guider l'utilisateur dans l'utilisation de l'application.
+
+- **Type d'entrée** : permet de restreindre ce que l'utilisateur peut entrer dans le workflow au moment du lancement.
+  - Tout type de ressources : Fichier(s) et prompt
+  - Texte : Contraint l'utilisateur à déclencher l'application avec un prompt uniquement
+  - Fichier(s) : Contraint l'utilisateur à déclencher l'application avec un/des fichier(s) uniquement
+  - Aucune entrée nécessaire :
+    - Manuel : L'utilisateur doit déclencher manuellement déclencher l'application depuis Jask
+    - Déclencheur périodique : L'application se déclenche de manière automatique à une fréquence donnée (toutes les X minutes, heures, jours, semaines, mois)
+- **Options supplémentaires** :
+  - Limiter le nombre de fichiers que l'utilisateur peut télécharger.
+  - Limiter le type de fichier en sélectionnant un format dans la liste déroulante.
+  - Inclure les métadonnées des fichiers téléchargés : dans le contenu de la première brique contexte, le nom du fichier sera inclus.
+  - Utiliser la vision IA pour extraire les informations de photos téléchargées ou de fichiers complexes comme des pdf. Sans vision IA, seul l'OCR sera utilisé.
+    - Le modèle utilisé pour la vision IA
+    - Les instructions spécifiques utilisées pour la vision IA
+  - Texte à afficher au lancement de l'application pour guider l'utilisateur dans l'utilisation de l'application.
 
 <Callout type="info">
-La vision IA apporte une lecture plus fine du contexte à analyser par l'IA. Lorsque vos documents contiennent des élements tels que des tableaux, des graphiques ou des images, il est recommandé d'activer la vision IA sur le workflow. Si vos fichiers peuvent contenir des scans de documents par exemple, la vision IA est indispensable. La vision IA peut augmenter le temps de traitement de l'application ainsi que son coût, mais les résultats fournis seront beaucoup plus qualitatifs.
+  La vision IA apporte une lecture plus fine du contexte à analyser par l'IA.
+  Lorsque vos documents contiennent des élements tels que des tableaux, des
+  graphiques ou des images, il est recommandé d'activer la vision IA sur le
+  workflow. Si vos fichiers peuvent contenir des scans de documents par exemple,
+  la vision IA est indispensable. La vision IA peut augmenter le temps de
+  traitement de l'application ainsi que son coût, mais les résultats fournis
+  seront beaucoup plus qualitatifs.
 </Callout>
-
 
 ![application_context](@public/applications/contexte.png)
 
 Ici sur cet exemple, le contexte accepte seulement du texte utilisateur et le texte à afficher au lancement de l'application est "Renseigner le nom du client / compte"
-
