@@ -1,0 +1,33 @@
+# Permissions & Accès
+
+Pour que Jask puisse accéder aux sources de données, vous devez donner les permissions nécessaires à Jask.
+
+## Permissions Azure
+
+Voici la liste des permissions nécessaires pour l'application registration `JaskSSO`.
+
+| Mandatory | Mode        | MS App           | Scope                            | Utilisation dans Jask                                                                                       |
+| --------- | ----------- | ---------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Yes       | Delegated   | User             | Openid                           | Sign user in                                                                                                |
+| Yes       | Delegated   | User             | User.Read                        | Sign in and read user profile                                                                               |
+| Yes       | Application | Sharepoint       | Sites.Selected                   | Indexation des sites Sharepoint sélectionnés par l'admin dans Jask                                          |
+|           | Delegated   | Sharepoint       | Sites.Read.All                   | L'utilisateur peut poser des questions sur ses sites Sharepoints                                            |
+|           | Delegated   | OneDrive         | Files.Read.All                   | L'utilisateur peut poser des questions sur ses fichiers OneDrive                                            |
+|           | Delegated   | Teams            | ChannelMessage.Read.All          | L'utilisateur peut poser des questions sur les messages dans les chats de Teams                             |
+|           | Delegated   | Teams            | Chat.Read                        | L'utilisateur peut poser des questions sur les messages dans les chats de Teams                             |
+|           | Delegated   | Teams            | OnlineMeetingRecording.Read.All  | L'utilisateur peut poser des questions sur les réunions de Teams                                            |
+|           | Delegated   | Teams            | OnlineMeetings.Read              | L'utilisateur peut poser des questions sur les réunions de Teams                                            |
+|           | Delegated   | Teams            | OnlineMeetingTranscript.Read.All | L'utilisateur peut poser des questions sur les transcripts des réunions de Teams                            |
+|           | Delegated   | Outlook          | Mail.ReadWrite                   | L'utilisateur peut poser des questions sur ses mails Outlook ou créer des drafts de mails                   |
+|           | Delegated   | Outlook          | Mail.Send                        | L'utilisateur peut envoyer des mails depuis son compte Outlook                                              |
+|           | Delegated   | Outlook          | Mail.ReadWrite.Shared            | L'utilisateur peut poser des questions sur ses boites mails partagés Outlook ou y créer des drafts de mails |
+|           | Delegated   | Outlook          | Mail.Send.Shared                 | L'utilisateur peut envoyer des mails depuis ses boites mails partagés Outlook                               |
+|           | Delegated   | Outlook Calendar | Calendars.Read                   | L'utilisateur peut poser des questions sur ses évènements dans Outlook                                      |
+|           | Delegated   | OneNote          | Notes.Read.All                   | L'utilisateur peut poser des questions sur ses notes dans OneNote (deployer la datasource onenote sur Jask) |
+
+## Permissions Google Cloud
+
+| Mandatory | Mode        | MS App   | Scope                 | Utilisation dans Jask                 |
+| --------- | ----------- | -------- | --------------------- | ------------------------------------- |
+| Yes       | Application | BigQuery | bigquery.jobs.create  | Lancer des requêtes SQL dans BigQuery |
+| Yes       | Application | BigQuery | bigquery.datasets.get | Lire les données dans BigQuery        |
