@@ -1,4 +1,4 @@
 export default {
-  ai_models: "Modèles",
+  ai_models: "Gestion des modèles",
   ai_extensions: "Extensions",
 };
