@@ -18,6 +18,13 @@ export default withNextra({
   },
 
   async redirects() {
-    return [{ source: "/", destination: "/docs", permanent: false }];
+    return [
+      { source: "/", destination: "/docs", permanent: false },
+      {
+        source: "/docs/applications/:path*",
+        destination: "/docs/agentia/applications/:path*",
+        permanent: false,
+      },
+    ];
   },
 });
