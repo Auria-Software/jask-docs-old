@@ -25,6 +25,21 @@ export default withNextra({
         destination: "/docs/agentia/applications/:path*",
         permanent: false,
       },
+      {
+        source: "/docs/applications/create/actions/mail/:path*",
+        destination: "/docs/agentia/applications/create/actions/m365/:path*",
+        permanent: false,
+      },
+      {
+        source: "/docs/settings/connectors/bigquery",
+        destination: "/docs/settings/connectors/providers/google/bigquery",
+        permanent: false,
+      },
+      {
+        source: "/docs/settings/connectors/:path*",
+        destination: "/docs/settings/connectors/providers/:path*",
+        permanent: false,
+      },
     ];
   },
 });
