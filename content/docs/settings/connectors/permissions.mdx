@@ -4,7 +4,7 @@ Pour que Jask puisse accéder aux sources de données, vous devez donner les per
 
 ## Permissions Azure
 
-Voici la liste des permissions nécessaires pour l'application registration `JaskSSO`.
+Voici la liste des permissions nécessaires pour l'application registration **`JaskSSO`**.
 
 | Mandatory | Mode        | MS App           | Scope                            | Utilisation dans Jask                                                                                       |
 | --------- | ----------- | ---------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -25,9 +25,15 @@ Voici la liste des permissions nécessaires pour l'application registration `Jas
 |           | Delegated   | Outlook Calendar | Calendars.Read                   | L'utilisateur peut poser des questions sur ses évènements dans Outlook                                      |
 |           | Delegated   | OneNote          | Notes.Read.All                   | L'utilisateur peut poser des questions sur ses notes dans OneNote (deployer la datasource onenote sur Jask) |
 
+Voici la liste des permissions nécessaires pour l'application registration **`JaskAdmin`**.
+
+| Mandatory | Mode        | MS App     | Scope          | Utilisation dans Jask                                                                                          |
+| --------- | ----------- | ---------- | -------------- | -------------------------------------------------------------------------------------------------------------- |
+| Yes       | Application | Sharepoint | Sites.Selected | Donner les droits d'accès à JaskSSO pour accéder aux ressources Sharepoint sélectionnées par l'admin dans Jask |
+
 ## Permissions Google Cloud
 
-| Mandatory | Mode        | MS App   | Scope                 | Utilisation dans Jask                 |
+| Mandatory | Mode        | GCP App  | Scope                 | Utilisation dans Jask                 |
 | --------- | ----------- | -------- | --------------------- | ------------------------------------- |
 | Yes       | Application | BigQuery | bigquery.jobs.create  | Lancer des requêtes SQL dans BigQuery |
 | Yes       | Application | BigQuery | bigquery.datasets.get | Lire les données dans BigQuery        |
