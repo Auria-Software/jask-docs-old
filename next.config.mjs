@@ -21,13 +21,13 @@ export default withNextra({
     return [
       { source: "/", destination: "/docs", permanent: false },
       {
-        source: "/docs/applications/:path*",
-        destination: "/docs/agentia/applications/:path*",
+        source: "/docs/applications/create/actions/mail/:path*",
+        destination: "/docs/agentia/applications/create/actions/m365/:path*",
         permanent: false,
       },
       {
-        source: "/docs/applications/create/actions/mail/:path*",
-        destination: "/docs/agentia/applications/create/actions/m365/:path*",
+        source: "/docs/applications/:path*",
+        destination: "/docs/agentia/applications/:path*",
         permanent: false,
       },
       {
