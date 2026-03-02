@@ -36,7 +36,7 @@ export default withNextra({
         permanent: false,
       },
       {
-        source: "/docs/settings/connectors/:path*",
+        source: "/docs/settings/connectors/:path((?!providers).*)",
         destination: "/docs/settings/connectors/providers/:path*",
         permanent: false,
       },
