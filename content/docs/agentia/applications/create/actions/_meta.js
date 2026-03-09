@@ -1,7 +1,7 @@
 import { newLabel, betaLabel } from "@components/new_label";
 
 export default {
-  contexte: "Contexte",
+  context: "Contexte",
   prompts_store: "Prompts Store",
   file_processing: <div key="file_processing">Traitement de fichiers</div>,
   m365: <div key="m365">Microsoft 365 {newLabel}</div>,
