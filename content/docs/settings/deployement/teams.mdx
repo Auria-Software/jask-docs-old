@@ -29,6 +29,12 @@ Vous pouvez créer une clé d'accès en cliquant sur le bouton `Ajouter` pour cr
 - Etre administrateur de Microsoft Teams
 - Etre administrateur de Microsoft Entra & Azure
 
+<Callout type="info">
+  Si un bot Teams a déjà été crée une première fois, vous pouvez vous rendre
+  directement à [**l'étape
+  4.**](/docs/settings/deployement/teams#etape-4--créer-une-ressource-bot-dans-azure)
+</Callout>
+
 <Steps>
 
 ### Etape 1 : Récupérer les identifiants de JaskSSO
@@ -39,7 +45,37 @@ Rendez vous sur la page microsoft entra de Jask SSO et récupérer les informati
 - **Application (secret) id**
 - **Tenant Id**
 
-### Etape 2 : Créer une ressource bot dans Azure
+### Etape 2: Créer un secret de connexion pour JaskSSO
+
+Si ce n'est pas déjà fait, créez un secret de type `Connexion O365` pour l'app registration JaskSSO.
+
+<Callout type="warning">
+  Le type de connexion 'Sharepoint' est obsolète et ne fonctionne pas avec les
+  déploiements dans Microsoft Teams.
+</Callout>
+
+![Jask Secret Management](@public/settings/deploy/secret.png)
+
+### Etape 3 : Ajouter des informations dans JaskSSO
+
+Rendez vous dans le menu `Authentification` et ajouter les informations suivantes :
+
+- **Web authentication link** : https://token.botframework.com/.auth/web/redirect
+
+![Microsoft Teams App](@public/settings/deploy/authentication.png)
+
+Ajouter les clients ids suivants dans `expose an api` en activant la permission créée lors de l'installation :
+
+- 1fec8e78-bce4-4aaf-ab1b-5451cc387264
+- 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
+- d3590ed6-52b3-4102-aeff-aad2292ab01c
+- ea5a67f6-b6f3-4338-b240-c655ddc3cc8e
+
+Ces clés permettent au bot Teams de communiquer avec Jask.
+
+![Microsoft Teams App](@public/settings/deploy/expose_api.png)
+
+### Etape 4 : Créer une ressource bot dans Azure
 
 Rendez vous dans le groupe de ressources et créer une ressource bot dans Azure.
 
@@ -84,7 +120,7 @@ Rendez vous ensuite sur la page `Channels` dans le menu gauche de la ressource b
 
 ![Microsoft Teams App](@public/settings/deploy/add_teams.png)
 
-### Etape 3 : Récupérer les identifiants du Bot
+### Etape 5 : Récupérer les identifiants du Bot
 
 Allez dans Microsoft Entra et rendez vous sur l'app registration portant le nom de votre ressource bot dans Azure.
 
@@ -94,36 +130,6 @@ Récupérez les informations suivantes :
 - **Application (secret) id**
 
 ![Microsoft Teams App](@public/settings/deploy/key.png)
-
-### Etape 4 : Ajouter des informations dans JaskSSO
-
-Rendez vous dans le menu `Authentification` et ajouter les informations suivantes :
-
-- **Web authentication link** : https://token.botframework.com/.auth/web/redirect
-
-![Microsoft Teams App](@public/settings/deploy/authentication.png)
-
-Ajouter les clients ids suivants dans `expose an api` en activant la permission créée lors de l'installation :
-
-- 1fec8e78-bce4-4aaf-ab1b-5451cc387264
-- 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
-- d3590ed6-52b3-4102-aeff-aad2292ab01c
-- ea5a67f6-b6f3-4338-b240-c655ddc3cc8e
-
-Ces clés permettent au bot Teams de communiquer avec Jask.
-
-![Microsoft Teams App](@public/settings/deploy/expose_api.png)
-
-### Etape 5: Créer un secret de connexion pour JaskSSO
-
-Si ce n'est pas déjà fait, créez un secret de type `Connexion O365` pour l'app registration JaskSSO.
-
-<Callout type="warning">
-  Le type de connexion 'Sharepoint' est obsolète et ne fonctionne pas avec les
-  déploiements dans Microsoft Teams.
-</Callout>
-
-![Jask Secret Management](@public/settings/deploy/secret.png)
 
 ### Etape 6 : Configurer le déploiement dans Jask
 
