@@ -1,0 +1,115 @@
+import { Callout } from "nextra/components";
+import { Steps } from "nextra/components";
+
+# Gestion des modèles
+
+Depuis la page `Gestion des Modèles`, vous pouvez administrer les modèles d’IA disponibles sur votre plateforme Jask et en gérer l’accès pour vos utilisateurs.
+
+{/* ![ai_models](@public/settings/model.png) */}
+
+Jask vous permet de connecter librement vos modèles d’IA, qu’ils proviennent d’Azure, du public ou qu’ils soient fine-tunés sur mesure.
+
+<Callout>
+  Nous recommandons l’utilisation de modèles Azure, déployés directement au sein
+  de votre environnement Azure. Cela garantit un niveau optimal de
+  confidentialité, de sécurité et de maîtrise de vos données.
+</Callout>
+
+![models](@public/models.png)
+
+## Ajouter un modèle Azure dans Jask
+
+L’ajout d’un modèle Azure dans Jask se fait en trois grandes étapes :
+
+1. **Déployer un modèle** chez le fournisseur Azure.
+2. **Récupérer les informations du modèle** depuis le fournisseur.
+3. **Enregistrer ce modèle dans Jask** depuis la page Gestion des modèles.
+
+<Callout type="warning">
+  Le changement fréquent des API Azure OpenAI et Azure Foundry peut entraîner
+  des problèmes d'ajout de modèles d'IA dans Jask. Veuillez contacter l'équipe
+  Jask si vous rencontrez des problèmes d'ajout de modèles d'IA.
+</Callout>
+
+<Steps>
+
+#### Etape 1 : Déployer un modèle chez le fournisseur
+
+Rendez-vous sur la page [déploiement sur Azure Foundry](https://ai.azure.com/foundryProject/overview) pour deployer un modèle Azure OpenAI. Cliquez sur le bouton `+ Déployer un modèle` puis sélectionnez `Déployer un modèle de base`.
+
+{/* ![azure_foundry](@public/settings/ai_models/foundry.png) */}
+
+Cherchez un modèle d'IA que vous souhaitez déployer puis cliquez sur le bouton `Confirmer` pour déployer le modèle d'IA.
+
+{/* ![model](@public/settings/ai_models/model.png) */}
+
+Vous pouvez ensuite augmenter les quotas (tokens par minutes du modèle d'IA) si nécessaire dans la section détails du déploiement. Enfin cliquez sur le bouton `Déployer` pour confirmer le déploiement.
+
+{/* ![quotas](@public/settings/ai_models/quotas.png) */}
+
+#### Etape 2 : Récupérer les informations du modèle
+
+Cliquez ensuite sur le modèle que vous venez de déployer apparaissant à l'écran pour voir les détails du modèle.
+
+<Callout type="warning">
+  Pour cette partie, suivez les instructions d'Azure OpenAI si vous avez déployé
+  un modèle OpenAI ou Azure AI Foundry (un peu plus bas) pour tous les autres
+  modèles (ex. Mistral, Claude, etc.).
+</Callout>
+
+---
+
+👉 **Azure OpenAI**
+
+Récupérez les informations suivantes :
+
+1. **`Nom`** du modèle d'IA
+2. **`URI Cible`**
+3. **`API version`**
+4. **`Clé`** d'authentification
+
+{/* ![model](@public/settings/ai_models/openai-version.png) */}
+
+---
+
+👉 **Azure AI Foundry (Autres Modèles Azure)**
+
+Récupérez les informations suivantes :
+
+1. **`Nom`** du modèle d'IA
+2. Une **`portion de l’URI cible`**
+   <Callout type="warning">
+     Pour **l'URI Cible**, vous devez récupérer le lien jusqu'à **`/models`**
+   </Callout>
+
+```note filename="URI Cible"
+https://{nom-de-la-ressource}.services.ai.azure.com/models
+```
+
+3. **`API version`**
+4. **`Clé`** d'authentification
+
+{/* ![model](@public/settings/ai_models/foundry-version.png) */}
+
+#### Etape 3 : Enregistrer le modèle dans Jask
+
+1. Ouvrez **Réglages → Gestion des modèles**.
+2. Cliquez sur **`+`**.
+3. Renseignez les informations collectées.
+4. Sélectionnez **`Azure OpenAI`** ou **`Azure AI Foundry`** comme fournisseur.
+5. **(`Azure OpenAI` uniquement)** → sélectionnez la famille de modèles correspondante.
+6. Cliquez sur **`Test de connexion`** pour vérifier que le modèle est accessible puis enregistrez le modèle.
+
+{/* ![ai_models](@public/settings/model-add.png) */}
+
+Après l’ajout, cliquez sur le modèle pour accéder à ses paramètres, gérer les accès utilisateurs, le rendre disponible par défaut ou le supprimer.
+
+<Callout type="info">
+  Quand vous partagez un modèle d'IA avec un utilisateur, celui-ci aura accès à
+  ce choix de modèle d'IA dans toutes les applications et assistants qu'il
+  pourra créer.
+</Callout>
+
+{/* ![ai_models](@public/settings/model-update.png) */}
+
+</Steps>

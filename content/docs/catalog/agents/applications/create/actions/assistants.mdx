@@ -1,0 +1,61 @@
+import { Callout } from 'nextra/components'
+import { Table } from 'nextra/components'
+
+# Appeler un Agent
+
+A la différence d'un simple prompt, l'agent est relié à des sources de données, à un prompt système associé et a déjà un modèle d'IA sélectionné. Vous pouvez appeler un agent dans une application pour réaliser une tâche spécifique.
+
+<Callout type="info">
+Tout ce que vous reliez à gauche de l'action sera passé dans le prompt envoyé à l'agent. Ce qui sort à droite de l'action sera uniquement la réponse de l'agent.
+</Callout>
+
+{/* ![application_assistant](@public/applications/assistant.png) */}
+
+Écrivez votre instruction (prompt) dans la zone de texte pour guider l'agent à réaliser la tâche.
+
+### Paramètres
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Mes agents</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Mes agents</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>
+        Cette brique permet de faire appel à tous les agents auxquels vous avez accès sur Jask.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>Texte et/ou fichier(s)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>
+        Texte
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        Vous devez spécifier un prompt supplémentaire pour guider l’agent appelé dans ce contexte précis d’utilisation.
+        Cela ne modifie pas les instructions générales de l’agent, c'est une couche supplémentaire d'instructions pour l’aider à agir dans ce contexte précis.
+         <Callout type="warning">
+        Si votre agent a pour instructions de rentrer dans une discussion et d’interagir avec l’utilisateur sous format conversationnel, il ne sera pas adapté à un usage dans une     application
+        </Callout>       
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>
+        Une batterie d’agents spécialisés (Juridique, Financier, Technique) analyse en parallèle les documents d’une entreprise pour fournir des analyses détaillées sur chaque expertise
+      </Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+

@@ -1,0 +1,79 @@
+import { Callout } from "nextra/components";
+
+# Automatisations
+
+La page **Automatisations** centralise l'historique de toutes les tâches exécutées par vos applications JAsk. Elle vous permet de suivre en temps réel l'état de vos workflows automatisés — qu'ils aient été déclenchés manuellement ou de façon planifiée — et d'accéder au détail de chaque exécution, étape par étape. C'est le point d'entrée principal pour auditer, relancer ou exporter les résultats produits par vos workflows.
+
+## Vue d'ensemble
+
+Accessible depuis **Réglages → Mon espace de travail → Automatisation**, cette page liste l'ensemble des exécutions d'applications sur la période sélectionnée. Chaque ligne correspond à une exécution d'une application, avec son déclencheur, sa date, sa durée et son statut final.
+
+Un bandeau de synthèse en haut de page affiche les compteurs clés de la période :
+
+| Indicateur | Description |
+|---|---|
+| **Terminé** | Nombre d'exécutions terminées avec succès |
+| **En cours** | Exécutions encore actives au moment de la consultation |
+| **Erreur** | Exécutions ayant rencontré une erreur |
+
+Filtrer sur une **période** (en haut à droite) pour filtrer l'historique sur une plage de dates précise.
+Forcer le rechargement de la liste de tâches.
+
+![automations](@public/automations.png)
+
+## Tâches personnalisées
+
+Les utilisateurs peuvent définir des automatisations personnalisées sur certains workflows. En cliquant sur le + en haut à droite du tableau.
+
+### Création d'une nouvelle automatisation
+Pour définir une nouvelle automatisation sur un workflow, l'utilisateur devra définir les champs suivants : 
+- Nom de l'automatisation 
+- Workflow à automatiser (séléction parmi les workflows auxquels vous avez accès)
+- Déclencheur et fréquence de déclenchement : 
+    * Toutes les X minutes
+    * Toutes les X heures
+    * Quotidien
+    * Hebdomadaire
+    * Mensuel
+
+![automations_create](@public/automations_create.png)
+
+### Liste des tâches personnalisées créées
+Via l'icône **Tâches automatisées** (à la gauche du bouton **+**), l'utilisateur retrouve la liste des automatisations qu'il a créées et peut les supprimer ou les éditer. 
+
+![automations_perso](@public/automations_perso.png)
+
+## Liste des tâches exécutées
+
+Chaque ligne du tableau représente une exécution d'application et affiche les informations suivantes :
+
+- **Application** — nom de l'application exécutée et son type 
+- **Déclencheur** — mode de lancement : `Manuel` (déclenché à la main) ou `Automatique`
+- **Exécuté le** — date et heure du démarrage de l'exécution
+- **Durée** — temps total d'exécution
+- **Status** — état final : `Terminé`, `En cours` ou `Erreur`
+
+<Callout type="info">
+  Cliquez sur l'icône en bout de ligne pour ouvrir le panneau de détail d'une exécution.
+</Callout>
+
+## Consulter le détail d'une exécution
+
+En cliquant sur une l'icône tout à droite d'une exécution terminée, un panneau latéral s'ouvre et présente le déroulé complet de l'exécution, organisé en étapes numérotées.
+
+Chaque étape correspond à une action définie dans l'application. Cliquez sur **Afficher les détails** pour déplier le résultat produit par une étape, ou **Masquer les détails** pour le refermer.
+
+### Actions disponibles sur une exécution
+
+Depuis le panneau de détail, plusieurs actions sont accessibles :
+
+- **Exporter** — télécharger le résultat de l'exécution
+- **Copier** — copier le contenu dans le presse-papier
+- **Éditer** — modifier la configuration de l'application associée
+- **Relancer** — réexécuter l'application avec les mêmes paramètres
+
+<Callout type="tip">
+  Utilisez **Relancer** pour rejouer rapidement une exécution qui a échoué ou dont vous souhaitez rafraîchir les résultats sans repasser par le catalogue.
+</Callout>
+
+    ![automations_details](@public/automations_details.png)

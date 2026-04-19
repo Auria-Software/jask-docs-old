@@ -1,0 +1,65 @@
+import { Callout } from 'nextra/components'
+
+# Historique des conversations
+
+La barre latérale gauche de JAsk centralise l'ensemble de vos conversations passées. Elle vous permet de reprendre un échange interrompu, de consulter le contexte d'une interaction précédente ou de retrouver une réponse obtenue lors d'une session antérieure. L'historique est organisé chronologiquement et filtrable, pour naviguer efficacement même avec un grand nombre de conversations.
+
+## Structure de la barre latérale
+
+La sidebar gauche est divisée en trois zones :
+
+**En haut** : la barre de navigation principale avec les onglets **Chats**, **Collab** et **Réglages**.
+
+**Au centre** : 
+- Un champ de **recherche** pour filtrer les conversations affichées par mot-clé
+- Le bouton **+ Chat** pour démarrer une nouvelle conversation
+- Le menu **`...`** pour accéder à la création de nouveaux services : [agent](/docs/catalog/agents/create), [group d'agents](/docs/catalog/agents/group) ou [skill](/docs/catalog/skills)
+- Les filtres et groupes : Définissez comment vous souhaitez grouper vos conversations, par date, par agent ou par tag, ainsi que l'ordre de tri des conversations
+- Les avatars des agents de la conversation 
+
+**En bas** : la liste de vos conversations, groupées selon la dimension choisie.
+
+![menu](@public/menu.png)
+
+## Conversations groupées (par date, agent ou tag)
+L'historique est automatiquement structuré en groupes selon le paramètre choisi pour faciliter la navigation :
+
+| Grouping | Séparation |
+|--------|---------|
+| **Temporel** | Catégories : Aujourd'hui, Hier, Cette semaine, Plus ancien |
+| **Agent** | Conversations regroupées par agent |
+| **Tag** | Conversations regroupées par tag |
+
+Chaque conversation est identifiée par son titre (généré automatiquement à partir du premier message) et l'icône de(s) l'agent(s) utilisé(s). Le titre de la conversation peut être modifié. En survolant la conversation a modifié, cliquez sur l'icône "..." puis Renommer
+
+##Épingler une conversation
+Pour garder accessible des conversations importantes, vous pouvez les épingler "..." puis Épingler. Les conversations épinglées seront affichées dans une section dédiée en grouping par date, ou en tête de grouping par agent ou tag.
+
+## Reprendre une conversation
+Cliquez sur n'importe quelle entrée de l'historique pour rouvrir la conversation correspondante. JAsk restaure l'intégralité de l'échange, y compris les fichiers partagés et les réponses générées.
+
+<Callout type="tip">
+  Si vous cherchez une conversation spécifique, utilisez le champ de recherche en haut de la sidebar plutôt que de faire défiler l'historique. Tapez un mot-clé du sujet ou du nom de l'agent utilisé.
+</Callout>
+
+## Charger plus de conversations
+
+Pour optimiser les performances de Jask, uniquement vos dernières conversations sont chargées par défaut. Un bouton "Charger plus" vous permet de charger plus de conversations si besoin.
+
+## Réduire la sidebar
+
+Le bouton fléché **`‹`** sur le bord droit de la sidebar permet de la replier pour agrandir la zone de travail centrale. Cliquez à nouveau pour la déplier.
+
+<Callout type="info">
+  La sidebar est également accessible depuis les onglets **Collab** et **Réglages** — elle conserve le même contenu quelle que soit la section active.
+</Callout>
+
+## Détails d'un agent
+En survolant l'avatar d'un agent dans le menu, vous pouvez "Voir les informations" sur cet agent : 
+- Titre & description
+- Vue d'ensemble avec le prompt de l'agent (si laissé visible par le créateur)
+- Connaissances de l'agent : les sources de données auxquelles cet agent a accès
+- Skills : les skills auxquelles cet agent a accès
+- Top contributeurs : les utilisateurs ayant le plus utilisé cet agent
+
+![agent_details](@public/agent_details.png)

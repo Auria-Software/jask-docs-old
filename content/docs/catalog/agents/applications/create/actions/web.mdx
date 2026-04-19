@@ -1,0 +1,181 @@
+import { Table } from "nextra/components";
+
+# Les actions Web
+
+Trois actions sont disponibles pour faire des requêtes HTTP :
+
+- Exécuter une requête HTTP
+- Importer une page web
+- Télécharger un fichier web
+
+{/* ![application_web](@public/applications/web.png) */}
+
+## Exécuter une requête HTTP
+
+### Paramètres
+
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Web</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Requête HTTP (BETA)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>
+        Permet d’effectuer une requête HTTP par API à un service externe
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>
+        Aucune entrée, mais à brancher au workflow pour que l'action soit
+        executée
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>Texte</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        - API route à utiliser
+        <div />
+        - Methode
+        <div />- HTTP Headers
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>-</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
+
+Cette action vous permet de faire une requête HTTP à une URL donnée.
+
+{/* ![application_web](@public/applications/http.png) */}
+
+Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Web` et enfin sur `Requête HTTP`.
+Une fois l'action dans le workflow, vous pouvez entrer l'URL de la requête HTTP, sélectionner le type d'opération HTTP (GET, POST, PUT, DELETE) et entrer les headers de la requête HTTP (Name & Value).
+
+## Importer une page web
+
+### Paramètres
+
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Web</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Importer une page web (BETA)</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>
+        Permet d’indexer une page web afin d’utiliser son contenu (texte) dans
+        le workflow
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>
+        Aucune entrée, mais à brancher au workflow pour que la step soit
+        executée
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>Texte</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>- URL : Définition de l’URL à indexer</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>
+        - Je souhaite fournir des informations provenant d’une page web, qui
+        seront traitées par une des étapes de mon workflow
+      </Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
+
+Cette action vous permet de scraper le texte d'une page web.
+
+{/* ![application_web](@public/applications/scrapping.png) */}
+
+Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Web` et enfin sur `Importer une page web`.
+Une fois l'action dans le workflow, vous pouvez entrer l'URL de la page web à scraper.
+
+L'action s'occupe de scraper le texte de la page web et de fournir en sortie tout le texte présent sur la page web.
+
+## Télécharger un fichier web
+
+### Paramètres
+
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Web</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>Télécharger un fichier</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Définition</Table.Td>
+      <Table.Td>Permet de télécharger un fichier hébergé sur le web</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>
+        Aucune entrée, mais à brancher au workflow pour que la step soit
+        executée
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>-</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>- URL : Adresse d’hébergement du fichier</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>-Télécharges et traite le document</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+---
+
+### Guide d'utilisation
+
+Cette action vous permet de télécharger un fichier sur le web disponible en HTTPS.
+
+{/* ![application_web](@public/applications/download.png) */}
+
+Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Web` et enfin sur `Télécharger un fichier web`.
+Une fois l'action dans le workflow, vous pouvez entrer l'URL du fichier à télécharger.
+
+L'action s'occupe de télécharger le fichier et d'extraire le contenu de celui-ci. La sortie de cette action est le contenu du fichier au format texte.

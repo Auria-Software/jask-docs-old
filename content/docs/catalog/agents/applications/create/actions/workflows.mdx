@@ -1,0 +1,61 @@
+import { Table } from "nextra/components";
+
+# Les workflows dans les workflows
+
+{/* ![workflows](@public/applications/workflow_in_workflow.png) */}
+
+Les workflows peuvent eux memes être utilisés comme actions dans d'autres workflows. C'est un excellent moyen d'utiliser un workflow pour une taches spécifique de façon répétitive sur une multitude de documents en entrée.
+
+## Créer un workflow
+
+Pour créer un nouveau workflow rendez-vous dans la page Agents IA > Workflows du catalogue de Jask et cliquez sur le bouton `+ Actions` puis sur `Créer un workflow`.
+Suivez la documentation [ici](/docs/agentia/applications/create/intro) pour créer un workflow.
+
+## Utiliser un workflow dans un workflow
+
+Pour utiliser un workflow dans un workflow, cliquez sur le bouton `+` puis sur `Workflows` et enfin sur le workflow à utiliser.
+
+<Table>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Section</Table.Td>
+      <Table.Td>Mes applications</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Titre</Table.Td>
+      <Table.Td>`le nom du workflow`</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Description</Table.Td>
+      <Table.Td>
+`la description du workflow`
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Entrée</Table.Td>
+      <Table.Td>
+        Texte et/ou fichier(s)
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Sortie</Table.Td>
+      <Table.Td>
+            Une ou plusieurs execution du workflow
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Paramètres avancés</Table.Td>
+      <Table.Td>
+        - Executer autant de fois qu'il y'a d'entrées distinctes : Plusieurs workflows s'executeront en parallèle si plusieurs documents sont importés en entrée.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Exemples d’utilisation</Table.Td>
+      <Table.Td>
+        - Je veux executer un workflow sur chacun d'une liste de documents
+        - Je veux pouvoir lancer un workflow déjà existant comme étape de mon workflow actuel
+      </Table.Td>
+    </Table.Tr>
+
+  </tbody>
+</Table>

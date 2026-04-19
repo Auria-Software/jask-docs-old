@@ -1,0 +1,86 @@
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+import { Cards } from "nextra/components";
+
+# Odoo
+
+![Odoo](@public/settings/odoo.png)
+
+Odoo est une suite bureautique open source qui permet de gérer les entreprises. Ce guide décrit comment connecter Odoo à Jask.
+
+Il existe un seul mode d'accès aux données dans Odoo :
+
+- **Compte utilisateur** — Chaque utilisateur utilise son compte Odoo pour se connecter à Odoo (flux API key par utilisateur).
+
+## Prérequis
+
+- Un compte **administrateur Odoo** (pour créer une application connectée et consulter les secrets OAuth)
+- Un compte Jask avec le [rôle administrateur](/docs/settings/security/roles) (pour **Connexions et secrets** et **Gestion des sources**)
+- L’**URL de votre instance** Odoo (par ex. `https://monentreprise.odoo.com`)
+
+## Guide Administrateur
+
+### 1. Donner des droits sur Odoo
+
+<Callout type="info">
+  Rendez-vous directement à la partie 2 si vous avez déjà donné les droits sur
+  Odoo.
+</Callout>
+
+Rendez-vous sur l'instance Odoo dans les groupes de sécurité. Séléctionnez le groupe "Utilisateur Interne" ou créer un nouveau goupe Jask associé à des utilisateurs.
+
+<Callout type="warning">
+  Ces droits sont nécessaires pour que l'IA puisse lire les données d'Odoo sinon
+  les utilisateurs ne pourront pas interroger les données.
+</Callout>
+
+Donnez deux droits à tous les utilisateurs qui feront des requêtes à Jask :
+
+- **Accès en lecture aux modèles** : pour que l'IA puisse lire les modèles
+- **Accès en lecture aux champs** : pour que l'IA puisse lire les champs
+
+![Droits d'accès à Jask](@public/settings/provider/odoo/rules.png)
+
+### 2. Créer la source de données (étape Connectivité)
+
+Toujours en tant qu’administrateur, allez dans **Gestion des sources** et lancez l’assistant **Nouvelle source de données**. À l’étape **Connectivité** (**Connectez votre instance Odoo**), entrer l'URL de votre instance Odoo (ex. `https://monentreprise.odoo.com`).
+
+Testez la connexion avec votre compte utilisateur Odoo. Chaque utilisateur contactant un agent connecté à odoo devra renseigner son token API.
+
+![Connectivité Odoo](@public/settings/provider/odoo/connectivity.png)
+
+Vous avez le choix de filtrer que certaines tables disponibles pour cette datasource. Si aucune table n'est sélectionnée, toutes les tables seront disponibles.
+
+Poursuivez avec les étapes **Indexation** puis **Revoir & Créer**.
+
+## Guide Utilisateur
+
+<Steps>
+### 1. Se connecter à Odoo
+
+Chaque utilisateur contactant un agent connecté à odoo devra renseigner son token API pour la première fois. L'agent detectera automatiquement que vous n'êtes pas connecté et lui proposera de le faire.
+
+![Token API Odoo](@public/settings/provider/odoo/conv.png)
+
+Veuillez cliquez sur le bouton "Se connecter" pour vous connecter à Odoo. Une popup vous demandera de renseigner votre clé API Odoo.
+Pour récupérer votre clé API personnelle Odoo, veuillez cliquer sur le lien "Générer ici votre clé API Odoo" pour ouvrir la page de récupération de votre clé API. Si vous n'y arivez pas suivez la documentation officielle d'Odoo pour récupérer votre clé API. [Documentation Odoo](https://www.odoo.com/documentation/18.0/fr/developer/reference/external_api.html)
+
+![Réglages Odoo](@public/settings/provider/odoo/auth.png)
+
+### 2. Récupérer votre clé API Odoo
+
+Une fois sur Odoo veuillez donner un nom (par exemple Jask) et choisir une durée de vie pour votre clé API **(Choisissez une durée de vie élevée pour eviter de refaire le processus de connexion)**. Enfin cliquez sur le bouton "Générer" pour générer votre clé API.
+
+![Récupération clé API Odoo](@public/settings/provider/odoo/name.png)
+
+Récupérez votre clé API Odoo en rose puis collez-la dans la popup Jask.
+
+![Récupération clé API Odoo](@public/settings/provider/odoo/key.png)
+
+### 3. Recommencer la recherche
+
+Si la connexion est réussie, vous verrez un message de succès et pourrez le dire à l'agent pour qu'il recommence ses recherches sur Odoo depuis Jask.
+
+![Recommencer la recherche](@public/settings/provider/odoo/ok.png)
+
+</Steps>

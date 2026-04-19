@@ -1,0 +1,77 @@
+import { Callout } from "nextra/components";
+import {
+  Folder,
+  FolderSearch2,
+  CircleUser,
+  House,
+  FileSymlink,
+  BookCopy,
+  History,
+  Bot,
+  Workflow,
+  BotMessageSquare,
+} from "lucide-react";
+import { Cards } from "nextra/components";
+
+# Agents IA
+
+---
+
+Bienvenue dans la page `Agents IA` du catalogue Jask, cet espace est dédié à la gestion et à la création de vos services d'IA.
+Dans cette section vous pourrez :
+
+- Rechercher et gérer tous vos services (agents, workflows, groupes d'agents)
+- Organiser vos services
+- Créer et modifier des services
+- Supprimer des services obsolètes
+
+<Callout>
+  Le terme de `services` est utilisé génériquement pour mentionner tous les
+  services IA de Jask, à savoir : Les agents, les workflows (applications) et
+  les groupes d'agents.
+</Callout>
+
+## Navigation
+
+La galerie de services est composée de plusieurs éléments :
+
+- Une barre de recherche qui permet de rechercher et filtrer les services par tags
+- D'onglets qui permettent de focaliser la vue sur un type de services spécifiques, ou d'utiliser la liste de tous les services mélangés `Récents`
+- Un bouton d'action qui permet de créer des nouveaux services
+
+Les onglets :
+
+- Récents : Tous les services sont mélangés et triés par ordre de dernière mise à jour. Dans cet onglet vous pouvez retrouver tous les services attachés à un tag spécifique
+- Mes agents : Tous les agents que vous avez créés
+- Groupe d'agents : Tous les groupes d'agents auxquels vous avez accès
+- Mes workflows : Tous les workflows auxquels vous avez accès
+- Partagés avec moi : Tous les services qui ont été partagés avec moi
+
+![agents](@public/agents.png)
+
+Les actions :
+
+- Créer un agent AI
+- Créer un groupe d'agents
+- Créer un workflow
+- Créer un tag
+
+![agents_actions](@public/agents_actions.png)
+
+## Détails des services
+
+Découvrez les principaux services
+
+<Cards>
+  <Cards.Card title="Agents" href="/docs/catalog/agents/create" icon={<Bot />} />
+  <Cards.Card
+    title="Groupe d'agents"
+    href="/docs/catalog/agents/group"
+    icon={<BotMessageSquare />}
+  />
+  <Cards.Card
+    title="Workflows"
+    href="/docs/catalog/agents/applications/intro"
+    icon={<Workflow />}
+  />
+</Cards>

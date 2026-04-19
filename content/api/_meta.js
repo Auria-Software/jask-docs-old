@@ -1,5 +1,3 @@
-import { newLabel } from "@components/new_label";
-
 export default {
   _1: {
     type: "separator",

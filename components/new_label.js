@@ -18,5 +18,24 @@ const betaStyles = {
   fontSize: "10px",
 };
 
+/** Badge « New » seul (à insérer à côté d’un libellé dans du MDX). */
 export const newLabel = <span style={tagStyles}>New</span>;
+
+/** Libellé de navigation + badge « New » (pour `_meta.js` / sidebar). */
+export function NewLabel({ children }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "0.35rem",
+        flexWrap: "wrap",
+      }}
+    >
+      <span>{children}</span>
+      <span style={tagStyles}>New</span>
+    </span>
+  );
+}
+
 export const betaLabel = <span style={betaStyles}>Beta</span>;
