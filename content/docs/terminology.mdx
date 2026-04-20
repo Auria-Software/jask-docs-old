@@ -1,5 +1,5 @@
 import { Cards } from "nextra/components";
-import { Bot, Package, Workflow, Group,Wrench,BookType } from "lucide-react";
+import { Bot, Package, Workflow, Group,Wrench,BookType,Languages } from "lucide-react";
 import { Callout,Steps } from "nextra/components";
 
 # Comprendre la terminologie de Jask
@@ -37,6 +37,11 @@ Il existe 5 grands types de concepts dans Jask qu'un utilisateur peut créer et 
     title="Expériences"
     href="/docs/catalog/experiences/intro"
     icon={<Workflow />}
+  />
+  <Cards.Card
+    title="Modèles"
+    href="/docs/catalog/ai_models"
+    icon={<Languages />}
   />
 </Cards>
 
@@ -94,6 +99,6 @@ Elles guident l’utilisateur à travers une tâche précise, en lui posant les 
 Chaque scénario peut combiner plusieurs cas d’usage, enchaînant des interactions entre agents et applications sans que l’utilisateur n’ait à se soucier de l'orchestration sous-jacente.
 
 ### Modèles
-Les modèles LLM (Large Language Models) sont des IA basées sur des réseaux de neurones géants entraînés sur des milliards de données.
+Les [modèles LLM](/docs/catalog/ai_models) (Large Language Models) sont des IA basées sur des réseaux de neurones géants entraînés sur des milliards de données.
 Ils apprennent à comprendre, prédire et générer du langage humain de façon très naturelle. Les administrateurs de la plateforme Jask déploient certains de ces modèles sur l'outil (Open AI, Mistral, Claude, Grok...) et les mettent à votre disposition. C'est pourquoi tous les modèles du marché ne sont pas disponibles dans la plateforme.
 </Steps>
