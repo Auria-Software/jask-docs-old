@@ -2,17 +2,142 @@ import { FileTree } from "nextra/components";
 
 # Listes des nouveautés & modifications
 
+---
+title: JAsk v.2026.04 — Release Notes
+description: 21 fonctionnalités réparties sur 3 piliers — interface, IA et connecteurs.
+---
+
+import { Callout, FileTree, Cards, Card } from 'nextra/components'
+
+# JAsk v.2026.04 — Ce qui change
+
+On a bossé dur sur cette release. 21 fonctionnalités réparties sur 3 axes : une interface refaite de fond en comble, des capacités IA vraiment nouvelles, et un Studio + des connecteurs qui montent clairement en maturité.
+
+---
+
+## 🎨 01 — Interface utilisateur
+
+### Une identité modernisée
+
+Nouveau logo, nouvelle charte, nouvelle énergie. JAsk fait peau neuve avec une identité visuelle modernisée qui reflète mieux ce que la plateforme est devenue : un point d'accès unique pour formuler ses demandes, lancer ses automatisations, et travailler avec ses agents.
+
+### Nouvelle navigation
+
+La navigation est maintenant centralisée dans un seul menu latéral avec trois onglets : **Chats**, **Collab** et **Réglages**. Fini les sections dispersées. Tu peux organiser tes conversations comme tu veux — par date, par agent, ou par tags.
+
+### Barre de saisie & mentions d'agents
+
+La barre de saisie devient le point de départ de tout. En utilisant `@`, tu appelles directement un agent, un workflow ou un skill. Avec `/`, tu accèdes à tes sources de données connectées. Et tu peux glisser-déposer n'importe quel fichier directement dans l'input pour l'analyser à la volée.
+
+### Interface de conversations repensée
+
+La vue conversation est maintenant focalisée sur le résultat. Les étapes de réflexion s'affichent progressivement sans charger l'écran. Si tu veux creuser le raisonnement de l'IA, tu ouvres le panel de détail — sinon tu gardes le focus sur la réponse. Bibliographies, résultats intermédiaires, tout est là mais sans polluer la lecture.
+
+### Création d'agents simplifiée
+
+Tous les paramètres d'un agent sont maintenant regroupés dans un seul onglet. Pour créer un agent simple, il suffit de renseigner quelques champs. Le reste est optionnel.
+
+<Callout type="tip">
+  Pour les agents simples, seuls le nom, la description et les instructions sont nécessaires. Tu peux toujours affiner la configuration ensuite.
+</Callout>
+
+### Améliorations mineures
+
 <FileTree>
-  <FileTree.Folder name="User Experience & Concepts">
-    <FileTree.File name="Accueil : Interface simplifiée et nouvelle barre de chat" />
+  <FileTree.Folder name="Accueil" defaultOpen>
+    <FileTree.File name="Accès rapide aux agents favoris depuis la page d'accueil" />
+    <FileTree.File name="Nouvelle section 'Mon espace' avec vue personnalisée" />
   </FileTree.Folder>
-  <FileTree.Folder name="Accueil & Barre de chat" defaultOpen>
-    <FileTree.File name="Nouvelle barre d'instruction pour faire appel aux différents services Jask (agents, worklfows, prompts, bases de données)" />
+  <FileTree.Folder name="Thème & affichage" defaultOpen>
+    <FileTree.File name="Choix de la palette de couleurs par utilisateur (violet, orange, vert…)" />
+    <FileTree.File name="Mode sombre disponible pour chaque palette" />
+    <FileTree.File name="Passage en plein écran depuis les préférences" />
   </FileTree.Folder>
-  <FileTree.Folder name="Agents">
-    <FileTree.File name="Fusion des bases de connaissances et des opérations agentiques dans le formulaire de création d'un agent" />
+</FileTree>
+
+---
+
+## 🤖 02 — Intelligence Artificielle
+
+### Génération de fichiers
+
+JAsk peut maintenant générer des fichiers à la demande — Word, PowerPoint, Excel, PDF — depuis un simple prompt. Tu peux aussi importer un fichier existant et demander des modifications directement en langage naturel.
+
+**Nouveaux cas d'usage :**
+- *"Génère-moi un PowerPoint sur notre stratégie Q3 en 8 slides"*
+- *"Prends ce Word et reformule la section introduction en version executive"*
+- *"Crée un Excel avec les colonnes suivantes et pré-remplis les formules"*
+
+### Jask Excel Master
+
+La lecture des fichiers Excel a été profondément améliorée. JAsk analyse maintenant tous les onglets et la structure globale d'un fichier, même les plus complexes. Calculs, analyses de structure, modifications — tout se fait via ton prompt.
+
+### Skills d'agents
+
+Les agents peuvent maintenant être équipés de **Skills** — des blocs d'instructions, de connaissances ou d'outils réutilisables entre plusieurs agents. Tu construis un skill une fois, tu le partages à plusieurs agents.
+
+<Callout type="info">
+  Les Skills peuvent aussi être rattachés à d'autres Skills, ce qui permet de composer des comportements complexes à partir de briques réutilisables.
+</Callout>
+
+### Gestion des coûts de consommation
+
+Tu peux maintenant contrôler finement le niveau de réflexion des agents : `rapide`, `faible`, `moyen`, `élevé` ou `auto`. Réglable agent par agent, ou conversation par conversation. Tu peux aussi définir une limite stricte de temps de réflexion maximale.
+
+### Vibe Coding
+
+JAsk peut générer du code et des artefacts interactifs directement dans la réponse d'un agent. Tu visualises le rendu en live, tu testes sans quitter JAsk.
+
+### Améliorations mineures
+
+<FileTree>
+  <FileTree.Folder name="Indexation" defaultOpen>
+    <FileTree.File name="Interface de suivi des sources indexées modernisée (statut, erreurs, progression)" />
+    <FileTree.File name="Simplification de la connexion à une nouvelle source de données" />
+    <FileTree.File name="Meilleur nettoyage des éléments supprimés dans les sources indexées" />
   </FileTree.Folder>
-  <FileTree.Folder name="Studio">
-    <FileTree.File name="Amélioration de l'interface : plein écran, actions claires, liste des briques avec accès à la documentation" />
+  <FileTree.Folder name="Fichiers & imports" defaultOpen>
+    <FileTree.File name="Import de fichiers .msg et .eml — résumé, réponse, to-do list depuis vos emails" />
+    <FileTree.File name="Les pièces jointes ne sont pas indexées (uniquement quelques métadonnées)" />
+  </FileTree.Folder>
+  <FileTree.Folder name="Automatisations" defaultOpen>
+    <FileTree.File name="Les créateurs peuvent définir des règles de déclenchement sur leurs workflows" />
+    <FileTree.File name="Les utilisateurs peuvent ajouter leurs propres triggers personnels sur un workflow partagé" />
+  </FileTree.Folder>
+</FileTree>
+
+---
+
+## 🔌 03 — Studio & Connecteurs
+
+### Connecteur ODOO
+
+JAsk se connecte maintenant nativement à ODOO. Les agents respectent les droits d'accès de chaque utilisateur — pas de fuite de données entre profils.
+
+### Amélioration du connecteur Salesforce
+
+Nouveau mode d'accès via une page de login dédiée. Chaque utilisateur se connecte avec ses propres credentials et accède uniquement aux données auxquelles il a le droit. Les agents respectent ces permissions à la lettre.
+
+### Flux RSS
+
+Tu peux connecter un flux RSS comme source de données dans JAsk. L'indexation est automatique à chaque nouvel article. Parfait pour alimenter un agent de veille concurrentielle ou sectorielle.
+
+### Excel Plugin V2 *(Prochainement)*
+
+Le plugin JAsk pour Excel arrive dans sa version 2. Tu pourras interagir avec tes agents directement depuis ton tableur, en langage naturel — sans jamais quitter Excel. Analyses, enrichissements, opérations complexes : tout depuis la barre latérale du plugin.
+
+<Callout type="warning">
+  Le Plugin Excel V2 est en cours de déploiement. Il sera disponible prochainement pour tous les clients.
+</Callout>
+
+### Améliorations mineures
+
+<FileTree>
+  <FileTree.Folder name="SharePoint" defaultOpen>
+    <FileTree.File name="Plusieurs sites SharePoint peuvent maintenant être regroupés dans une seule source de données" />
+  </FileTree.Folder>
+  <FileTree.Folder name="Modèles LLM" defaultOpen>
+    <FileTree.File name="Formulaire d'ajout de modèle adapté selon le fournisseur choisi (Azure OpenAI, Anthropic, Mistral, Groq…)" />
+    <FileTree.File name="Seules les informations indispensables sont demandées à la configuration" />
   </FileTree.Folder>
 </FileTree>
