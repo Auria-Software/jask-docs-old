@@ -1,5 +1,5 @@
 export default {
-    create: "Agents",
+    create: "Créer un Agent",
     group: "Groupe d'agents",
     applications :"Workflows"
 };
