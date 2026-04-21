@@ -2,8 +2,6 @@ import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import { useMDXComponents as getMDXComponents } from '../../mdx-components'
 import { notFound } from 'next/navigation'
 
-const Wrapper = getMDXComponents().wrapper
-
 export const generateStaticParams = async () => {
   const params = await generateStaticParamsFor('mdxPath')()
   // Exclude /api routes from static generation
@@ -29,6 +27,7 @@ export async function generateMetadata(props) {
 }
 
 export default async function Page(props) {
+  const Wrapper = getMDXComponents().wrapper
   const params = await props.params
 
   if (!params?.mdxPath || params.mdxPath.length === 0) {
