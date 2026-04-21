@@ -6,7 +6,7 @@ export const generateStaticParams = async () => {
   const params = await generateStaticParamsFor('mdxPath')()
   return params.filter((p) => {
     const path = p.mdxPath?.join('/') || ''
-    return !path.startsWith('api/')
+    return !path.startsWith('api/') && !path.startsWith('changelog/')
   })
 }
 
