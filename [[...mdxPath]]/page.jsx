@@ -1,14 +1,8 @@
-import { generateStaticParamsFor, importPage } from 'nextra/pages'
+import { importPage } from 'nextra/pages'
 import { notFound } from 'next/navigation'
 import { MDXWrapper } from './mdx-wrapper'
 
-export const generateStaticParams = async () => {
-  const params = await generateStaticParamsFor('mdxPath')()
-  return params.filter((p) => {
-    const path = p.mdxPath?.join('/') || ''
-    return !path.startsWith('api/') && !path.startsWith('changelog/')
-  })
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(props) {
   const params = await props.params
