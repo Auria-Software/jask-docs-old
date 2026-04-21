@@ -1,7 +1,6 @@
 import { importPage } from 'nextra/pages'
 import { notFound } from 'next/navigation'
-
-export const dynamic = 'force-dynamic'
+import { MDXRenderer } from './mdx-client'
 
 export async function generateMetadata(props) {
   const params = await props.params
@@ -29,7 +28,11 @@ export default async function Page(props) {
     const result = await importPage(params.mdxPath)
     const { default: MDXContent } = result
 
-    return <MDXContent />
+    return (
+      <MDXRenderer>
+        <MDXContent />
+      </MDXRenderer>
+    )
   } catch {
     notFound()
   }
