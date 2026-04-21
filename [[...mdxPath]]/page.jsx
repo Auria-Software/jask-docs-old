@@ -1,6 +1,5 @@
 import { importPage } from 'nextra/pages'
 import { notFound } from 'next/navigation'
-import { MDXWrapper } from './mdx-wrapper'
 
 export const dynamic = 'force-dynamic'
 
@@ -28,11 +27,9 @@ export default async function Page(props) {
 
   try {
     const result = await importPage(params.mdxPath)
-    const { default: MDXContent, metadata } = result
+    const { default: MDXContent } = result
 
-    return (
-      <MDXWrapper MDXContent={MDXContent} metadata={metadata} />
-    )
+    return <MDXContent />
   } catch {
     notFound()
   }
