@@ -25,4 +25,9 @@ export default {
   datasources:"Sources de données",
   deployment:"Déploiement",
   observability:"Observabilité",
+  _4: {
+    type: "separator",
+    title: "Plugins",
+  },
+  excel:"Plugin Excel",
 };
