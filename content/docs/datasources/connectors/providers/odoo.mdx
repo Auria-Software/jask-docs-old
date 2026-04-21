@@ -19,7 +19,7 @@ Il existe un seul mode d'accès aux données dans Odoo :
 - L’**URL de votre instance** Odoo (par ex. `https://monentreprise.odoo.com`)
 
 ## Guide Administrateur
-
+<Steps>
 ### 1. Donner des droits sur Odoo
 
 <Callout type="info">
@@ -27,7 +27,7 @@ Il existe un seul mode d'accès aux données dans Odoo :
   Odoo.
 </Callout>
 
-Rendez-vous sur l'instance Odoo dans les groupes de sécurité. Séléctionnez le groupe "Utilisateur Interne" ou créer un nouveau goupe Jask associé à des utilisateurs.
+Rendez-vous sur l'instance Odoo dans les groupes de sécurité. Sélectionnez le groupe "Utilisateur Interne" ou créer un nouveau goupe Jask associé à des utilisateurs.
 
 <Callout type="warning">
   Ces droits sont nécessaires pour que l'IA puisse lire les données d'Odoo sinon
@@ -45,31 +45,31 @@ Donnez deux droits à tous les utilisateurs qui feront des requêtes à Jask :
 
 Toujours en tant qu’administrateur, allez dans **Gestion des sources** et lancez l’assistant **Nouvelle source de données**. À l’étape **Connectivité** (**Connectez votre instance Odoo**), entrer l'URL de votre instance Odoo (ex. `https://monentreprise.odoo.com`).
 
-Testez la connexion avec votre compte utilisateur Odoo. Chaque utilisateur contactant un agent connecté à odoo devra renseigner son token API.
+Testez la connexion avec votre compte utilisateur Odoo. Chaque utilisateur contactant un agent connecté à Odoo devra renseigner son token API.
 
 ![Connectivité Odoo](@public/settings/provider/odoo/connectivity.png)
 
-Vous avez le choix de filtrer que certaines tables disponibles pour cette datasource. Si aucune table n'est sélectionnée, toutes les tables seront disponibles.
+Vous avez le choix de filtrer uniquement certaines tables afin que seules celles-ci soient disponibles pour cette source de données. Si aucune table n'est sélectionnée, toutes les tables seront disponibles.
 
 Poursuivez avec les étapes **Indexation** puis **Revoir & Créer**.
-
+</Steps>
 ## Guide Utilisateur
 
 <Steps>
 ### 1. Se connecter à Odoo
 
-Chaque utilisateur contactant un agent connecté à odoo devra renseigner son token API pour la première fois. L'agent detectera automatiquement que vous n'êtes pas connecté et lui proposera de le faire.
+Chaque utilisateur contactant un agent connecté à Odoo devra renseigner son token API pour la première fois. L'agent détectera automatiquement que vous n'êtes pas connecté et proposera à l'utilisateur de le faire.
 
 ![Token API Odoo](@public/settings/provider/odoo/conv.png)
 
-Veuillez cliquez sur le bouton "Se connecter" pour vous connecter à Odoo. Une popup vous demandera de renseigner votre clé API Odoo.
-Pour récupérer votre clé API personnelle Odoo, veuillez cliquer sur le lien "Générer ici votre clé API Odoo" pour ouvrir la page de récupération de votre clé API. Si vous n'y arivez pas suivez la documentation officielle d'Odoo pour récupérer votre clé API. [Documentation Odoo](https://www.odoo.com/documentation/18.0/fr/developer/reference/external_api.html)
+Veuillez cliquer sur le bouton "Se connecter" pour vous connecter à Odoo. Une popup vous demandera de renseigner votre clé API Odoo.
+Pour récupérer votre clé API personnelle Odoo, veuillez cliquer sur le lien "Générer ici votre clé API Odoo" pour ouvrir la page de récupération de votre clé API. Si vous n'y arivez pas, suivez la documentation officielle d'Odoo pour récupérer votre clé API. [Documentation Odoo](https://www.odoo.com/documentation/18.0/fr/developer/reference/external_api.html)
 
 ![Réglages Odoo](@public/settings/provider/odoo/auth.png)
 
 ### 2. Récupérer votre clé API Odoo
 
-Une fois sur Odoo veuillez donner un nom (par exemple Jask) et choisir une durée de vie pour votre clé API **(Choisissez une durée de vie élevée pour eviter de refaire le processus de connexion)**. Enfin cliquez sur le bouton "Générer" pour générer votre clé API.
+Une fois sur Odoo, veuillez donner un nom (par exemple Jask) et choisir une durée de vie pour votre clé API **(Choisissez une durée de vie élevée pour éviter de refaire le processus de connexion trop régulièrement)**. Enfin, cliquez sur le bouton "Générer" pour générer votre clé API.
 
 ![Récupération clé API Odoo](@public/settings/provider/odoo/name.png)
 
