@@ -25,7 +25,7 @@ Il existe deux modes d'accès aux données dans Salesforce :
 
 <Callout type="info">
   Rendez-vous directement à la partie 3 si vous avez déjà créé une application
-  connectée (OAuth2) dans Salesforce et ajouter les identifiants dans Jask.
+  connectée (OAuth2) dans Salesforce et ajoutez les identifiants dans Jask.
 </Callout>
 
 Une **External Client Application** permet à Jask d’échanger un code d’autorisation contre des jetons d’accès via OAuth2.
@@ -52,7 +52,7 @@ Indiquez au minimum :
 
 #### Activer OAuth et l’URL de redirection Jask
 
-Cochez **Enable OAuth Settings** (Activer les paramètres OAuth).
+Cochez **Enable OAuth Settings** (Activez les paramètres OAuth).
 
 Dans **Callback URL** (URL de rappel), ajoutez l’URL de redirection OAuth utilisée par Jask, qui se termine par le chemin **`/oauth2/callback`** :
 
@@ -82,7 +82,7 @@ Refresh_token, offline_access
   des jetons ou l’accès aux objets attendus.
 </Callout>
 
-Désactiver le bouton "Require Proof Key for Code Exchange (PKCE) extension for Supported Authorization Flows" et activez "Enable Refresh Token Rotation".
+Désactivez le bouton "Require Proof Key for Code Exchange (PKCE) extension for Supported Authorization Flows" et activez "Enable Refresh Token Rotation".
 
 ![Paramètres OAuth et URL de rappel](@public/settings/provider/salesforce/oauth-params.png)
 
@@ -102,11 +102,7 @@ Documentation Salesforce à titre de référence : [Create a Connected App](http
 #### Optionnel : Passer en `client credential flow` via un compte de service
 
 <Callout type="warning">
-  La manipulation suivante est à faire uniquement si vous souhaitez passer l'app
-  en `client credential flow` via un compte de service pour que les utilisateurs
-  dans jask n'est pas à se connecter. Les droits et permissions d'accès de
-  salesforce seront déterminé par l'utilisateur séléctionné en guise de compte
-  de service.
+  La manipulation suivante est à faire uniquement si vous souhaitez passer l'applisation en `client credential flow` via un compte de service pour que les utilisateurs dans jask n'aient pas à se connecter. Les droits et permissions d'accès de Salesforce seront déterminés par l'utilisateur sélectionné en guise de compte de service.
 </Callout>
 
 Rendez-vous sur l'app et cliquez sur le bouton "Edit" en haut à droite.
@@ -143,7 +139,7 @@ Validez avec **Valider**.
 Toujours en tant qu’administrateur, allez dans **Gestion des sources** et lancez l’assistant **Nouvelle source de données**. À l’étape **Connectivité** (**Connectez votre instance Salesforce**), choisissez le **mode d’accès aux données** et la **connexion** créée à l’étape précédente.
 
 <Callout type="warning">
-  Selectionnez la bonne connexion en fonction de la configuration de votre
+  Sélectionnez la bonne connexion en fonction de la configuration de votre
   application connectée dans Salesforce. Si vous avez activé le `client
   credential flow` via un compte de service, sélectionnez le mode "Compte de
   service". Sinon, sélectionnez le mode "Compte utilisateur".
@@ -158,7 +154,7 @@ Toujours en tant qu’administrateur, allez dans **Gestion des sources** et lanc
 ![Mode compte de service](@public/salesforce/jask-source-mode-compte-service.png)
 
 Une fois le test de connexion effectué, vous pouvez voir les objets disponibles dans Salesforce.
-Vous pouvez enfin séléctionner si vous souhaitez filtrer que certaines tables ou objets.
+Vous pouvez enfin séléctionner si vous souhaitez filtrer que certaines tables ou certains objets.
 
 Poursuivez avec les étapes **Indexation** puis **Revoir & Créer**.
 
