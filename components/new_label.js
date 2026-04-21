@@ -1,6 +1,8 @@
-const tagStyles = {
+"use client";
+
+const newStyles = {
   margin: "0.25rem",
-  padding: "0.25rem",
+  padding: "0.15rem 0.35rem",
   borderRadius: "0.25rem",
   fontWeight: "400",
   background: "#FDECFF",
@@ -10,7 +12,7 @@ const tagStyles = {
 
 const betaStyles = {
   margin: "0.25rem",
-  padding: "0.25rem",
+  padding: "0.15rem 0.35rem",
   borderRadius: "0.25rem",
   fontWeight: "400",
   background: "#FFE5E5",
@@ -18,24 +20,26 @@ const betaStyles = {
   fontSize: "10px",
 };
 
-/** Badge « New » seul (à insérer à côté d’un libellé dans du MDX). */
-export const newLabel = <span style={tagStyles}>New</span>;
-
-/** Libellé de navigation + badge « New » (pour `_meta.js` / sidebar). */
+/** "New" badge — use inline in MDX or as sidebar label: <NewLabel /> or <NewLabel>Odoo</NewLabel> */
 export function NewLabel({ children }) {
+  const badge = <span style={newStyles}>New</span>;
+  if (!children) return badge;
   return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "0.35rem",
-        flexWrap: "wrap",
-      }}
-    >
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", flexWrap: "wrap" }}>
       <span>{children}</span>
-      <span style={tagStyles}>New</span>
+      {badge}
     </span>
   );
 }
 
-export const betaLabel = <span style={betaStyles}>Beta</span>;
+/** "Beta" badge — use inline in MDX or as sidebar label: <BetaLabel /> or <BetaLabel>Feature</BetaLabel> */
+export function BetaLabel({ children }) {
+  const badge = <span style={betaStyles}>Beta</span>;
+  if (!children) return badge;
+  return (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", flexWrap: "wrap" }}>
+      <span>{children}</span>
+      {badge}
+    </span>
+  );
+}

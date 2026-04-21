@@ -10,10 +10,11 @@ import {
   Workflow,
   History,
 } from "lucide-react";
-import { betaLabel } from "@components/new_label";
+import { BetaLabel } from "@components/new_label";
 import { Table } from "nextra/components";
 
 # Les services Jask
+
 ---
 
 Retrouvez l'ensemble de la [terminologie Jask](/docs/terminology)
@@ -29,21 +30,17 @@ Retrouvez l'ensemble de la [terminologie Jask](/docs/terminology)
     href="/docs/catalog/agents/create"
     icon={<Bot />}
   />
-<Cards.Card
-  title="Workflows"
-  href="/docs/catalog/agents/applications/intro"
-  icon={<Package />}
-/>
+  <Cards.Card
+    title="Workflows"
+    href="/docs/catalog/agents/applications/intro"
+    icon={<Package />}
+  />
   <Cards.Card
     title="Groupe d'agents"
     href="/docs/catalog/agents/group"
     icon={<Group />}
   />
-  <Cards.Card
-    title="Skills"
-    href="/docs/catalog/skills"
-    icon={<Wrench />}
-  />
+  <Cards.Card title="Skills" href="/docs/catalog/skills" icon={<Wrench />} />
   <Cards.Card
     title="Expériences"
     href="/docs/catalog/experiences/intro"
@@ -101,7 +98,8 @@ Par exemple, vous pouvez :
     <Table.Tr>
       <Table.Td>Groupe d'agents</Table.Td>
       <Table.Td>
-        Le groupe d'agents répond à la requpete de l'utilisateur en fonction du mode de fonctionnement défini dans le groupe.
+        Le groupe d'agents répond à la requpete de l'utilisateur en fonction du
+        mode de fonctionnement défini dans le groupe.
       </Table.Td>
     </Table.Tr>
     <Table.Tr>
@@ -149,7 +147,8 @@ Par exemple, vous pouvez :
 </Table>
 
 <Callout type="info">
-  Le service natif Deep Research a été déprécié et remplacé par les niveaux de réflexion
+  Le service natif Deep Research a été déprécié et remplacé par les niveaux de
+  réflexion
 </Callout>
 
 <Cards>
@@ -158,15 +157,14 @@ Par exemple, vous pouvez :
     href="/docs/menu"
     icon={<MessagesSquare />}
   />
-<Cards.Card
+  <Cards.Card
     title="Détails d'une conversation"
     href="/docs/conversations"
     icon={<History />}
-/>
-<Cards.Card
+  />
+  <Cards.Card
     title="Création des services IA"
     href="/docs/catalog/agents/create"
     icon={<Bot />}
-/>
+  />
 </Cards>
-
