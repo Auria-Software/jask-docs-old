@@ -1,7 +1,7 @@
 import { NewLabel } from "@components/new_label";
 
 export default {
-  google: "Google",
+  bigquery: "Big Query",
   microsoft: "Microsoft",
   notion: "Notion",
   odoo: <NewLabel>Odoo</NewLabel>,
