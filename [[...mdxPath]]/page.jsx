@@ -4,7 +4,6 @@ import { MDXWrapper } from './mdx-wrapper'
 
 export const generateStaticParams = async () => {
   const params = await generateStaticParamsFor('mdxPath')()
-  // Exclude /api routes from static generation
   return params.filter((p) => {
     const path = p.mdxPath?.join('/') || ''
     return !path.startsWith('api/')
@@ -38,9 +37,7 @@ export default async function Page(props) {
     const { default: MDXContent, metadata } = result
 
     return (
-      <MDXWrapper metadata={metadata}>
-        <MDXContent />
-      </MDXWrapper>
+      <MDXWrapper MDXContent={MDXContent} metadata={metadata} />
     )
   } catch {
     notFound()
