@@ -7,7 +7,7 @@ import { Callout } from "nextra/components";
 
 ## Objectif du connecteur
 
-Le connecteur RSS (Really Simple Syndication) permet à **JASK** d’ingérer, surveiller et mettre à jour en continu des flux d’actualités provenant de sites web externes.
+Le connecteur RSS (Really Simple Syndication) permet à **Jask** d’ingérer, surveiller et mettre à jour en continu des flux d’actualités provenant de sites web externes.
 
 Contrairement aux connecteurs statiques (fichiers ou scraping ponctuel), le connecteur RSS est conçu pour répondre à des besoins de veille dynamique :
 
@@ -25,11 +25,11 @@ Contrairement aux connecteurs statiques (fichiers ou scraping ponctuel), le conn
 
 <Steps>
 
-### Étape 1 : Accéder aux sources de données
+### Accéder aux sources de données
 
-Depuis l’interface JASK, ouvrez le menu latéral gauche, cliquez sur **Sources de données**, puis sur le bouton **+ Ajouter une source de données**.
+Depuis l’interface JASK, dans le menu latéral rendez vous sur Réglages > **Gestion des Sources** > Onglet **Source de données connectées** > Cliquez sur le bouton **+ Ajouter une source de données**.
 
-### Étape 2 : Sélectionner le connecteur RSS
+### Sélectionner le connecteur RSS
 
 Renseignez les informations suivantes :
 
@@ -40,7 +40,7 @@ Renseignez les informations suivantes :
 
 {/* ![source de données](@public/rss/info.png) */}
 
-### Étape 3.1 : Découverte des flux RSS
+### Découverte des flux RSS
 
 Le connecteur JASK peut détecter automatiquement les flux RSS associés à l’URL fournie, ou vous pouvez saisir directement une URL de flux.
 
@@ -50,7 +50,7 @@ Paramètres à renseigner :
 - **Stratégie de découverte** : Lancez la recherche automatique des flux RSS disponibles
 - **Type de flux** : Sélectionnez le ou les flux RSS détectés
 
-### Étape 3.2 : Découverte et filtrage des articles
+### Découverte et filtrage des articles
 
 Cliquez sur **Parcourir les articles**.  
 Une fois les flux sélectionnés, les articles correspondants s’affichent dans le panneau de droite.
@@ -60,11 +60,11 @@ Une fois les flux sélectionnés, les articles correspondants s’affichent dans
 - Tous les flux ne fournissent pas forcément de tags
 - La liste des articles se met à jour automatiquement après chaque filtrage
 
-**Suivez les étapes numérotées de 1 à 6 comme indiqué dans la capture ci-dessous.**
+**Suivez les étapes suivantes comme indiqué dans la capture ci-dessous.**
 
-{/* ![connectivité](@public/rss/connectivite.png) */}
+![connectivité](@public/rss/connectivite.png)
 
-### Étape 4 : Paramétrer l’indexation
+### Paramétrer l’indexation
 
 Choisissez la fréquence d’indexation des articles :
 
@@ -73,26 +73,27 @@ Choisissez la fréquence d’indexation des articles :
 - Une fois par jour
 - Etc.
 
-{/* ![indexation](@public/rss/indexation.png) */}
+![indexation](@public/rss/indexation.png)
 
-### Étape 5 : Enregistrer et lancer l’indexation
+### Enregistrer et lancer l’indexation
 
 Cliquez sur **Revoir et créer** pour valider la configuration de la source.
+
+</Steps>
 
 ### Indexer la source manuellement
 
 <Callout type="info">
-  L’indexation se lance automatiquement selon la fréquence définie à l’étape 4.
+  L’indexation se lance automatiquement selon la fréquence définie à l’étape 5.
   Il est également possible de déclencher une indexation manuelle.
 </Callout>
 
 Pour utiliser immédiatement la source de données :
 
-1. Cliquez sur les **trois points** à droite de la source
-2. Sélectionnez **Scanner**
-3. Rafraîchissez la liste avec le bouton prévu si l’opération prend du temps
-4. Cliquez sur **Indexer** pour lancer l’indexation manuelle
+1. Cliquez sur le bouton **Autres** à droite de la source ajoutée
+2. Sélectionnez **Indexer**
+3. La source est alors scannée puis indexée
 
-{/* ![index](@public/rss/index.png) */}
+![index](@public/rss/index.png)
 
-</Steps>
+
