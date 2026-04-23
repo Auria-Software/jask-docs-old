@@ -1,0 +1,143 @@
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# Création d'un agent
+
+<div
+  style={{
+    position: "relative",
+    paddingBottom: "56.25%",
+    height: 0,
+    overflow: "hidden",
+    width: "100%",
+    borderRadius: "8px",
+    marginTop: "24px",
+  }}>
+  <iframe
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "12px",
+    }}
+    src="https://www.youtube.com/embed/EmhZDGcNcmI"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+</div>
+
+---
+
+La création d'agents (si vous en avez les permissions) peut être démarrée de 3 manières : 
+- Dans le menu, via le bouton **...** à droite de +Chat
+- Dans l'accueil, via le bouton **Ajouter** à droite de la barre de recherche du catalogue
+- Dans l'onglet Réglages, sous la menu Agents IA de la section Catalogue
+
+## Configuration
+
+Plusieurs éléments sont configurables pour créer un agent IA:
+
+<Steps>
+### Identité de l'agent
+
+Dans cette étape, vous pouvez renseigner les éléments généraux de l'agent qui permettront de l'identifier : 
+- Nom de l'agent
+- Description (pour décrire l'objectif et comportement de cet agent aux autres utilisateurs)
+- Avatar 
+- [Prompt Système](/docs/terminology#prompts) de l'agent
+- Tags (utilisés pour retrouver l'agent plus facilement)
+
+![agents_general](@public/agents_general.png)
+
+En cliquant, sur le bouton, **Définir plus d'informations**, un panel s'ouvre ou vous pourrez définir : 
+- Message d'accueil de l'agent
+- Exemples de demandes
+
+Ces éléments sont visibles dans la carte de détail de l'agent, pour indiquer aux utilisateurs comment l'utiliser.
+
+En cliquant sur le bouton **Personnaliser l'intelligence**, vous définirez l'IA utilisée par l'agent : 
+- Le [modèle](/docs/terminology#modèles) d'IA générative utilisé (parmi les modèles auxquels vous avez accès). Le modèle par défaut est sélectionné.
+- Le niveau de réflexion de l'agent qui définira la profondeur de réflexion par défaut de cet agent.
+- Des options avancées avec le format des réponses souhaitées : 
+- **Cites toujours tes sources (documents, liens,...)** force ou non la citation des sources utilisées pour rédiger la réponse
+- **Inclure le prompt système par défaut** : Inclut le prompt système de l'agent dans la réponse
+- **Informes l'utilisateur lorsque la réponse ne se base pas sur les sources connectées** : Si aucune source n'est utilisée pour générer la réponse (entraînement du LLM uniquement), l'agent le mentionne
+- **Utilises la terminologie interne** : Si un glossaire a été défini, l'agent en a connaissance 
+
+![agents_ia](@public/agents_ia.png)
+
+### Connaissances de l'agent
+
+Dans cette étape, vous pouvez choisir les sources de données que votre agent pourra utiliser quand un utilisateur lui envoie une requête.
+Vous pouvez connecter une ou plusieurs sources de données à l'agent. L'agent ne fait pas forcément appel à ses sources de données connectées quand une requête lui est envoyée, il activera la recherche sur ces sources il considère que c'est pertinent pour répondre à la requête de l'utilisateur.
+Vous pouvez choisir ces sources parmi : 
+- Des sources externes connectées à Jask (Sharepoint, Web, Salesforce, Notion...)
+- La recherche web, qui donnera à l'agent la capacité d'aller rechercher des informations sur internet
+- Des dossiers contenant des documents importés sur Jask (en utilisant un des dossiers de la ressource **Mes documents**)
+
+<Callout>
+Chaque source de données est paramétrable en fonction des données que vous voulez fournir à votre agent. Par exemple, si vous connectez un Sharepoint, vous pouvez filtrer les dossiers que vous voulez utiliser.
+</Callout>
+
+<Callout type="info">
+  Si vous ne connectez aucune source de données, votre agent sera un simple LLM
+  c'est à dire qu'il répondra uniquement à l'aide des connaissances
+  d'entrainement que le modèle sélectionné a reçu.
+</Callout>
+
+![agents_sources](@public/agents_sources.png)
+
+### Skills
+
+Vous pouvez ajouter des [skills](/docs/terminology#skills) supplémentaires à votre agent. Les skills sont des capacités additionnelles, que l'agent va pouvoir activer au cours de sa réflexion pour obtenir un meilleur résultat.
+
+Cliquez sur le bouton **Cliquez pour ajouter**, et choississez les skills à rajouter à l'agent.
+
+### Sécurité & Gouvernance
+
+Dans cette étape, vous configurez la sécurité et la gouvernance de votre agent.
+
+* Visibilité & accès : 
+Définissez la visibilité de l'agent pour les autres utilisateurs. En fonction des droits donnés, vous pourrez définir si les utilisateurs peuvent uniquement utiliser l'agent ou bien l'éditer et le modifier :
+    * **`Privé`** (moi uniquement (par défaut)) : utile en phase de construction de l'agent ou pour des agents personnels
+    * **`Toute l'organisation`** : Tous les utilisateurs de votre organisation sont impactés par la visibiltié donnée (utilisation uniquement ou édition)
+    * **`Accès restreint`** : Vous sélectionnez un ou plusieurs utilisateurs et vous leur attachez le rôle nécessaire (utilisation ou édition).
+
+![agents_visibility](@public/agents_visibility.png)
+* Mode de contrôle d'accès aux ressources
+
+    * **`Délégué à la source`** : le contrôle d'accès aux ressources est géré par la source de données. Par exemple, pour un agent connecté à l'entièreté d'un environnement Sharepoint, si deux utilisateurs n'ayant pas les mêmes droits dans le Sharepoint posent la même question, les réponses seront différentes. En effet, l'agent répondra uniquement en prenant en compte les documents auxquels l'utilisateur posant la question a accès.
+
+    * **`Partage via Jask`** : le contrôle d'accès est géré via Jask. Dans ce cas, les deux utilisateurs auront la même réponse qui se basera sur l'entièreté des documents auxquels l'agent a accès.
+
+<Callout type="warning">
+Le mode **Partage via Jask** est très permissif, et contourne les règles de visibilité des connecteurs
+</Callout> 
+
+* Info à afficher sur l'agent
+    * Afficher le **prompt système** : Permet d'afficher/masquer le prompt système aux consommateurs de l'agent
+    * Afficher les **sources connectées** : Permet d'afficher/masquer les sources connectées à l'agent aux consommateurs de cet agent
+
+* Limiter l'usage de cet agent : Vous pouvez décider de limiter la consommation d'un agent par un utilisateur :
+
+    * Nombre de requêtes : Limiter le nombre de requêtes qu'un utilisateur peut envoyer à un agent
+    * Volumétrie de données : Limiter la quantité de données qu'un utilisateur peut consommer auprès d'un agent (Nombre d'octets ou de tokens consommés)
+
+![agents_advanced](@public/agents_advanced.png)
+
+<Callout type="warning">
+  Les valeurs d'utilisation par utilisateur ne sont pas réinitialisées automatiquement pour le calcul des limites.
+</Callout>
+</Steps>
+
+## Niveaux de réflexion
+
+Il existe 5 niveaux de réflexion que vous pouvez choisir sur un agent ou une conversation avec un agent : 
+
+- Rapide : L'agent ne part pas dans des étapes de réflexion, il répond rapidement et relativement succintement à la requête de l'utilisateur
+- Auto : L'agent va définir le niveau de réflexion qu'il juge nécessaire d'activer en fonction de la requête de l'utilisateur
+- Faible : L'agent va se limiter à quelques étapes(moins de 5) de réflexion afin de fournir un résultat relativement rapide à la requête de l'utilisateur
+- Moyen : L'agent va se limiter à moins de 10 étapes de réflexion pour fournir une réponse à la requête de l'utilisateur
+- Elevé : L'agent va itérer autant de fois que nécessaire pour fournir le résultat le plus complet et réfléchi à l'utilisateur. Il ne dépassera pas la limite globale de temps de réflexion définie.

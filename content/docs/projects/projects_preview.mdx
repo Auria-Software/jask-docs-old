@@ -1,0 +1,69 @@
+import { Callout, Cards, Steps } from 'nextra/components'
+import { Cable,FolderKanban,ShieldCheck } from 'lucide-react'
+
+# Vue d'ensemble du projet
+
+L'interface d'un Projet JAsk est l'interface principale pour intéragir avec votre projet. C'est ici que convergent toutes les dimensions d'un projet : les conversations passées, les fichiers de référence, les intégrations et les membres actifs.
+
+## Le Projet
+
+Lorsque vous ouvrez la section Collab du menu, et  sélectionnez un projet, vous accédez à la vue principale du projet. Elle se compose de plusieurs zones distinctes.
+
+### L'historique des conversations
+
+La colonne centrale gauche liste toutes les **Conversations du projet**, organisées par ordre chronologique (Hier, Cette semaine, etc.). Chaque conversation correspond à un échange distinct initié depuis ce projet. Cliquez sur une conversation pour la rouvrir et consulter son historique.
+
+<Callout type="info">
+  Toutes les conversations listées dans un projet sont visibles par l'ensemble des membres du projet. C'est le principe même du contexte partagé.
+</Callout>
+
+### Détail d'un projet
+
+![projects_structure](@public/project_structure.png)
+<Steps>
+### Titre et description
+
+En haut de la zone centrale, le nom du projet est affiché en titre, accompagné d'un extrait de sa description.
+
+### Zone de chat
+
+Au centre de l'interface se trouve la **zone de chat JAsk**, identique à celle que vous retrouvez dans le reste de la plateforme. Vous pouvez y saisir vos messages, mentionner un agent avec `@`, accéder à vos sources avec `/`, et utiliser les icônes d'action pour joindre des fichiers ou des contenus supplémentaires.
+
+Sous la zone de chat, les avatars des membres actifs sur le projet sont affichés. Ce bloc donne une vision rapide de qui a accès au projet.
+Les contributeurs et Administrateurs du projet retrouveront aussi des boutons pour (éditer le projet)(/docs/projects/projects_settings)
+
+
+### Fichiers importés
+
+La section **Fichiers importés** liste les documents que les membres ont ajoutés manuellement au projet. Ces fichiers constituent la base de connaissance accessible à l'agent lors de ses réponses dans ce projet. Les administrateurs et contributeurs au projet peuvent ajouter ou modifier la liste des fichiers du projet.
+
+<Callout type="warning">
+  La suppression d'un fichier importé est définitive pour le projet. Un écran de confirmation sera affiché avant de supprimer ce fichier.
+</Callout>
+
+### Sources connectées
+
+La section **Sources connectées** affiche les sources de données actives sur ce projet. Ces sources permettent au projet d'avoir accès à bases documentaires externes en plus des fichiers importés directement dans le projet. Les administrateurs et contributeurs au projet peuvent ajouter ou modifier les sources du projet.
+
+<Callout type="info">
+  Les droits d'accès aux sources connectées restent gérés au niveau de l'intégration elle-même. Un membre du projet ne peut accéder qu'aux données pour lesquelles il dispose déjà des droits dans le système source (ex : SharePoint).
+</Callout>
+
+### Skills
+La section **Skills** affiche les skills actifs sur ce projet. Ces skills permettent de données à l'agent des capacités supplémentaires au sein du projet. Les administrateurs et contributeurs au projet peuvent ajouter ou modifier les skills attachés au projet.
+</Steps>
+
+## Voir aussi
+
+<Cards>
+  <Cards.Card 
+    icon={<FolderKanban />}
+    title="Projets" 
+    href="/docs/projects/projects_intro" 
+  />
+  <Cards.Card 
+    title="Gérer un projet"
+    href="/docs/projects/projects_settings"
+    icon ={<ShieldCheck/>}
+  />
+</Cards>

@@ -1,13 +1,37 @@
-import { Cards } from 'nextra/components'
-import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Rocket,Home,Package, NotepadText, MessagesSquare, FolderSearch2, Bot, Workflow, LibraryBig, Database, KeyRound, Share2, BrainCircuit, BriefcaseBusinessIcon, Cog, ChartSpline, Cable, ChevronsLeftRightEllipsisIcon } from 'lucide-react';
+import { Cards } from "nextra/components";
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+import {
+  Rocket,
+  Home,
+  Package,
+  NotepadText,
+  MessagesSquare,
+  FolderSearch2,
+  Bot,
+  Workflow,
+  LibraryBig,
+  Database,
+  KeyRound,
+  Share2,
+  BrainCircuit,
+  BriefcaseBusinessIcon,
+  Cog,
+  BookType,
+  ChartSpline,
+  Cable,
+  ChevronsLeftRightEllipsisIcon,
+  CalendarSync,
+  UserCog,
+  ShieldUser,
+  BookA,
+  ChartColumnBig,
+  Wrench,
+} from "lucide-react";
 
 # Documentation Jask
 
-
 **Jask** une **plateforme unique, sécurisée et intuitive**, vos organisations et métiers créent **en quelques minutes** et en toute **autonomie** leurs propres agents et workflows pour servir leurs enjeux business.
-
 
 ### Par où commencer ?
 
@@ -17,17 +41,17 @@ Suivez ces guides pour utiliser rapidement Jask
   <Cards.Card
     title="Utilisateur : Démarrage rapide dans l'Accueil"
     href="/docs/accueil"
-    icon ={<Rocket/>}
+    icon={<Rocket />}
   />
   <Cards.Card
     title="Developpeur : Appeller Jask via API"
     href="/api/intro"
-    icon ={<ChevronsLeftRightEllipsisIcon/>}
+    icon={<ChevronsLeftRightEllipsisIcon />}
   />
   <Cards.Card
-    title="Admin : Connecter la première DataSource"
-    href="/docs/settings/connectors/microsoft"
-    icon ={<Cable/>}
+    title="Admin : Ajouter un modèle LLM"
+    href="/docs/catalog/ai_models"
+    icon={<Cable />}
   />
 </Cards>
 
@@ -35,94 +59,152 @@ Suivez ces guides pour utiliser rapidement Jask
 
 # Le menu
 
-Le menu de Jask se découpe en sections à partir desquelles vous avez accès à toute la puissance de l'IA Générative proposée par Jask.
+Le menu de Jask se découpe en 3 onglets à partir desquels vous avez accès à toute la puissance de l'IA Générative proposée par Jask.
 
 <Steps>
+### Chats
 
-### Espace de travail
-
-L'Espace de travail est l'endroit où les utilisateurs accèdent aux fonctions quotidiennes de Jask.
-Différentes vues permettent de bénéficier de la puissance de Jask. Chacune d'elles possède ses propres avantages et répondent à des usages spécifiques.
-
-Découvrez les !
-Le menu de gauche vous permet de naviguer sous ``Espace de travail`` dans les vues suivantes :
+L'onglet Chats est l'endroit où les utilisateurs vont consommer l'IA générative Jask.
+Différentes vues permettent de retrouver l'historique de vos conversations avec les services Jask. Chacune d'elles possède ses propres avantages et répondent à des usages spécifiques (chronologie, par agent, par tag)
 
 <Cards>
+  <Cards.Card title="Accueil" href="/docs/accueil" icon={<Home />} />
   <Cards.Card
-    title="Accueil"
-    href="/docs/accueil"
-    icon ={<Home />}
-  />
-  <Cards.Card
-    title="Chat Room"
-    href="/docs/chats_room/intro"
+    title="Conversations"
+    href="/docs/conversations"
     icon={<MessagesSquare />}
   />
-  <Cards.Card
-    title="Mes Documents"
-    href="/docs/ai_search/intro"
-    icon={<FolderSearch2 />}
-  />
-  <Cards.Card
-    title="Mes Projets"
-    href="/docs/projects"
-    icon={<BriefcaseBusinessIcon />}
-  />
 </Cards>
+![accueil](@public/accueil_chats.png) 
 
-### Catalogue
+### Collaboration
 
-Les catalogues permettent de découvrir et de créer les ressources mises à disposition par votre organisation.
+L'onglet Collab regroupe tous vos projets. Les projets sont des espaces collaboratifs et partagés avec d'autres utilisateurs pour collaborer sur des thématiques communes.
 
 Le menu de gauche vous permet de naviguer sous `Catalogue` dans les vues suivantes :
 
 <Cards>
   <Cards.Card
-    title="Prompt Store"
-    href="/docs/prompts_store"
+    title="Projets"
+    href="/docs/projects"
     icon={<LibraryBig />}
   />
-  <Cards.Card
-    title="Agents"
-    href="/docs/assistants/create"
-    icon={<Bot />}
-  />
-  <Cards.Card
-    title="Expériences"
-    href="/docs/experiences/create"
-    icon={<Workflow />}
-  />
 </Cards>
+![collab](@public/accueil_collab.png) 
 
-### Administration
+### Réglages
 
 <Callout type="warning">
-Cette section n’est disponible qu’aux utilisateurs avec le rôle `Administrateur`.
+  Dans cette section l'ensemble des éléments ne sont pas disponibles. Leur
+  visibilité dépend de votre niveau d'accès à la plateforme
 </Callout>
 
-Les fonctions d’administration permettent de gérer les ressources, les droits et les utilisateurs.
-Vous pourrez également exposer vos agents ou attacher de nouveaux modèles d’IA.
+Les fonctionnalités accessibles ici sont réparties en 6 sections :
+![settings](@public/accueil_settings.png)
 
-Le menu de gauche vous permet de naviguer sous `Administration` dans les vues suivantes :
+#### Mon espace de travail
 
 <Cards>
   <Cards.Card
-    title="Réglages"
-    icon={<Cog />}
-    href="/docs/settings/security/users"
+    title="Mes bibliothèques"
+    icon={<LibraryBig />}
+    href="/docs/workspace/libraries"
+  />
+  <Cards.Card
+    title="Sources de données"
+    icon={<Database />}
+    href="/docs/workspace/datasources"
+  />
+  <Cards.Card
+    title="Automatisation"
+    icon={<CalendarSync />}
+    href="/docs/workspace/automations"
+  />
+</Cards>
+
+#### Catalogue
+
+<Cards>
+  <Cards.Card
+    title="Agents IA"
+    icon={<Bot />}
+    href="/docs/catalog/agents"
+  />
+  <Cards.Card
+    title="Prompts"
+    icon={<BookType />}
+    href="/docs/catalog/prompts_store"
+  />
+  <Cards.Card
+    title="Skills"
+    icon={<Wrench />}
+    href="/docs/catalog/skills"
+  />
+  <Cards.Card
+    title="Gestion des modèles"
+    icon={<BrainCircuit />}
+    href="/docs/catalog/ai_models"
+  />
+  <Cards.Card
+    title="Expériences"
+    icon={<Workflow />}
+    href="/docs/catalog/experiences"
+  />
+</Cards>
+
+#### Utilisateurs et Groupes
+
+<Cards>
+  <Cards.Card
+    title="Utilisateurs"
+    icon={<UserCog />}
+    href="/docs/users_groups/users"
+  />
+  <Cards.Card title="Rôles" icon={<ShieldUser />} href="/docs/users_groups/roles" />
+</Cards>
+
+#### Sources de données
+
+<Cards>
+  <Cards.Card
+    title="Gestion des sources"
+    icon={<Database />}
+    href="/docs/workspace/datasources"
+  />
+  <Cards.Card
+    title="Connexions et secrets"
+    icon={<KeyRound />}
+    href="/docs/datasources/permissions"
+  />
+  <Cards.Card
+    title="Terminologie interne"
+    icon={<BookA />}
+    href="/docs/terminology"
+  />
+</Cards>
+
+#### Déploiement et Observabilité
+
+<Cards>
+  <Cards.Card
+    title="Liste des déploiements"
+    icon={<Rocket />}
+    href="/docs/deployment/excel"
   />
   <Cards.Card
     title="Observabilité"
-    icon={<ChartSpline />}
+    icon={<ChartColumnBig />}
     href="/docs/observability"
   />
 </Cards>
 </Steps>
 
+En bas de ce menu, en cliquant sur votre nom d'utilisateur, vous pouvez personnaliser votre expérience :
 
-En bas de ce menu, en cliquant sur votre nom d'utilisateur, vous pouvez personnaliser votre expérience : 
-
+- Choix de la langue : Français ou Anglais
 - Basculer en mode sombre ou clair,
-- D'activer ou désactiver le mode plein écran,
+- Choisir le thème parmi les thèmes prédéfinis proposés
 - De basculer l'interface en Français ou en Anglais (d'autres langues seront prochainement proposées),
 - De voir quel utilisateur est connecté et de vous déconnecter de Jask en sélectionnant le choix du menu qui s'ouvre lorsque vous cliquez sur votre nom.
+
+![profile](@public/accueil_profile.png)

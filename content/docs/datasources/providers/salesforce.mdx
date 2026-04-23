@@ -1,0 +1,165 @@
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+import { Cards } from "nextra/components";
+
+# Salesforce
+
+![Salesforce](@public/settings/salesforce.png)
+
+Salesforce est une plateforme CRM dans laquelle vos équipes gèrent opportunités, comptes, contacts et bien d’autres objets métier. Ce guide décrit comment préparer **une application connectée OAuth2** côté Salesforce, enregistrer les identifiants dans Jask, puis configurer la **source de données** selon le mode d’accès choisi.
+
+Il existe deux modes d'accès aux données dans Salesforce :
+
+- **Compte utilisateur** — chaque utilisateur doit se connecter individuellement à Salesforce (flux OAuth2 par utilisateur).
+- **Compte de service** — tous les utilisateurs accèdent aux données via le compte de service associé à la connexion choisie (un seul contexte d’accès partagé).
+
+## Prérequis
+
+- Un compte **administrateur Salesforce** (pour créer une application connectée et consulter les secrets OAuth)
+- Un compte Jask avec le [rôle administrateur](/docs/users_groups/roles) (pour **Connexions et secrets** et **Gestion des sources**)
+- L’**URL de votre instance** Salesforce (par ex. `https://monentreprise.my.salesforce.com`)
+
+## Guide Administrateur
+
+### 1. Créer une application connectée (OAuth2) dans Salesforce
+
+<Callout type="info">
+  Rendez-vous directement à la partie 3 si vous avez déjà créé une application
+  connectée (OAuth2) dans Salesforce et ajoutez les identifiants dans Jask.
+</Callout>
+
+Une **External Client Application** permet à Jask d’échanger un code d’autorisation contre des jetons d’accès via OAuth2.
+
+<Steps>
+
+#### Ouvrir le gestionnaire d’applications
+
+Connectez-vous à Salesforce avec un compte administrateur. Ouvrez **Setup** (Paramètres / la roue dentée), puis dans la **recherche rapide** saisissez **External Client App Manager**.
+
+Cliquez sur **New External Client App** (libellé pouvant être en anglais selon la langue de l’interface).
+
+![Nouvelle application connectée dans App Manager](@public/settings/provider/salesforce/setup.png)
+
+#### Renseigner les informations de base
+
+Indiquez au minimum :
+
+- **Connected App Name** : nom visible (par ex. `Jask`)
+- **API Name** : nom technique généré automatiquement
+- **Contact Email** : email de contact administrateur
+
+![Nouvelle application connectée dans App Manager](@public/settings/provider/salesforce/basic.png)
+
+#### Activer OAuth et l’URL de redirection Jask
+
+Cochez **Enable OAuth Settings** (Activez les paramètres OAuth).
+
+Dans **Callback URL** (URL de rappel), ajoutez l’URL de redirection OAuth utilisée par Jask, qui se termine par le chemin **`/oauth2/callback`** :
+
+```text filename="Exemple d’URL de redirection"
+https://<votre-domaine-jask>/oauth2/callback
+```
+
+<Callout type="warning">
+  Remplacez l’hôte par le domaine réel de votre environnement Jask (production,
+  recette, etc.). En cas de doute, confirmez l’URL exacte avec votre référent
+  technique ou la documentation de déploiement.
+</Callout>
+
+![Paramètres OAuth et URL de rappel](@public/settings/provider/salesforce/oauth.png)
+
+Dans **Selected OAuth Scopes**, ajoutez les autorisations nécessaires pour que Jask puisse interroger l’API Salesforce au nom des utilisateurs ou du compte de service. Selon votre politique de sécurité, vous pouvez par exemple inclure notamment :
+
+```note filename="Scopes couramment utilisés (exemples)"
+Manage user data via APIs
+Manage user data via Web browsers
+Refresh_token, offline_access
+```
+
+<Callout type="info">
+  La liste exacte des scopes peut être affinée avec votre équipe sécurité
+  Salesforce. Toute restriction trop stricte peut empêcher le rafraîchissement
+  des jetons ou l’accès aux objets attendus.
+</Callout>
+
+Désactivez le bouton "Require Proof Key for Code Exchange (PKCE) extension for Supported Authorization Flows" et activez "Enable Refresh Token Rotation".
+
+![Paramètres OAuth et URL de rappel](@public/settings/provider/salesforce/oauth-params.png)
+
+#### Enregistrer et récupérer Consumer Key et Consumer Secret
+
+Enregistrez l’application. Salesforce peut indiquer un délai de **quelques minutes** avant la prise en compte complète des paramètres OAuth.
+
+Ouvrez ensuite le détail de l’application connectée, rendez-vous sur l'onglet "Settings" et récupérez :
+
+- **Consumer Key** → correspond au champ **App. ID** dans Jask
+- **Consumer Secret** → correspond au champ **App. Secret** dans Jask (utilisez **Click to reveal** pour l’afficher la première fois)
+
+![Consumer Key et Consumer Secret](@public/settings/provider/salesforce/key.png)
+
+Documentation Salesforce à titre de référence : [Create a Connected App](https://help.salesforce.com/s/articleView?id=sf.connected_app_create.htm&type=5).
+
+#### Optionnel : Passer en `client credential flow` via un compte de service
+
+<Callout type="warning">
+  La manipulation suivante est à faire uniquement si vous souhaitez passer l'applisation en `client credential flow` via un compte de service pour que les utilisateurs dans jask n'aient pas à se connecter. Les droits et permissions d'accès de Salesforce seront déterminés par l'utilisateur sélectionné en guise de compte de service.
+</Callout>
+
+Rendez-vous sur l'app et cliquez sur le bouton "Edit" en haut à droite.
+
+![Paramètres OAuth et URL de rappel](@public/settings/provider/salesforce/edit.png)
+
+Activer dans Flow Enablement : `Enable Client Credentials Flow`
+
+![Paramètres OAuth et URL de rappel](@public/settings/provider/salesforce/credential-flow.png)
+
+Ajouter un compte utilisateur en guise de compte de service.
+
+![Paramètres OAuth et URL de rappel](@public/settings/provider/salesforce/run-as.png)
+
+</Steps>
+
+### 2. Enregistrer le secret dans Jask
+
+Dans Jask, ouvrez **Réglages** → **Sources de données** → **Connexions et secrets**, puis cliquez sur **+ Nouveau** (ou **Nouveau**). Renseignez le formulaire :
+
+- **Nom** : libellé reconnaissable (par ex. `salesforce production`)
+- **Type** : **Salesforce**
+- **URL** : URL de votre instance Salesforce (ex. `https://monentreprise.my.salesforce.com`)
+- **App. ID** : Consumer Key de l’application connectée
+- **App. Secret** : Consumer Secret
+- **Visibilité** : par ex. **Privé** ou selon votre politique (qui peut réutiliser ce secret pour créer des sources)
+
+Validez avec **Valider**.
+
+![Ajouter un secret Salesforce dans Jask](@public/salesforce/jask-connexion-secret-salesforce.png)
+
+### 3. Créer la source de données (étape Connectivité)
+
+Toujours en tant qu’administrateur, allez dans **Gestion des sources** et lancez l’assistant **Nouvelle source de données**. À l’étape **Connectivité** (**Connectez votre instance Salesforce**), choisissez le **mode d’accès aux données** et la **connexion** créée à l’étape précédente.
+
+<Callout type="warning">
+  Sélectionnez la bonne connexion en fonction de la configuration de votre
+  application connectée dans Salesforce. Si vous avez activé le `client
+  credential flow` via un compte de service, sélectionnez le mode "Compte de
+  service". Sinon, sélectionnez le mode "Compte utilisateur".
+</Callout>
+
+**Compte utilisateur** — chaque utilisateur doit **se connecter individuellement** à Salesforce (flux OAuth2 par utilisateur). Sélectionnez la connexion à utiliser pour l’OAuth2, puis utilisez **Testez la connexion** lorsque l’interface le permet.
+
+![Mode compte utilisateur et test de connexion](@public/salesforce/jask-source-mode-utilisateur.png)
+
+**Compte de service** — tous les utilisateurs accèdent aux données **via le compte de service** associé à la connexion choisie (un seul contexte d’accès partagé). Sélectionnez la connexion dans **Connexion à utiliser pour l’accès aux données**, puis testez la connexion une fois la sélection effectuée.
+
+![Mode compte de service](@public/salesforce/jask-source-mode-compte-service.png)
+
+Une fois le test de connexion effectué, vous pouvez voir les objets disponibles dans Salesforce.
+Vous pouvez enfin séléctionner si vous souhaitez filtrer que certaines tables ou certains objets.
+
+Poursuivez avec les étapes **Indexation** puis **Revoir & Créer**.
+
+<Callout type="info">
+  L’indexation périodique et les options détaillées peuvent varier selon votre
+  configuration Jask ; utilisez les écrans d’indexation pour finaliser la
+  source.
+</Callout>

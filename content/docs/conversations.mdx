@@ -1,0 +1,167 @@
+import { Callout, Cards, Card, Steps } from 'nextra/components'
+import {
+  BookCheck,
+  Bot,
+  Files,
+  History,
+  Keyboard,
+  MessagesSquare,
+  Workflow,
+  Pencil,
+  MessageSquare,
+} from "lucide-react";
+import { NewLabel } from "@components/new_label";
+
+<div
+  style={{
+    position: "relative",
+    paddingBottom: "56.25%",
+    height: 0,
+    overflow: "hidden",
+    width: "100%",
+    borderRadius: "8px",
+    marginTop: "24px",
+  }}>
+  <iframe
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "12px",
+    }}
+    src="https://www.youtube.com/embed/fkKRprSlsgw?si=7cCbVi8OziS3Hu10"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+</div>
+
+# Conversations
+
+Les conversations sont l'interface principale des réponses générées par l'IA : c'est ici que vous échangez avec les agents de votre organisation, que vous partagez des fichiers, et que vous exploitez les résultats produits par l'IA. Chaque conversation est un espace structuré qui va bien au-delà d'un simple échange de messages — les agents peuvent raisonner, exécuter du code, générer des fichiers et exposer leur processus de réflexion en toute transparence.
+
+# Vue d'ensemble
+
+Une conversation JAsk se compose de trois zones distinctes :
+
+- **Le fil de messages** au centre, qui affiche vos messages et les réponses structurées des agents
+- **La zone de saisie** en bas, persistante pendant toute la durée de la conversation, sauf lors des phases de réflexion de l'IA
+- **Le panneau latéral** qui s'ouvre à droite pour afficher les détails de réflexion ou prévisualiser les fichiers générés
+
+Les boutons en haut à droite donnent accès aux actions sur la conversation dans son ensemble (partage, export de la conversation complète).
+
+![conv](@public/conv.png)
+
+## Le fil de messages
+
+### Structure d'une réponse
+
+Chaque réponse dans le fil affiche :
+
+- **L'avatar et le nom de l'agent** qui a traité la requête, avec l'horodatage
+- **Le badge "Réflexion"** pour voir le détail de la réflexion, visible lorsque l'agent a effectué un raisonnement multi-étapes ou exécuté du code
+- **Le contenu de la réponse** — formaté avec titres colorés, tableaux, listes à puces, texte en gras pour les points clés
+- **Les fichiers générés** — affichés sous forme de carte avec un bouton **Télécharger** lorsque l'agent a produit un livrable (CSV, Excel, PDF…)
+- Des actions rapides : Copier la réponse, Feedback positif et négatif sur la réponse, Export de la réponse
+
+Les réponses des agents JAsk sont structurées pour être lisibles, exploitables et traçables. Elles peuvent prendre des formes très variées selon la nature de la requête : texte enrichi, tableaux, listes structurées, fichiers téléchargeables — et s'accompagnent systématiquement d'indicateurs qui vous informent sur le traitement effectué. Cette page explique comment lire une réponse et quelles actions vous pouvez effectuer dessus.
+Le fil des messages peut contenir la production de certains éléments comme des images ou des fichiers.
+En cliquant sur ces éléments ils apparaitront en preview dans le panel de droite.
+
+
+### Format riche des réponses
+
+JAsk formate automatiquement les réponses pour en améliorer la lisibilité par rapport au format de réponse fourni par le modèle utilisé, par exemple :
+
+- Les **titres de sections** pour organiser la structure de la réponse
+- Les **données tabulaires** sont rendues sous forme de tableau avec en-têtes distincts
+- Le **texte en gras** met en évidence les résultats clés, les chiffres importants et les conclusions
+- Les **listes à puces** détaillent les étapes, méthodes ou éléments énumérés
+
+<Callout type="tip">
+  Si une réponse vous semble longue, commencez par les titres pour identifier les sections clés, puis descendez vers les conclusions avant de lire le détail.
+</Callout>
+
+![advanced](@public/advanced.png)
+
+### Télécharger un fichier généré
+
+Lorsqu'un agent produit un fichier (analyse CSV, export Excel, rapport…), celui-ci apparaît sous forme de carte dans la réponse avec :
+
+- L'**icône du type de fichier**
+- Le **nom du fichier**
+- La mention **"Draft généré par l'IA"**
+- Un bouton **Enregistrer** pour le sauvegarder dans un des dossiers de votre bibliothèque
+- Un bouton **Télécharger** pour le sauvegarder localement
+
+Vous pouvez également cliquer sur la carte pour ouvrir une **prévisualisation** du fichier dans un panneau latéral droit.
+
+### Actions sur une réponse
+
+En bas à droite de chaque message d'agent, une barre d'actions apparaît au survol :
+
+| Action | Description |
+|--------|-------------|
+| **Copier** | Copie le contenu de la réponse dans le presse-papiers |
+| **👍 Utile** | Signale la réponse comme satisfaisante (feedback positif) |
+| **👎 Pas utile** | Signale la réponse comme insuffisante (feedback négatif) |
+| **`…` Plus** | Ouvre un menu d'options supplémentaires (export, signalement…) |
+
+![conv_actions](@public/conv_actions.png)
+
+<Callout type="info">
+  Le feedback 👍 / 👎 est utilisé par les administrateurs JAsk pour suivre la qualité des agents et identifier les cas d'usage à améliorer. N'hésitez pas à l'utiliser.
+</Callout>
+
+## La réflexion
+Au cours de son processus de génération, le processus auquel l'utilisateur a fait appel va pouvoir raisonner en plusieurs étapes. Ces étapes permettent à l'IA de décomposer son travail en afin d'atteindre l'objectif demandé par l'utilisateur.
+Lors de la réflexion, les étapes vont défiler dans le fil de la conversation, mais tout le détail et l'historique des étapes est disponible dans le panneau de réflexion.
+
+Le panneau de réflexion est l'interface de transparence de JAsk : il expose l'ensemble du processus de raisonnement qu'un agent a suivi pour produire une réponse. Plutôt que de livrer uniquement un résultat, JAsk vous permet de vérifier comment ce résultat a été obtenu — quelles étapes ont été exécutées, quelles données ont été analysées, quelles sources ont été consultées, et avec quel niveau de confiance. C'est un outil essentiel pour valider les réponses avant de les utiliser dans un contexte professionnel.
+
+### Panneau de réflexion
+
+Lorsqu'une réponse implique un raisonnement multi-étapes ou une exécution de code, un badge **Réflexion →** apparaît à droite du nom de l'agent dans le fil de conversation. Cliquez dessus pour ouvrir le panneau latéral droit.
+
+Le panneau s'ouvre sans quitter le fil de conversation — il coexiste avec la vue principale.
+
+<Callout>
+Le nombre d'étapes que va suivre le processus dépend du niveau de réflexion défini au niveau de la conversation, ou de l'agent en question. Un niveau de réflexion élevé induira un nombre d'étapes beaucoup plus conséquent qu'un niveau de réflexion faible. 
+ [Détails](/docs/catalog/agents/create)
+</Callout>
+
+Dans le panel détaillé vous retrouverez différents onglets : 
+* Voir tout : Toutes les étapes de réflexion
+* Réflexions : Onglet filtré sur les étapes de raisonnement
+* Infos clés : Onglet filtré sur les infos clés enregistrées au cours de la réflexion
+* Sources : Onglet filtré sur les sources utilisés au cours de la réflexion
+* Agents : Onglet filtré sur les agents utilisés au cours de la réflexion
+
+<details>
+<summary>Détails</summary>
+![thinking](@public/thinking.png)
+</details>
+## Pourquoi avoir des conversations distinctes ?
+
+- **Contexte** : Chaque conversation conserve le contexte de tous les messages de la conversation, ce qui permet à l'agent de fournir des réponses plus pertinentes basées sur l'historique de la conversation.
+- **Organisation** : Les conversations distinctes vous permettent de séparer les sujets ou projets. Par exemple, vous pouvez avoir une conversation pour un projet spécifique et une autre pour des questions générales.
+- **Gestion** : Vous pouvez facilement retrouver et gérer vos interactions passées en accédant à vos conversations enregistrées.
+
+Vous accédez à l'ensemble de l'historique de vos conversations depuis le menu de l'onglet Chats, où les conversations sont groupées et ordonnées en fonction des préférences choisies.
+
+## Partager une conversation
+
+Le bouton **Partager** en haut à droite permet de partager l'intégralité du fil de conversation avec d'autres utilisateurs de votre organisation.
+
+Définissez le titre, la description et le niveau de visibilité de votre partage (Tous les utilisateurs qui ont accès à cet agent ou une sous-sélection des utilisateurs qui y ont accès).
+
+<Callout type="info">
+  Le partage d'une conversation permet à vos collègues de consulter l'ensemble des échanges, y compris les fichiers générés et les détails de réflexion des agents.
+</Callout>
+
+## Exporter une conversation
+
+Le bouton **`…`** en haut à droite de l'écran permet d'exporter l'intégralité de la conversation en différents formats : word, markdown, PDF.
+
+L'ensemble des requêtes utilisateur et des réponses générées par l'IA seront intégrées à l'export fourni.

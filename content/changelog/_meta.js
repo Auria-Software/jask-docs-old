@@ -1,10 +1,11 @@
-import { newLabel } from "@components/new_label";
+import { NewLabel } from "@components/new_label";
 
 export default {
   _1: {
     type: "separator",
     title: "Version",
   },
-  version202602: <div key="202602">v.2026.02 {newLabel}</div>,
-  version202510: <div key="202510">v.2025.10</div>,
+  version202604: <NewLabel>v.2026.04</NewLabel>,
+  version202602: "v.2026.02",
+  version202510: "v.2025.10",
 };

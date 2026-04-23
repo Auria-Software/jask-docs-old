@@ -6,8 +6,8 @@ import Script from "next/script";
 
 const banner = (
   <Banner storageKey="2.0-release">
-    <a href="/changelog/version202602">
-      🎉 Nouvelle version de Jask v2026.02 →
+    <a href="/changelog/version202604">
+      🎉 Nouvelle version de Jask v2026.04 →
     </a>
   </Banner>
 );
@@ -15,7 +15,7 @@ const navbar = (
   <Navbar
     logo={
       <b>
-        <img src="/logo_jask.png" alt="Logo Jask" width={100} height={100} />
+        <img src="/Logo_Noir.svg" alt="Logo Jask" width={100} height={100} />
       </b>
     }
     // ... Your additional navbar options
@@ -36,7 +36,10 @@ export default async function RootLayout({ children }) {
         {/* Prevent search engine indexing */}
         <meta name="robots" content="noindex, nofollow" />
         <meta name="googlebot" content="noindex, nofollow" />
-        <meta name="google-site-verification" content="QZuJf6xlz4IGab0TRwRHSag-c_KaNTYxJ710BRr3-mg" />
+        <meta
+          name="google-site-verification"
+          content="QZuJf6xlz4IGab0TRwRHSag-c_KaNTYxJ710BRr3-mg"
+        />
         {/* Google Analytics */}
         <Script
           async

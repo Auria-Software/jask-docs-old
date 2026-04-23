@@ -1,0 +1,175 @@
+import { Callout } from "nextra/components";
+import { Cards } from "nextra/components";
+import {
+  Bot,
+  Search,
+  Package,
+  MessageSquare,
+  MessagesSquare,
+  FolderSearch2,
+  Workflow,
+  History,
+ BookType,
+ BrainCircuit,
+  Group,
+  Languages,
+  Wrench,
+} from "lucide-react";
+import { BetaLabel } from "@components/new_label";
+import { Table } from "nextra/components";
+
+# Les services Jask
+
+---
+
+Retrouvez l'ensemble de la [terminologie Jask](/docs/terminology)
+
+<Cards>
+  <Cards.Card
+    title="Prompts"
+    href="/docs/catalog/prompts_store"
+    icon={<BookType />}
+  />
+  <Cards.Card
+    title="Agents"
+    href="/docs/catalog/agents/create"
+    icon={<Bot />}
+  />
+  <Cards.Card
+    title="Workflows"
+    href="/docs/catalog/agents/applications/intro"
+    icon={<Package />}
+  />
+  <Cards.Card
+    title="Groupe d'agents"
+    href="/docs/catalog/agents/group"
+    icon={<Group />}
+  />
+  <Cards.Card title="Skills" href="/docs/catalog/skills" icon={<Wrench />} />
+  <Cards.Card
+    title="Expériences"
+    href="/docs/catalog/experiences"
+    icon={<Workflow />}
+  />
+  <Cards.Card
+    title="Modèles"
+    href="/docs/catalog/ai_models"
+    icon={<BrainCircuit />}
+  />
+</Cards>
+
+## Les workflows custom
+
+Créés par vous ou votre organisation, ces workflows permettent de réaliser une série de tâches spécifiques de manière automatisée selon la configuration qui a été définie.
+Vous pouvez sélectionner les workflows via la commande @ ou en cherchant dans le catalogue. Et l'exécuter directement depuis la page d'accueil.
+
+### Les workflows natifs (Microsoft)
+
+Ils sont présents par défaut sur votre environnement et permettent d'intéragir avec des ressources Microsoft (emails, transcripts, sharepoints, MS Graph...).
+
+## Interroger vos bases de données
+
+Recherchez des informations dans les bases de connaissance de votre organisation.
+L'IA va générer une réponse en fonction de votre requête en se basant sur les bases de données sélectionées.
+Vous pouvez **sélectionner une ou plusieurs sources de données** que vous souhaitez interroger avec votre requête en utilisant la commande / puis en tapant le nom de la source
+
+[Voir plus](/docs/catalog/agents/applications)
+
+## Enchaîner les interactions
+
+Depuis l'accueil, vous pouvez enchaîner plusieurs services présentés précédemment. Cela vous permet de poursuivre, d'approfondir ou de challenger les résultats fournis par l'IA
+Par exemple, vous pouvez :
+
+- **Exécuter** un workflows
+- **Rebondir sur le résultat du worfklow** avec un agent pour approfondir
+
+## Croiser les services
+
+<Table>
+  <thead>
+    <Table.Tr>
+      <Table.Th>Service(s)</Table.Th>
+      <Table.Th>Comportement</Table.Th>
+    </Table.Tr>
+  </thead>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>Agent</Table.Td>
+      <Table.Td>
+        L'agent répond à la requête de l'utilisateur en prenant en compte les
+        fichiers importés (si c'est le cas)
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Groupe d'agents</Table.Td>
+      <Table.Td>
+        Le groupe d'agents répond à la requpete de l'utilisateur en fonction du
+        mode de fonctionnement défini dans le groupe.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Workflows</Table.Td>
+      <Table.Td>
+        Le workflow se lance en prenant en contexte la requête/fichier saisis
+        par l'utilisateur (si c'est le cas). Si l'application ne permet pas de
+        prendre en contexte un fichier, le fichier importé sera ignoré.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Base de connaissance</Table.Td>
+      <Table.Td>
+        L'IA répond à la requête de l'utilsateur en interrogeant la base de
+        données séléctionnée. Si un fichier est importé, l'IA traitera la base
+        de données sélectionnée et le fichier comme deux sources distinctes pour
+        générer sa réponse.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Plusieurs agents</Table.Td>
+      <Table.Td>
+        Les agents sélectionnés répondent parallèlement à la requête de
+        l'utilisateur.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Plusieurs workflows</Table.Td>
+      <Table.Td>
+        Les workflows sélectionnés sont déclenchés en parallèle.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Plusieurs bases de données</Table.Td>
+      <Table.Td>
+        Les bases de données sont utilisées par l'IA pour répondre à la requête
+        de l'utilisateur.
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Deux services sélectionnés</Table.Td>
+      <Table.Td>Les deux services sont exécutés parallèlement.</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+<Callout type="info">
+  Le service natif Deep Research a été déprécié et remplacé par les niveaux de
+  réflexion
+</Callout>
+
+<Cards>
+  <Cards.Card
+    title="Historique des conversations"
+    href="/docs/menu"
+    icon={<MessagesSquare />}
+  />
+  <Cards.Card
+    title="Détails d'une conversation"
+    href="/docs/conversations"
+    icon={<History />}
+  />
+  <Cards.Card
+    title="Création des services IA"
+    href="/docs/catalog/agents/create"
+    icon={<Bot />}
+  />
+</Cards>

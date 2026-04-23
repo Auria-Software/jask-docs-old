@@ -1,0 +1,42 @@
+---
+title: Projets
+sidebarTitle: Projets
+asIndexPage: true
+---
+
+import { Callout, Cards } from 'nextra/components'
+import { Cable,FolderKanban,ShieldCheck } from 'lucide-react'
+
+# Mes Projets
+
+Les Projets sont des espaces de travail collaboratifs dans JAsk qui permettent à une équipe de partager un même contexte conversationnel, des fichiers et des sources de données. Contrairement aux conversations individuelles de la section Chats, un Projet persiste dans le temps et est accessible à tous les membres invités — chacun peut y démarrer une conversation, retrouver l'historique et s'appuyer sur les mêmes ressources.
+
+Un Projet est particulièrement utile lorsqu'une équipe travaille ensemble sur un sujet structuré : une levée de fonds, un appel d'offres, un projet client ou une recherche thématique. Il centralise en un seul endroit les documents de référence, les connexions à vos sources de données (SharePoint, Salesforce, BigQuery...) et les capacités IA configurées pour ce contexte précis.
+
+![projects](@public/projects.png)
+
+## Vue d'ensemble
+
+Chaque Projet dans JAsk repose sur quatre composantes complémentaires :
+
+- **Le contexte conversationnel** : toutes les conversations menées dans le projet sont visibles par les membres et organisées dans l'historique du projet. L'agent JAsk, au cœur du projet, s'appuie sur ce contexte commun pour répondre.
+-**L'intelligence du projet** : Le modèle, niveau de réflexion et skills attachés au projet
+- **Les ressources** : les fichiers importés manuellement et les sources connectées (intégrations externes) constituent la base de connaissance du projet. L'agent y accède pour ancrer ses réponses.
+- **Les membres et les droits** : chaque collaborateur est invité avec un niveau d'accès précis — Lecture seule, Contributeur ou Administrateur — ce qui garantit une gouvernance adaptée à chaque contexte.
+
+Sur l'onglet **Collab** du menu, vous retrouvez la liste de vos projets triée par date de création : le nom du projet, sa description, un aperçu des membres participants.
+
+## Dans cette section
+
+<Cards>
+  <Cards.Card
+    title="Projet"
+    href="/docs/projects/projects_preview"
+    icon ={<FolderKanban/>}
+  />
+  <Cards.Card
+    title="Gérer un projet"
+    href="/docs/projects/projects_settings"
+    icon ={<ShieldCheck/>}
+  />
+</Cards>

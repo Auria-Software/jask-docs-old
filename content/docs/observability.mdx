@@ -5,13 +5,9 @@ import { Tabs } from "nextra/components";
 
 Depuis les réglages, allez sur la page `Observabilité`, vous pouvez suivre la consommation des agents, workflows, modèles et utilisateurs de votre organisation. Cette vue est la pour vous donner une vue d'ensemble de l'utilisation et de la consommation sur Jask.
 
-![observability](@public/settings/observability.png)
-
 ### Filtrer sur une période
 
 Choisissez la période sur laquelle vous voulez voir les données en utilisant le filtre en haut à droite de la page.
-
-![observability](@public/settings/observability-date.png)
 
 ### Télécharger les logs
 
@@ -26,8 +22,6 @@ En effectuant cette action, vous allez télécharger un fichier CSV contenant le
   analyse évolutive mois par mois sans recharger l’historique complet.
 </Callout>
 
-![download logs](@public/settings/observability/download.png)
-
 Chaque ligne du fichier correspond à un log associé à une requête effectuée par un utilisateur dans Jask.
 Une seule requête adressée à un agent **peut générer plusieurs lignes**, chacune représentant un type de ressource utilisé lors du traitement de la requête :
 
@@ -37,9 +31,9 @@ Une seule requête adressée à un agent **peut générer plusieurs lignes**, ch
 - Datasources : 0 à N lignes par source de données utilisée par l’agent
 - Resources : 0 à N lignes par fichier ou ressource consommée
 
-![download logs](@public/settings/observability/logs.png)
+![download logs](@public/logs.png)
 
-###Vue d'ensemble
+### Vue d'ensemble
 Dans cette vue vous avez un résumé de la consommation globale de Jask au travers de 6 graphiques :
 
 - le nombre de requêtes (nombre de requêtes, utilisateurs actifs, estimation du coûts, évolution temporelle des requêtes
@@ -49,7 +43,7 @@ Dans cette vue vous avez un résumé de la consommation globale de Jask au trave
 - les modèles les plus utilisés (nombre de modèles déployés, nombre de modèles utilisés, estimations du coût, bar chart de la répartition des requêtes sur le top 10 des modèles utilisés)
 - les utilisateurs les plus actifs (nombre total d'utilisateurs, nombre total d'utilisateurs actifs, nombre de requêtes moyen par utilisateur, bar chart de la répartition des requêtes pour le top 5 utilisateurs)
 
-![observability](@public/settings/kpi-global.png)
+![obs_general](@public/obs_general.png)
 
 ### Onglets dédiés
 
@@ -73,8 +67,8 @@ En haut de l'écran d'observabilité, vous pouvez accéder à différents onglet
     <div />
     Par utilisateur : taux d'utilisation, nombre de requêtes total, tokens
     consommés, estimations coût
-    ![observability_users](@public/settings/kpi-users.png)
-  </Tabs.Tab>
+![obs_users](@public/obs_users.png)  
+</Tabs.Tab>
   <Tabs.Tab>
     **Groupes**: <div /> Total : Nombre de groupes, % groupes actifs (au moins 1
     utilisateur du groupe actif), total de requêtes, estimation coûts
@@ -86,7 +80,7 @@ En haut de l'écran d'observabilité, vous pouvez accéder à différents onglet
       La somme des taux d'utilisation des groupe peut dépasser 100% puisque
       chaque utilisateur est compté dans chacun des groupes dans lequel il est
     </Callout>
-    ![observability_groups](@public/settings/kpi-groups.png)
+   ![obs_group](@public/obs_group.png) 
   </Tabs.Tab>
   <Tabs.Tab>
     **Agents**:
@@ -94,7 +88,8 @@ En haut de l'écran d'observabilité, vous pouvez accéder à différents onglet
     estimation coûts
     <div />
     Par agent : taux d'utilisation, nombre de requêtes total, tokens consommés,
-    estimations coût ![observability_agents](@public/settings/kpi-agents.png)
+    estimations coût 
+    ![obs_agents](@public/obs_agents.png) 
   </Tabs.Tab>
   <Tabs.Tab>
     **Workflows**: <div /> Total : Nombre de workflows, total de requêtes, total
@@ -102,7 +97,7 @@ En haut de l'écran d'observabilité, vous pouvez accéder à différents onglet
     <div />
     Par workflow : taux d'utilisation, nombre de requêtes total, tokens
     consommés, estimations coût
-    ![observability_workflows](@public/settings/kpi-workflows.png)
+   ![obs_workflow](@public/obs_workflow.png) 
   </Tabs.Tab>
   <Tabs.Tab>
     **Sources de données**: <div /> Total : Nombre de sources de données, total
@@ -110,7 +105,7 @@ En haut de l'écran d'observabilité, vous pouvez accéder à différents onglet
     <div />
     Par sources de données : taux d'utilisation, nombre de requêtes total,
     tokens consommés, estimations coût
-    ![observability_datasources](@public/settings/kpi-datasources.png)
+   ![obs_datasources](@public/obs_datasources.png) 
   </Tabs.Tab>
   <Tabs.Tab>
     **File Rooms**: <div /> Total : Nombre de file rooms, total de requêtes,
@@ -127,7 +122,7 @@ En haut de l'écran d'observabilité, vous pouvez accéder à différents onglet
     <div />
     Par modèle : taux d'utilisation, nombre de requêtes total, tokens consommés,
     estimations coût
-    ![observability_models](@public/settings/kpi-models.png){" "}
+      ![obs_models](@public/obs_models.png) 
   </Tabs.Tab>
   <Tabs.Tab>
     **Canaux**: <div /> Total : Nombre de canaux, total de requêtes, total
@@ -135,6 +130,6 @@ En haut de l'écran d'observabilité, vous pouvez accéder à différents onglet
     <div />
     Par canal: taux d'utilisation, nombre de requêtes total, tokens consommés,
     estimations coût
-    ![observability_channels](@public/settings/kpi-channels.png){" "}
+       ![obs_channels](@public/obs_channels.png) 
   </Tabs.Tab>
 </Tabs>

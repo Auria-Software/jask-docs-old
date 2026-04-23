@@ -3,28 +3,47 @@
 Voici quelques questions fréquemment posées sur Jask :
 
 <details>
-  <summary>
-    Comment faire pour que les agents ne répondent que sur les textes qu’on leur
-    fournit ?
-  </summary>
-  Deux paramètres sur lesquels jouer dans la [configuration d'un
-  agent](/chats_room/intro) : - Le Prompt système afin d’indiquer à l’agent de
-  ne pas répondre s’il ne dispose pas de l’information, - La température de
-  l’agent (proche de 0) pour éviter que l’IA soit trop créative et génère des
-  hallucinations
+  <summary>À quoi sert Jask et en quoi est-il différent d’un simple chatbot IA ?</summary>
+  Jask est une plateforme IA complète qui va bien au-delà d’un chatbot générique. Elle permet à vos équipes de créer des **agents IA métier**, des **workflows automatisés** et des **projets collaboratifs**, tous branchés sur vos propres sources de données (SharePoint, BigQuery, Notion, Salesforce…). Contrairement à un chatbot grand public, chaque agent Jask est configuré avec un rôle précis, des connaissances internes et un niveau de confidentialité adapté à votre organisation.
+</details>
+
+<details>
+  <summary>Quelle est la différence entre un agent, un groupe d’agents et un workflow ?</summary>
+  Ce sont trois types de **services IA** distincts dans Jask :
+  - Un **agent** répond aux questions en s’appuyant sur ses sources de données et son prompt système. C’est le service de base.
+  - Un **groupe d’agents** regroupe plusieurs agents qui se coordonnent pour traiter une requête complexe, selon différents modes de fonctionnement.
+  - Un **workflow** est une série d’actions automatisées et prédéfinies. Il s’exécute de manière structurée, idéal pour des tâches répétitives ou des processus multi-étapes.
+
+  Vous pouvez combiner ces trois types depuis l’interface Jask pour enchaîner ou croiser les services.
+</details>
+
+<details>
+  <summary>Comment partager une conversation ou un résultat avec un collègue ?</summary>
+  Depuis n’importe quelle conversation, cliquez sur le bouton **Partager** en haut à droite. Vous pouvez définir un titre, une description et choisir la visibilité : tous les utilisateurs ayant accès à cet agent, ou une sélection précise. Votre collègue accède alors à l’intégralité du fil de conversation, y compris les fichiers générés et les détails de réflexion de l’agent.
+
+  Vous pouvez également exporter la conversation en **Word, Markdown ou PDF** via le menu `…`.
+</details>
+
+<details>
+  <summary>Comment utiliser les Projets pour collaborer en équipe ?</summary>
+  Les Projets sont des espaces de travail partagés et persistants. Chaque membre invité peut y mener ses propres conversations, retrouver l’historique commun et accéder aux mêmes ressources (fichiers importés, sources connectées). Vous pouvez mentionner n’importe quel agent disponible directement dans le chat du projet avec `@nom_de_l_agent`. Les droits d’accès sont définis par niveau : Lecture seule, Contributeur ou Administrateur.
+</details>
+
+<details>
+  <summary>Qu’est-ce que le panneau de réflexion et pourquoi est-il utile ?</summary>
+  Lorsqu’un agent effectue un raisonnement multi-étapes, un badge **Réflexion →** apparaît dans la réponse. En cliquant dessus, vous ouvrez un panneau latéral qui détaille chaque étape du raisonnement : ce que l’agent a analysé, quelles sources il a consultées, et avec quelle logique il est parvenu à sa réponse. C’est un outil essentiel pour **valider la fiabilité d’une réponse** avant de l’utiliser dans un contexte professionnel. Le niveau de détail dépend du niveau de réflexion configuré sur l’agent.
+</details>
+
+<details>
+  <summary>Comment faire pour que les agents ne répondent que sur les textes qu’on leur fournit ?</summary>
+  Deux paramètres sur lesquels jouer dans la [configuration d’un agent](/docs/catalog/agents/create) :
+  - Le **Prompt système** : indiquez explicitement à l’agent de ne pas répondre s’il ne dispose pas de l’information dans ses sources.
+  - Le **niveau de réflexion** : "faible" limite la créativité et réduit le risque d’hallucinations.
+
+  Vous pouvez aussi activer l’option **"Informe l’utilisateur lorsque la réponse ne se base pas sur les sources connectées"** dans la configuration avancée de l’agent.
 </details>
 
 <details>
   <summary>Pourquoi donner un `Prompt système` à un agent ?</summary>
-  Le Prompt système permet de donner un cadre, pour cibler la réponse si besoin
-  (le ton employé par l'agent, périmètre, manière d’analyse, structure de
-  réponse, etc). [Cliquez ici](/docs/assistants/create#etape-3--intelligence)
-  afin de consulter le guide de configuration d'un bon Prompt système.
-</details>
-
-<details>
-  <summary>Qu’est-ce que la température en IA ? </summary>
-  Il s’agit d’un réglage qui contrôle le niveau de créativité des réponses :
-  plus elle est basse (ex. 0), plus les réponses sont factuelles ; plus elle est
-  haute (ex. 1), plus elles sont variées et créatives.
+  Le Prompt système permet de donner un cadre à l’agent : le ton à employer, le périmètre de réponse, la structure attendue, les sujets à éviter. Sans prompt système, l’agent se comporte comme un LLM générique. Avec un prompt bien rédigé, il devient un expert métier ciblé. [Consultez le guide de configuration d’un agent](/docs/catalog/agents/create#étape-3--intelligence) pour des exemples concrets.
 </details>
