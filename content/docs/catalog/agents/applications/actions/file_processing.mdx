@@ -8,7 +8,7 @@ Deux actions sont disponibles pour traiter les fichiers :
 - Extraction de tableau
 - Analyse de fichier(s)
 
-{/* ![application_file_processing](@public/applications/file_processing.png) */}
+![application_file_processing](@public/applications/file_processing.png)
 
 <Callout type="info">
   Si vous souhaitez extraire des données d'un document de grande taille dans un
@@ -76,7 +76,7 @@ Tableau(x) : un ou plusieurs
 
 Cette action vous permet d'extraire des informations structurées depuis des documents et de les restituer sous forme de tableaux configurables.
 
-{/* ![application_file_processing](@public/applications/tab_extraction.png) */}
+![application_file_processing](@public/applications/tab_extraction.png)
 
 Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Traitement de fichiers` et enfin sur `Extraction de tableau`.
 Une fois l'action dans le workflow, vous pouvez entrer les colonnes à extraire, sélectionner le modèle LLM utilisé et configurer les paramètres avancés.
@@ -159,7 +159,7 @@ Une fois l'action dans le workflow, vous pouvez entrer les colonnes à extraire,
 
 Cette action vous permet d'analyser ou traiter les documents en entrée (résumé, traduction, restructuration…), en forçant la lecture complète des fichiers si nécessaire.
 
-{/* ![application_file_processing](@public/applications/file_analysis.png) */}
+![application_file_processing](@public/applications/file_analysis.png)
 
 Pour utiliser cette action, cliquez sur le bouton `+` puis sur `Traitement de fichiers` et enfin sur `Analyse de fichier(s)`.
 Une fois l'action dans le workflow, vous pouvez sélectionner le type de traitement, configurer les paramètres avancés et entrer les instructions personnalisées.
@@ -173,8 +173,8 @@ Objectif : Je souhaite extraire les noms et emails de tous les participants à u
 Dans un premier temps, je vais utiliser une brique analyse de fichiers, cette brique va pouvoir parcourir page par page l'intégralité de mes documents, et en extraire uniquement les informations personnalisées. Cette étape est primordiale pour éviter de dépasser le contexte d'entrée du modèle.
 Dans un second temps, je vais utiliser une brique Extraction de tableau, qui va utiliser tous les éléments extraits dans l'étape précédente, sous forme de tableau consolidé.
 Ainsi, même avec de fichiers de grande taille, en travaillant sur les prompts d'extraction, et sur le paramétrage de mon tableau de sortie, je peux extraire de grandes quantités d'information de manière consolidée.
-{/* ![extraction_app](@public/applications/analyse.png) */}
+![extraction_app](@public/applications/analyse.png)
 
-{/* ![extraction_app](@public/applications/table.png) */}
+![extraction_app](@public/applications/table.png)
 
 </details>

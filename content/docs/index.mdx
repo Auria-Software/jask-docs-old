@@ -17,6 +17,7 @@ import {
   BrainCircuit,
   BriefcaseBusinessIcon,
   Cog,
+  BookType,
   ChartSpline,
   Cable,
   ChevronsLeftRightEllipsisIcon,
@@ -25,6 +26,7 @@ import {
   ShieldUser,
   BookA,
   ChartColumnBig,
+  Wrench,
 } from "lucide-react";
 
 # Documentation Jask
@@ -84,7 +86,7 @@ Le menu de gauche vous permet de naviguer sous `Catalogue` dans les vues suivant
 <Cards>
   <Cards.Card
     title="Projets"
-    href="/docs/projects/index"
+    href="/docs/projects"
     icon={<LibraryBig />}
   />
 </Cards>
@@ -106,17 +108,17 @@ Les fonctionnalités accessibles ici sont réparties en 6 sections :
   <Cards.Card
     title="Mes bibliothèques"
     icon={<LibraryBig />}
-    href="/docs/settings/libraries"
+    href="/docs/workspace/libraries"
   />
   <Cards.Card
     title="Sources de données"
-    icon={<ChartSpline />}
-    href="/docs/settings/datasources"
+    icon={<Database />}
+    href="/docs/workspace/datasources"
   />
   <Cards.Card
     title="Automatisation"
     icon={<CalendarSync />}
-    href="/docs/settings/automations"
+    href="/docs/workspace/automations"
   />
 </Cards>
 
@@ -125,28 +127,28 @@ Les fonctionnalités accessibles ici sont réparties en 6 sections :
 <Cards>
   <Cards.Card
     title="Agents IA"
-    icon={<LibraryBig />}
-    href="/docs/settings/agentsia/intro"
+    icon={<Bot />}
+    href="/docs/catalog/agents"
   />
   <Cards.Card
     title="Prompts"
-    icon={<ChartSpline />}
-    href="/docs/settings/prompts_store"
+    icon={<BookType />}
+    href="/docs/catalog/prompts_store"
   />
   <Cards.Card
     title="Skills"
-    icon={<CalendarSync />}
-    href="/docs/settings/skills"
+    icon={<Wrench />}
+    href="/docs/catalog/skills"
   />
   <Cards.Card
     title="Gestion des modèles"
-    icon={<ChartSpline />}
-    href="/docs/settings/ai_models"
+    icon={<BrainCircuit />}
+    href="/docs/catalog/ai_models"
   />
   <Cards.Card
     title="Expériences"
-    icon={<CalendarSync />}
-    href="/docs/settings/experiences/intro"
+    icon={<Workflow />}
+    href="/docs/catalog/experiences"
   />
 </Cards>
 
@@ -156,9 +158,9 @@ Les fonctionnalités accessibles ici sont réparties en 6 sections :
   <Cards.Card
     title="Utilisateurs"
     icon={<UserCog />}
-    href="/docs/settings/users"
+    href="/docs/users_groups/users"
   />
-  <Cards.Card title="Rôles" icon={<ShieldUser />} href="/docs/settings/roles" />
+  <Cards.Card title="Rôles" icon={<ShieldUser />} href="/docs/users_groups/roles" />
 </Cards>
 
 #### Sources de données
@@ -167,17 +169,17 @@ Les fonctionnalités accessibles ici sont réparties en 6 sections :
   <Cards.Card
     title="Gestion des sources"
     icon={<Database />}
-    href="/docs/settings/connectors/permissions"
+    href="/docs/workspace/datasources"
   />
   <Cards.Card
     title="Connexions et secrets"
     icon={<KeyRound />}
-    href="/docs/settings/connectors/permissions"
+    href="/docs/datasources/permissions"
   />
   <Cards.Card
     title="Terminologie interne"
     icon={<BookA />}
-    href="/docs/settings/terminology"
+    href="/docs/terminology"
   />
 </Cards>
 
@@ -187,12 +189,12 @@ Les fonctionnalités accessibles ici sont réparties en 6 sections :
   <Cards.Card
     title="Liste des déploiements"
     icon={<Rocket />}
-    href="/docs/settings/deployement/excel"
+    href="/docs/deployment/excel"
   />
   <Cards.Card
     title="Observabilité"
     icon={<ChartColumnBig />}
-    href="/docs/settings/observability"
+    href="/docs/observability"
   />
 </Cards>
 </Steps>

@@ -12,6 +12,30 @@ import {
 } from "lucide-react";
 import { NewLabel } from "@components/new_label";
 
+<div
+  style={{
+    position: "relative",
+    paddingBottom: "56.25%",
+    height: 0,
+    overflow: "hidden",
+    width: "100%",
+    borderRadius: "8px",
+    marginTop: "24px",
+  }}>
+  <iframe
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "12px",
+    }}
+    src="https://www.youtube.com/embed/fkKRprSlsgw?si=7cCbVi8OziS3Hu10"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+</div>
 
 # Conversations
 
@@ -28,8 +52,6 @@ Une conversation JAsk se compose de trois zones distinctes :
 Les boutons en haut à droite donnent accès aux actions sur la conversation dans son ensemble (partage, export de la conversation complète).
 
 ![conv](@public/conv.png)
-
----
 
 ## Le fil de messages
 

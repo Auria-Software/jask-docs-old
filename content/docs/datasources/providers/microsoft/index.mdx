@@ -28,13 +28,13 @@ Ce guide vous donne un aperçu rapide de la mise en place d'une app registry Jas
 Ouvrez [le portail Microsoft Entra](https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade/quickStartType~/null/sourceType/Microsoft_AAD_IAM) et connectez-vous avec votre compte administrateur puis rendez vous sur la page `Inscription d'application` depuis le menu à gauche.
 Cliquez sur `Nouvelle inscription` en haut à gauche pour créer une nouvelle applicaton.
 
-{/* ![Microsoft Entra](@public/microsoft/Microsoft-New-App.png) */}
+![Microsoft Entra](@public/microsoft/Microsoft-New-App.png)
 
 Nommez l'application `JaskSSO`.
 
 Récupérer les identifiants `Application (client) id` et `Directory (tenant) id` de l'application JaskSSO sur l'accueil de l'application.
 
-{/* ![Microsoft Entra App ID](@public/microsoft/Microsoft-App-ID.png) */}
+![Microsoft Entra App ID](@public/microsoft/Microsoft-App-ID.png)
 
 ### Récupérer la valeur du `Secret` de l'app registry `JaskSSO`
 
@@ -45,18 +45,18 @@ Créer le secret de l'application en vous rendant dans `Certificates & secrets` 
   d'expiration pour recréer un secret au moment venu.
 </Callout>
 
-{/* ![Microsoft Entra Secret](@public/microsoft/Microsoft-New-Secret.png) */}
+![Microsoft Entra Secret](@public/microsoft/Microsoft-New-Secret.png)
 
 Récupérer la `Valeur` du secret pour la suite.
 
-{/* ![Microsoft Entra Secret](@public/microsoft/Microsoft-Secret-Value.png) */}
+![Microsoft Entra Secret](@public/microsoft/Microsoft-Secret-Value.png)
 
 ### Configurer les clés dans `Gestion des secrets` sur Jask
 
 Rendez vous sur Jask. Cliquez sur `Réglages` dans le menu de gauche puis sur `Connexions et secrets`. Rentrer le nom `JaskSSO`, Séléctionnez `Connexion Sharepoint (Obsolète)` puis ajoutez les identifiants récupérés à l'étape 1 et 2.
 Choisissez la visibilité de telle sorte à ce que seulement les personnes ayant accès à ces clés puisse les utiliser pour connecter des sources Sharepoint à Jask. Cliquez sur `Valider`.
 
-{/* ![Jask Secret Management](@public/microsoft/Jask-Secret-Management.png) */}
+![Jask Secret Management](@public/microsoft/Jask-Secret-Management.png)
 
 </Steps>
 
