@@ -1,0 +1,158 @@
+---
+title: "Appeler un Agent"
+description: "Interagir avec un agent IA sans streaming"
+---
+
+import { Tabs } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# Appeler un Agent
+
+Cet endpoint exécute le pipeline agent v2 et retourne la réponse complète en une seule requête JSON — sans streaming SSE.
+
+## Endpoint
+
+```http
+POST /assistant/ask/jask/v2/answer
+```
+
+## Headers requis
+
+| Header          | Valeur                | Description                   |
+| --------------- | --------------------- | ----------------------------- |
+| `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'agent à utiliser |
+| `Content-Type`  | `application/json`    | Format du payload             |
+
+## Corps de la requête
+
+```typescript
+{
+  conversationId: string,  // ID unique de la conversation (UUID)
+  query: string,           // Message de l'utilisateur
+}
+```
+
+| Paramètre        | Type   | Requis | Description                                                                                                       |
+| ---------------- | ------ | ------ | ----------------------------------------------------------------------------------------------------------------- |
+| `conversationId` | string | ✅     | Identifiant de la conversation. Générez un UUID pour une nouvelle conversation — elle sera créée automatiquement. |
+| `query`          | string | ✅     | Le message de l'utilisateur                                                                                       |
+
+<Callout type="info">
+  Aucune initialisation préalable de conversation n'est nécessaire. Réutilisez le
+  même `conversationId` pour poursuivre un échange.
+</Callout>
+
+<Callout>
+  Pour discuter d'un document avec l'agent, commencez par [uploader et indexer le fichier](/api/documents/upload_index). Une fois indexé, le contenu est disponible en recherche (RAG) — les sources apparaissent dans le champ `references` de la réponse.
+</Callout>
+
+## Réponse
+
+Réponse JSON unique contenant la réponse finale de l'agent.
+
+```json
+{
+  "id": "reply-uuid",
+  "conversationId": "conv-uuid",
+  "title": "Titre auto-généré de la conversation",
+  "answer": "La tour Eiffel mesure 330 mètres.",
+  "references": [],
+  "usage": {
+    "totalTokens": 1250,
+    "promptTokens": 800,
+    "completionTokens": 450,
+    "modelId": "gpt-4o",
+    "thinkingDuration": 0,
+    "status": true
+  },
+  "status": true,
+  "error": null,
+  "duration": 3.2
+}
+```
+
+| Champ            | Type    | Description                                              |
+| ---------------- | ------- | -------------------------------------------------------- |
+| `answer`         | string  | Réponse complète de l'agent                              |
+| `references`     | array   | Sources utilisées pour construire la réponse             |
+| `conversationId` | string  | ID de la conversation (utile pour les échanges suivants) |
+| `status`         | boolean | `true` si la requête a réussi                            |
+| `error`          | string  | Message d'erreur le cas échéant                          |
+| `usage`          | object  | Consommation de tokens (champs publics uniquement)       |
+
+## Exemples
+
+<Tabs items={['cURL', 'Python', 'JavaScript']} defaultIndex="0">
+  <Tabs.Tab value="cURL">
+    ```bash
+curl -X POST "https://{organization_jask_backend_name}.azurewebsites.net/api/v1/assistant/ask/jask/v2/answer" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"conversationId": "550e8400-e29b-41d4-a716-446655440000", "query": "Quelle est la taille de la tour Eiffel ?"}'
+```
+  </Tabs.Tab>
+  <Tabs.Tab value="Python">
+    ```python
+import httpx
+from uuid import uuid4
+
+async def ask_agent(query: str, api_key: str, conversation_id: str = None) -> dict:
+conversation_id = conversation_id or str(uuid4())
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            f"https://{organization_jask_backend_name}.azurewebsites.net/api/v1/assistant/ask/jask/v2/answer",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json={"conversationId": conversation_id, "query": query},
+        )
+        response.raise_for_status()
+        return response.json()
+
+# Utilisation
+
+result = await ask_agent(
+query="Quelle est la taille de la tour Eiffel ?",
+api_key="jask_api_key_abc123",
+)
+print(result["answer"])
+
+````
+  </Tabs.Tab>
+  <Tabs.Tab value="JavaScript">
+    ```javascript
+async function askAgent(query, apiKey, conversationId = crypto.randomUUID()) {
+  const response = await fetch(
+    'https://{organization_jask_backend_name}.azurewebsites.net/api/v1/assistant/ask/jask/v2/answer',
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ conversationId, query }),
+    }
+  );
+
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+// Utilisation
+const result = await askAgent(
+  "Quelle est la taille de la tour Eiffel ?",
+  "jask_api_key_abc123"
+);
+console.log(result.answer);
+````
+
+  </Tabs.Tab>
+</Tabs>
+
+## Voir aussi
+
+- [Uploader et indexer un document](/api/documents/upload_index) — préparer un fichier avant de l'interroger
+- [Appeler un Agent en Streaming](/api/agents/post) — pour recevoir la réponse token par token
+- [Conversations](/api/conversations/post) — gérer les conversations manuellement

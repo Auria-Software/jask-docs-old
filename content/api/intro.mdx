@@ -5,77 +5,130 @@ description: "Guide complet pour utiliser l'API Jask"
 
 # Introduction à l'API Jask
 
-Bienvenue dans la documentation de l'API Jask. Cette API vous permet d'intégrer des agents IA conversationnels et des workflows d'automatisation dans vos applications.
+Bienvenue dans la documentation de l'API Jask. Cette API permet d'intégrer des agents IA conversationnels, d'indexer des documents et d'exécuter des workflows d'automatisation dans vos applications.
 
 ## Base URL
 
-La base URL de l'API Jask varie en fonction de l'organisation. Vous pouvez la trouver sur le portail Azure de votre organisation dans la ressource API Jask.
-Sinon vous pouvez la retrouver dans la partie réseau de l'inspecteur de votre navigateur à l'utilisation de la plateforme Jask.
+La base URL varie selon l'organisation. Retrouvez-la sur le portail Azure (ressource API Jask) ou dans l'inspecteur réseau de la plateforme Jask.
 
 ```
-https://{organization_jask_backend_name}.azurewebsites.net/api/v1
+https://{organization_jask_backend_name}/api/v1
 ```
+
+Tous les endpoints documentés ci-dessous sont relatifs à cette base.
 
 ## Authentification
 
-Toutes les requêtes à l'API Jask nécessitent une clé API passée dans le header `Authorization` :
+Chaque requête nécessite une clé API dans le header `Authorization` :
 
 ```http
 Authorization: Bearer YOUR_API_KEY
 ```
 
-Vous pouvez obtenir votre clé API depuis votre tableau de bord Jask.
-
+La clé API est associée à un agent ou une application. Elle détermine les permissions et le comportement de l'endpoint appelé. Suivez la documentation [Clés API](/docs/deployment/teams#api-key-pour-les-applications-externes) pour en savoir plus sur la gestion des clés API.
 
 ## Types de réponses
 
-L'API Jask supporte deux types de réponses :
+| Type          | Format                | Usage                                                 |
+| ------------- | --------------------- | ----------------------------------------------------- |
+| **JSON**      | `application/json`    | Réponse agent sans streaming, upload/index, workflows |
+| **SSE**       | `text/event-stream`   | Réponse agent en streaming token par token            |
+| **Multipart** | `multipart/form-data` | Upload de fichiers                                    |
 
-### 1. Réponses Streaming (SSE)
+### Streaming (SSE)
 
-Pour les interactions conversationnelles en temps réel, l'API utilise Server-Sent Events (SSE). Les événements sont envoyés au format :
+Les endpoints agent v2 diffusent des événements au format :
 
 ```
 data: {"type": "streaming", "value": "texte..."}
+data: {"type": "end", "value": {"status": true}}
 ```
 
-### 2. Réponses Standard (JSON)
+Voir [Formats de Réponse](/api/formats) pour la liste complète des événements.
 
-Pour les opérations non-conversationnelles, l'API retourne du JSON standard.
+### JSON standard
 
-## Principaux endpoints
+Les endpoints non-streaming retournent un objet ou un tableau JSON en une seule réponse.
 
-| Endpoint | Méthode | Description |
-|----------|---------|-------------|
-| `/ask/sse` | POST | Appeler un agent en mode streaming |
-| `/studio/apps/run` | POST | Exécuter une application/workflow |
-| `/conversations/{id}` | POST | Créer/initialiser une conversation |
+## Endpoints
+
+### Agents
+
+| Endpoint                                              | Méthode | Description                                 |
+| ----------------------------------------------------- | ------- | ------------------------------------------- |
+| [`/assistant/ask/jask/v2`](/api/agents/post)          | POST    | Interroger un agent en streaming (SSE)      |
+| [`/assistant/ask/jask/v2/answer`](/api/agents/answer) | POST    | Interroger un agent — réponse JSON complète |
+
+Payload commun : `conversationId` + `query`. Aucune initialisation préalable de conversation n'est requise — un UUID génère automatiquement une nouvelle conversation.
+
+### Documents
+
+| Endpoint                                                          | Méthode | Description                                   |
+| ----------------------------------------------------------------- | ------- | --------------------------------------------- |
+| [`/documents/task/upload-and-index`](/api/documents/upload_index) | POST    | Uploader et indexer un fichier en une requête |
+
+Les fichiers indexés sont utilisables en recherche (RAG) par les agents.
+
+### Conversations
+
+| Endpoint                                                   | Méthode | Description                           |
+| ---------------------------------------------------------- | ------- | ------------------------------------- |
+| [`/assistant/conversations/{id}`](/api/conversations/post) | POST    | Créer ou initialiser une conversation |
+| [`/assistant/conversations/{id}`](/api/conversations/get)  | GET     | Récupérer une conversation existante  |
+
+Optionnel pour les agents v2 (création automatique), utile pour gérer l'historique ou vérifier l'existence d'une session.
+
+### Applications
+
+| Endpoint                                 | Méthode | Description               |
+| ---------------------------------------- | ------- | ------------------------- |
+| [`/studio/apps/run`](/api/workflows/run) | POST    | Exécuter un workflow Jask |
+
+## Parcours d'intégration type
+
+```mermaid
+flowchart LR
+    A[Uploader et indexer<br/>un document] --> B[Appeler un agent<br/>avec une question]
+    B --> C{Réponse<br/>streaming ?}
+    C -->|Oui| D["/ask/jask/v2"]
+    C -->|Non| E["/ask/jask/v2/answer"]
+```
+
+1. **Indexer des documents** — `POST /documents/task/upload-and-index`
+2. **Poser une question** — `POST /assistant/ask/jask/v2/answer` (simple) ou `/assistant/ask/jask/v2` (streaming)
+3. **Poursuivre l'échange** — réutiliser le `conversationId` retourné
 
 ## Gestion des erreurs
 
-Les erreurs sont retournées avec un code HTTP approprié et un message JSON :
+### Erreurs HTTP
 
 ```json
 {
-  "type": "error",
-  "value": {
-    "message": "Description de l'erreur",
-    "code": "ERROR_CODE"
-  }
+  "error": "Invalid request"
 }
 ```
 
-### Codes d'erreur courants
+| Code HTTP | Description                   |
+| --------- | ----------------------------- |
+| 400       | Requête invalide              |
+| 401       | Clé API manquante ou invalide |
+| 403       | Permissions insuffisantes     |
+| 404       | Ressource non trouvée         |
+| 422       | Corps de requête invalide     |
+| 500       | Erreur serveur interne        |
 
-| Code HTTP | Description |
-|-----------|-------------|
-| 400 | Requête invalide |
-| 401 | Authentification manquante ou invalide |
-| 404 | Ressource non trouvée |
-| 500 | Erreur serveur interne |
+### Erreurs SSE
 
+En mode streaming, les erreurs arrivent dans le flux sous forme d'événement :
+
+```json
+data: {"type": "error", "value": "Description de l'erreur"}
+```
 
 ## Prochaines étapes
 
-- Explorez les [Objets](/api/formats) pour comprendre les structures de données
-- Consultez les [Routes](/api/agents/post) pour les détails de chaque endpoint
+- [Formats de Réponse](/api/formats) — structures de données et événements SSE
+- [Agents](/api/agents/answer) — interagir avec un agent IA
+- [Documents](/api/documents/upload_index) — uploader et indexer des fichiers
+- [Conversations](/api/conversations/post) — gérer les sessions
+- [Applications](/api/workflows/run) — exécuter des workflows

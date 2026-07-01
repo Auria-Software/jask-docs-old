@@ -15,5 +15,6 @@ export default {
   },
   conversations: "Conversations",
   agents: "Agents",
+  documents: "Documents",
   workflows: "Applications",
 };
