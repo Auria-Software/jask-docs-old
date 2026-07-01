@@ -27,26 +27,53 @@ POST /assistant/ask/jask/v2
 
 ```typescript
 {
-  conversationId: string,  // ID unique de la conversation (UUID)
-  query: string,           // Message de l'utilisateur
+  conversationId: string,       // ID unique de la conversation (UUID)
+  query: string,                // Message de l'utilisateur
+  resources: ResourceProfile[],  // Documents à joindre à la requête (optionnel)
 }
 ```
 
-| Paramètre        | Type   | Requis | Description                                                                                                       |
-| ---------------- | ------ | ------ | ----------------------------------------------------------------------------------------------------------------- |
-| `conversationId` | string | ✅     | Identifiant de la conversation. Générez un UUID pour une nouvelle conversation — elle sera créée automatiquement. |
-| `query`          | string | ✅     | Le message de l'utilisateur                                                                                       |
+| Paramètre        | Type     | Requis | Description                                                                                                       |
+| ---------------- | -------- | ------ | ----------------------------------------------------------------------------------------------------------------- |
+| `conversationId` | string   | ✅     | Identifiant de la conversation. Générez un UUID pour une nouvelle conversation — elle sera créée automatiquement. |
+| `query`          | string   | ✅     | Le message de l'utilisateur                                                                                       |
+| `resources`      | object[] | ❌     | Documents uploadés à inclure dans le contexte de l'agent (voir ci-dessous)                                        |
 
 <Callout type="info">
   Aucune initialisation préalable de conversation n'est nécessaire. Réutilisez
   le même `conversationId` pour poursuivre un échange.
 </Callout>
 
+### Joindre des documents
+
+Uploadez vos fichiers via [Uploader et indexer un document](/api/documents/upload_index), puis passez le résultat tel quel dans `resources` — aucune transformation n'est nécessaire :
+
+```json
+{
+  "conversationId": "550e8400-e29b-41d4-a716-446655440000",
+  "query": "Résume ce document",
+  "resources": [
+    {
+      "id": "workspace/documents/guide.pdf",
+      "name": "guide.pdf",
+      "location": "workspace/documents/guide.pdf",
+      "size": 245760,
+      "isDir": false,
+      "createdAt": "2025-06-30T10:30:00.000000",
+      "principalId": "user-id",
+      "principalName": "Jean Dupont",
+      "providerId": "filesystem",
+      "providerType": "filesystem",
+      "type": "file"
+    }
+  ]
+}
+```
+
 <Callout>
-  Pour discuter d'un document avec l'agent, commencez par [uploader et indexer
-  le fichier](/api/documents/upload_index). Une fois indexé, le contenu est
-  disponible en recherche (RAG) — les sources apparaissent dans les événements
-  `context` du stream.
+  L'endpoint d'upload retourne des objets `ResourceProfile` prêts à l'emploi.
+  Passez le tableau retourné (ou un élément) directement dans `resources` lors
+  de l'appel à `/ask`.
 </Callout>
 
 ## Réponse
@@ -88,19 +115,36 @@ import httpx
 import json
 from uuid import uuid4
 
-async def ask_agent_streaming(query: str, api_key: str, conversation_id: str = None) -> str:
+BASE_URL = f"https://{organization_jask_backend_name}.azurewebsites.net/api/v1"
+
+async def upload_and_index(file_path: str, api_key: str, directory: str = "workspace/documents") -> list:
+async with httpx.AsyncClient(timeout=120) as client:
+with open(file_path, "rb") as f:
+response = await client.post(
+f"{BASE_URL}/documents/task/upload-and-index",
+headers={"Authorization": f"Bearer {api_key}"},
+files={"files": (file_path.split("/")[-1], f)},
+data={"directory": directory},
+)
+response.raise_for_status()
+return response.json()
+
+async def ask_agent_streaming(query: str, api_key: str, resources: list = None, conversation_id: str = None) -> str:
 conversation_id = conversation_id or str(uuid4())
+payload = {"conversationId": conversation_id, "query": query}
+if resources:
+payload["resources"] = resources
 full_response = ""
 
     async with httpx.AsyncClient() as client:
         async with client.stream(
             "POST",
-            f"https://{organization_jask_backend_name}.azurewebsites.net/api/v1/assistant/ask/jask/v2",
+            f"{BASE_URL}/assistant/ask/jask/v2",
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
             },
-            json={"conversationId": conversation_id, "query": query},
+            json=payload,
         ) as response:
             response.raise_for_status()
             async for line in response.aiter_lines():
@@ -121,31 +165,44 @@ full_response = ""
 
     return full_response
 
-# Utilisation
+# Upload puis appel agent — le résultat d'upload est passé directement dans resources
 
-response = await ask_agent_streaming(
-query="Quelle est la taille de la tour Eiffel ?",
-api_key="jask_api_key_abc123",
-)
+uploaded = await upload_and_index("./guide.pdf", "jask_api_key_abc123")
+response = await ask_agent_streaming("Résume ce document", "jask_api_key_abc123", resources=uploaded)
 print(f"\nRéponse complète: {response}")
 
 ````
   </Tabs.Tab>
   <Tabs.Tab value="JavaScript">
     ```javascript
-async function askAgentStreaming(query, apiKey, conversationId = crypto.randomUUID()) {
-  const response = await fetch(
-    'https://{organization_jask_backend_name}.azurewebsites.net/api/v1/assistant/ask/jask/v2',
-    {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ conversationId, query }),
-    }
-  );
+const BASE_URL = 'https://{organization_jask_backend_name}.azurewebsites.net/api/v1';
 
+async function uploadAndIndex(file, apiKey, directory = 'workspace/documents') {
+  const form = new FormData();
+  form.append('files', file);
+  form.append('directory', directory);
+
+  const response = await fetch(`${BASE_URL}/documents/task/upload-and-index`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}` },
+    body: form,
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+async function askAgentStreaming(query, apiKey, resources = null, conversationId = crypto.randomUUID()) {
+  const body = { conversationId, query };
+  if (resources) body.resources = resources;
+
+  const response = await fetch(`${BASE_URL}/assistant/ask/jask/v2`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
   const reader = response.body.getReader();
@@ -178,12 +235,10 @@ async function askAgentStreaming(query, apiKey, conversationId = crypto.randomUU
   return fullResponse;
 }
 
-// Utilisation
-const response = await askAgentStreaming(
-  "Quelle est la taille de la tour Eiffel ?",
-  "jask_api_key_abc123"
-);
-console.log("Réponse:", response);
+// Upload puis appel agent — le résultat d'upload est passé directement dans resources
+const uploaded = await uploadAndIndex(fileInput.files[0], 'jask_api_key_abc123');
+const response = await askAgentStreaming('Résume ce document', 'jask_api_key_abc123', uploaded);
+console.log('Réponse:', response);
 ````
 
   </Tabs.Tab>
