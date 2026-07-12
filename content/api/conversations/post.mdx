@@ -2,6 +2,7 @@
 title: "Créer une Conversation"
 description: "Initialiser une nouvelle conversation avec un agent"
 ---
+
 import { Tabs } from "nextra/components";
 
 # Créer une Conversation
@@ -16,16 +17,16 @@ POST /api/v1/assistant/conversations{conversationId}
 
 ## Headers requis
 
-| Header | Valeur | Description |
-|--------|--------|-------------|
+| Header          | Valeur                | Description        |
+| --------------- | --------------------- | ------------------ |
 | `Authorization` | `Bearer YOUR_API_KEY` | Clé API de l'agent |
-| `Content-Type` | `application/json` | Format du payload |
+| `Content-Type`  | `application/json`    | Format du payload  |
 
 ## Paramètres d'URL
 
-| Paramètre | Type | Requis | Description |
-|-----------|------|--------|-------------|
-| `conversationId` | string | ✅ | Identifiant unique de la conversation (UUID recommandé) |
+| Paramètre        | Type   | Requis | Description                                             |
+| ---------------- | ------ | ------ | ------------------------------------------------------- |
+| `conversationId` | string | ✅     | Identifiant unique de la conversation (UUID recommandé) |
 
 ## Corps de la requête
 
@@ -75,19 +76,19 @@ import httpx
 from uuid import uuid4
 
 async def create_conversation(api_key: str, conversation_id: str = None) -> str:
-    """
-    Crée une nouvelle conversation
-    
+"""
+Crée une nouvelle conversation
+
     Args:
         api_key: Clé API de l'agent
         conversation_id: ID de conversation (généré si non fourni)
-    
+
     Returns:
         str: L'ID de la conversation créée
     """
     if conversation_id is None:
         conversation_id = str(uuid4())
-    
+
     async with httpx.AsyncClient() as client:
         response = await client.post(
             f"https://{organization_jask_backend_name}.azurewebsites.net/api/v1/assistant/conversations/{conversation_id}",
@@ -98,13 +99,15 @@ async def create_conversation(api_key: str, conversation_id: str = None) -> str:
             json={}
         )
         response.raise_for_status()
-    
+
     print(f"Conversation créée: {conversation_id}")
     return conversation_id
 
 # Utilisation
+
 conversation_id = await create_conversation("jask_api_key_abc123")
-```
+
+````
 
   </Tabs.Tab>
   <Tabs.Tab value="JavaScript">
@@ -136,10 +139,10 @@ async function createConversation(apiKey, conversationId = null) {
 
 // Utilisation
 const conversationId = await createConversation('jask_api_key_abc123');
-```
+````
+
   </Tabs.Tab>
 </Tabs>
-
 
 ## Cycle de vie d'une conversation
 
@@ -150,7 +153,7 @@ graph TD
     C -->|Oui| D[Conversation prête]
     C -->|Non| E[Erreur d'authentification]
     D --> F[Appeler agent]
-    F --> G[POST /ask/sse]
+    F --> G[POST /ask/jask/v2]
     G --> H[Recevoir réponse]
     H --> I{Continuer?}
     I -->|Oui| F
@@ -183,8 +186,6 @@ valid_id = str(uuid4())  # UUID v4
 # ou
 valid_id = "conv-user-123-session-456"  # Slug valide
 ```
-
-
 
 ## Voir aussi
 

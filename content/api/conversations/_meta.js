@@ -1,4 +1,6 @@
+import { MethodLabel } from "@components/CRUD_label";
+
 export default {
-  post: "Create",
-  get: "Retrieve",
+  post: <MethodLabel method="POST">Créer</MethodLabel>,
+  get: <MethodLabel method="GET">Récupérer</MethodLabel>,
 };

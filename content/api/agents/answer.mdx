@@ -1,19 +1,19 @@
 ---
-title: "Appeler un Agent en Streaming"
-description: "Interagir avec un agent IA en mode streaming"
+title: "Appeler un Agent"
+description: "Interagir avec un agent IA sans streaming"
 ---
 
 import { Tabs } from "nextra/components";
 import { Callout } from "nextra/components";
 
-# Appeler un Agent en Streaming
+# Appeler un Agent
 
-Cet endpoint exécute le pipeline agent v2 et diffuse la réponse en temps réel via Server-Sent Events (SSE).
+Cet endpoint exécute le pipeline agent v2 et retourne la réponse complète en une seule requête JSON — sans streaming SSE.
 
 ## Endpoint
 
 ```http
-POST /assistant/ask/jask/v2
+POST /assistant/ask/jask/v2/answer
 ```
 
 ## Headers requis
@@ -78,32 +78,44 @@ Uploadez vos fichiers via [Uploader et indexer un document](/api/documents/uploa
 
 ## Réponse
 
-Flux SSE (`text/event-stream`). Chaque événement est une ligne `data:` suivie d'un objet JSON.
+Réponse JSON unique contenant la réponse finale de l'agent.
 
-### Événements principaux
-
-| Type                  | Description                                   |
-| --------------------- | --------------------------------------------- |
-| `streaming`           | Fragment de texte de la réponse               |
-| `context`             | Sources utilisées pour construire la réponse  |
-| `conversationCreated` | Nouvelle conversation créée (contient l'`id`) |
-| `end`                 | Fin du stream                                 |
-| `error`               | Erreur pendant le traitement                  |
-
+```json
+{
+  "id": "reply-uuid",
+  "conversationId": "conv-uuid",
+  "title": "Titre auto-généré de la conversation",
+  "answer": "La tour Eiffel mesure 330 mètres.",
+  "references": [],
+  "usage": {
+    "totalTokens": 1250,
+    "promptTokens": 800,
+    "completionTokens": 450,
+    "modelId": "gpt-4o",
+    "thinkingDuration": 0,
+    "status": true
+  },
+  "status": true,
+  "error": null,
+  "duration": 3.2
+}
 ```
-data: {"type": "streaming", "value": "La tour Eiffel "}
-data: {"type": "streaming", "value": "mesure 330 mètres."}
-data: {"type": "end", "value": {"status": true, "duration": 3.2}}
-```
 
-Des événements `ping` sont envoyés toutes les 5 secondes pour maintenir la connexion. Voir [Formats de Réponse](/api/formats) pour la liste complète des événements.
+| Champ            | Type    | Description                                              |
+| ---------------- | ------- | -------------------------------------------------------- |
+| `answer`         | string  | Réponse complète de l'agent                              |
+| `references`     | array   | Sources utilisées pour construire la réponse             |
+| `conversationId` | string  | ID de la conversation (utile pour les échanges suivants) |
+| `status`         | boolean | `true` si la requête a réussi                            |
+| `error`          | string  | Message d'erreur le cas échéant                          |
+| `usage`          | object  | Consommation de tokens (champs publics uniquement)       |
 
 ## Exemples
 
 <Tabs items={['cURL', 'Python', 'JavaScript']} defaultIndex="0">
   <Tabs.Tab value="cURL">
     ```bash
-curl -N -X POST "https://{organization_jask_backend_name}.azurewebsites.net/api/v1/assistant/ask/jask/v2" \
+curl -X POST "https://{organization_jask_backend_name}.azurewebsites.net/api/v1/assistant/ask/jask/v2/answer" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"conversationId": "550e8400-e29b-41d4-a716-446655440000", "query": "Quelle est la taille de la tour Eiffel ?"}'
@@ -112,7 +124,6 @@ curl -N -X POST "https://{organization_jask_backend_name}.azurewebsites.net/api/
   <Tabs.Tab value="Python">
     ```python
 import httpx
-import json
 from uuid import uuid4
 
 BASE_URL = f"https://{organization_jask_backend_name}.azurewebsites.net/api/v1"
@@ -129,47 +140,29 @@ data={"directory": directory},
 response.raise_for_status()
 return response.json()
 
-async def ask_agent_streaming(query: str, api_key: str, resources: list = None, conversation_id: str = None) -> str:
+async def ask_agent(query: str, api_key: str, resources: list = None, conversation_id: str = None) -> dict:
 conversation_id = conversation_id or str(uuid4())
 payload = {"conversationId": conversation_id, "query": query}
 if resources:
 payload["resources"] = resources
-full_response = ""
 
     async with httpx.AsyncClient() as client:
-        async with client.stream(
-            "POST",
-            f"{BASE_URL}/assistant/ask/jask/v2",
+        response = await client.post(
+            f"{BASE_URL}/assistant/ask/jask/v2/answer",
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
             },
             json=payload,
-        ) as response:
-            response.raise_for_status()
-            async for line in response.aiter_lines():
-                if not line.startswith("data:"):
-                    continue
-                try:
-                    event = json.loads(line.removeprefix("data:").strip())
-                    if event.get("type") == "streaming":
-                        chunk = event.get("value", "")
-                        full_response += chunk
-                        print(chunk, end="", flush=True)
-                    elif event.get("type") == "end":
-                        break
-                    elif event.get("type") == "error":
-                        raise Exception(event.get("value"))
-                except json.JSONDecodeError:
-                    continue
-
-    return full_response
+        )
+        response.raise_for_status()
+        return response.json()
 
 # Upload puis appel agent — le résultat d'upload est passé directement dans resources
 
 uploaded = await upload_and_index("./guide.pdf", "jask_api_key_abc123")
-response = await ask_agent_streaming("Résume ce document", "jask_api_key_abc123", resources=uploaded)
-print(f"\nRéponse complète: {response}")
+result = await ask_agent("Résume ce document", "jask_api_key_abc123", resources=uploaded)
+print(result["answer"])
 
 ````
   </Tabs.Tab>
@@ -191,11 +184,11 @@ async function uploadAndIndex(file, apiKey, directory = 'workspace/documents') {
   return response.json();
 }
 
-async function askAgentStreaming(query, apiKey, resources = null, conversationId = crypto.randomUUID()) {
+async function askAgent(query, apiKey, resources = null, conversationId = crypto.randomUUID()) {
   const body = { conversationId, query };
   if (resources) body.resources = resources;
 
-  const response = await fetch(`${BASE_URL}/assistant/ask/jask/v2`, {
+  const response = await fetch(`${BASE_URL}/assistant/ask/jask/v2/answer`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -204,41 +197,13 @@ async function askAgentStreaming(query, apiKey, resources = null, conversationId
     body: JSON.stringify(body),
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-  let fullResponse = '';
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-
-    for (const line of decoder.decode(value).split('\n')) {
-      if (!line.startsWith('data:')) continue;
-      try {
-        const event = JSON.parse(line.replace('data:', '').trim());
-        if (event.type === 'streaming') {
-          fullResponse += event.value;
-          console.log(event.value);
-        } else if (event.type === 'end') {
-          return fullResponse;
-        } else if (event.type === 'error') {
-          throw new Error(event.value);
-        }
-      } catch (e) {
-        if (e instanceof SyntaxError) continue;
-        throw e;
-      }
-    }
-  }
-
-  return fullResponse;
+  return response.json();
 }
 
 // Upload puis appel agent — le résultat d'upload est passé directement dans resources
 const uploaded = await uploadAndIndex(fileInput.files[0], 'jask_api_key_abc123');
-const response = await askAgentStreaming('Résume ce document', 'jask_api_key_abc123', uploaded);
-console.log('Réponse:', response);
+const result = await askAgent('Résume ce document', 'jask_api_key_abc123', uploaded);
+console.log(result.answer);
 ````
 
   </Tabs.Tab>
@@ -247,5 +212,5 @@ console.log('Réponse:', response);
 ## Voir aussi
 
 - [Uploader et indexer un document](/api/documents/upload_index) — préparer un fichier avant de l'interroger
-- [Appeler un Agent (sans streaming)](/api/agents/answer) — réponse JSON en une seule requête
-- [Formats de Réponse](/api/formats) — détail des événements SSE
+- [Appeler un Agent en Streaming](/api/agents/post) — pour recevoir la réponse token par token
+- [Conversations](/api/conversations/post) — gérer les conversations manuellement

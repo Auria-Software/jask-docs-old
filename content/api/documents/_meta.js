@@ -1,5 +1,5 @@
 import { MethodLabel } from "@components/CRUD_label";
 
 export default {
-  run: <MethodLabel method="POST">Exécuter</MethodLabel>,
+    upload_index: <MethodLabel method="POST">Upload</MethodLabel>,
 };

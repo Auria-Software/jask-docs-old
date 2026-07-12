@@ -1,0 +1,184 @@
+---
+title: "Uploader et indexer un document"
+description: "Envoyer un fichier et l'indexer en une seule requête"
+---
+
+import { Tabs } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# Uploader et indexer un document
+
+Cet endpoint enchaîne l'upload (`/documents/task/upload`) et l'indexation (`/documents/index`) : chaque fichier est stocké dans l'espace de travail, indexé pour la recherche (RAG), puis retourné dans un format compatible avec le champ `resources` de [`AskMessage`](/api/agents/answer).
+
+## Endpoint
+
+```http
+POST /documents/task/upload-and-index
+```
+
+## Headers requis
+
+| Header          | Valeur                | Description        |
+| --------------- | --------------------- | ------------------ |
+| `Authorization` | `Bearer YOUR_API_KEY` | Clé API            |
+| `Content-Type`  | `multipart/form-data` | Upload de fichiers |
+
+## Corps de la requête
+
+Requête `multipart/form-data` :
+
+| Champ       | Type   | Requis | Description                                                              |
+| ----------- | ------ | ------ | ------------------------------------------------------------------------ |
+| `files`     | file[] | ✅     | Un ou plusieurs fichiers (même nom de champ répété)                      |
+| `directory` | string | ✅     | Dossier de destination dans l'espace de travail                          |
+| `room_id`   | string | ❌     | ID de salle ou projet — si différent de l'utilisateur, stockage en cache |
+
+<Callout type="info">
+  L'indexation est ignorée pour certains formats (Excel, Markdown, TXT, HTML,
+  YAML) : le fichier est tout de même uploadé et retourné.
+</Callout>
+
+## Réponse
+
+Tableau JSON — un objet par fichier, identique à la réponse de `/documents/task/upload`.
+
+```json
+[
+  {
+    "id": "workspace/documents/guide.pdf",
+    "name": "guide.pdf",
+    "location": "workspace/documents/guide.pdf",
+    "size": 245760,
+    "isDir": false,
+    "createdAt": "2025-06-30T10:30:00.000000",
+    "principalId": "user-id",
+    "principalName": "Jean Dupont",
+    "providerId": "filesystem",
+    "providerType": "filesystem",
+    "type": "file"
+  }
+]
+```
+
+| Champ           | Type    | Description                              |
+| --------------- | ------- | ---------------------------------------- |
+| `id`            | string  | Identifiant — égal au `location`         |
+| `name`          | string  | Nom du fichier (`filename`)              |
+| `location`      | string  | Chemin dans l'espace de travail          |
+| `size`          | integer | Taille en octets                         |
+| `isDir`         | boolean | Toujours `false` pour un fichier uploadé |
+| `createdAt`     | string  | Date d'upload (ISO 8601 UTC)             |
+| `principalId`   | string  | ID de l'utilisateur ayant uploadé        |
+| `principalName` | string  | Nom complet de l'utilisateur             |
+| `providerId`    | string  | `"filesystem"`                           |
+| `providerType`  | string  | `"filesystem"`                           |
+| `type`          | string  | `"file"`                                 |
+
+<Callout>
+  Le statut d'indexation n'est pas inclus dans la réponse : l'indexation est
+  exécutée côté serveur avant le retour. Le tableau peut être passé tel quel
+  dans `resources` lors d'un appel à
+  [`/assistant/ask/jask/v2`](/api/agents/post) ou
+  [`/assistant/ask/jask/v2/answer`](/api/agents/answer).
+</Callout>
+
+## Exemples
+
+<Tabs items={['cURL', 'Python', 'JavaScript']} defaultIndex="0">
+  <Tabs.Tab value="cURL">
+    ```bash
+curl -X POST "https://{organization_jask_backend_name}.azurewebsites.net/api/v1/documents/task/upload-and-index" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "files=@./guide.pdf" \
+  -F "directory=workspace/documents"
+```
+  </Tabs.Tab>
+  <Tabs.Tab value="Python">
+    ```python
+import httpx
+from uuid import uuid4
+
+BASE_URL = f"https://{organization_jask_backend_name}.azurewebsites.net/api/v1"
+
+async def upload_and_index(file_path: str, api_key: str, directory: str = "workspace/documents") -> list:
+async with httpx.AsyncClient(timeout=120) as client:
+with open(file_path, "rb") as f:
+response = await client.post(
+f"{BASE_URL}/documents/task/upload-and-index",
+headers={"Authorization": f"Bearer {api_key}"},
+files={"files": (file_path.split("/")[-1], f)},
+data={"directory": directory},
+)
+response.raise_for_status()
+return response.json()
+
+async def ask_agent(query: str, api_key: str, resources: list) -> dict:
+async with httpx.AsyncClient() as client:
+response = await client.post(
+f"{BASE_URL}/assistant/ask/jask/v2/answer",
+headers={
+"Authorization": f"Bearer {api_key}",
+"Content-Type": "application/json",
+},
+json={
+"conversationId": str(uuid4()),
+"query": query,
+"resources": resources,
+},
+)
+response.raise_for_status()
+return response.json()
+
+uploaded = await upload_and_index("./guide.pdf", "jask_api_key_abc123")
+result = await ask_agent("Résume ce document", "jask_api_key_abc123", uploaded)
+print(result["answer"])
+
+````
+  </Tabs.Tab>
+  <Tabs.Tab value="JavaScript">
+    ```javascript
+const BASE_URL = 'https://{organization_jask_backend_name}.azurewebsites.net/api/v1';
+
+async function uploadAndIndex(file, apiKey, directory = 'workspace/documents') {
+  const form = new FormData();
+  form.append('files', file);
+  form.append('directory', directory);
+
+  const response = await fetch(`${BASE_URL}/documents/task/upload-and-index`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}` },
+    body: form,
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+async function askAgent(query, apiKey, resources) {
+  const response = await fetch(`${BASE_URL}/assistant/ask/jask/v2/answer`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      conversationId: crypto.randomUUID(),
+      query,
+      resources,
+    }),
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+const uploaded = await uploadAndIndex(fileInput.files[0], 'jask_api_key_abc123');
+const result = await askAgent('Résume ce document', 'jask_api_key_abc123', uploaded);
+console.log(result.answer);
+````
+
+  </Tabs.Tab>
+</Tabs>
+
+## Voir aussi
+
+- [Appeler un Agent](/api/agents/answer) — interroger un agent avec les documents uploadés
+- [Appeler un Agent en Streaming](/api/agents/post) — même flux en mode SSE
