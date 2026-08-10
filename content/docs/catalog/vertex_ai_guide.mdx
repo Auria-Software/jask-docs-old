@@ -1,0 +1,471 @@
+import { Callout } from "nextra/components";
+
+# Guide : Déployer un modèle Google Vertex AI sur Jask
+
+<Callout>
+  **À qui s'adresse ce guide ?** Ce guide est destiné aux administrateurs de
+  Jask qui souhaitent connecter un modèle d'intelligence artificielle Google
+  (Gemini, etc.) via Vertex AI. Aucune compétence en développement n'est
+  requise.
+</Callout>
+
+## Vue d'ensemble
+
+Déployer un modèle Vertex AI sur Jask se fait en **3 grandes étapes** :
+
+```
+ÉTAPE 1                ÉTAPE 2                   ÉTAPE 3
+──────────────         ──────────────────────     ──────────────────────
+Préparer Google  →     Connecter le modèle   →    Utiliser le modèle
+Cloud                  dans Jask                  dans un assistant
+```
+
+## Pré-requis
+
+Avant de commencer, vous devez disposer de :
+
+| Élément                      | Description                                                |
+| ----------------------------- | ----------------------------------------------------------- |
+| Un compte Google Cloud         | Accessible sur [console.cloud.google.com](https://console.cloud.google.com) |
+| Un projet Google Cloud         | Avec l'API **Vertex AI** activée                            |
+| Un accès administrateur Jask   | Pour accéder à la section **Admin > IA**                    |
+
+<Callout type="info">
+  **Vous n'avez pas encore de compte Google Cloud ?** Créez-en un sur
+  [cloud.google.com](https://cloud.google.com). Google offre un crédit gratuit
+  de démarrage.
+</Callout>
+
+## ÉTAPE 1 — Configurer Google Cloud (guide détaillé)
+
+<Callout type="info">
+  **Note importante sur le nommage Google** : Google a récemment renommé une
+  partie de sa console. Ce qui s'appelait **"Vertex AI"** dans les menus
+  s'appelle désormais **"Agent Platform"** (ou **"Vertex AI Agent Builder"**)
+  dans certaines vues. Ne vous laissez pas dérouter : la technologie est la
+  même, et les étapes ci-dessous tiennent compte des deux nommages.
+</Callout>
+
+### 1.0 — Compte entreprise : points d'attention
+
+Si vous travaillez dans une **organisation Google Cloud** (compte entreprise géré par votre DSI), plusieurs contraintes s'appliquent :
+
+#### Vous n'êtes peut-être pas propriétaire du projet
+
+Dans un environnement d'entreprise, les projets Google Cloud sont souvent gérés par l'équipe IT ou la DSI. Avant de commencer, vérifiez auprès de votre administrateur IT :
+
+- Qu'un **projet Google Cloud** existe (ou peut être créé) pour cet usage
+- Que vous avez le rôle **Editeur** ou **Propriétaire** sur ce projet, ou à défaut le rôle **Administrateur des comptes de service** (`roles/iam.serviceAccountAdmin`)
+- Que la **création de clés de compte de service** n'est pas bloquée par une règle d'organisation (voir section 1.3 ci-dessous)
+
+#### Politiques d'organisation restrictives
+
+Les entreprises appliquent souvent des **contraintes de sécurité** sur Google Cloud qui peuvent bloquer certaines actions :
+
+| Contrainte fréquente                          | Impact                                     | Solution                                        |
+| ---------------------------------------------- | ------------------------------------------- | ------------------------------------------------ |
+| `iam.disableServiceAccountKeyCreation`          | Impossible de télécharger le fichier JSON  | Demander une exemption à votre admin GCP        |
+| `compute.restrictCloudSQLInstances`             | Sans impact ici                            | —                                                |
+| Facturation désactivée sur le projet            | Les APIs ne peuvent pas être activées       | Contacter la DSI pour activer la facturation     |
+
+<Callout type="warning">
+  Si vous ne pouvez pas créer de clé JSON, signalez-le à votre administrateur
+  Google Cloud et montrez-lui la section 1.3 de ce guide. Il pourra accorder
+  une exception ou créer la clé à votre place.
+</Callout>
+
+### 1.1 — Créer un projet Google Cloud
+
+Si votre organisation n'a pas encore de projet dédié, créez-en un :
+
+1. Rendez-vous sur [console.cloud.google.com](https://console.cloud.google.com)
+2. En haut à gauche, cliquez sur le sélecteur de projet (souvent affiché comme `Mon Projet` ou le nom d'un projet existant)
+3. Dans la fenêtre qui s'ouvre, cliquez sur **"Nouveau projet"** (en haut à droite de la fenêtre)
+4. Remplissez les informations :
+   - **Nom du projet** : par exemple `jask-ia-prod`
+   - **Organisation** : sélectionnez votre organisation d'entreprise si elle apparaît
+   - **Emplacement** : choisissez le dossier ou l'organisation parent si applicable
+5. Cliquez sur **"Créer"**
+6. Attendez la création (environ 30 secondes), puis sélectionnez ce nouveau projet
+
+<Callout type="info">
+  **Compte personnel (sans organisation)** : le champ "Organisation" sera
+  vide, c'est normal. Laissez-le tel quel.
+</Callout>
+
+<Callout type="warning">
+  **Compte entreprise** : si le bouton "Nouveau projet" est grisé, votre
+  compte n'a pas les droits pour créer des projets. Contactez votre
+  administrateur IT avec la demande : *"Création d'un projet GCP pour
+  connecter un modèle IA à notre plateforme Jask"*.
+</Callout>
+
+### 1.2 — Activer les APIs nécessaires
+
+Google Cloud fonctionne par **APIs** — chaque service doit être explicitement activé avant d'être utilisé. Vous devez activer les APIs suivantes.
+
+#### APIs à activer
+
+| API                       | Nom affiché dans la console                              | Pourquoi                          |
+| -------------------------- | ---------------------------------------------------------| ---------------------------------- |
+| `aiplatform.googleapis.com`| **Vertex AI API** ou **Cloud AI Platform API**            | Accès aux modèles Gemini          |
+| `iam.googleapis.com`       | **Identity and Access Management (IAM) API**              | Gestion des comptes de service    |
+
+#### Comment activer une API
+
+1. Dans la barre de recherche en haut de la console, tapez le nom de l'API (ex: `Vertex AI`)
+2. Dans les résultats, cliquez sur l'entrée correspondant à **"Vertex AI API"**
+
+   <Callout type="warning">
+     Vous pouvez voir plusieurs résultats similaires. Cherchez celle qui
+     indique **"Vertex AI API"** avec comme éditeur **Google Enterprise API**.
+   </Callout>
+
+3. Sur la page de l'API, cliquez sur **"Activer"**
+
+   <Callout type="info">
+     Si le bouton indique **"Gérer"** au lieu d'**"Activer"**, c'est que l'API
+     est déjà active — vous pouvez passer à l'étape suivante.
+   </Callout>
+
+4. Attendez 1 à 2 minutes que l'activation se propage
+
+<Callout type="warning">
+  **Erreur "La facturation n'est pas activée"** : si vous voyez ce message, la
+  facturation doit être configurée sur le projet. Dans un compte entreprise,
+  contactez votre DSI. Sur un compte personnel, allez dans **Facturation** et
+  liez une carte bancaire (vous ne serez pas débité tant que vous restez dans
+  les limites gratuites).
+</Callout>
+
+#### Note sur Agent Platform / Agent Builder
+
+Dans certaines vues de la console Google Cloud (notamment dans le menu latéral), les services IA sont regroupés sous **"Agent Platform"** ou **"Vertex AI Agent Builder"**. Il s'agit du même service que Vertex AI — **activer l'API Vertex AI suffit**, vous n'avez pas besoin d'activer une API supplémentaire pour Agent Platform.
+
+### 1.3 — Créer un compte de service
+
+Un **compte de service** est une identité technique (non humaine) qui permet à Jask de s'authentifier auprès de Google Cloud sans utiliser votre compte personnel.
+
+#### Créer le compte de service
+
+1. Dans le menu de gauche, allez dans **IAM et administration** → **Comptes de service**
+
+   <Callout type="info">
+     Si vous ne voyez pas ce menu, cliquez d'abord sur l'icône ☰ en haut à
+     gauche pour ouvrir la navigation.
+   </Callout>
+
+2. Cliquez sur **"+ Créer un compte de service"** en haut de la page
+3. À l'**Étape 1 — Détails du compte** :
+   - **Nom du compte de service** : `jask-vertex-ai` *(uniquement des lettres minuscules, chiffres et tirets)*
+   - **ID du compte de service** : se remplit automatiquement
+   - **Description** : `Compte de service utilisé par Jask pour accéder aux modèles Gemini via Vertex AI`
+   - Cliquez sur **"Créer et continuer"**
+
+4. À l'**Étape 2 — Accorder l'accès au projet** :
+
+   Vous devez ajouter **au minimum** le rôle suivant :
+
+   | Rôle à ajouter          | Identifiant             | Pourquoi                            |
+   | ------------------------ | ------------------------- | ------------------------------------ |
+   | **Utilisateur Vertex AI**| `roles/aiplatform.user`   | Permet d'appeler les modèles Gemini |
+
+   Pour ajouter ce rôle :
+   - Cliquez dans le champ **"Sélectionner un rôle"**
+   - Tapez `Vertex AI` dans la recherche
+   - Sélectionnez **"Utilisateur Vertex AI"** (Vertex AI User)
+   - Cliquez sur **"Continuer"**
+
+5. À l'**Étape 3 — Accorder aux utilisateurs l'accès à ce compte de service** :
+   - Cette étape est optionnelle pour notre usage
+   - Cliquez directement sur **"OK"**
+
+Le compte de service est maintenant créé.
+
+#### En environnement entreprise : rôles supplémentaires possibles
+
+Selon la configuration de votre organisation, des rôles additionnels peuvent être nécessaires :
+
+| Rôle                                                          | Quand l'ajouter                                                    |
+| --------------------------------------------------------------| --------------------------------------------------------------------|
+| **Consommateur de services** (`roles/serviceusage.serviceUsageConsumer`) | Si vous obtenez des erreurs de quota ou d'accès au service |
+| **Lecteur** (`roles/viewer`)                                   | Si vous avez besoin d'inspecter les ressources du projet depuis Jask |
+
+### 1.4 — Télécharger la clé JSON (et résoudre les blocages entreprise)
+
+La clé JSON est le **fichier d'authentification** que vous importerez dans Jask. Elle contient les identifiants du compte de service.
+
+#### Procédure standard
+
+1. Dans **IAM et administration → Comptes de service**, cliquez sur le compte `jask-vertex-ai`
+2. Allez dans l'onglet **"Clés"** (en haut de la page du compte de service)
+3. Cliquez sur **"Ajouter une clé"** → **"Créer une clé"**
+4. Choisissez le format **JSON** (pas P12)
+5. Cliquez sur **"Créer"**
+
+Le fichier `.json` se télécharge automatiquement dans votre dossier Téléchargements.
+
+<Callout type="warning">
+  **Ce fichier est confidentiel.** Il donne accès à votre projet Google Cloud.
+  Ne le partagez pas par email, Slack ou tout autre outil de communication.
+  Transmettez-le uniquement via l'interface Jask.
+</Callout>
+
+#### ❌ Le bouton "Créer une clé" est grisé ou absent
+
+Cela se produit dans les **comptes d'entreprise** où l'administrateur GCP a activé la contrainte `iam.disableServiceAccountKeyCreation`. Cette politique de sécurité empêche la création de clés JSON pour tous les utilisateurs.
+
+**Solution 1 — Demander une exception à votre admin GCP**
+
+Transmettez ce message à votre administrateur Google Cloud :
+
+> *"Bonjour, j'ai besoin de créer une clé JSON pour le compte de service `jask-vertex-ai` dans le projet `[nom-du-projet]`. Cette clé est nécessaire pour connecter notre plateforme Jask aux modèles Gemini via Vertex AI. Pouvez-vous soit créer la clé à ma place et me la transmettre de manière sécurisée, soit accorder une exemption temporaire à la contrainte `iam.disableServiceAccountKeyCreation` pour ce projet ?"*
+
+**Solution 2 — Faire créer la clé par l'admin**
+
+Si l'admin a accès au projet sans cette restriction, il peut :
+1. Aller dans **IAM et administration → Comptes de service → jask-vertex-ai → Clés**
+2. Créer la clé JSON comme décrit ci-dessus
+3. Vous transmettre le fichier **via un canal sécurisé** (coffre-fort de mots de passe type 1Password, Bitwarden, ou partage chiffré)
+
+**Solution 3 — Vérifier si la contrainte est au niveau du projet ou de l'organisation**
+
+Un administrateur GCP peut lever la contrainte uniquement pour un projet spécifique via les **règles d'organisation** :
+1. Aller dans **IAM et administration → Règles d'organisation**
+2. Rechercher `iam.disableServiceAccountKeyCreation`
+3. Cliquer sur **"Gérer la règle"** et y ajouter une exception pour le projet concerné
+
+#### ❌ Erreur "Vous n'êtes pas autorisé à effectuer cette action"
+
+Votre compte n'a pas les droits suffisants sur le projet. Vous devez avoir l'un des rôles suivants :
+
+| Rôle requis                                                       | Ce qu'il permet                                |
+| -------------------------------------------------------------------| ------------------------------------------------ |
+| **Propriétaire** (`roles/owner`)                                    | Accès complet                                   |
+| **Editeur** (`roles/editor`)                                        | Créer/modifier les ressources                   |
+| **Administrateur des comptes de service** (`roles/iam.serviceAccountAdmin`) | Créer et gérer les comptes de service uniquement |
+| **Créateur de clés de comptes de service** (`roles/iam.serviceAccountKeyAdmin`) | Créer des clés JSON uniquement          |
+
+Demandez à votre administrateur GCP de vous attribuer l'un de ces rôles.
+
+## ÉTAPE 2 — Connecter le modèle dans Jask
+
+### 2.1 Accéder à la section IA
+
+1. Connectez-vous à Jask avec votre compte administrateur
+2. Dans le menu de gauche, cliquez sur **Paramètres** (ou l'icône ⚙️)
+3. Naviguez vers **Admin** → **IA**
+4. Cliquez sur le bouton **"+ Ajouter un modèle"**
+
+Une fenêtre s'ouvre avec la liste des fournisseurs d'IA disponibles.
+
+### 2.2 Sélectionner Google Vertex AI
+
+Dans la colonne de gauche de la fenêtre, cliquez sur **Google Vertex AI**.
+
+Le formulaire de configuration apparaît à droite.
+
+### 2.3 Remplir le formulaire
+
+| Champ                                    | Ce qu'il faut mettre                                        | Exemple                          |
+| ------------------------------------------| --------------------------------------------------------------| ----------------------------------|
+| **Nom d'affichage**                       | Un nom que vous choisissez pour reconnaître ce modèle dans Jask | `Gemini Flash Production`      |
+| **Nom du modèle**                         | L'identifiant exact du modèle Google (voir tableau ci-dessous) | `gemini-2.0-flash-001`         |
+| **Région GCP**                            | La région géographique la plus proche de vous                 | `Europe - Belgium (europe-west1)` |
+| **Thinking budget**                       | Niveau de raisonnement du modèle (voir explication ci-dessous) | `Par défaut (auto)`            |
+| **Fichier de compte de service (.json)** | Le fichier téléchargé à l'étape 1.3                            | `jask-vertex-ai.json`           |
+
+#### Modèles disponibles sur Vertex AI
+
+Vertex AI donne accès aux modèles **Google Gemini** en natif, mais aussi aux modèles **Anthropic Claude** via le **Model Garden** — une bibliothèque de modèles tiers directement accessibles depuis votre projet GCP.
+
+##### Modèles Google Gemini
+
+| Modèle                 | Identifiant à saisir              | Usage recommandé                |
+| ------------------------| ------------------------------------| ---------------------------------|
+| Gemini 2.0 Flash        | `gemini-2.0-flash-001`             | Réponses rapides, usage quotidien |
+| Gemini 2.0 Flash Lite   | `gemini-2.0-flash-lite-001`        | Volume élevé, faible coût        |
+| Gemini 2.5 Flash        | `gemini-2.5-flash-preview-05-20`   | Raisonnement avancé              |
+| Gemini 2.5 Pro          | `gemini-2.5-pro-preview-06-05`     | Tâches complexes                 |
+| Gemini 1.5 Pro          | `gemini-1.5-pro-002`               | Longs documents                  |
+
+<Callout type="info">
+  **Conseil** : Pour commencer, choisissez `gemini-2.0-flash-001`. C'est le
+  modèle le plus polyvalent et économique.
+</Callout>
+
+##### Modèles Anthropic Claude (via Model Garden)
+
+Google Vertex AI propose également les modèles **Claude d'Anthropic** directement dans la console, via la section **Model Garden**. Cela vous permet d'utiliser Claude sans avoir de compte Anthropic séparé — la facturation passe par Google Cloud.
+
+| Modèle         | Identifiant à saisir             | Usage recommandé                          |
+| ---------------- | ----------------------------------| -------------------------------------------|
+| Claude Opus     | `claude-opus-4-8` par exemple      | Tâches les plus complexes, raisonnement poussé |
+| Claude Sonnet   | `claude-sonnet-4-5` par exemple    | Bon équilibre performance / coût          |
+| Claude Haiku    | `claude-4-5-haiku` par exemple     | Réponses rapides, faible coût              |
+
+<Callout type="warning">
+  **Activation préalable requise dans Model Garden** : avant de pouvoir
+  utiliser un modèle Claude via Vertex AI, vous devez l'**activer une fois**
+  dans la console Google Cloud :
+
+  1. Allez dans [console.cloud.google.com/vertex-ai/model-garden](https://console.cloud.google.com/vertex-ai/model-garden)
+  2. Recherchez **"Claude"** dans la barre de recherche
+  3. Cliquez sur le modèle souhaité (ex: *Claude Sonnet 4*)
+  4. Cliquez sur **"Activer"** ou **"Enable"** — une fenêtre vous demandera d'accepter les conditions d'utilisation d'Anthropic
+  5. Une fois activé, le modèle est disponible dans votre projet et peut être utilisé via le compte de service `jask-vertex-ai`
+
+  Cette activation est **gratuite** — vous ne payez que l'utilisation effective
+  du modèle.
+</Callout>
+
+<Callout type="info">
+  **Conseil** : Si vous hésitez entre Gemini et Claude, commencez par
+  **Gemini 2.0 Flash** pour la rapidité, ou **Claude Sonnet 4** pour des
+  tâches nécessitant une compréhension fine du langage naturel.
+</Callout>
+
+#### Choisir la région
+
+Choisissez la région la plus proche de votre organisation :
+
+| Votre localisation      | Région recommandée                     |
+| -------------------------| -----------------------------------------|
+| France                   | `Europe - Paris (europe-west9)`         |
+| Belgique / Pays-Bas      | `Europe - Belgium (europe-west1)`       |
+| Allemagne                | `Europe - Frankfurt (europe-west3)`     |
+| Angleterre               | `Europe - London (europe-west2)`        |
+| États-Unis               | `US - Iowa (us-central1)`               |
+
+#### Qu'est-ce que le "Thinking budget" ?
+
+Le thinking budget contrôle le niveau de réflexion du modèle avant de répondre :
+
+| Option              | Description                       | Quand l'utiliser                    |
+| ---------------------| ------------------------------------| --------------------------------------|
+| **Par défaut (auto)**| Google décide automatiquement      | Recommandé pour commencer            |
+| **Désactivé**        | Réponses instantanées, moins précises | Chatbot simple, FAQ                |
+| **Léger (512)**      | Réflexion minimale                 | Questions courtes                    |
+| **Moyen (8 192)**    | Bon équilibre                      | Usage professionnel                  |
+| **Élevé (24 576)**   | Analyse approfondie                | Documents complexes, analyses        |
+
+### 2.4 Importer le fichier JSON
+
+1. Cliquez sur la zone de téléchargement (avec l'icône nuage ☁️)
+2. Sélectionnez le fichier `.json` téléchargé depuis Google Cloud
+3. Si le fichier est valide, vous verrez :
+   - ✅ Une coche verte
+   - Le nom de votre **projet Google Cloud**
+   - L'adresse du **compte de service**
+
+<Callout type="warning">
+  Si vous voyez une erreur, vérifiez que le fichier est bien celui téléchargé
+  depuis Google Cloud Console et qu'il n'a pas été modifié.
+</Callout>
+
+### 2.5 Tester la connexion
+
+Avant d'enregistrer, testez que tout fonctionne correctement :
+
+1. Cliquez sur **"Tester la connexion"**
+2. Attendez quelques secondes
+3. Si la connexion réussit : message vert ✅ *"Connexion réussie — vous pouvez ajouter le modèle"*
+4. Si une erreur apparaît, vérifiez :
+   - Que l'API Vertex AI est bien **activée** sur votre projet Google Cloud
+   - Que le compte de service a bien le rôle **"Utilisateur Vertex AI"**
+   - Que la **région** choisie est correcte
+
+### 2.6 Enregistrer le modèle
+
+1. Cliquez sur **"Ajouter →"**
+2. Un message de confirmation s'affiche : le modèle est maintenant disponible dans Jask
+
+## ÉTAPE 3 — Utiliser le modèle dans un assistant
+
+Une fois le modèle connecté, vous pouvez l'assigner à un assistant Jask existant ou en créer un nouveau.
+
+### 3.1 Assigner le modèle à un assistant
+
+1. Allez dans **Studio** → **Assistants**
+2. Cliquez sur l'assistant auquel vous souhaitez associer le modèle Vertex AI
+3. Dans les paramètres de l'assistant, trouvez le champ **Modèle IA**
+4. Sélectionnez le modèle que vous venez d'ajouter (ex: `Gemini Flash Production`)
+5. Enregistrez les modifications
+
+### 3.2 (Optionnel) Déployer l'assistant sur un canal
+
+Si vous souhaitez exposer l'assistant sur une interface externe (site web, Microsoft Teams) :
+
+1. Allez dans **Admin** → **Déploiements**
+2. Cliquez sur **"+ Nouveau déploiement"**
+3. Remplissez les informations :
+
+| Champ         | Description                                                          |
+| ---------------| -----------------------------------------------------------------------|
+| **Nom**        | Nom du déploiement (ex: `Assistant RH - Prod`)                       |
+| **Application**| Sélectionnez l'assistant configuré avec Vertex AI                    |
+| **Canal**      | `Web` (intégration iframe/API) ou `Microsoft Teams`                  |
+
+4. Cliquez sur **"Créer"**
+5. Une clé d'API est générée — utilisez-la pour intégrer l'assistant sur votre site ou dans Teams
+
+## Résolution des problèmes courants
+
+| Problème                                                   | Cause probable                        | Solution                                                                                   |
+| -------------------------------------------------------------| ----------------------------------------| ---------------------------------------------------------------------------------------------|
+| *"Ce fichier n'est pas un compte de service Google valide"*  | Mauvais fichier JSON importé          | Retournez sur Google Cloud et re-téléchargez la clé depuis **IAM → Comptes de service → Clés** |
+| *"Connexion échouée"* après le test                          | API non activée ou rôle manquant      | Vérifiez que l'API Vertex AI est activée et que le rôle `Vertex AI User` est bien assigné au compte de service |
+| Le modèle n'apparaît pas dans l'assistant                    | Modèle non encore propagé             | Attendez quelques secondes et rechargez la page                                            |
+| Erreur de quota Google                                       | Limite d'utilisation atteinte         | Consultez [console.cloud.google.com/iam-admin/quotas](https://console.cloud.google.com/iam-admin/quotas) ou passez à un plan payant |
+
+## Résumé rapide (checklist)
+
+- Compte Google Cloud créé et projet sélectionné
+- API **Vertex AI** activée dans le projet
+- Compte de service créé avec le rôle **"Utilisateur Vertex AI"**
+- Clé JSON téléchargée depuis **IAM → Comptes de service → Clés**
+- Dans Jask : **Admin → IA → Ajouter un modèle → Google Vertex AI**
+- Formulaire complété (nom, modèle, région, fichier JSON)
+- Test de connexion réussi ✅
+- Modèle assigné à un assistant dans le Studio
+
+## Ressources utiles
+
+### Documentation officielle Google Cloud
+
+| Ressource                                     | Lien                                                                                                                 |
+| ------------------------------------------------| ------------------------------------------------------------------------------------------------------------------------|
+| Console Google Cloud                          | [console.cloud.google.com](https://console.cloud.google.com)                                                        |
+| Créer un projet GCP                            | [cloud.google.com/resource-manager/docs/creating-managing-projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects) |
+| Activer une API                                | [cloud.google.com/apis/docs/getting-started](https://cloud.google.com/apis/docs/getting-started)                    |
+| Créer un compte de service                     | [cloud.google.com/iam/docs/service-accounts-create](https://cloud.google.com/iam/docs/service-accounts-create)      |
+| Créer une clé de compte de service (JSON)      | [cloud.google.com/iam/docs/keys-create-delete](https://cloud.google.com/iam/docs/keys-create-delete)                |
+| Comprendre les rôles IAM                       | [cloud.google.com/iam/docs/understanding-roles](https://cloud.google.com/iam/docs/understanding-roles)              |
+| Contraintes et règles d'organisation           | [cloud.google.com/resource-manager/docs/organization-policy/overview](https://cloud.google.com/resource-manager/docs/organization-policy/overview) |
+
+### Documentation Vertex AI / Agent Platform
+
+| Ressource                                       | Lien                                                                                                              |
+| --------------------------------------------------| ---------------------------------------------------------------------------------------------------------------------|
+| Page d'accueil Vertex AI                        | [cloud.google.com/vertex-ai](https://cloud.google.com/vertex-ai)                                                   |
+| Agent Platform (anciennement Vertex AI Studio)  | [cloud.google.com/products/agent-builder](https://cloud.google.com/products/agent-builder)                        |
+| Liste des modèles Gemini disponibles            | [cloud.google.com/vertex-ai/generative-ai/docs/learn/models](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models) |
+| Régions supportées par Vertex AI                | [cloud.google.com/vertex-ai/docs/general/locations](https://cloud.google.com/vertex-ai/docs/general/locations)    |
+| Tarifs Vertex AI — Gemini                       | [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)       |
+| Quotas et limites                                | [cloud.google.com/vertex-ai/docs/quotas](https://cloud.google.com/vertex-ai/docs/quotas)                           |
+| Meilleures pratiques sécurité comptes de service | [cloud.google.com/iam/docs/best-practices-service-accounts](https://cloud.google.com/iam/docs/best-practices-service-accounts) |
+
+### Raccourcis directs vers la console GCP
+
+| Action                                       | Lien direct                                                                                                        |
+| ----------------------------------------------| ----------------------------------------------------------------------------------------------------------------------|
+| Activer l'API Vertex AI sur votre projet     | [console.cloud.google.com/apis/library/aiplatform.googleapis.com](https://console.cloud.google.com/apis/library/aiplatform.googleapis.com) |
+| Gérer les comptes de service                 | [console.cloud.google.com/iam-admin/serviceaccounts](https://console.cloud.google.com/iam-admin/serviceaccounts)   |
+| Gérer les rôles IAM du projet                | [console.cloud.google.com/iam-admin/iam](https://console.cloud.google.com/iam-admin/iam)                          |
+| Gérer les règles d'organisation              | [console.cloud.google.com/iam-admin/orgpolicies](https://console.cloud.google.com/iam-admin/orgpolicies)          |
+| Voir les quotas                              | [console.cloud.google.com/iam-admin/quotas](https://console.cloud.google.com/iam-admin/quotas)                    |
+| Gérer la facturation                         | [console.cloud.google.com/billing](https://console.cloud.google.com/billing)                                      |
+
+<Callout type="info">
+  Pour toute question, contactez votre administrateur Jask ou l'équipe support.
+</Callout>
